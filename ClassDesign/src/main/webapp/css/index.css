@@ -1,0 +1,537 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0px auto;
+	padding: 0px;
+	width: 1365px;
+	overflow-x: hidden;
+}
+
+#header-bg {
+	height: 32px;
+	position: absolute;
+	width: 100%;
+	background: url(../images/site-nav-bg.gif) repeat-x;
+}
+
+#header-nav {
+	width: 80%;
+	height: 32px;
+	position: relative;
+	margin-left: 200px;
+}
+
+.header-login-reg li {
+	display: inline-block;
+	width: auto;
+	height: 32px;
+	float: left;
+	margin-right: 8px;
+	margin-top: 6px;
+	font-size: 15px;
+}
+
+.headspan a {
+	color: red;
+}
+
+.helpLink {
+	width: 20%;
+	height: 32px;
+	float: right
+}
+
+.helpul {
+	width: 50%;
+	height: 32px;
+	float: right;
+	line-height: 32px
+}
+
+.helpul li {
+	height: 32px;
+	float: right;
+	color: blue;
+}
+
+.bg-div {
+	width: 80%;
+	height: 85px;
+	margin-left: 200px;
+}
+
+.loge {
+	width: 20%;
+	height: 80px;
+	float: left;
+	overflow: hidden;
+	margin-left: -250px;
+}
+
+/*搜索框*/
+form {
+	position: relative;
+	top: 10px; width : 460px;
+	margin: 0 auto;
+	width: 460px;
+}
+
+input .searhot {
+	font-family: "微软雅黑";
+}
+
+.d2 input, .d2 button {
+	border: none;
+	outline: none;
+	border-radius: 2px;
+}
+
+.d2 input {
+	width: 100%;
+	height: 40px;
+	background: #E89386;
+}
+
+.d2 button {
+	height: 40px;
+	width: 50px;
+	position: absolute;
+	top: 0px; right : 0px;
+	background: #F15B42;
+	cursor: pointer;
+	right: 0px;
+}
+
+.searhot h7 {
+	font-size: 14px;
+}
+
+.searhot span {
+	color: red;
+	font-size: 14px;
+	display: inline-block;
+	padding-right: 6px;
+}
+
+.bookNum {
+	width: 200px;
+	height: 80px;
+	position: absolute;
+	right: -280px;
+	top: -2px;
+	box-shadow: 0px 1px 3px rgba(34, 25, 25, 0.2);
+	text-align: center;
+	line-height: 80px;
+}
+
+.firstHead {
+	width: 100%;
+	height: 340px;
+}
+/*分类目录的css*/
+#type-menu {
+	position: absolute;
+	/*目前要求宽度是238px,高度是332px，左边框+width正好238，以后需要可以修改*/
+	border-left: 1px solid #FF8A00;
+	width: 237px;
+	/* height : 332px; */
+	margin: 0;
+	padding: 0;
+	background: #FFF7F0;
+	margin-left: 200px;
+}
+
+#type-menu>ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#type-menu>ul>li{
+	list-style: none;
+	padding: 0; margin : 0;
+	border-bottom: 1px solid #FDEADB;
+	position: relative;
+	margin: 0;
+}
+
+#type-menu>ul>li.selected {
+	background: #FFF;
+	border-top: 1px solid #F93;
+	border-bottom: 1px solid #F93;
+}
+
+#type-menu>ul>li.first {
+	border-top: 1px solid #F93;
+}
+
+#type-menu>ul>li.last {
+	border-bottom: 1px solid #F93;
+}
+
+#type-menu .menu-attr{
+	background: #FFF7F0 no-repeat left center;
+	height: 32px; /**控制菜单中每行的宽度，下面还有两处需要修改**/
+	border-right: 1px solid #F93;
+	z-index: 10000;
+	position: relative;
+}
+.diva{
+	display:block;
+}
+#type-menu>ul>li.selected .menu-attr {
+	border-right: 1px solid #FFF;
+	background: #FFF no-repeat left center;
+}
+
+#type-menu .menu-attr span {
+	font-size: 13px;
+	font-weight: bold;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 35px;
+	padding-top: 2px;
+	display: inline-block;
+	color: #B36B17;
+}
+
+#type-menu .menu-panel {
+	padding: 10px 20px;
+	display: none;
+	border: 1px solid #F93;
+	width: 560px;
+	position: absolute;
+	left: 236px;
+	top: -1px;
+	z-index: 5000;
+	min-height: 50px;
+	box-shadow: 1px 1px 4px #888888;
+	background-color: #FEFDF8;
+}
+
+#type-menu div.menu-panel.selected {
+	display: block;
+}
+
+/*Panel 里面的链接列表*/
+#type-menu div.menu-panel ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#type-menu div.menu-panel ul li {
+	list-style: none;
+	padding: 5px 0px;
+	margin: 0;
+}
+
+#type-menu div.menu-panel>ul>li>h2 {
+	margin: 0;
+	padding: 0;
+	padding-top: 2px;
+	font-size: 13px;
+	color: red;
+	float: left;
+	width: 60px;
+}
+
+#type-menu div.menu-panel>ul>li>div.menu-list {
+	float: left;
+	padding-left: 10px;
+	width: 450px;
+}
+
+#type-menu div.menu-panel div.menu-list-div {
+	display: inline-block;
+	padding: 3px 0px;
+}
+
+#type-menu div.menu-panel div.menu-list-div span {
+	font-size: 13px;
+	color: #888;
+	padding-right: 4px;
+}
+
+#type-menu div.menu-panel div.menu-list a {
+	font-size: 13px;
+	color: #888;
+	text-decoration: none;
+}
+
+#type-menu div.menu-panel div.menu-list a:hover {
+	text-decoration: underline;
+}
+
+#type-menu div.clear {
+	clear: both;
+	height: 0;
+	line-height: 0;
+}
+
+/*菜单*/
+.menu {
+	width: 67.5%;
+	height: 34px;
+	float: right;
+	background-color: #FF8A00;
+	font-family: "微软雅黑";
+	border: 1px solid #CCC;
+}
+
+.menu ul {
+	padding: 0px;
+	list-style-type: none;
+}
+
+.menu ul li {
+	float: left;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+
+.menu ul li a {
+	text-decoration: none;
+	color: #E5FFFF;
+	display: block;
+	cursor: pointer;
+}
+
+.menu ul li a:hover {
+	background: #fff;
+	color: red;
+}
+
+.menu ul li a:active {
+	background: #FE8B20;
+	color: #000;
+}
+/*右边图片轮转和公告*/
+#picMsgConter {
+	width: 59%;
+	position: relative;
+	border: 1px solid #333;
+	float: left;
+	margin-left: 450px;
+	margin-top: 10px;
+}
+
+/*图片切换*/
+#containerDiv {
+	position: relative;
+	width: 565px;
+	height: 255px;
+	border: 3px solid #333;
+	overflow: hidden;
+	float: left;
+}
+
+#listDiv {
+	position: absolute;
+	z-index: 1;
+	width: 4200px;
+	height: 400px;
+}
+
+#listDiv img {
+	float: left;
+	width: 600px;
+	height: 400px;
+}
+
+#buttonsDiv {
+	position: absolute;
+	left: 250px;
+	bottom: 20px;
+	z-index: 2;
+	height: 10px;
+	width: 100px;
+}
+
+#buttonsDiv span {
+	float: left;
+	margin-right: 5px;
+	width: 10px;
+	height: 10px;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	background: #333;
+	cursor: pointer;
+}
+
+#buttonsDiv .on {
+	background: orangered;
+}
+
+.arrow {
+	position: absolute;
+	top: 180px;
+	z-index: 2;
+	display: none;
+	width: 40px;
+	height: 40px;
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 39px;
+	text-align: center;
+	color: #fff;
+	background-color: RGBA(0, 0, 0, .3);
+	cursor: pointer;
+}
+
+.arrow:hover {
+	background-color: RGBA(0, 0, 0, .7);
+}
+
+#containerDiv:hover .arrow {
+	display: block;
+}
+
+/*公告*/
+.message {
+	width: 28%;
+	height: 100%;
+	float: right;
+}
+
+/*第二部分*/
+.secondDiv {
+	width: 58%;
+	height: 260px;
+	margin-top: 30px;
+	margin-left: 200px;
+}
+
+/*推荐*/
+#command_top {
+	width: 600px;
+}
+
+#command_top .active {
+	background: url(../images/qiehuan.jpg) no-repeat;
+	color: #F3F3F3;
+}
+
+#command_top h3 {
+	line-height: 35px;
+	text-align: center;
+	float: left;
+	height: 35px;
+	width: 182px;
+	margin: :0px;
+	padding: 0px;
+	background-color: #282828;
+	font-size: 15px;
+	color: white;
+	font-weight: lighter;
+	cursor: pointer;
+}
+
+#command_top div {
+	width: 130%;
+	font-size: 14px;
+	display: none;
+	clear: both;
+	height: 160px;
+	padding: 20px 0px 0px 20px;
+	border-top-width: medium;
+	border-top-style: solid;
+	border: 2px solid #A0603D;
+}
+
+.biaryCode {
+	float: right;
+	width: 30%;
+	height: 250px;
+	margin-right: -260px;
+	margin-top: -240px;
+}
+
+.biaryCode img {
+	width: 100%;
+	height: 100%;
+}
+
+
+/*热门书籍*/
+.hotbook{
+	width: 78%;
+	height: 612px;
+	float:right;
+	margin-right: 100px;
+}
+.onlineDiv{
+	width: 25%;
+	height:100%;
+	float:right;
+	border: 1px solid green;
+}
+.combookDiv{
+	width: 73%;
+	height:100%;
+	float:left;
+	border: 1px solid #0171B9;	
+}
+
+.oneBookDiv{
+	width: 30%;
+	height:46.5%;
+	margin-left:14px;
+	margin-top:6px;
+	float:left;
+	border: 1px solid #0171B9;	
+}
+
+
+/*底部*/
+.foot{
+	width: 100%;
+	height: 200px;
+	float:right;
+	box-shadow: 0px 1px 3px rgba(34, 25, 25, 0.2);
+	text-align: center;
+	line-height: 45px;
+}
+
+/*客服*/
+.izl-rmenu {
+	position: fixed;
+	left: 95.8%;
+	bottom: 10px;
+	padding-bottom: 73px;
+	z-index: 999;
+}
+
+.izl-rmenu .btn {
+	width: 72px;
+	height: 73px;
+	margin-bottom: 1px;
+	cursor: pointer;
+	position: relative;
+}
+
+.izl-rmenu .botton-phone {
+	background-color: #a2abb0;
+	background: url(../images/custSer.png) 0px 0px no-repeat;
+}
+
+.izl-rmenu .botton-phone:hover {
+	background-color: #f06f52;
+	background: url(../images/custSer_two.png) 0px 0px no-repeat;
+}
+
+.izl-rmenu .returnTop {
+	background: url(../images/return.png) 0px 0px no-repeat;
+	background-color: #fe9700;
+	display: none;
+}
+
+.izl-rmenu .returnTop:hover {
+	background-color: #f06f52;
+	background: url(../images/return_two.png) 0px 0px no-repeat;
+}

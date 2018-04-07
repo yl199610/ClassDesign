@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.cd.mapper.CcategoryMapper">
+	<select id="getAllOnetype" resultType="Ccategory">
+		select * from ccategory
+		where parentid=1
+	</select>
+
+	<select id="getAllTwotype" parameterType="int" resultType="Ccategory">
+		select * from ccategory where parentid=#{ccid}
+	</select>
+
+	<!-- <select id="getAllThreetype" parameterType="int" resultType="Ccategory"> 
+		select * from ccategory where parentid=(select ccid from ccategory where 
+		ccid=#{ccid}) </select> -->
+
+	<select id="selectTeahcerByTid" resultMap="teacherMap">
+		select * from ccategory where parentid=#{ccid}<!--https://www.cnblogs.com/999-/p/6422024.html#{xxx} 就是再根据tid查询对应的子项 -->
+	</select>
+
+	<resultMap type="Ccategory" id="teacherMap">
+		<id property="ccid" column="ccid" />
+		<result property="levels" column="levels" />
+		<result property="ccname" column="ccname" />
+		<result property="description" column="description" />
+		<result property="parentid" column="parentid" />
+		<result property="cafree" column="cafree" />
+		<!-- 设置关联集合的属性 select="selectTeahcerByTid" 因为查询的结果都是一样的 递归查询 column="ccid"  根据查询到的id再作为tid进行下一次的查询 -->
+		<collection property="ccategory" ofType="Ccategory" select="selectTeahcerByTid" column="ccid" />
+	</resultMap>
+
+	<select id="getAllThreetype" parameterType="int" resultMap="teacherMap">
+		<!--先查询出 自身的信息 -->
+		select * from ccategory where ccid=#{ccid}
+	</select>
+
+
+	<resultMap type="paginationBean" id="paginationBeanMap">
+		<collection property="rows" column="{pageSize=pageSize ,currPage=currPage}" select="getCatgory"/>
+	</resultMap>
+	
+	<select id="getAlltype" parameterType="paginationBean" resultMap="paginationBeanMap">
+		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize} pageSize,${currPage} currPage from ccategory
+	</select>
+	<select id="getCatgory" resultType="Ccategory">
+		select * from
+		(select m.*,rownum rn from
+		(select * from ccategory order by 1) m where ${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
+	</select>
+
+	<select id="getParentType" parameterType="int" resultType="Ccategory">
+		select * from ccategory where parentid=#{parentId}
+	</select>
+
+</mapper>
