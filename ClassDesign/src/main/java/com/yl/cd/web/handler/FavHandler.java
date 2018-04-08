@@ -20,7 +20,7 @@ public class FavHandler{
 	@RequestMapping("/list")
 	@ResponseBody
 	public PaginationBean<Cfavorites> getAllFav(String page,String rows){
-		LogManager.getLogger().debug("请求FavHandler处理getAllBook......");
+		LogManager.getLogger().debug("请求FavHandler处理getAllFav......");
 		return favService.getAllFav(page,rows);
 	}
 	

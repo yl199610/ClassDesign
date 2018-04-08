@@ -8,6 +8,6 @@
 </head>
 <body>   
 	<table id="orderInfo"></table>
-	<script type="text/javascript" src="js/userMsg.js"></script>
+	<script type="text/javascript" src="js/orderMsg.js"></script>
 </body>
 </html>

@@ -175,5 +175,6 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	ccontent varchar2(1000),
 	ccdate varchar2(20)
 );
+select * from cfavorites;
 drop table ccomments
 create sequence seqccomments start with 1;

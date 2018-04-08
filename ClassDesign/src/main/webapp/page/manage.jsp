@@ -71,12 +71,12 @@
 			</div>
 			<div title="收藏管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
-					<li><span>详细信息</span></li>
+					<li><span>收藏信息</span></li>
 				</ul>
 			</div>
 			<div title="评论管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
-					<li><span>详细信息</span></li>
+					<li><span>评论信息</span></li>
 				</ul>
 			</div>
 		</div>

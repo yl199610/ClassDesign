@@ -9,9 +9,7 @@ var urlJson = {
 	"书籍信息" : "bookMsg.jsp",
 	"订单信息" : "orderMsg.jsp",
 	"收藏信息" : "favMsg.jsp",
-	"评论信息" : "commentMsg.jsp",
-	"用户信息" : "userMsg.jsp",
-	"已收藏歌曲信息" : "saveMsg.jsp"
+	"评论信息" : "commentMsg.jsp"
 }
 
 $(".menutree").tree({
