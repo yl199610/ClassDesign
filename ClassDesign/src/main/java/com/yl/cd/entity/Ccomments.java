@@ -6,16 +6,23 @@ public class Ccomments {
 	private Integer cuserid;
 	private String ccontent;
 	private String ccdate;
+	private Cproduct cproduct;
+	private Cuser cuser;
 	public Ccomments() {
 	}
-	public Ccomments(Integer cid, Integer cfp, Integer cuserid, String ccontent, String ccdate) {
+
+	public Ccomments(Integer cid, Integer cfp, Integer cuserid, String ccontent, String ccdate, Cproduct cproduct,
+			Cuser cuser) {
 		super();
 		this.cid = cid;
 		this.cfp = cfp;
 		this.cuserid = cuserid;
 		this.ccontent = ccontent;
 		this.ccdate = ccdate;
+		this.cproduct = cproduct;
+		this.cuser = cuser;
 	}
+
 	public Integer getCid() {
 		return cid;
 	}
@@ -46,10 +53,28 @@ public class Ccomments {
 	public void setCcdate(String ccdate) {
 		this.ccdate = ccdate;
 	}
+
+	public Cproduct getCproduct() {
+		return cproduct;
+	}
+
+	public void setCproduct(Cproduct cproduct) {
+		this.cproduct = cproduct;
+	}
+
+	public Cuser getCuser() {
+		return cuser;
+	}
+
+	public void setCuser(Cuser cuser) {
+		this.cuser = cuser;
+	}
+
 	@Override
 	public String toString() {
 		return "Ccomments [cid=" + cid + ", cfp=" + cfp + ", cuserid=" + cuserid + ", ccontent=" + ccontent
-				+ ", ccdate=" + ccdate + "]";
+				+ ", ccdate=" + ccdate + ", cproduct=" + cproduct + ", cuser=" + cuser + "]";
 	}
+
 	
 }

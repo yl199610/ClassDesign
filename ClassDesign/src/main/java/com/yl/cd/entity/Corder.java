@@ -12,11 +12,13 @@ public class Corder {
 	private String cpostalcode;
 	private String cphone;
 	private String cofree;
+	private Cuser cuser;
 	public Corder() {
 	}
+	
 	public Corder(Integer coid, Integer cordid, String cstatus, String cordertime, String corderdesc,
 			String ctotalprice, String cordername, String cfulladdress, String cpostalcode, String cphone,
-			String cofree) {
+			String cofree, Cuser cuser) {
 		super();
 		this.coid = coid;
 		this.cordid = cordid;
@@ -29,7 +31,9 @@ public class Corder {
 		this.cpostalcode = cpostalcode;
 		this.cphone = cphone;
 		this.cofree = cofree;
+		this.cuser = cuser;
 	}
+
 	public Integer getCoid() {
 		return coid;
 	}
@@ -96,12 +100,22 @@ public class Corder {
 	public void setCofree(String cofree) {
 		this.cofree = cofree;
 	}
+
+	public Cuser getCuser() {
+		return cuser;
+	}
+
+	public void setCuser(Cuser cuser) {
+		this.cuser = cuser;
+	}
+
 	@Override
 	public String toString() {
 		return "Corder [coid=" + coid + ", cordid=" + cordid + ", cstatus=" + cstatus + ", cordertime=" + cordertime
 				+ ", corderdesc=" + corderdesc + ", ctotalprice=" + ctotalprice + ", cordername=" + cordername
 				+ ", cfulladdress=" + cfulladdress + ", cpostalcode=" + cpostalcode + ", cphone=" + cphone + ", cofree="
-				+ cofree + "]";
+				+ cofree + ", cuser=" + cuser + "]";
 	}
+
 	
 }

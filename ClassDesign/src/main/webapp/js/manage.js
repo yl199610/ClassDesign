@@ -44,40 +44,16 @@ $("#main").tabs({
 
 var cnid;
 var pid;
-// 修改歌曲
-function updateSong(id) {
+// 修改用户信息
+function openPerson(id) {
 	cnid = id;
-	$("#songModify").dialog({
-		title : 'modifySong',
+	alert(id)
+	$("#modifyUser").dialog({
+		title : 'modifyUser',
 		width : 300,
 		height : 500,
 		left : 300,
 		modal : true,
-		href : 'back/modifySong.jsp'
-	});
-}
-// 修改歌手
-function updateSinger(id) {
-	cnid = id;
-	$("#singerModify").dialog({
-		title : 'modifySinger',
-		width : 300,
-		height : 500,
-		left : 300,
-		modal : true,
-		href : 'back/modifySinger.jsp'
-	});
-}
-
-// 修改风格
-function updateStyle(id) {
-	cnid = id;
-	$("#styleModify").dialog({
-		title : 'modifyStyle',
-		width : 300,
-		height : 500,
-		left : 300,
-		modal : true,
-		href : 'back/modifyStyle.jsp'
+		href : 'back/modifyUser.jsp'
 	});
 }
