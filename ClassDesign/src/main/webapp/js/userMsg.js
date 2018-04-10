@@ -98,14 +98,21 @@ function stopUser(id){
 	    }    
 	});
 }
-
-
-
-
-
 function getUserByName(){
-	$.get("cuser/userlist",function(data){
-		$('#userInfo').datagrid("reload");
-    },"json");  
-	
+	var formData = new FormData($("#getUserInfoForm")[0]); // FormData
+//	$('#userInfo').datagrid({url:'cuser/userlist',type : 'POST',
+//		data : formData})
+//	
+	$.ajax({
+		url : 'cuser/userlist',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+//		success : function(returndata) {
+//			$('#userInfo').datagrid("reload");
+//		}
+	});
 }

@@ -4,24 +4,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yl.cd.mapper.UserMapper">
 	<resultMap type="paginationBean" id="paginationBeanMap">
-		<collection property="rows" column="{pageSize=pageSize ,currPage=currPage}" select="getUsers"/>
+		<collection property="rows"
+			column="{userBean.pageSize=pageSize ,userBean.currPage=currPage}"
+			select="getUsers" />
 	</resultMap>
-	
-	<select id="getUsersByPagination" parameterType="paginationBean" resultMap="paginationBeanMap">
-		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize} pageSize,${currPage} currPage from cuser
+
+	<select id="getUsersByPagination" resultMap="paginationBeanMap">
+		select count(1)
+		total,ceil(count(1)/${userBean.pageSize})
+		totalPage,${userBean.pageSize} pageSize,${userBean.currPage} currPage
+		from cuser
 	</select>
 	<select id="getUsers" resultType="Cuser">
 		select * from
-		(select m.*,rownum rn from
-		(select * from cuser order by 1 desc) m where ${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
+		(select m.*,rownum
+		rn from
+		(select * from cuser order by 1
+		desc) m where
+		${userBean.currPage}*${userBean.pageSize}>=rownum) where rn>(${userBean.currPage}-1)*${userBean.pageSize}
+		<if test="cuser!=null and cuser!=''">
+			<if test="cuser.cuid!=null and cuser.cuid!=''">
+				and cuid=#{cuser.cuid}
+			</if>
+			<if test="cuser.cusername!=null and cuser.cusername!=''">
+				and cusername=#{cuser.cusername}
+			</if>
+		</if>
+
 	</select>
-	
+
 	<select id="getUsersByOther" resultType="Cuser">
-	select * from (select t.*,rownum rownu from cuser t 
-        where rownum&lt;=#{userBean.currPage}*#{userBean.pageSize})tt
-        where tt.rownu>(#{userBean.currPage}-1)*#{userBean.pageSize}
+		select * from (select
+		t.*,rownum rownu from cuser t
+		where
+		rownum&lt;=#{userBean.currPage}*#{userBean.pageSize})tt
+		where
+		tt.rownu>(#{userBean.currPage}-1)*#{userBean.pageSize}
+
 	</select>
-	
-	
-	
+
 </mapper>

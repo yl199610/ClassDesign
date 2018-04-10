@@ -1,7 +1,5 @@
 package com.yl.cd.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +23,7 @@ public class UserServiceImpl implements UserService{
 		if(pageSize!=null){
 			userBean.setPageSize(Integer.parseInt(pageSize));
 		}
-		List<Cuser> cuser1 = userMapper.getUsersByOther(userBean,cuser);
-		userBean.setRows(cuser1);
-		return userBean;
+		return userMapper.getUsersByPagination(userBean,cuser);
 	}
 	
 

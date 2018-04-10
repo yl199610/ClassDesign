@@ -26,11 +26,13 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
-select * from (select t.*,rownum rownu from cuser t where rownum<=1*10)tt where tt.rownu>(1-1)*10
+select * from (select m.*,rownum rn from (select * from cuser order by 1 desc)
+m where 1*5>=rownum) where rn>(1-1)*5 and cuid=1
+
 drop table cuser;
 create sequence sequserid start with 1;
-insert into cuser values (sequserid.nextval,'b','b','347247531@qq.com','男','18394528725',
-'192.124.24.2',default,'347247531@qq.com',default,'1993-09-10',default);
+insert into cuser values (sequserid.nextval,'a','a','1232134234@qq.com','男','1343543534',
+'192.124.22.12',default,'4534534534@qq.com',default,'1992-02-10',default);
 select * from cuser;
 --图书分类表
 create  table ccategory(

@@ -29,12 +29,12 @@ public class UserHandler{
 	@RequestMapping("/userlist")
 	@ResponseBody
 	public PaginationBean<Cuser> userList(String page,String rows,Cuser cuser){
-		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows+"====="+cuser);
+		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows+"====="+"".equals(cuser));
 		System.out.println("========="+userService.listPartUser(page,rows,cuser));
 		return userService.listPartUser(page,rows,cuser);
 	}
 	
-	@RequestMapping("/modify")
+	@RequestMapping("/modify")	
 	@ResponseBody
 	public boolean modify(@RequestParam(name="picData",required=false)MultipartFile picData,Cuser cuser){
 		LogManager.getLogger().debug("请求userHandler处理modify...."+cuser);
