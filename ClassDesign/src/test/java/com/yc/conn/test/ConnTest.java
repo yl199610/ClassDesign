@@ -37,8 +37,9 @@ public class ConnTest {
 	@Autowired
 	private CadminMapper cadminMapper;
 
-	@Ignore
+	@Test
 	public void testConn() throws SQLException {
+		System.out.println("------------");
 		Connection con = dataSource.getConnection();
 		assertNotNull(con);
 	}
