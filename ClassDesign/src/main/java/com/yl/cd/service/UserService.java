@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface UserService {
 
-	PaginationBean<Cuser> listPartUser(String page, String rows);
+	PaginationBean<Cuser> listPartUser(String page, String rows,Cuser cuser);
 
 }

@@ -28,9 +28,10 @@ public class UserHandler{
 	 */
 	@RequestMapping("/userlist")
 	@ResponseBody
-	public PaginationBean<Cuser> userList(String page,String rows){
-		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows);
-		return userService.listPartUser(page,rows);
+	public PaginationBean<Cuser> userList(String page,String rows,Cuser cuser){
+		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows+"====="+cuser);
+		System.out.println("========="+userService.listPartUser(page,rows,cuser));
+		return userService.listPartUser(page,rows,cuser);
 	}
 	
 	@RequestMapping("/modify")

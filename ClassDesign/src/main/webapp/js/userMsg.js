@@ -98,3 +98,14 @@ function stopUser(id){
 	    }    
 	});
 }
+
+
+
+
+
+function getUserByName(){
+	$.get("cuser/userlist",function(data){
+		$('#userInfo').datagrid("reload");
+    },"json");  
+	
+}

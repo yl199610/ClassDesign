@@ -21,6 +21,7 @@ import com.yl.cd.entity.Cadmin;
 import com.yl.cd.entity.Ccategory;
 import com.yl.cd.mapper.CadminMapper;
 import com.yl.cd.mapper.CcategoryMapper;
+import com.yl.cd.mapper.UserMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // @ContextConfiguration(locations={"classpath:spring.xml",

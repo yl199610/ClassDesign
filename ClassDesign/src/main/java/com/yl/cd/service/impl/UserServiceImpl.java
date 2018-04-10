@@ -1,5 +1,7 @@
 package com.yl.cd.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	private UserMapper userMapper;
 
 	@Override
-	public PaginationBean<Cuser> listPartUser(String currpage, String pageSize) {
+	public PaginationBean<Cuser> listPartUser(String currpage, String pageSize,Cuser cuser) {
 		PaginationBean<Cuser> userBean = new PaginationBean<Cuser>();
 		if(currpage!=null){
 			userBean.setCurrPage(Integer.parseInt(currpage));
@@ -23,7 +25,9 @@ public class UserServiceImpl implements UserService{
 		if(pageSize!=null){
 			userBean.setPageSize(Integer.parseInt(pageSize));
 		}
-		return userMapper.getUsersByPagination(userBean);
+		List<Cuser> cuser1 = userMapper.getUsersByOther(userBean,cuser);
+		userBean.setRows(cuser1);
+		return userBean;
 	}
 	
 

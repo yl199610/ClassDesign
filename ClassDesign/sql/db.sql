@@ -26,6 +26,7 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
+select * from (select t.*,rownum rownu from cuser t where rownum<=1*10)tt where tt.rownu>(1-1)*10
 drop table cuser;
 create sequence sequserid start with 1;
 insert into cuser values (sequserid.nextval,'b','b','347247531@qq.com','男','18394528725',

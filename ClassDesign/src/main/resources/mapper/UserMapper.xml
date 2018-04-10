@@ -15,4 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select m.*,rownum rn from
 		(select * from cuser order by 1 desc) m where ${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
 	</select>
+	
+	<select id="getUsersByOther" resultType="Cuser">
+	select * from (select t.*,rownum rownu from cuser t 
+        where rownum&lt;=#{userBean.currPage}*#{userBean.pageSize})tt
+        where tt.rownu>(#{userBean.currPage}-1)*#{userBean.pageSize}
+	</select>
+	
+	
+	
 </mapper>
