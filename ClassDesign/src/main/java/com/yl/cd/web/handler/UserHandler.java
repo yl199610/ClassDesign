@@ -29,10 +29,18 @@ public class UserHandler{
 	@RequestMapping("/userlist")
 	@ResponseBody
 	public PaginationBean<Cuser> userList(String page,String rows,Cuser cuser){
-		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows+"====="+"".equals(cuser));
-		System.out.println("========="+userService.listPartUser(page,rows,cuser));
+		LogManager.getLogger().debug("请求UserHandler处理list...."+page+"----"+rows+"====="+cuser);
 		return userService.listPartUser(page,rows,cuser);
 	}
+	//获取用户对应信息
+	@RequestMapping("/detail")
+	@ResponseBody
+	public Cuser userDetail(@RequestParam(name="sid")Integer cuid){
+		LogManager.getLogger().debug("请求UserHandler处理userDetail...."+cuid);
+		return userService.getUserMsgById(cuid);
+	}
+	
+	
 	
 	@RequestMapping("/modify")	
 	@ResponseBody
@@ -43,14 +51,20 @@ public class UserHandler{
 			try {
 				picData.transferTo(new File(ServletUtil.UPLOAD_DIR,picData.getOriginalFilename()));
 				cuser.setCphoto("/"+ServletUtil.UPLOAD_DIR_NAME+"/"+picData.getOriginalFilename());//图片上传
-			System.out.println("picData.getOriginalFilename()"+picData.getOriginalFilename());
-			System.out.println("picData.ServletUtil.UPLOAD_DIR()"+ServletUtil.UPLOAD_DIR);	
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
-	return false;
-		//return userService.modifyUser(cuser);
+		return userService.modifyUser(cuser);
 	}
-
+	
+	/**
+	 * 删除用户
+	 */
+	@RequestMapping("/archive")
+	@ResponseBody
+	public boolean archiveUser(@RequestParam(name="cuid")Integer cuid){
+		LogManager.getLogger().debug("请求userHandler处理delete....\n"+cuid);
+		return userService.archiveUser(cuid);
+	}
 }

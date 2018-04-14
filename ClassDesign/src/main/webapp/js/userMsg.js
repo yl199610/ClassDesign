@@ -16,17 +16,17 @@ $('#userInfo').datagrid({
 	} ,{
 		field : 'cpassword',
 		title : '密码',
-		width : 18,
+		width : 22,
 		align:'center'
 	}, {
 		field : 'cemail',
 		title : '邮箱',
-		width : 40,
+		width : 45,
 		align:'center'
 	}, {
 		field : 'csex',
 		title : '性别',
-		width : 26,
+		width : 16,
 		align:'center'
 	}, {
 		field : 'cphone',
@@ -36,20 +36,23 @@ $('#userInfo').datagrid({
 	} , {
 		field : 'clastloginip',
 		title : '登录ip',
-		width : 26,
+		width : 40,
+		align:'center'
+	},  {
+		field : 'cbirthday',
+		title : '生日',
+		width : 40,
 		align:'center'
 	}, {
 		field : 'cphoto',
 		title : '头像',
-		width : 100,
+		width : 50,
 		align:'center',
 		formatter: function(value,row,index){
 			if(value==null){
-			var opStr='<image width="100" src="images/notpic.jpg">';  
-			return opStr;
+			return '<img width="100" src="images/notpic.jpg">';  
 			}else{
-				return '<image width="100" src="'+value+'"/>'
-				
+				return '<img width="100" src="'+value+'"/>'
 			}
 		}
 	},{
@@ -84,11 +87,11 @@ function userOperatorFun(operType, id){
 function stopUser(id){
 	$.messager.confirm('确认','您确认想要删除记录吗,删除后记录将无法恢复？',function(r){    
 	    if (r){
-	        $.get("user/archive?cnid="+id,function(data){
-				$('#personInfo').datagrid("reload");
+	        $.get("cuser/archive?cuid="+id,function(data){
+				$('#userInfo').datagrid("reload");
 	        	$.messager.show({
-					title:'归档用户',
-					msg:returndata.trim()=="true"?"删除成功...":"删除失败!!!",
+					title:'删除用户',
+					msg:data.trim()=="true"?"删除成功...":"删除失败!!!",
 					showType:'show',
 					style:{
 						top:document.body.scrollTop+document.documentElement.scrollTop+40,
@@ -100,9 +103,6 @@ function stopUser(id){
 }
 function getUserByName(){
 	var formData = new FormData($("#getUserInfoForm")[0]); // FormData
-//	$('#userInfo').datagrid({url:'cuser/userlist',type : 'POST',
-//		data : formData})
-//	
 	$.ajax({
 		url : 'cuser/userlist',
 		type : 'POST',
@@ -111,8 +111,8 @@ function getUserByName(){
 		cache : false,
 		contentType : false,
 		processData : false,
-//		success : function(returndata) {
-//			$('#userInfo').datagrid("reload");
-//		}
+		success : function(returndata) {
+			$('#userInfo').datagrid("loadData",returndata);
+		}
 	});
 }

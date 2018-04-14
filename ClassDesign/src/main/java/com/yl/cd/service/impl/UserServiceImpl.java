@@ -1,5 +1,8 @@
 package com.yl.cd.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +18,35 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public PaginationBean<Cuser> listPartUser(String currpage, String pageSize,Cuser cuser) {
-		PaginationBean<Cuser> userBean = new PaginationBean<Cuser>();
-		if(currpage!=null){
-			userBean.setCurrPage(Integer.parseInt(currpage));
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
 		}
-		
-		if(pageSize!=null){
-			userBean.setPageSize(Integer.parseInt(pageSize));
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
 		}
-		return userMapper.getUsersByPagination(userBean,cuser);
+		String cusername=cuser.getCusername();
+		Integer cuid=cuser.getCuid();
+		map.put("cusername", cusername);
+		map.put("cuid", cuid);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		return userMapper.getUsersByPagination1(map);
 	}
-	
+
+	@Override
+	public Cuser getUserMsgById(Integer cuid) {
+		return userMapper.getUserMsgById(cuid);
+	}
+
+	@Override
+	public boolean modifyUser(Cuser cuser) {
+		return userMapper.modifyUser(cuser);
+	}
+
+	@Override
+	public boolean archiveUser(Integer cuid) {
+		return userMapper.archiveUser(cuid);
+	}
 
 }

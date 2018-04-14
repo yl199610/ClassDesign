@@ -77,9 +77,31 @@ public class CcategoryHandler{
 						ccategory.setCafree(leavel.getLevels()+"("+parentId+")");
 					}
 				}
-			}			
+			}
 		}
 		return ccategoryPage;
 	}
+	//模糊分页查询
+	@RequestMapping("/listlevels")
+	@ResponseBody
+	public PaginationBean<Ccategory> getCatgroyByName(String page,String rows,Ccategory ccatgory){
+		LogManager.getLogger().debug("请求CcategoryHandler处理getCatgroyByName......");
+		PaginationBean<Ccategory> ccategoryPage = ccategoryService.getCatgroyByName(page,rows,ccatgory);
+		List<Ccategory> ccategoryList = ccategoryPage.getRows();
+		if(ccategoryList.size()>0){
+			for (Ccategory ccategory : ccategoryList) {
+				int parentId = ccategory.getParentid();
+				List<Ccategory> leavelList = ccategoryService.getParentType(parentId);
+				if(leavelList.size()>0){
+					for (Ccategory leavel : leavelList) {
+						ccategory.setCafree(leavel.getLevels()+"("+parentId+")");
+					}
+				}
+			}
+		}
+		return ccategoryPage;
+	}
+	
+	
 	
 }

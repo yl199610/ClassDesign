@@ -43,3 +43,19 @@ $('#categoryInfo').datagrid({
 		}
 	} ]]
 });
+
+function getCatroryBy(){
+	var formData = new FormData($("#getCatInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'ccategory/listlevels',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#userInfo').datagrid("loadData",returndata);
+		}
+	});
+}

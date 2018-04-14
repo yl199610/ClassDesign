@@ -47,10 +47,9 @@ var pid;
 // 修改用户信息
 function openPerson(id) {
 	cnid = id;
-	alert(id)
 	$("#modifyUser").dialog({
 		title : 'modifyUser',
-		width : 300,
+		width : 600,
 		height : 500,
 		left : 300,
 		modal : true,

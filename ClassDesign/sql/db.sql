@@ -26,9 +26,9 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
-select * from (select m.*,rownum rn from (select * from cuser order by 1 desc)
-m where 1*5>=rownum) where rn>(1-1)*5 and cuid=1
-
+select * from cuser;
+update cuser set cufree=1 where cuid=3
+select * from (select m.*,rownum rn from (select * from cuser where cuid=2) m where 1*5>=rownum) where rn>(1-1)*5 
 drop table cuser;
 create sequence sequserid start with 1;
 insert into cuser values (sequserid.nextval,'a','a','1232134234@qq.com','男','1343543534',
@@ -43,6 +43,7 @@ create  table ccategory(
 	parentid Integer default null,
 	cafree varchar2(25) default null
 );
+select * from (select m.*,rownum rn from (select * from ccategory where levels='二级目录') m where 1*10>=rownum) where rn>0
 select * from ccategory where levels='一级目录'
 drop table ccategory;
 create sequence seqcatid start with 1;

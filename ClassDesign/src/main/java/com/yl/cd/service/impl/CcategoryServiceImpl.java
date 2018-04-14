@@ -1,6 +1,8 @@
 package com.yl.cd.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,25 @@ public class CcategoryServiceImpl implements CcategoryService{
 	@Override
 	public List<Ccategory> getParentType(int parentId) {
 		return CcategoryMapper.getParentType(parentId);
+	}
+
+	@Override
+	public PaginationBean<Ccategory> getCatgroyByName(String currpage, String pageSize, Ccategory ccatgory) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
+		}
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
+		}
+		String levels=ccatgory.getLevels();
+		String ccname=ccatgory.getCcname();
+		map.put("levels", levels);
+		map.put("ccname", ccname);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		PaginationBean<Ccategory> c = CcategoryMapper.getCatgroyByName(map);
+		return c;
 	}
 
 }

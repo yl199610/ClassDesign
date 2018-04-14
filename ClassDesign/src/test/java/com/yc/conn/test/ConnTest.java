@@ -19,9 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yl.cd.entity.Cadmin;
 import com.yl.cd.entity.Ccategory;
+import com.yl.cd.entity.Cuser;
+import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.mapper.CadminMapper;
 import com.yl.cd.mapper.CcategoryMapper;
 import com.yl.cd.mapper.UserMapper;
+import com.yl.cd.service.impl.CcategoryServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // @ContextConfiguration(locations={"classpath:spring.xml",
@@ -37,7 +40,17 @@ public class ConnTest {
 	private CcategoryMapper ccategoryMapper;
 	@Autowired
 	private CadminMapper cadminMapper;
-
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private CcategoryServiceImpl categoryServiceImpl;
+	
+	@Test
+	public void testConn1(){
+		Ccategory c = new Ccategory(1,"一级目录","文艺",null,1,null,null);
+		PaginationBean<Ccategory> caca = categoryServiceImpl.getCatgroyByName(String.valueOf(1),String.valueOf(5),c);
+		System.out.println(caca.toString());
+	}
 	@Test
 	public void testConn() throws SQLException {
 		System.out.println("------------");
