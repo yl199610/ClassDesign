@@ -43,6 +43,7 @@ create  table ccategory(
 	parentid Integer default null,
 	cafree varchar2(25) default null
 );
+select count(1) total,ceil(count(1)/5) totalPage from ccategory
 select * from (select m.*,rownum rn from (select * from ccategory where levels='二级目录') m where 1*10>=rownum) where rn>0
 select * from ccategory where levels='一级目录'
 drop table ccategory;
