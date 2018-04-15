@@ -1,6 +1,7 @@
 $('#userInfo').datagrid({
 	fitColumns : true,
 	url:'cuser/userlist',
+	fit:true,
 	singleSelect : true,
 	pagination:true,
 	columns : [ [ {
@@ -31,7 +32,7 @@ $('#userInfo').datagrid({
 	}, {
 		field : 'cphone',
 		title : '电话',
-		width : 26,
+		width : 30,
 		align:'center'
 	} , {
 		field : 'clastloginip',
@@ -46,13 +47,13 @@ $('#userInfo').datagrid({
 	}, {
 		field : 'cphoto',
 		title : '头像',
-		width : 50,
+		width : 60,
 		align:'center',
 		formatter: function(value,row,index){
 			if(value==null){
-			return '<img width="100" src="images/notpic.jpg">';  
+				return '<img width="50" src="images/notpic.jpg">';  
 			}else{
-				return '<img width="100" src="'+value+'"/>'
+				return '<img width="50" src="'+value+'"/>'
 			}
 		}
 	},{

@@ -104,6 +104,5 @@
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="js/manage.js"></script>
-
 </body>
 </html>

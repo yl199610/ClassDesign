@@ -51,6 +51,7 @@ public class CcategoryServiceImpl implements CcategoryService{
 
 	@Override
 	public PaginationBean<Ccategory> getCatgroyByName(String currpage, String pageSize, Ccategory ccatgory) {
+		PaginationBean<Ccategory> ccategoryList = new PaginationBean<Ccategory>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		if("".equals(currpage)||null==currpage){
 			currpage=currpage.valueOf(1);
@@ -64,8 +65,11 @@ public class CcategoryServiceImpl implements CcategoryService{
 		map.put("ccname", ccname);
 		map.put("currPage", currpage);
 		map.put("pageSize", pageSize);
-		PaginationBean<Ccategory> c = CcategoryMapper.getCatgroyByName(map);
-		return c;
+		List<Ccategory> c = CcategoryMapper.getCatgroyByName(map);
+		//获得total 和 totalPage
+		ccategoryList = CcategoryMapper.getTotalAndTotalPage(map);
+		ccategoryList.setRows(c);
+		return ccategoryList;
 	}
 
 }

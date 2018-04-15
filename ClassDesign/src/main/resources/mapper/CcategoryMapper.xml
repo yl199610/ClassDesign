@@ -63,20 +63,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 条件查询 -->
-	<select id="getCatgroyByName" parameterType="map" resultType="Ccategory"> 
-	select * from (select t.*,rownum rownu from ccategory t where rownum&lt;=#{currPage}*#{pageSize} and 1=1
+	<select id="getCatgroyByName" parameterType="map" resultType="Ccategory">
+		select * from (select t.*,rownum rownu from ccategory t where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1
 		<choose>
 			<when test="levels!=null and levels!=''">
-			and levels=#{levels,jdbcType=VARCHAR}
+				and levels=#{levels,jdbcType=VARCHAR}
 			</when>
 		</choose>
 		<choose>
-		<when test="ccname!=null and ccname!=''">
-			and ccname=#{ccname,jdbcType=VARCHAR}
-		</when>
+			<when test="ccname!=null and ccname!=''">
+				and ccname=#{ccname,jdbcType=VARCHAR}
+			</when>
 		</choose>
-	)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
 	</select>
-	
-	
+	<!-- 条件查询获得total and totalpage -->
+	<select id="getTotalAndTotalPage" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize})
+		totalPage,${pageSize}
+		pageSize,${currPage} currPage from ccategory where 1=1
+		<choose>
+			<when test="levels!=null and levels!=''">
+				and levels=#{levels,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<choose>
+			<when test="ccname!=null and ccname!=''">
+				and ccname=#{ccname,jdbcType=VARCHAR}
+			</when>
+		</choose>
+	</select>
 </mapper>

@@ -18,5 +18,7 @@ public interface CcategoryMapper {
 
 	List<Ccategory> getParentType(int parentId);
 
-	PaginationBean<Ccategory> getCatgroyByName(Map<String, Object> map);
+	List<Ccategory> getCatgroyByName(Map<String, Object> map);
+
+	PaginationBean<Ccategory> getTotalAndTotalPage(Map<String, Object> map);
 }

@@ -60,7 +60,7 @@ public class CcategoryHandler{
 	}
 	
 	/**
-	 * 获得所有标题
+	 * 获得所有标题   可能已经没有作用了
 	 */
 	@RequestMapping("/list")
 	@ResponseBody

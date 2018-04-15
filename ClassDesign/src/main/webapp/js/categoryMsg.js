@@ -1,6 +1,6 @@
 $('#categoryInfo').datagrid({
 	fitColumns : true,
-	url:'ccategory/list',
+	url:'ccategory/listlevels',
 	singleSelect : true,
 	pagination:true,
 	columns : [ [ {
@@ -55,7 +55,7 @@ function getCatroryBy(){
 		contentType : false,
 		processData : false,
 		success : function(returndata) {
-			$('#userInfo').datagrid("loadData",returndata);
+			$('#categoryInfo').datagrid("loadData",returndata);
 		}
 	});
 }

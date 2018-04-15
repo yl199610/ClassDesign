@@ -44,12 +44,12 @@ public class ConnTest {
 	private UserMapper userMapper;
 	@Autowired
 	private CcategoryServiceImpl categoryServiceImpl;
-	
+
 	@Test
-	public void testConn1(){
-		Ccategory c = new Ccategory(1,"一级目录","文艺",null,1,null,null);
+	public void testCateAll(){
+		Ccategory c = new Ccategory(1,"一级目录","",null,1,null,null);
 		PaginationBean<Ccategory> caca = categoryServiceImpl.getCatgroyByName(String.valueOf(1),String.valueOf(5),c);
-		System.out.println(caca.toString());
+		System.out.println(caca.toString()+"============"+caca.getCurrPage()+"============"+caca.getPageSize()+"============"+caca.getTotal()+"============"+caca.getTotalPage());
 	}
 	@Test
 	public void testConn() throws SQLException {

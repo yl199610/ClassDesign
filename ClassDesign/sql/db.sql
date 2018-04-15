@@ -26,8 +26,8 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
-select * from cuser;
-update cuser set cufree=1 where cuid=3
+select * from cuser c where 1=1 and cufree=1 and c.cuid like '%%' and c.cusername like '%%'
+update cuser set cufree=1 where cuid=21
 select * from (select m.*,rownum rn from (select * from cuser where cuid=2) m where 1*5>=rownum) where rn>(1-1)*5 
 drop table cuser;
 create sequence sequserid start with 1;
