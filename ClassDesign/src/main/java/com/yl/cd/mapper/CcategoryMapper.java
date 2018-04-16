@@ -21,4 +21,8 @@ public interface CcategoryMapper {
 	List<Ccategory> getCatgroyByName(Map<String, Object> map);
 
 	PaginationBean<Ccategory> getTotalAndTotalPage(Map<String, Object> map);
+
+	boolean archiveCategory(Integer ccid);
+
+	boolean modifyCate(Ccategory ccatgory);
 }

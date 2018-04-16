@@ -56,3 +56,15 @@ function openPerson(id) {
 		href : 'back/modifyUser.jsp'
 	});
 }
+//修改目录信息
+function openCate(id) {
+	cnid = id;
+	$("#modifyCategory").dialog({
+		title : 'modifyCategory',
+		width : 600,
+		height : 500,
+		left : 300,
+		modal : true,
+		href : 'back/modifyCategory.jsp'
+	});
+}

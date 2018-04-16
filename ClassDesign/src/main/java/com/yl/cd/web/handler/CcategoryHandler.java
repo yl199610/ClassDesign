@@ -1,5 +1,7 @@
 package com.yl.cd.web.handler;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yl.cd.entity.Ccategory;
+import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.CcategoryService;
+import com.yl.cd.util.ServletUtil;
 
 @Controller
 @RequestMapping("/ccategory")
@@ -102,6 +107,22 @@ public class CcategoryHandler{
 		return ccategoryPage;
 	}
 	
+	/**
+	 * 删除目录
+	 */
+	@RequestMapping("/archive")
+	@ResponseBody
+	public boolean archiveCategory(@RequestParam(name="ccid")Integer ccid){
+		LogManager.getLogger().debug("请求CcategoryHandler处理archiveCategory....\n"+ccid);
+		return ccategoryService.archiveCategory(ccid);
+	}
 	
+	//修改
+	@RequestMapping("/modify")	
+	@ResponseBody
+	public boolean modifyCate(Ccategory ccatgory){
+		LogManager.getLogger().debug("请求CcategoryHandler处理modifyCate...."+ccatgory);
+		return ccategoryService.modifyCate(ccatgory);
+	}
 	
 }

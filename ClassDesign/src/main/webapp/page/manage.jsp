@@ -99,6 +99,8 @@
 	</div>
 
 	<div id="modifyUser"></div>
+	<div id="modifyCategory"></div>
+	
 
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>

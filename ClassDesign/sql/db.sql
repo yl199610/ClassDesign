@@ -1,6 +1,6 @@
 --create user tssc identified by a;
 --grant resource,connect to tssc;
-
+--  状态为1 正常
 --1 管理员			--0超级管理
 create table cadmin(
 	caid Integer primary key,
@@ -43,6 +43,7 @@ create  table ccategory(
 	parentid Integer default null,
 	cafree varchar2(25) default null
 );
+update ccategory set cafree=1 where ccid>=1
 select count(1) total,ceil(count(1)/5) totalPage from ccategory
 select * from (select m.*,rownum rn from (select * from ccategory where levels='二级目录') m where 1*10>=rownum) where rn>0
 select * from ccategory where levels='一级目录'

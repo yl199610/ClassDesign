@@ -72,4 +72,14 @@ public class CcategoryServiceImpl implements CcategoryService{
 		return ccategoryList;
 	}
 
+	@Override
+	public boolean archiveCategory(Integer ccid) {
+		return CcategoryMapper.archiveCategory(ccid);
+	}
+
+	@Override
+	public boolean modifyCate(Ccategory ccatgory) {
+		return CcategoryMapper.modifyCate(ccatgory);
+	}
+
 }

@@ -34,15 +34,45 @@ $('#categoryInfo').datagrid({
 		width : 40,
 		align:'center',
 		formatter: function(value,row,index){
-			var str = '<a class="operatorBtn" href="javascript:void(0)" onClick="songOperatorFun(1, ' 
-				+ row.kuSongId + ')">删除</a>&nbsp;'
-				+ '<a class="operatorBtn" href="javascript:void(0)" onClick="songOperatorFun(2, ' 
-				+ row.kuSongId + ')">修改</a>&nbsp;'
+			var str = '<a class="operatorBtn" href="javascript:void(0)" onClick="cateOperatorFun(1, ' 
+				+ row.ccid + ')">删除</a>&nbsp;'
+				+ '<a class="operatorBtn" href="javascript:void(0)" onClick="cateOperatorFun(2, ' 
+				+ row.ccid + ')">修改</a>&nbsp;'
 				+ '<script>$(".operatorBtn").linkbutton();</script>';
 			return str;
 		}
 	} ]]
 });
+
+function cateOperatorFun(operType, id){
+	switch(operType){
+	case 1:
+		delCate(id);
+		break;	
+	case 2:
+		parent.openCate(id);
+		break;
+	}
+}
+
+
+function delCate(id){
+	$.messager.confirm('确认','您确认想要删除记录吗,删除后记录将无法恢复？',function(r){    
+	    if (r){
+	        $.get("ccategory/archive?ccid="+id,function(data){
+				$('#categoryInfo').datagrid("reload");
+	        	$.messager.show({
+					title:'删除用户',
+					msg:data.trim()=="true"?"删除成功...":"删除失败!!!",
+					showType:'show',
+					style:{
+						top:document.body.scrollTop+document.documentElement.scrollTop+40,
+					}
+				});
+	        },"json");   
+	    }    
+	});
+}
 
 function getCatroryBy(){
 	var formData = new FormData($("#getCatInfoForm")[0]); // FormData

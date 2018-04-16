@@ -19,4 +19,8 @@ public interface CcategoryService {
 	List<Ccategory> getParentType(int parentId);
 
 	PaginationBean<Ccategory> getCatgroyByName(String page, String rows, Ccategory ccatgory);
+
+	boolean archiveCategory(Integer ccid);
+
+	boolean modifyCate(Ccategory ccatgory);
 }
