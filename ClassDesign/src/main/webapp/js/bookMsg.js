@@ -9,6 +9,11 @@ $('#bookInfo').datagrid({
 		width : 18,
 		align:'center'
 	}, {
+		field : 'bookname',
+		title : '书名',
+		width : 30,
+		align:'center'
+	} , {
 		field : 'cauthor',
 		title : '作者',
 		width : 30,
@@ -67,3 +72,19 @@ $('#bookInfo').datagrid({
 		}
 	} ]]
 });
+
+function getBookBy(){
+	var formData = new FormData($("#getBookInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'cbook/list',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#bookInfo').datagrid("loadData",returndata);
+		}
+	});
+}

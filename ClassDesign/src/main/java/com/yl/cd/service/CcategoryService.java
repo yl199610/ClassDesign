@@ -23,4 +23,6 @@ public interface CcategoryService {
 	boolean archiveCategory(Integer ccid);
 
 	boolean modifyCate(Ccategory ccatgory);
+
+	Ccategory detailCategory(Integer ccid);
 }

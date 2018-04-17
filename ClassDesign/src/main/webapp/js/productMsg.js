@@ -67,3 +67,20 @@ $('#productInfo').datagrid({
 		}
 	} ]]
 });
+
+
+function getProductBy(){
+	var formData = new FormData($("#getProInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'cproduct/list',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#productInfo').datagrid("loadData",returndata);
+		}
+	});
+}

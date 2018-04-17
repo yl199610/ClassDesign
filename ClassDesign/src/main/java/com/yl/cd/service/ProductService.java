@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface ProductService {
 
-	PaginationBean<Cproduct> getAllProduct(String page, String rows);
+	PaginationBean<Cproduct> getAllProduct(String page, String rows, Cproduct cproduct);
 
 }

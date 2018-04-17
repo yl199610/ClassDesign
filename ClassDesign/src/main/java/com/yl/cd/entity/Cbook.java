@@ -14,12 +14,15 @@ public class Cbook {
 	private String catalogue;
 	private String edition;
 	private String cbfree;
+	private String bookname;
 	public Cbook() {
 	}
 	
+
+
 	public Cbook(Integer cbid, Integer cbcpid, String cauthor, String cimage, String cisbn, String cpublishing,
 			String cpublishtime, String cwordnumber, String ctotalpage, String cintroduce, String catalogue,
-			String edition, String cbfree) {
+			String edition, String cbfree, String bookname) {
 		super();
 		this.cbid = cbid;
 		this.cbcpid = cbcpid;
@@ -34,7 +37,22 @@ public class Cbook {
 		this.catalogue = catalogue;
 		this.edition = edition;
 		this.cbfree = cbfree;
+		this.bookname = bookname;
 	}
+
+
+
+	public String getBookname() {
+		return bookname;
+	}
+
+
+
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
+	}
+
+
 
 	public Integer getCbid() {
 		return cbid;
@@ -115,12 +133,15 @@ public class Cbook {
 		this.cbfree = cbfree;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Cbook [cbid=" + cbid + ", cbcpid=" + cbcpid + ", cauthor=" + cauthor + ", cimage=" + cimage + ", cisbn="
 				+ cisbn + ", cpublishing=" + cpublishing + ", cpublishtime=" + cpublishtime + ", cwordnumber="
 				+ cwordnumber + ", ctotalpage=" + ctotalpage + ", cintroduce=" + cintroduce + ", catalogue=" + catalogue
-				+ ", edition=" + edition + ", cbfree=" + cbfree + "]";
+				+ ", edition=" + edition + ", cbfree=" + cbfree + ", bookname=" + bookname + "]";
 	}
+
 	
 }

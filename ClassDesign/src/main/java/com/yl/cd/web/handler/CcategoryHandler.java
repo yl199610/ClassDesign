@@ -116,6 +116,13 @@ public class CcategoryHandler{
 		LogManager.getLogger().debug("请求CcategoryHandler处理archiveCategory....\n"+ccid);
 		return ccategoryService.archiveCategory(ccid);
 	}
+	//获取详情
+	@RequestMapping("/detail")
+	@ResponseBody
+	public Ccategory detailCategory(@RequestParam(name="ccid")Integer ccid){
+		LogManager.getLogger().debug("请求CcategoryHandler处理detailCategory....\n"+ccid);
+		return ccategoryService.detailCategory(ccid);
+	}
 	
 	//修改
 	@RequestMapping("/modify")	

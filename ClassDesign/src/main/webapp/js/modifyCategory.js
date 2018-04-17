@@ -16,7 +16,6 @@ $.get("ccategory/detail?ccid="+cnid,function(data){
 	$("#mccid").val(cnid);
 	$("#mlevels").val(data.levels);
 	$("#mccname").val(data.ccname);
-	$("#parentid").combobox('setValue',data.description);
 	$("#mdescription").val(data.description);
 },"json");
 

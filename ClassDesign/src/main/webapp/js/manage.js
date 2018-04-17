@@ -61,8 +61,8 @@ function openCate(id) {
 	cnid = id;
 	$("#modifyCategory").dialog({
 		title : 'modifyCategory',
-		width : 600,
-		height : 500,
+		width : 500,
+		height : 350,
 		left : 300,
 		modal : true,
 		href : 'back/modifyCategory.jsp'

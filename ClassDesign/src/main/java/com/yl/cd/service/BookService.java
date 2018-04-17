@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface BookService {
 
-	PaginationBean<Cbook> getAllBook(String page, String rows);
+	PaginationBean<Cbook> getAllBook(String page, String rows, Cbook cbook);
 
 }

@@ -6,7 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>后台管理</title>
 </head>
-<body>   
+<body>  
+	<form id="getProInfoForm" method="post" style="width: 70%; margin: 0px auto">
+		输入名称:<input name="cproductname" id="mcproductname"><br>
+		 <input type="button" value="查询产品信息" onClick="getProductBy()">
+	</form> 
 	<table id="productInfo"></table>
 	<script type="text/javascript" src="js/productMsg.js"></script>
 </body>

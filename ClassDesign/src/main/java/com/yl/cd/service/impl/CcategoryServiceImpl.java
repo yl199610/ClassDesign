@@ -82,4 +82,9 @@ public class CcategoryServiceImpl implements CcategoryService{
 		return CcategoryMapper.modifyCate(ccatgory);
 	}
 
+	@Override
+	public Ccategory detailCategory(Integer ccid) {
+		return CcategoryMapper.detailCategory(ccid);
+	}
+
 }

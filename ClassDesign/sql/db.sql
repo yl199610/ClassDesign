@@ -107,7 +107,8 @@ create table cproduct(
 	cpstatus varchar2(20) default 'normal',
 	cpfree varchar2(25) default null
 );
-select * from cproduct
+select * from (select t.*,rownum rownu from cproduct t where rownum<=1*10 and 1=1 and cpstatus='normal' and cproductname='左脑思维魔法训练' )tt where tt.rownu>(1-1)*10
+select * from cproduct where cproductname='左脑思维魔法训练(2016年新版)'
 drop table cproduct;
 drop sequence seqcpro
 create sequence seqcpro start with 1;
@@ -119,6 +120,7 @@ create table cbook(
 	cauthor varchar2(20) not null,
 	cimage varchar2(30) not null,
 	cisbn varchar2(25) not null,
+	bookname varchar2(30) not null,
 	cpublishing varchar2(25) not null,
 	cpublishtime varchar2(15) not null,
 	cwordnumber varchar2(10) not null,
@@ -134,8 +136,8 @@ drop sequence seqcbook
 create sequence seqcbook start with 1;
 insert into cbook values(seqcbook.nextval,'艾伦布莱恩大卫加蒙','../images/notpic.jpg','9787567548138',
 '华东师范大学出版社','2016年3月','3万','200','本书用海量题库实现左脑思维','第一章联锁字谜7个联锁字谜练习','新版',default);
-
-
+alter table cbook add (bookname varchar2(30));
+update CBOOK set cbfree=1 where cbid=1
 --订单表
 create table corder(
   coid Integer primary key,

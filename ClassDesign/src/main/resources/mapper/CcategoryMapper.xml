@@ -120,5 +120,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ccid=#{ccid}
 	</update>
 	
+	<select id="detailCategory" parameterType="Integer" resultType="Ccategory">
+		select * from ccategory where ccid=#{ccid}
+	</select>
 	
 </mapper>

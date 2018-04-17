@@ -3,17 +3,46 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yl.cd.mapper.BookMapper">
-		<resultMap type="paginationBean" id="paginationBeanMap">
-		<collection property="rows" column="{pageSize=pageSize ,currPage=currPage}" select="getBook"/>
-	</resultMap>
-	
-	<select id="getAllBook" parameterType="paginationBean" resultMap="paginationBeanMap">
-		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize} pageSize,${currPage} currPage from cbook
-	</select>
-	<select id="getBook" resultType="Cbook">
-		select * from
-		(select m.*,rownum rn from
-		(select * from cbook order by 1) m where ${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
+	<select id="getBookByName" parameterType="map" resultType="Cbook">
+		select * from (select t.*,rownum rownu from cbook t where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and cbfree=1
+		<choose>
+			<when test="cauthor!=null and cauthor!=''">
+				and cauthor=#{cauthor,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<choose>
+			<when test="cisbn!=null and cisbn!=''">
+				and cisbn=#{cisbn,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<choose>
+			<when test="bookname!=null and bookname!=''">
+				and bookname=#{bookname,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
 	</select>
 
+	<select id="getBookTotalAndTotalPage" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize})
+		totalPage,${pageSize}
+		pageSize,${currPage} currPage from cbook where 1=1 and cbfree=1
+		<choose>
+			<when test="cauthor!=null and cauthor!=''">
+				and cauthor=#{cauthor,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<choose>
+			<when test="cisbn!=null and cisbn!=''">
+				and cisbn=#{cisbn,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<choose>
+			<when test="bookname!=null and bookname!=''">
+				and bookname=#{bookname,jdbcType=VARCHAR}
+			</when>
+		</choose>
+	</select>
 </mapper>
