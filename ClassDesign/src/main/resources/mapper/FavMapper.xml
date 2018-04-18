@@ -30,21 +30,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</association>
 	</resultMap>
 	<select id="getFavoriteByName" parameterType="map" resultMap="CfavoritesDetail">
-		select * from (select t.*,c.*,cp.*,rownum rownu from cfavorites t join cuser c
+		select * from (select t.*,c.*,cp.*,rownum rownu from cfavorites t join
+		cuser c
 		on c.cuid=t.cuserid
 		join cproduct cp on cp.cpid=t.cfp where
 		rownum&lt;=#{currPage}*#{pageSize} and 1=1
-		<choose>
-			<when test="cuserid!=null and cuserid!=''">
-				and cuserid=#{cuserid}
-			</when>
-			<when test="cfp!=null and cfp!=''">
+				<if test="cfp!=null and cfp!=''">
 				and cfp=#{cfp}
-			</when>
-			<when test="cfstatus!=null and cfstatus!=''">
+			</if>
+			<if test="cuserid!=null and cuserid!=''">
+				and cuserid=#{cuserid}
+			</if>
+			<if test="cfstatus!=null and cfstatus!=''">
 				and cfstatus=#{cfstatus}
-			</when>
-		</choose>
+			</if>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
 	</select>
 
@@ -56,16 +55,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join cuser c on
 		c.cuid=t.cuserid
 		join cproduct cp on cp.cpid=t.cfp where 1=1
-		<choose>
-			<when test="cuserid!=null and cuserid!=''">
+		<if test="cfp!=null and cfp!=''">
+				and cfp=#{cfp}
+			</if>
+			<if test="cuserid!=null and cuserid!=''">
 				and cuserid=#{cuserid}
-			</when>
+			</if>
+			<if test="cfstatus!=null and cfstatus!=''">
+				and cfstatus=#{cfstatus}
+			</if>
+	<!-- 	<choose>
 			<when test="cfp!=null and cfp!=''">
 				and cfp=#{cfp}
+			</when>
+			<when test="cuserid!=null and cuserid!=''">
+				and cuserid=#{cuserid}
 			</when>
 			<when test="cfstatus!=null and cfstatus!=''">
 				and cfstatus=#{cfstatus}
 			</when>
-		</choose>
+		</choose> -->
 	</select>
 </mapper>

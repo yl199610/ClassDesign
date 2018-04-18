@@ -12,12 +12,18 @@ $('#favInfo').datagrid({
 		field : 'cuserid',
 		title : '用户ID',
 		width : 30,
-		align:'center'
+		align:'center',
+		formatter: function(value,row,index){
+			return row['cuser']['cusername'];
+		}
 	} ,{
 		field : 'cfp',
 		title : '产品名',
 		width : 18,
-		align:'center'
+		align:'center',
+		formatter: function(value,row,index){
+			return row['cproduct']['cproductname'];
+		}
 	}, {
 		field : 'cfstatus',
 		title : '状态',
