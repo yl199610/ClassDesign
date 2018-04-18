@@ -45,17 +45,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserDetail" resultMap="detailMap">
 		select * from cuser c where 1=1 and cufree=1
 		<choose>
-			<when test='cuid==1 and cusername=="a"'>
+			<when test='cuid==1 and cusername=="username"'>
 				and c.cuid like '%%' and c.cusername like '%%'
 			</when>
 			<when test='cuid==1 and cusername!=null and cusername!=""'>
-				and c.cusername=#{cusername}
+				and c.cusername like '%${cusername}%'
 			</when>
-			<when test='cuid!=null and cuid!="" and cusername=="a"'>
-				and c.cuid=#{cuid}
+			<when test='cuid!=null and cuid!="" and cusername=="username"'>
+				and c.cuid like '%${cuid}%'
 			</when>
 			<otherwise>
-				and c.cuid=#{cuid} and c.cusername=#{cusername}
+				and c.cuid like '%${cuid}%' and c.cusername=#{cusername}%'
 			</otherwise>
 		</choose>
 	</select>
@@ -77,16 +77,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				,#{cusername} cusername
 			</when>
 			<otherwise>
-				,'a' cusername
+				,'username' cusername
 			</otherwise>
 		</choose>
 		from (
 		select * from cuser where 1=1 and cufree=1
 		<if test="cuid!=null and cuid!=''">
-			and cuid=#{cuid}
+			and cuid like '%${cuid}%'
 		</if>
 		<if test="cusername!=null and cusername!=''">
-			and cusername=#{cusername}
+			and cusername like '%${cusername}%'
 		</if>
 		)
 	</select>

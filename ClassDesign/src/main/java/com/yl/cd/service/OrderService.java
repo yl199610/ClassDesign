@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface OrderService {
 
-	PaginationBean<Corder> getAllOrder(String page, String rows);
+	PaginationBean<Corder> getAllCorder(String page, String rows, Corder corder);
 
 }

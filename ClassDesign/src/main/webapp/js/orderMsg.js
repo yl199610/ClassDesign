@@ -63,3 +63,19 @@ $('#orderInfo').datagrid({
 		}
 	} ]]
 });
+
+function getOrderBy(){
+	var formData = new FormData($("#getOrderInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'corder/list',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#orderInfo').datagrid("loadData",returndata);
+		}
+	});
+}

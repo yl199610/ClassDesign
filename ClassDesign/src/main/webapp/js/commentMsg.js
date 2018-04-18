@@ -1,6 +1,6 @@
 $('#commentInfo').datagrid({
 	fitColumns : true,
-	url:'cccomments/list',
+	url:'ccomments/list',
 	singleSelect : true,
 	pagination:true,
 	columns : [ [ {

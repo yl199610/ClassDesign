@@ -8,17 +8,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and cbfree=1
 		<choose>
 			<when test="cauthor!=null and cauthor!=''">
-				and cauthor=#{cauthor,jdbcType=VARCHAR}
+				and cauthor like '%${cauthor}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="cisbn!=null and cisbn!=''">
-				and cisbn=#{cisbn,jdbcType=VARCHAR}
+				and cisbn like '%${cisbn}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="bookname!=null and bookname!=''">
-				and bookname=#{bookname,jdbcType=VARCHAR}
+				and bookname like '%${bookname}%'
 			</when>
 		</choose>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
@@ -31,17 +31,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pageSize,${currPage} currPage from cbook where 1=1 and cbfree=1
 		<choose>
 			<when test="cauthor!=null and cauthor!=''">
-				and cauthor=#{cauthor,jdbcType=VARCHAR}
+				and cauthor like '%${cauthor}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="cisbn!=null and cisbn!=''">
-				and cisbn=#{cisbn,jdbcType=VARCHAR}
+				and cisbn like '%${cisbn}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="bookname!=null and bookname!=''">
-				and bookname=#{bookname,jdbcType=VARCHAR}
+				and bookname like'%${bookname}%'
 			</when>
 		</choose>
 	</select>

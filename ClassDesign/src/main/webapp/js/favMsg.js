@@ -10,7 +10,7 @@ $('#favInfo').datagrid({
 		align:'center'
 	}, {
 		field : 'cuserid',
-		title : '用户',
+		title : '用户ID',
 		width : 30,
 		align:'center'
 	} ,{

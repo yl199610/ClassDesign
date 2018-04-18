@@ -68,12 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and cafree=1
 		<choose>
 			<when test="levels!=null and levels!=''">
-				and levels=#{levels,jdbcType=VARCHAR}
+				and levels like '%${levels}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="ccname!=null and ccname!=''">
-				and ccname=#{ccname,jdbcType=VARCHAR}
+				and ccname like '%${ccname}%'
 			</when>
 		</choose>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
@@ -86,12 +86,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pageSize,${currPage} currPage from ccategory where 1=1 and cafree=1
 		<choose>
 			<when test="levels!=null and levels!=''">
-				and levels=#{levels,jdbcType=VARCHAR}
+				and levels like '%${levels}%'
 			</when>
 		</choose>
 		<choose>
 			<when test="ccname!=null and ccname!=''">
-				and ccname=#{ccname,jdbcType=VARCHAR}
+				and ccname like '%${ccname}%'
 			</when>
 		</choose>
 	</select>

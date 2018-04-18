@@ -3,17 +3,32 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yl.cd.mapper.OrderMapper">
-		<resultMap type="paginationBean" id="paginationBeanMap">
-		<collection property="rows" column="{pageSize=pageSize ,currPage=currPage}" select="getOrder"/>
-	</resultMap>
+	<select id="getOrderByName" parameterType="map" resultType="Corder">
+		select * from (select t.*,rownum rownu from corder t where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and cstatus='normal'
+		<choose>
+			<when test="coid!=null and coid!=''">
+				and coid like '%${coid}%'
+			</when>
+			<when test="cordid!=null and cordid!=''">
+				and cordid like '%${cordid}%'
+			</when>
+		</choose>
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
+	</select>	
 	
-	<select id="getAllOrder" parameterType="paginationBean" resultMap="paginationBeanMap">
-		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize} pageSize,${currPage} currPage from corder
+	<select id="getOrderTotalAndTotalPage" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize})
+		totalPage,${pageSize}
+		pageSize,${currPage} currPage from corder where 1=1 and cstatus='normal'
+		<choose>
+			<when test="coid!=null and coid!=''">
+				and coid like '%${coid}%'
+			</when>
+			<when test="cordid!=null and cordid!=''">
+				and cordid like '%${cordid}%'
+			</when>
+		</choose>
 	</select>
-	<select id="getOrder" resultType="Corder">
-		select * from
-		(select m.*,rownum rn from
-		(select * from corder order by 1) m where ${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
-	</select>
-
 </mapper>

@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and cpstatus='normal'
 		<choose>
 			<when test="cproductname!=null and cproductname!=''">
-				and cproductname=#{cproductname,jdbcType=VARCHAR}
+				and cproductname like '%${cproductname}%'
 			</when>
 		</choose>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pageSize,${currPage} currPage from cproduct where 1=1 and cpstatus='normal'
 		<choose>
 			<when test="cproductname!=null and cproductname!=''">
-				and cproductname=#{cproductname,jdbcType=VARCHAR}
+				and cproductname like '%${cproductname}%'
 			</when>
 		</choose>
 	</select>
