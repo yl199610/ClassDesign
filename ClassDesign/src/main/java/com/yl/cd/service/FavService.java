@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface FavService {
 
-	PaginationBean<Cfavorites> getAllFav(String page, String rows);
+	PaginationBean<Cfavorites> getAllFavorites(String page, String rows, Cfavorites cfavorites);
 
 }

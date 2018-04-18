@@ -1,5 +1,9 @@
 package com.yl.cd.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +17,30 @@ public class FavServiceImpl implements FavService{
 	@Autowired
 	private FavMapper favMapper;
 
-
 	@Override
-	public PaginationBean<Cfavorites> getAllFav(String currpage, String pageSize) {
-		PaginationBean<Cfavorites> bookBean = new PaginationBean<Cfavorites>();
-		if(currpage!=null){
-			bookBean.setCurrPage(Integer.parseInt(currpage));
+	public PaginationBean<Cfavorites> getAllFavorites(String currpage, String pageSize, Cfavorites cfavorites) {
+		PaginationBean<Cfavorites> productList = new PaginationBean<Cfavorites>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
 		}
-		
-		if(pageSize!=null){
-			bookBean.setPageSize(Integer.parseInt(pageSize));
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
 		}
-		return favMapper.getAllFav(bookBean);
+		Integer cuserid = cfavorites.getCuserid();
+		Integer cfp = cfavorites.getCfp();
+		String cfstatus = cfavorites.getCfstatus();
+		System.out.println(cfp+"========"+cuserid+"==========="+cfstatus);
+		map.put("cfstatus", cfstatus);
+		map.put("cuserid", cuserid);
+		map.put("cfp", cfp);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		List<Cfavorites> c = favMapper.getFavoriteByName(map);
+		//获得total 和 totalPage
+		productList = favMapper.getFavoriteTotalAndTotalPage(map);
+		productList.setRows(c);
+		return productList;
 	}
 
 }

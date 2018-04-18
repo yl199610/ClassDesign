@@ -114,6 +114,8 @@ drop sequence seqcpro
 create sequence seqcpro start with 1;
 insert into cproduct values(seqcpro.nextval,20,2,'左脑思维魔法训练(2016年新版)','依据科学研究结果设计的104种左脑思维训练题和87种快速学习',
 '2017-12-10','28','18','左脑思维魔法训练','../images/notpic.jpg',default,null);
+insert into cproduct values(seqcpro.nextval,20,1,'左脑思维','依据科学研和87种快速学习',
+'2012-1-14','38','38','左脑思维练','../images/notpic.jpg',default,null);
 --书籍表
 create table cbook(
 	cbid Integer primary key,
@@ -136,9 +138,10 @@ drop table cbook;
 drop sequence seqcbook
 create sequence seqcbook start with 1;
 insert into cbook values(seqcbook.nextval,'艾伦布莱恩大卫加蒙','../images/notpic.jpg','9787567548138',
-'华东师范大学出版社','2016年3月','3万','200','本书用海量题库实现左脑思维','第一章联锁字谜7个联锁字谜练习','新版',default);
+'华东师范大学出版社','2016-2-1','3万','200','本书用海量题库实现左脑思维','第一章联锁字谜7个联锁字谜练习',
+'新版',default,'左脑思维');
 alter table cbook add (bookname varchar2(30));
-update CBOOK set cbfree=1 where cbid=2
+update CBOOK set cbfree=1 where cbid=23
 --订单表
 create table corder(
   coid Integer primary key,
@@ -155,8 +158,8 @@ create table corder(
 );
 create sequence seqcorder start with 1;
 select * from corder where cstatus='normal' and coid like '%23%'
-insert into corder values(2323,3,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
-insert into corder values(seqcorder.nextval,3,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
+insert into corder values(2323,21,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
+insert into corder values(seqcorder.nextval,21,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
 --订单详细表
 create  table corderitem(
   coiid Integer primary key,
@@ -177,7 +180,15 @@ create table cfavorites(--用户的外键 书籍产品的外键
 ); 
 drop table cfavorites
 create sequence seqcfavorites start with 1;
-insert into cfavorites values(seqcfavorites.nextval,3,3,default);
+insert into cfavorites values(seqcfavorites.nextval,21,1,default);
+insert into cfavorites values(seqcfavorites.nextval,21,23,default);
+update cfavorites set cfstatus='收藏' where cfp=23
+select * from (select t.*,rownum rownu from cfavorites t join cuser c on c.cuid=t.cuserid
+join cproduct cp on cp.cpid=t.cfp where rownum<=5 and 1=1)tt where tt.rownu>0
+
+select t.*,c.*,cp.*,rownum rownu from cfavorites t join cuser c
+		on c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp
 --评论表
 create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	cid Integer  primary key,
@@ -186,7 +197,7 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	ccontent varchar2(1000),
 	ccdate varchar2(20)
 );
-insert into ccomments values(seqccomments.nextval,3,3,'这本书好看','2018-4-16');
+insert into ccomments values(seqccomments.nextval,1,21,'这本书好看','2018-4-16');
 select * from cfavorites;
 drop table ccomments
 create sequence seqccomments start with 1;

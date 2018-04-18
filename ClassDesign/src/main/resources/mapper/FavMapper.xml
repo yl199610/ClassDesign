@@ -3,21 +3,69 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yl.cd.mapper.FavMapper">
-	<resultMap type="paginationBean" id="paginationBeanMap">
-		<collection property="rows"
-			column="{pageSize=pageSize ,currPage=currPage}" select="getFav" />
+	<resultMap id="CfavoritesDetail" type="Cfavorites">
+		<id property="cfid" column="cfid" />
+		<result property="cuserid" column="cuserid" />
+		<result property="cfp" column="cfp" />
+		<result property="cfstatus" column="cfstatus" />
+		<association property="cuser" javaType="Cuser">
+			<id property="cuid" column="cuid" />
+			<result property="cusername" column="cusername" />
+			<result property="cemail" column="cemail" />
+			<result property="cphone" column="cphone" />
+			<result property="clikebook" column="clikebook" />
+			<result property="csex" column="csex" />
+			<result property="applynum" column="applynum" />
+			<result property="cbirthday" column="cbirthday" />
+		</association>
+		<association property="cproduct" javaType="Cproduct">
+			<id property="cpid" column="cpid" />
+			<result property="spcaid" column="spcaid" />
+			<result property="cproductname" column="cproductname" />
+			<result property="cdescription" column="cdescription" />
+			<result property="caddtime" column="caddtime" />
+			<result property="cnormalprice" column="cnormalprice" />
+			<result property="ckeywords" column="ckeywords" />
+			<result property="cwsscprice" column="cwsscprice" />
+		</association>
 	</resultMap>
-
-	<select id="getAllFav" parameterType="paginationBean" resultMap="paginationBeanMap">
-		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize}
-		pageSize,${currPage} currPage from cfavorites
+	<select id="getFavoriteByName" parameterType="map" resultMap="CfavoritesDetail">
+		select * from (select t.*,c.*,cp.*,rownum rownu from cfavorites t join cuser c
+		on c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1
+		<choose>
+			<when test="cuserid!=null and cuserid!=''">
+				and cuserid=#{cuserid}
+			</when>
+			<when test="cfp!=null and cfp!=''">
+				and cfp=#{cfp}
+			</when>
+			<when test="cfstatus!=null and cfstatus!=''">
+				and cfstatus=#{cfstatus}
+			</when>
+		</choose>
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
 	</select>
-	<select id="getFav" resultType="Cfavorites">
-		select * from
-		(select m.*,rownum
-		rn from
-		(select * from cfavorites order by 1) m where
-		${currPage}*${pageSize}>=rownum) where rn>(${currPage}-1)*${pageSize}
-	</select>
 
+	<select id="getFavoriteTotalAndTotalPage" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize})
+		totalPage,${pageSize}
+		pageSize,${currPage} currPage from cfavorites t
+		join cuser c on
+		c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp where 1=1
+		<choose>
+			<when test="cuserid!=null and cuserid!=''">
+				and cuserid=#{cuserid}
+			</when>
+			<when test="cfp!=null and cfp!=''">
+				and cfp=#{cfp}
+			</when>
+			<when test="cfstatus!=null and cfstatus!=''">
+				and cfstatus=#{cfstatus}
+			</when>
+		</choose>
+	</select>
 </mapper>

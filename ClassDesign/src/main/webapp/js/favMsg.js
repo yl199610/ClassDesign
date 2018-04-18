@@ -38,3 +38,20 @@ $('#favInfo').datagrid({
 		}
 	} ]]
 });
+
+
+function getFavBy(){
+	var formData = new FormData($("#getFavInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'cfav/list',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#favInfo').datagrid("loadData",returndata);
+		}
+	});
+}

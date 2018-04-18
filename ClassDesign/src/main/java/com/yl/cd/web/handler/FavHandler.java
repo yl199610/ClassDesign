@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yl.cd.entity.Cfavorites;
+import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.FavService;
 
@@ -16,12 +17,14 @@ public class FavHandler{
 	@Autowired
 	private FavService favService;
 	
-
+	// 模糊分页查询
 	@RequestMapping("/list")
 	@ResponseBody
-	public PaginationBean<Cfavorites> getAllFav(String page,String rows){
-		LogManager.getLogger().debug("请求FavHandler处理getAllFav......");
-		return favService.getAllFav(page,rows);
+	public PaginationBean<Cfavorites> getAllFavorites(String page, String rows, Cfavorites cfavorites) {
+		LogManager.getLogger().debug("请求FavHandler处理getAllFavorites......");
+		PaginationBean<Cfavorites> favoritesPage = favService.getAllFavorites(page, rows, cfavorites);
+		System.out.println(favoritesPage.getRows());
+		return favoritesPage;
 	}
-	
+
 }
