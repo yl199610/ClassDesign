@@ -12,4 +12,8 @@ public interface BookMapper {
 
 	PaginationBean<Cbook> getBookTotalAndTotalPage(Map<String, Object> map);
 
+	boolean archiveBook(Integer cbid);
+
+	Cbook detailBook(Integer cbid);
+
 }

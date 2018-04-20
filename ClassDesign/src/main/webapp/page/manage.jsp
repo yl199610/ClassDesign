@@ -100,6 +100,8 @@
 
 	<div id="modifyUser"></div>
 	<div id="modifyCategory"></div>
+	<div id="modifyBook"></div>
+	<div id="modifyProduct"></div>
 	
 
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>

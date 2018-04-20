@@ -45,4 +45,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
+	
+	
+	
+	<update id="archiveBook" parameterType="Integer">
+		update cbook set cbfree=0 where cbid=#{cbid}
+	</update>
+	
+		
+	<select id="detailBook" resultType="Ccategory">
+		select * from cbook where cbid=#{levels}
+	</select>
+	
+	
+	
 </mapper>

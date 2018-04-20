@@ -25,4 +25,6 @@ public interface CcategoryService {
 	boolean modifyCate(Ccategory ccatgory);
 
 	Ccategory detailCategory(Integer ccid);
+
+	List<Ccategory> getAllParentTypeByCcid(int ccid);
 }

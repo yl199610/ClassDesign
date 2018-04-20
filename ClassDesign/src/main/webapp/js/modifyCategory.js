@@ -6,7 +6,7 @@ $(document).ready(function() {
 function find(){
 	$('#mparentid').combobox({
 		editable:false,
-	    url:'ccategory/secondtype?ccid='+cnid,
+	    url:'ccategory/getallparentTypeByCcid?ccid='+cnid,
 	    valueField:'ccid',
 	    textField:'ccname'
 	});
@@ -16,6 +16,8 @@ $.get("ccategory/detail?ccid="+cnid,function(data){
 	$("#mccid").val(cnid);
 	$("#mlevels").val(data.levels);
 	$("#mccname").val(data.ccname);
+	$('#mparentid').combobox('setValue',data.parentid);
+	$('#mparentid').combobox('setText',data.cafree);
 	$("#mdescription").val(data.description);
 },"json");
 
@@ -26,7 +28,7 @@ function modifyCate(){
 		  success : function(data) {
 			if (data.trim() == "true") {
 				$("#modifyCategory").dialog("close"); //关闭修改框
-				$("#getCatInfoForm").datagrid("reload"); // 刷新修改数据
+				$("#categoryInfo").datagrid("reload"); // 刷新修改数据
 			}  else {
 				$.messager.show({
 					title : '修改信息',

@@ -19,7 +19,8 @@ public class CcategoryServiceImpl implements CcategoryService{
 	
 	@Override
 	public List<Ccategory> getAllOnetype() {
-		return CcategoryMapper.getAllOnetype();
+		Ccategory cate = CcategoryMapper.getTheFirstParentid();
+		return CcategoryMapper.getAllOnetype(cate.getCcid());
 	}
 
 	@Override
@@ -84,7 +85,22 @@ public class CcategoryServiceImpl implements CcategoryService{
 
 	@Override
 	public Ccategory detailCategory(Integer ccid) {
-		return CcategoryMapper.detailCategory(ccid);
+		//获取本目录的额父类id
+		Ccategory category= CcategoryMapper.detailCategory(ccid);
+		int parentid = category.getParentid();
+		Ccategory cate = CcategoryMapper.detailCategory(parentid);
+		category.setCafree(cate.getCcname());
+		return category;
+	}
+
+	@Override
+	public List<Ccategory> getAllParentTypeByCcid(int ccid) {
+		//通过id找到级别名字
+		Ccategory category= CcategoryMapper.detailCategory(ccid);
+		int parentid = category.getParentid();
+		Ccategory cate = CcategoryMapper.detailCategory(parentid);
+		String levels = cate.getLevels();
+		return CcategoryMapper.getAllParentTypeByCcid(levels);
 	}
 
 }

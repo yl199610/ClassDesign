@@ -8,7 +8,7 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface CcategoryMapper {
 
-	List<Ccategory> getAllOnetype();
+	List<Ccategory> getAllOnetype(int parentid);
 
 	List<Ccategory> getAllTwotype(int ccid);
 
@@ -27,4 +27,10 @@ public interface CcategoryMapper {
 	boolean modifyCate(Ccategory ccatgory);
 
 	Ccategory detailCategory(Integer ccid);
+
+	Ccategory getTheFirstParentid();//获得总父类
+
+	List<Ccategory> getAllParentTypeByCcid(String levels);
+
+
 }

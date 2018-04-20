@@ -58,11 +58,7 @@ public class ConnTest {
 		assertNotNull(con);
 	}
 
-	@Ignore
-	public void testCate() {
-		List<Ccategory> c = ccategoryMapper.getAllOnetype();
-		System.out.println(c);
-	}
+
 
 	@Test
 	public void testCate1() {

@@ -1,7 +1,5 @@
 package com.yl.cd.web.handler;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.yl.cd.entity.Ccategory;
-import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.CcategoryService;
-import com.yl.cd.util.ServletUtil;
 
 @Controller
 @RequestMapping("/ccategory")
@@ -99,7 +94,7 @@ public class CcategoryHandler{
 				List<Ccategory> leavelList = ccategoryService.getParentType(parentId);
 				if(leavelList.size()>0){
 					for (Ccategory leavel : leavelList) {
-						ccategory.setCafree(leavel.getLevels()+"("+parentId+")");
+						ccategory.setCafree(leavel.getLevels()+"("+leavel.getCcname()+")");
 					}
 				}
 			}
@@ -132,4 +127,11 @@ public class CcategoryHandler{
 		return ccategoryService.modifyCate(ccatgory);
 	}
 	
+	//加载所有父目录标题
+	@RequestMapping("/getallparentTypeByCcid")
+	@ResponseBody
+	public List<Ccategory> getAllParentTypeByCcid(@RequestParam(name="ccid") int ccid){
+		LogManager.getLogger().debug("请求CcategoryHandler处理getAllParentTypeByCcid......"+ccid);
+		return ccategoryService.getAllParentTypeByCcid(ccid);
+	}
 }

@@ -68,3 +68,17 @@ function openCate(id) {
 		href : 'back/modifyCategory.jsp'
 	});
 }
+
+
+//修改书籍信息
+function openBook(id) {
+	cnid = id;
+	$("#modifyBook").dialog({
+		title : 'modifyBook',
+		width : 700,
+		height : 600,
+		left : 300,
+		modal : true,
+		href : 'back/modifyBook.jsp'
+	});
+}

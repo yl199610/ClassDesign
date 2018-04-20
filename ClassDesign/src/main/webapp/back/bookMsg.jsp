@@ -7,13 +7,15 @@
 <title>后台管理</title>
 </head>
 <body>
-	<form id="getBookInfoForm" method="post" style="width: 70%; margin: 0px auto">
+	<form id="getBookInfoForm" method="post"enctype="multipart/form-data" style="width: 70%; margin: 0px auto">
 		输入作者:<input name="cauthor" id="cauthor"><br>
 		输入编号:<input name="cisbn" id="cisbn"><br>
 		输入书名:<input name="bookname" id="bookname"><br>
 		 <input type="button" value="查询书籍信息" onClick="getBookBy()">
 	</form>    
+	<div style="height:90%;">
 	<table id="bookInfo"></table>
+	</div>
 	<script type="text/javascript" src="js/bookMsg.js"></script>
 </body>
 </html>

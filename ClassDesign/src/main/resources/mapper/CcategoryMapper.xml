@@ -3,18 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yl.cd.mapper.CcategoryMapper">
+	<select id="getTheFirstParentid" resultType="Ccategory">
+		select * from ccategory where levels='总父类'
+	</select>
 	<select id="getAllOnetype" resultType="Ccategory">
-		select * from ccategory
-		where parentid=1 and cafree=1
+		select * from ccategory where parentid=#{parentid} and cafree=1
 	</select>
 
 	<select id="getAllTwotype" parameterType="int" resultType="Ccategory">
 		select * from ccategory where parentid=#{ccid} and cafree=1
 	</select>
-
-	<!-- <select id="getAllThreetype" parameterType="int" resultType="Ccategory"> 
-		select * from ccategory where parentid=(select ccid from ccategory where 
-		ccid=#{ccid}) </select> -->
 
 	<select id="selectTeahcerByTid" resultMap="teacherMap">
 		select * from ccategory where parentid=#{ccid} and cafree=1<!--https://www.cnblogs.com/999-/p/6422024.html#{xxx} 
@@ -59,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getParentType" parameterType="int" resultType="Ccategory">
-		select * from ccategory where parentid=#{parentId} and cafree=1
+		select * from ccategory where ccid=#{parentId} and cafree=1
 	</select>
 
 	<!-- 条件查询 -->
@@ -102,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="modifyCate" parameterType="Ccategory">
-		update cuser
+		update ccategory
 		<set>
 			<if test='levels!=null and levels!=""'>
 				levels = #{levels},
@@ -123,5 +121,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailCategory" parameterType="Integer" resultType="Ccategory">
 		select * from ccategory where ccid=#{ccid}
 	</select>
+	
+	<select id="getAllParentTypeByCcid" resultType="Ccategory">
+		select * from ccategory where levels=#{levels}
+	</select>
+	
 	
 </mapper>

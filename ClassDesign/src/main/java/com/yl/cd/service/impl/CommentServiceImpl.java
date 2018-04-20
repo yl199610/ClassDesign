@@ -1,5 +1,9 @@
 package com.yl.cd.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +18,26 @@ public class CommentServiceImpl implements CommentService{
 	private CommentMapper commentMapper;
 
 	@Override
-	public PaginationBean<Ccomments> getAllComment(String currpage, String pageSize) {
-		PaginationBean<Ccomments> commentBean = new PaginationBean<Ccomments>();
-		if(currpage!=null){
-			commentBean.setCurrPage(Integer.parseInt(currpage));
+	public PaginationBean<Ccomments> getAllComments(String currpage, String pageSize, Ccomments comments) {
+		PaginationBean<Ccomments> commentList = new PaginationBean<Ccomments>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
 		}
-		
-		if(pageSize!=null){
-			commentBean.setPageSize(Integer.parseInt(pageSize));
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
 		}
-		return commentMapper.getAllComment(commentBean);
+		Integer cuserid = comments.getCuserid();
+		Integer cfp = comments.getCfp();
+		map.put("cuserid", cuserid);
+		map.put("cfp", cfp);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		List<Ccomments> c = commentMapper.getCommentByName(map);
+		//获得total 和 totalPage
+		commentList = commentMapper.getCommentTotalAndTotalPage(map);
+		commentList.setRows(c);
+		return commentList;
 	}
 
 }

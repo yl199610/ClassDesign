@@ -43,3 +43,20 @@ $('#commentInfo').datagrid({
 		}
 	} ]]
 });
+
+
+function getCommentBy(){
+	var formData = new FormData($("#getCommentInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'ccomments/list',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			$('#commentInfo').datagrid("loadData",returndata);
+		}
+	});
+}

@@ -36,4 +36,6 @@ function modifyUser(){
 function addPicPath(obj){
 	var picStr=window.URL.createObjectURL(obj.files[0]);
 	$("#pic").attr("src",picStr);
+	$("#mpic").attr("height","100px");
+	$("#mpic").attr("weight","100px");
 }

@@ -44,4 +44,16 @@ public class BookServiceImpl implements BookService{
 		productList.setRows(c);
 		return productList;	}
 
+
+	@Override
+	public boolean archiveBook(Integer cbid) {
+		return bookMapper.archiveBook(cbid);
+	}
+
+
+	@Override
+	public Cbook detailBook(Integer cbid) {
+		return bookMapper.detailBook(cbid);
+	}
+
 }

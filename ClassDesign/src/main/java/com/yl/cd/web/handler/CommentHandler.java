@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yl.cd.entity.Ccomments;
+import com.yl.cd.entity.Cfavorites;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.CommentService;
 
@@ -17,14 +18,12 @@ public class CommentHandler{
 	private CommentService commentService;
 	
 
-	/**
-	 * 获得所有标题
-	 */
+	// 模糊分页查询
 	@RequestMapping("/list")
 	@ResponseBody
-	public PaginationBean<Ccomments> getAllComment(String page,String rows){
-		LogManager.getLogger().debug("请求CommentHandler处理getAllComment......");
-		return commentService.getAllComment(page,rows);
+	public PaginationBean<Ccomments> getAllComments(String page, String rows, Ccomments comments) {
+		LogManager.getLogger().debug("请求CommentHandler处理getAllComments......");
+		PaginationBean<Ccomments> commentPage = commentService.getAllComments(page, rows, comments);
+		return commentPage;
 	}
-	
 }

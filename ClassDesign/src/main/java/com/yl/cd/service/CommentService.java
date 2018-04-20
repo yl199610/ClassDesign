@@ -5,6 +5,6 @@ import com.yl.cd.entity.PaginationBean;
 
 public interface CommentService {
 
-	PaginationBean<Ccomments> getAllComment(String page, String rows);
+	PaginationBean<Ccomments> getAllComments(String page, String rows, Ccomments comments);
 
 }
