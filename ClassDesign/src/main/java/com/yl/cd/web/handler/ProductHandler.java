@@ -58,9 +58,9 @@ public class ProductHandler {
 	// 首页页面加载获取图书总数
 	@RequestMapping("/getcountproduct")
 	@ResponseBody
-	public int getAllCountProduct() {
+	public Integer getAllCountProduct() {
 		LogManager.getLogger().debug("请求ProductHandler处理getAllCountProduct......");
-		int count = productService.getAllCountProduct();
+		Integer count = productService.getAllCountProduct();
 		return count;
 	}
 

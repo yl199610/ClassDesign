@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int getAllCountProduct() {
+	public Integer getAllCountProduct() {
 		return productMapper.getAllCountProduct();
 	}
 

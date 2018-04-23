@@ -26,7 +26,7 @@ public interface ProductMapper {
 
 	List<Cproduct> getProductByMan();
 
-	int getAllCountProduct();
+	Integer getAllCountProduct();
 
 
 }

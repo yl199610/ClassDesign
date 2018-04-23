@@ -37,7 +37,7 @@
 					<span>刘德华</span><span>李宗盛</span>
 				</div>
 				<div class="bookNum">
-					共有图书<span style="color: blue">123</span>本
+					共有图书<span id="countProductTotal" style="color: blue"></span>本
 				</div>
 			</form>
 		</div>

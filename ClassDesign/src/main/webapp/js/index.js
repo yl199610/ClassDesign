@@ -64,7 +64,7 @@ function loadHotBook(){
 		for(var i=0;i<data.length;i++){
 			$('#hotBookDivThird').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
 					'<img src="'+data[i].cimage+'"></a></li><li>'+
-					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
+					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条收藏</li><li>'+
 					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
 		}
 	}, "json");
@@ -76,6 +76,11 @@ function loadHotBook(){
 					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
 					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span></br><span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul></div>');
 		}
+	}, "json");
+	
+	
+	$.post("cproduct/getcountproduct",function(data) {
+		$('#countProductTotal').html(data);
 	}, "json");
 	
 }

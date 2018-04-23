@@ -15,7 +15,7 @@ public interface ProductService {
 
 	List<Cproduct> getAllFavProduct();
 
-	int getAllCountProduct();
+	Integer getAllCountProduct();
 
 	List<Cproduct> getProductByMan();
 

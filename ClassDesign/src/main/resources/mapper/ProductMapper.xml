@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		count(1)-4 from CPRODUCT)
 	</select>
 
-	<select id="getAllCountProduct" resultType="int">
+	<select id="getAllCountProduct" resultType="Integer">
 		select count(1) from CPRODUCT  where cpstatus='normal'
 	</select>
 </mapper>
