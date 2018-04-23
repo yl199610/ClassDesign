@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <base href="/ClassDesign/">
@@ -284,6 +287,20 @@
 			<div class="oneBookDiv"></div>
 			<div class="oneBookDiv"></div>
 			<div class="oneBookDiv"></div> -->
+			<c:if test="${pageNos>1 }">
+				<a href="/view/FindAllWithPage?pageNos=1">首页</a>
+				<a href="/view/FindAllWithPage?pageNos=${pageNos-1 }">上一页</a>
+			</c:if>
+			<c:if test="${pageNos <recordCount }">
+				<a href="/view/FindAllWithPage?pageNos=${pageNos+1 }">下一页</a>
+				<a href="/view/FindAllWithPage?pageNos=${recordCount }">末页</a>
+			</c:if>
+			<form action="/view/FindAllWithPage">
+				<h4 align="center">
+					共${recordCount}页 <input type="text" value="${pageNos}"
+						name="pageNos" size="1">页 <input type="submit" value="到达">
+				</h4>
+			</form>
 		</div>
 		<div class="onlineDiv">
 			<h3 style="text-align: center;">网上热卖即将有货</h3>

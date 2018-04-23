@@ -300,6 +300,31 @@ select * from cproduct where cpid=26
 --查询所有图书产品 
 select count(1) from CPRODUCT where cpstatus='normal'
 --显示下面的产品推荐(将不热门的推荐)
+
 select * from (select c.*,rownum rownu from cproduct c where rownum<=1*3 and cpstatus='normal'
 order by to_number(cpfree) asc) cp where cp.rownu>(1-1)*3
 and cp.rownu<(select count(1)-4 from CPRODUCT)
+
+select * from CPRODUCT
+
+update cproduct set cpstatus='normal' where cpid=49
+
+select * from (select c.*,rownum rownu from cproduct c where
+		rownum<=1*8 and cpstatus='normal'
+		order by to_number(cpfree) asc) cp where
+		cp.rownu>(1-1)*8
+		and cp.rownu<(select count(1)-3 from CPRODUCT)
+		
+		
+select * from (select t.*,rownum rownu from cproduct t where
+rownum<=1*8 and cpstatus='normal' order by to_number(cpfree) asc
+)tt where tt.rownu>(1-1)*8
+
+select (select count(1)-5 total from CPRODUCT) total,ceil(count(1)/8)
+		totalPage,8 pageSize,1 currPage from cproduct
+
+select * from
+(select m.*,rownum rn from
+(select * from cproduct where cpstatus='normal' order by to_number(cpfree) asc) m where 1*8>=rownum)
+where rn>(1-1)*8 and rn<(select count(1)-4 from CPRODUCT)
+

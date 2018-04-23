@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yl.cd.entity.Cadmin;
 import com.yl.cd.entity.Ccategory;
+import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.mapper.CadminMapper;
@@ -99,6 +100,11 @@ public class ConnTest {
 //		System.out.println("-----------------------");
 //		System.out.println(productMapper.getAllCountProduct());
 //		System.out.println("-----------------------");
+	}
+	@Test
+	public void getProductTestPage() {
+		PaginationBean<Cproduct>  p = productServiceImpl.getProductByMan("1","8");
+		System.out.println(p.getTotal()+"========"+p.getTotalPage());
 	}
 	
 	

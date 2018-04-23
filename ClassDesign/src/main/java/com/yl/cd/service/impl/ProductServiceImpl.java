@@ -83,8 +83,28 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Cproduct> getProductByMan() {
-		return productMapper.getProductByMan();
+	public int getTotalPage() {
+		return productMapper.getTotalPage();
+	}
+
+	@Override
+	public PaginationBean<Cproduct> getProductByMan(String currpage, String pageSize) {
+		PaginationBean<Cproduct> productBean = new PaginationBean<Cproduct>();
+		if(currpage!=null){
+			productBean.setCurrPage(Integer.parseInt(currpage));
+		}
+		
+		if(pageSize!=null){
+			productBean.setPageSize(8);
+		}
+		List<Cproduct> c = productMapper.getProductByMan(productBean);
+		//获得total 和 totalPage
+		productBean = productMapper.getProductPageByMan(productBean);
+		Integer total = productBean.getTotal();
+		Integer totalPage = (int) Math.ceil(total/Integer.valueOf(pageSize));
+		System.out.println(total);
+		productBean.setRows(c);
+		return productBean;
 	}
 	
 

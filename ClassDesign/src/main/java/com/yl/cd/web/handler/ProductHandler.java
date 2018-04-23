@@ -1,6 +1,9 @@
 package com.yl.cd.web.handler;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +70,9 @@ public class ProductHandler {
 	// 首页页面加载获取图书推荐
 	@RequestMapping("/getproductbyman")
 	@ResponseBody
-	public List<Cproduct> getProductByMan() {
+	public PaginationBean<Cproduct> getProductByMan(String page, String rows) {
 		LogManager.getLogger().debug("请求ProductHandler处理getProductByMan......");
-		List<Cproduct> cproductList = productService.getProductByMan();
+		PaginationBean<Cproduct> cproductList = productService.getProductByMan(page,rows);
 		return cproductList;
 	}
 

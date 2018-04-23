@@ -12,13 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
-	</select>	
-	
+	</select>
+
 	<select id="getProductTotalAndTotalPage" parameterType="map"
 		resultType="PaginationBean">
 		select count(1) total,ceil(count(1)/${pageSize})
 		totalPage,${pageSize}
-		pageSize,${currPage} currPage from cproduct where 1=1 and cpstatus='normal'
+		pageSize,${currPage} currPage from cproduct where 1=1 and
+		cpstatus='normal'
 		<choose>
 			<when test="cproductname!=null and cproductname!=''">
 				and cproductname like '%${cproductname}%'
@@ -38,29 +39,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rownum&lt;6
 	</select>
 	<select id="getAllCommProduct" resultType="Cproduct">
-		select * from cproduct where cpid=#{cfp}
-	</select>	
-	
+		select * from cproduct
+		where cpid=#{cfp}
+	</select>
+
 	<select id="getAllFavCount" resultType="Cfavorites">
-		select * from (select 
-		count(cfp) favcount,cfp from cfavorites c where cfstatus='收藏' group by cfp order by
+		select * from (select
+		count(cfp) favcount,cfp from cfavorites c where cfstatus='收藏' group by
+		cfp order by
 		favcount desc) where
 		rownum&lt;6
 	</select>
 
 	<select id="getAllFavProduct" resultType="Cproduct">
-		select * from cproduct where cpid=#{cfp}
-	</select>	
-	
-
-	<select id="getProductByMan" resultType="Cproduct">
-		select * from (select *
-		from cproduct where cpstatus='normal' order by to_number(cpfree) asc) where
-		rownum&lt;(select
-		count(1)-4 from CPRODUCT)
+		select * from cproduct
+		where cpid=#{cfp}
 	</select>
 
 	<select id="getAllCountProduct" resultType="Integer">
-		select count(1) from CPRODUCT  where cpstatus='normal'
+		select count(1) from
+		CPRODUCT where cpstatus='normal'
 	</select>
+
+
+	<select id="getProductByMan" resultType="Cproduct">
+		select * from (select
+		c.*,rownum rownu from cproduct c where
+		rownum&lt;=#{currPage}*#{pageSize} and cpstatus='normal'
+		order by
+		to_number(cpfree) asc) cp where
+		cp.rownu>(#{currPage}-1)*#{pageSize}
+		and cp.rownu&lt;(select count(1)-4 from CPRODUCT)
+	</select>
+
+	<!-- <select id="getProductPageb" resultType="Cproduct"> select * from (select 
+		m.*,rownum rn from (select * from cproduct where cpstatus='normal' order 
+		by to_number(cpfree) asc) m where ${currPage}*${pageSize}>=rownum) where 
+		rn>(${currPage}-1)*${pageSize} and rn&lt;(select count(1)-4 from cproduct) 
+		</select> -->
+	<select id="getProductPageByMan" resultType="PaginationBean">
+		select count(1)-5 total from CPRODUCT
+	</select>
+
 </mapper>

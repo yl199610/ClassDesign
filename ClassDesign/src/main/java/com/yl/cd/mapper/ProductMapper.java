@@ -24,9 +24,13 @@ public interface ProductMapper {
 	
 	Cproduct getAllFavProduct(Integer cfp);
 
-	List<Cproduct> getProductByMan();
-
 	Integer getAllCountProduct();
+
+	int getTotalPage();
+
+	List<Cproduct> getProductByMan(PaginationBean<Cproduct> productBean);
+
+	PaginationBean<Cproduct> getProductPageByMan(PaginationBean<Cproduct> productBean);
 
 
 }

@@ -17,6 +17,8 @@ public interface ProductService {
 
 	Integer getAllCountProduct();
 
-	List<Cproduct> getProductByMan();
+	int getTotalPage();
+
+	PaginationBean<Cproduct> getProductByMan(String page, String rows);
 
 }
