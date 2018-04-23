@@ -212,19 +212,13 @@
 		<div id="picMsgConter">
 			<div id="containerDiv">
 				<div id="listDiv" style="left: -600px;">
-					<img src="images/0.jpg" alt="1" />
-					<img src="images/1.jpg" alt="1" />
-					<img src="images/2.jpg" alt="2" />
-					<img src="images/3.jpg" alt="3" />
-					<img src="images/4.jpg" alt="4" />
-					<img src="images/4.jpg" alt="4" />
+					<img src="images/0.jpg" alt="1" /> <img src="images/1.jpg" alt="1" />
+					<img src="images/2.jpg" alt="2" /> <img src="images/3.jpg" alt="3" />
+					<img src="images/4.jpg" alt="4" /> <img src="images/4.jpg" alt="4" />
 				</div>
 				<div id="buttonsDiv">
-					<span index="1" class="on"></span>
-				    <span index="2"></span>
-				    <span index="3"></span>
-				    <span index="4"></span>
-				    <span index="5"></span>
+					<span index="1" class="on"></span> <span index="2"></span> <span
+						index="3"></span> <span index="4"></span> <span index="5"></span>
 				</div>
 			</div>
 
@@ -247,9 +241,25 @@
 			<h3 class="active">热卖图书</h3>
 			<h3>评论排行</h3>
 			<h3>热门收藏</h3>
-			<div style="display: block">限时抢购的内容</div>
-			<div>新品尝鲜的内容</div>
-			<div>茗茶热卖的内容</div>
+			<div id="hotBookDivFirst" style="display: block;">
+				<ul id="hotDiv">
+					<li><a href="/1076435.htm" target="_blank"><img
+							src="images/hot1.jpg"></a></li>
+					<li><a href="/1076435.htm" title="写给大家的欧美现代美术史"
+						target="_blank">写给大家的欧美现代美术史</a></li>
+					<li><span class="sellPrice">¥25.0</span>&nbsp;&nbsp;&nbsp; <span
+						class="price">¥78.0</span></br></li>
+				</ul>
+				<ul id="hotDiv">
+					<li><a href="/1076435.htm" target="_blank"><img
+							src="images/hot1.jpg"></a></li>
+					<li><a href="/1076435.htm" title="写给大家的欧美现代美术史"
+						target="_blank">写给大家的欧美现代美术史</a> <span class="sellPrice">¥25.0</span><span
+						class="price">¥78.0</span></li>
+				</ul>
+			</div>
+			<div id="hotBookDivScoend"></div>
+			<div id="hotBookDivThird"></div>
 		</div>
 
 		<div class="biaryCode">
@@ -259,12 +269,21 @@
 	<div class="hotbook">
 		<div class="combookDiv">
 			<h3 style="text-align: center;">书籍推荐</h3>
+			<!-- <div class="oneBookDiv">
+				<ul id="hotDiv">
+					<li><a href="/1076435.htm" target="_blank"><img
+							src="images/hot1.jpg"></a></li>
+					<li><a href="/1076435.htm"
+						title="历史的调控" target="_blank">历史的调控</a></li>
+					<li><span class="sellPrice">¥34</span>&nbsp;&nbsp;&nbsp;
+						<span class="price">¥20</span></br></li>
+				</ul>
+			</div>
 			<div class="oneBookDiv"></div>
 			<div class="oneBookDiv"></div>
 			<div class="oneBookDiv"></div>
 			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div>
+			<div class="oneBookDiv"></div> -->
 		</div>
 		<div class="onlineDiv">
 			<h3 style="text-align: center;">网上热卖即将有货</h3>

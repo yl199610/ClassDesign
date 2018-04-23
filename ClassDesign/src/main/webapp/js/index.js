@@ -38,7 +38,47 @@ function findanotherdata(ccid){
 		}
 	}, "json");
 }
-
+function loadHotBook(){
+	$("#hotBookDivFirst").empty();
+	$.post("cproduct/gethotproduct",function(data) {
+		for(var i=0;i<data.length;i++){
+			$('#hotBookDivFirst').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+					'<img src="'+data[i].cimage+'"></a></li><li>'+
+					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
+					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
+		}
+	}, "json");
+	
+	$("#hotBookDivScoend").empty();
+	$.post("cproduct/getcomproduct",function(data) {
+		for(var i=0;i<data.length;i++){
+			$('#hotBookDivScoend').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+					'<img src="'+data[i].cimage+'"></a></li><li>'+
+					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条评论</li><li>'+
+					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
+		}
+	}, "json");
+	
+	$("#hotBookDivThird").empty();
+	$.post("cproduct/getfavproduct",function(data) {
+		for(var i=0;i<data.length;i++){
+			$('#hotBookDivThird').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+					'<img src="'+data[i].cimage+'"></a></li><li>'+
+					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
+					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
+		}
+	}, "json");
+	
+	$.post("cproduct/getproductbyman",function(data) {
+		for(var i=0;i<data.length;i++){
+			$('.combookDiv').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+					'<img src="'+data[i].cimage+'"></a></li><li>'+
+					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
+					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span></br><span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul></div>');
+		}
+	}, "json");
+	
+}
 
 //页面加载出现
 $(function() {
@@ -46,6 +86,8 @@ $(function() {
 	imgChange();//图片轮转
 	consume();//客服
 	loadCategory();//从数据库加载分类的数据
+	loadHotBook();//加载热门图书  评论 收藏	//加载书籍推荐
+	//加载书的总数
 });
 function diffType(){//分类
 	$("#type-menu > ul > li").hover(function() {

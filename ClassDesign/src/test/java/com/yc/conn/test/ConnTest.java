@@ -23,8 +23,10 @@ import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.mapper.CadminMapper;
 import com.yl.cd.mapper.CcategoryMapper;
+import com.yl.cd.mapper.ProductMapper;
 import com.yl.cd.mapper.UserMapper;
 import com.yl.cd.service.impl.CcategoryServiceImpl;
+import com.yl.cd.service.impl.ProductServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // @ContextConfiguration(locations={"classpath:spring.xml",
@@ -44,7 +46,11 @@ public class ConnTest {
 	private UserMapper userMapper;
 	@Autowired
 	private CcategoryServiceImpl categoryServiceImpl;
-
+	@Autowired
+	private ProductServiceImpl productServiceImpl;
+	@Autowired
+	private ProductMapper productMapper;
+	
 	@Test
 	public void testCateAll(){
 		Ccategory c = new Ccategory(1,"一级目录","",null,1,null,null);
@@ -78,6 +84,21 @@ public class ConnTest {
 		Cadmin admin=new Cadmin(1,"a","a","1");
 		admin = cadminMapper.adminLogin(admin);
 		System.out.println(admin);
+	}
+	
+	//产品信息
+	@Test
+	public void getAllHotProductTest() {
+		System.out.println(productMapper.getAllHotProduct());
+//		System.out.println("-----------------------");
+//		System.out.println(productServiceImpl.getAllCommProduct());
+//		System.out.println("-----------------------");
+//		System.out.println("-==0=-0=-0=-0=-0=-0=-"+productServiceImpl.getAllFavProduct());
+//		System.out.println("-----------------------");
+//		System.out.println(productMapper.getProductByMan());
+//		System.out.println("-----------------------");
+//		System.out.println(productMapper.getAllCountProduct());
+//		System.out.println("-----------------------");
 	}
 	
 	

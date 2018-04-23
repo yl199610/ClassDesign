@@ -8,11 +8,13 @@ public class Ccomments {
 	private String ccdate;
 	private Cproduct cproduct;
 	private Cuser cuser;
+	private String comcount;
 	public Ccomments() {
 	}
 
+	
 	public Ccomments(Integer cid, Integer cfp, Integer cuserid, String ccontent, String ccdate, Cproduct cproduct,
-			Cuser cuser) {
+			Cuser cuser, String comcount) {
 		super();
 		this.cid = cid;
 		this.cfp = cfp;
@@ -21,7 +23,9 @@ public class Ccomments {
 		this.ccdate = ccdate;
 		this.cproduct = cproduct;
 		this.cuser = cuser;
+		this.comcount = comcount;
 	}
+
 
 	public Integer getCid() {
 		return cid;
@@ -70,10 +74,20 @@ public class Ccomments {
 		this.cuser = cuser;
 	}
 
+	public String getComcount() {
+		return comcount;
+	}
+
+
+	public void setComcount(String comcount) {
+		this.comcount = comcount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Ccomments [cid=" + cid + ", cfp=" + cfp + ", cuserid=" + cuserid + ", ccontent=" + ccontent
-				+ ", ccdate=" + ccdate + ", cproduct=" + cproduct + ", cuser=" + cuser + "]";
+				+ ", ccdate=" + ccdate + ", cproduct=" + cproduct + ", cuser=" + cuser + ", comcount=" + comcount + "]";
 	}
 
 	

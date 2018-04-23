@@ -7,10 +7,13 @@ public class Cfavorites {
 	private String cfstatus;
 	private Cuser cuser;
 	private Cproduct cproduct;
+	private String favcount;
 	public Cfavorites() {
 	}
 
-	public Cfavorites(Integer cfid, Integer cuserid, Integer cfp, String cfstatus, Cuser cuser, Cproduct cproduct) {
+	
+	public Cfavorites(Integer cfid, Integer cuserid, Integer cfp, String cfstatus, Cuser cuser, Cproduct cproduct,
+			String favcount) {
 		super();
 		this.cfid = cfid;
 		this.cuserid = cuserid;
@@ -18,7 +21,9 @@ public class Cfavorites {
 		this.cfstatus = cfstatus;
 		this.cuser = cuser;
 		this.cproduct = cproduct;
+		this.favcount = favcount;
 	}
+
 
 	public Integer getCfid() {
 		return cfid;
@@ -61,11 +66,23 @@ public class Cfavorites {
 		this.cproduct = cproduct;
 	}
 
+
+	public String getFavcount() {
+		return favcount;
+	}
+
+
+	public void setFavcount(String favcount) {
+		this.favcount = favcount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cfavorites [cfid=" + cfid + ", cuserid=" + cuserid + ", cfp=" + cfp + ", cfstatus=" + cfstatus
-				+ ", cuser=" + cuser + ", cproduct=" + cproduct + "]";
+				+ ", cuser=" + cuser + ", cproduct=" + cproduct + ", favcount=" + favcount + "]";
 	}
+
 
 	
 }
