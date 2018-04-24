@@ -63,13 +63,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getProductByMan" resultType="Cproduct">
-		select * from (select
-		c.*,rownum rownu from cproduct c where
-		rownum&lt;=#{currPage}*#{pageSize} and cpstatus='normal'
-		order by
-		to_number(cpfree) asc) cp where
-		cp.rownu>(#{currPage}-1)*#{pageSize}
-		and cp.rownu&lt;(select count(1)-4 from CPRODUCT)
+		<!-- select * from (select c.*,rownum rownu from cproduct c where rownum&lt;=#{currPage}*#{pageSize} 
+			and cpstatus='normal' order by to_number(cpfree) asc) cp where cp.rownu>(#{currPage}-1)*#{pageSize} 
+			and cp.rownu&lt;(select count(1)-4 from CPRODUCT) -->
+		select * from
+		(select m.*,rownum rn from
+		(select * from cproduct where cpstatus='normal' order by to_number(cpfree)
+		asc) m where #{currPage}*#{pageSize}>=rownum)
+		where rn>(#{currPage}-1)*#{pageSize} and rn&lt;(select count(1)-4 from
+		CPRODUCT)
 	</select>
 
 	<!-- <select id="getProductPageb" resultType="Cproduct"> select * from (select 
@@ -78,7 +80,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rn>(${currPage}-1)*${pageSize} and rn&lt;(select count(1)-4 from cproduct) 
 		</select> -->
 	<select id="getProductPageByMan" resultType="PaginationBean">
-		select count(1)-5 total from CPRODUCT
+		select count(1)-5
+		total from CPRODUCT
 	</select>
 
 </mapper>

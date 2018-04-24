@@ -69,21 +69,89 @@ function loadHotBook(){
 		}
 	}, "json");
 	
-	$.post("cproduct/getproductbyman",function(data) {
-		for(var i=0;i<data.length;i++){
-			$('.combookDiv').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
-					'<img src="'+data[i].cimage+'"></a></li><li>'+
-					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
-					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span></br><span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul></div>');
-		}
-	}, "json");
-	
-	
 	$.post("cproduct/getcountproduct",function(data) {
 		$('#countProductTotal').html(data);
 	}, "json");
 	
 }
+//总分页界面
+function pageFunction(){
+	$.post("cproduct/getproductbyman",function(data) {
+		var currPage=data.currPage;
+		var nextPage=currPage+1;
+		var perPage=currPage-1;
+		var totalPage=data.totalPage;
+		var total=data.total;
+		var len = data.rows.length;
+		loadData(data);
+		//分页栏
+		pageNextAndPer(data);
+	}, "json");
+	 
+}
+//加载数据显示
+function loadData(data){
+	var len = data.rows.length;
+	for(var i=0;i<len;i++){
+		$('.imageAppear').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+				'<img src="'+data.rows[i].cimage+'"></a></li><li>'+
+				'<a href="/1076435.htm" title="'+data.rows[i].cproductname+'" target="_blank">'+data.rows[i].cproductname+'</a></li><li>'+
+				'<span class="sellPrice">¥'+data.rows[i].cwsscprice+'</span></br><span class="price"><del>¥'+data.rows[i].cnormalprice+'</del></span></br></li></ul></div>');
+	}
+}
+//分页栏
+function pageNextAndPer(data){
+	var currPage=data.currPage;
+	var nextPage=currPage+1;
+	var perPage=currPage-1;
+	var totalPage=data.totalPage;
+	var total=data.total;
+	var len = data.rows.length;
+	if(data.currPage>1){
+		$('#pageDiv').empty();
+		$('#pageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a><form id="get$("#pagenum").val()"><h4 align="center">共'+totalPage+'页 <input id="pagenum" type="text" value="'+currPage+'"name="pageNos" size="1">页 <input type="button" value="到达" onclick="decPerPage('+currPage+','+totalPage+')"></h4></form>');
+	}else if(currPage<=0){
+		getPerPage(1);
+	}
+	if(currPage <totalPage){
+		$('#pageDiv').empty();
+		$('#pageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a><form id="get$("#pagenum").val()"><h4 align="center">共'+totalPage+'页 <input id="pagenum") type="text" value="'+currPage+'"name="pageNos" size="1">页 <input type="button" value="到达" onclick="decPerPage('+currPage+','+totalPage+')"></h4></form>');
+	}else{
+		$("#nexta").click(function(){
+			getPerPage(totalPage);
+		});
+	}
+}
+
+
+//上下页的点击事件
+function getPerPage(perpage){
+	getData(perpage);
+}
+
+function decPerPage(currPage,total){
+	var inputnum = $("#pagenum").val();
+	if(inputnum>total){
+		alert("输入有误");
+	}else{
+		getData(inputnum);
+	}
+}
+//获得数据
+function getData(pageCurr){
+	$.post("cproduct/getproductbyman?pageNos="+pageCurr,function(data) {
+		var currPage=data.currPage;
+		var nextPage=currPage+1;
+		var perPage=currPage-1;
+		var totalPage=data.totalPage;
+		var total=data.total;
+		var len = data.rows.length;
+		$('.imageAppear').empty();
+		loadData(data);
+		pageNextAndPer(data);
+	}, "json");
+}
+
 
 //页面加载出现
 $(function() {
@@ -92,7 +160,7 @@ $(function() {
 	consume();//客服
 	loadCategory();//从数据库加载分类的数据
 	loadHotBook();//加载热门图书  评论 收藏	//加载书籍推荐
-	//加载书的总数
+	pageFunction();
 });
 function diffType(){//分类
 	$("#type-menu > ul > li").hover(function() {

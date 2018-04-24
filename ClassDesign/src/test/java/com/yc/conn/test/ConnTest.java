@@ -103,8 +103,8 @@ public class ConnTest {
 	}
 	@Test
 	public void getProductTestPage() {
-		PaginationBean<Cproduct>  p = productServiceImpl.getProductByMan("1","8");
-		System.out.println(p.getTotal()+"========"+p.getTotalPage());
+		PaginationBean<Cproduct>  p = productServiceImpl.getProductByMan("2","3");
+		System.out.println(p+"=-=--===-="+p.getTotal()+"========"+p.getTotalPage());
 	}
 	
 	

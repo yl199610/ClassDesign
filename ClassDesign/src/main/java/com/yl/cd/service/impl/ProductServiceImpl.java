@@ -93,16 +93,19 @@ public class ProductServiceImpl implements ProductService{
 		if(currpage!=null){
 			productBean.setCurrPage(Integer.parseInt(currpage));
 		}
-		
 		if(pageSize!=null){
-			productBean.setPageSize(8);
+			productBean.setPageSize(Integer.parseInt(pageSize));
 		}
 		List<Cproduct> c = productMapper.getProductByMan(productBean);
 		//获得total 和 totalPage
 		productBean = productMapper.getProductPageByMan(productBean);
-		Integer total = productBean.getTotal();
-		Integer totalPage = (int) Math.ceil(total/Integer.valueOf(pageSize));
-		System.out.println(total);
+		int total = productBean.getTotal();
+//		System.out.println("pageSize:==="+pageSize+"total:=="+total+"totalPage======="+(int) Math.ceil((double)total/Double.parseDouble(pageSize)));
+		Integer totalPage = (int) Math.ceil((double)total/Double.parseDouble(pageSize));
+		productBean.setCurrPage(Integer.parseInt(currpage));
+		productBean.setTotal(total);
+		productBean.setPageSize(Integer.parseInt(pageSize));
+		productBean.setTotalPage(totalPage);
 		productBean.setRows(c);
 		return productBean;
 	}

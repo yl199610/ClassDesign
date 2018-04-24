@@ -129,6 +129,7 @@ insert into CPRODUCT values(seqcpro.nextval,22,26,'谈美书简','名家著作',
 insert into CPRODUCT values(seqcpro.nextval,22,22,'欧美现代美术史','名家著作','2003-02-01','25.5','20','孟森','images/pic.jpg',4,default);
 insert into CPRODUCT values(seqcpro.nextval,25,28,'放学后','名家著作1','2013-04-01','30','25','孟森','images/fx.jpg',2,default);
 insert into CPRODUCT values(seqcpro.nextval,26,29,'幻想的哲学','名家著作11','2002-02-14','52.5','40','孟森','images/hx.jpg',1,default);
+insert into CPRODUCT values(seqcpro.nextval,27,41,'幻想的哲学','历史著作','1998-02-15','82.5','60','作者','images/sh.jpg',1,default);
 
 
 update CPRODUCT set cimage='images/xq.jpg' where cpid=42;
@@ -188,6 +189,9 @@ insert into cbook values(seqcbook.nextval,'东野圭吾','images/fx.jpg','978754
 insert into cbook values(seqcbook.nextval,'约尔根·哈斯','images/hj.jpg','9787506034142','幻觉的哲学',
 '东方出版社','2011-01-01','16开','358','在尼采看来，欧洲哲学的传统在根本上是人的幻觉的历史',
 '一、不合时宜的人及其同代人','1','1');
+insert into cbook values(seqcbook.nextval,'水浒','images/sh.jpg','345324534211','历史',
+'中国出版社','2011-01-01','16开','1234','历史的长河',
+'序章','1','1');
 alter table cbook modify cpublishing varchar2(32) 
 alter table cbook add (cpublishing varchar2(30));
 update CBOOK set cimage='images/notpic.jpg' where cbid=11
@@ -322,9 +326,18 @@ rownum<=1*8 and cpstatus='normal' order by to_number(cpfree) asc
 
 select (select count(1)-5 total from CPRODUCT) total,ceil(count(1)/8)
 		totalPage,8 pageSize,1 currPage from cproduct
-
+select count(1)-5 total from CPRODUCT
 select * from
 (select m.*,rownum rn from
 (select * from cproduct where cpstatus='normal' order by to_number(cpfree) asc) m where 1*8>=rownum)
 where rn>(1-1)*8 and rn<(select count(1)-4 from CPRODUCT)
 
+		select * from (select
+		c.*,rownum rownu from cproduct c where
+		rownum<=8 and cpstatus='normal'
+		order by
+		to_number(cpfree) asc) cp where
+		cp.rownu>(1-1)*8
+		and cp.rownu<(select count(1)-4 from CPRODUCT)
+
+		select * from CPRODUCT

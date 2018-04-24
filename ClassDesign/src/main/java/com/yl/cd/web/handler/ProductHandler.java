@@ -1,6 +1,5 @@
 package com.yl.cd.web.handler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.ProductService;
@@ -70,9 +68,15 @@ public class ProductHandler {
 	// 首页页面加载获取图书推荐
 	@RequestMapping("/getproductbyman")
 	@ResponseBody
-	public PaginationBean<Cproduct> getProductByMan(String page, String rows) {
-		LogManager.getLogger().debug("请求ProductHandler处理getProductByMan......");
-		PaginationBean<Cproduct> cproductList = productService.getProductByMan(page,rows);
+	public PaginationBean<Cproduct> getProductByMan(HttpServletRequest request) {
+		LogManager.getLogger().debug("请求ProductHandler处理getProductByMan......"+request.getParameter("pageNos"));
+		String page = request.getParameter("pageNos");
+		PaginationBean<Cproduct> cproductList = new PaginationBean<Cproduct>();
+		if("".equals(page)||page==null){
+			page=String.valueOf(cproductList.getCurrPage());
+		}
+		String rows = "2";
+		cproductList = productService.getProductByMan(page,rows);
 		return cproductList;
 	}
 
