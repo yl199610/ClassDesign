@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.ProductService;
+import com.yl.cd.util.JsoupGetBook;
 
 @Controller
 @RequestMapping("/cproduct")
@@ -80,4 +81,14 @@ public class ProductHandler {
 		return cproductList;
 	}
 
+	// 首页加载爬虫数据
+	@RequestMapping("/getjsoupdata")
+	@ResponseBody
+	public List<Cproduct> getJsoupData() {
+		LogManager.getLogger().debug("请求ProductHandler处理getJsoupData......");
+		List<Cproduct> cproductList = JsoupGetBook.getTopMsg();
+		return cproductList;
+	}
+	
+	
 }

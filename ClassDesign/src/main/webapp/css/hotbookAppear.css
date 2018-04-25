@@ -1,0 +1,49 @@
+body { font-family:"楷体"; font-size:18px; background:#fff;  }
+.w1200 { width:1200px; margin:auto;  }
+
+.tabConList .arrow { position:absolute; width:27px; height:38px; top:50%; margin-top:-57px; cursor:pointer; z-index:9; display:none;  }
+.tabConList .leftArrow { left:0; background:url(../Images/homeindex.png) no-repeat -73px -38px; background-color:#000; background-color:rgba(0,0,0,0.35);}
+.tabConList .rightArrow { right:0; background:url(../Images/homeindex.png) no-repeat -73px 0px; background-color:#000; background-color:rgba(0,0,0,0.35);}
+.tabConList:hover .arrow { display:block; } 
+.tabConList .arrow:hover { background-color:rgba(0,0,0,0.2); display:block }
+
+.hot_sale  { float:right; width:260px;height: 100%; background:#f0f0f0;border: 1px solid green; }
+.hot_sale .hotTitle { line-height:22px; height:32px; overflow:hidden; background:#fff;}
+.hot_sale .hotTitle h2 { float:left; font-size:16px; color:#e60000; font-family:"Microsoft YaHei";font-weight:400; }
+.hot_sale .hotTitle a { float:right; color:#999999;  }
+
+.hot_sale .hotNav { font-size:12px;position:relative; background:#fff; }
+.hot_sale .hotNav .navDot { overflow:hidden; height:36px; position:relative;border-right:1px solid #e6e6e6; position:relative;   }
+.hot_sale .hotNav .navDot ul { overflow:hidden; width:560px; position:absolute; top:0; left:0; }
+.hot_sale .hotNav .navDot ul li { float:left; width:54px; height:34px; display:inline; border:1px solid #e6e6e6; border-right:none; line-height:34px;   }
+.hot_sale .hotNav .navDot ul li.cur { border-top:2px solid #e60000; border-bottom:none;}
+.hot_sale .hotNav .navDot ul li a { display:block; text-align:center; color:#666666; text-decoration:none;  }
+.hot_sale .hotNav .navDot ul li.cur a { color:#e60000;}
+.hotNav .arrow { position:absolute; width:10px; height:36px; top:0; cursor:pointer;  }
+.hotNav .leftArrow { left:0; background:url(../Images/homeindex.png) no-repeat -10px -64px; display:none; }
+.hotNav .rightArrow { right:0; background:url(../Images/homeindex.png) no-repeat 0 -64px; }
+.hotCon { border:1px solid #eaeaea; border-top:none; border-bottom:none; overflow:hidden;background:#fff; }
+.hotCon ul { display:none; }
+.hotCon ul.on { display:block;}
+.hotCon ul li { position:relative; border-bottom:1px solid #eaeaea;  line-height:0\9;   }
+.hotCon ul li i { position:absolute; height:32px; line-height:32px; font-size:14px; font-family:'Microsoft YaHei'; width:40px; text-align:center; top:0; }
+.hotCon ul li em { position:absolute; font-size:9px; color:#7a7a7a; height:32px; line-height:32px; right:10px; top:0; }
+.hotCon ul li.red i { color:#e60000;}
+.hotCon ul li p { height:32px; line-height:32px; color:#333333; text-indent:34px;  padding-right:35px; overflow:hidden;  cursor:pointer;}
+.hotCon ul li.cur p { display:none;}
+.hotCon ul li.cur em{ display:none;}
+.hotCon ul li .bookCur { display:none; overflow:hidden; padding:10px 0px 11px}
+.hotCon ul li .bookCur .bpic { float:left; width:85px; height:85px;  margin-left:35px; display:inline; text-align:center; }
+.hotCon ul li .bookCur .bpic a { display:block;}
+.hotCon ul li .bookCur .bpic img {  max-width:85px; max-height:85px;}
+.hotCon ul li .bookCur .bDetai {  float:left; width:100px; overflow:hidden;  }
+.hotCon ul li .bookCur .bDetai .bName { margin-top:8px; line-height:22px; height:44px; overflow:hidden; position:relative;  }
+.hotCon ul li .bookCur .bDetai .bName a { display:block;height:44px; text-decoration:none;  color:#333;  font-size:12px; overflow:hidden; }
+.hotCon ul li .bookCur .bDetai .bName a:hover  { color:#e60000;}
+.hotCon ul li.cur .bookCur { display:block; }
+.hotCon ul li .bookCur .bPrice { overflow:hidden; margin-top:3px; line-height:normal\9; }
+.hotCon ul li .bookCur .bPrice .sellPrice { float:left; color:#e60000; font-family:"Microsoft YaHei";}
+.hotCon ul li .bookCur .bPrice .price { float:left; color:#999999; text-decoration-line:line-through; font-family:"Microsoft YaHei"; margin-left:3px;}
+
+.moreHotSale { text-align:right; line-height:20px; padding-right:10px; }
+.moreHotSale a { font-size:12px; color:#666; }

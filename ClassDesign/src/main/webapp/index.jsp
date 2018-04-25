@@ -8,6 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/hotbookAppear.css">
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <title>图书商城：Such is life</title>
 </head>
 <body>
@@ -251,7 +254,7 @@
 					<li><a href="/1076435.htm" title="写给大家的欧美现代美术史"
 						target="_blank">写给大家的欧美现代美术史</a></li>
 					<li><span class="sellPrice">¥25.0</span>&nbsp;&nbsp;&nbsp; <span
-						class="price">¥78.0</span></br></li>
+						class="price">¥78.0</span></li>
 				</ul>
 				<ul id="hotDiv">
 					<li><a href="/1076435.htm" target="_blank"><img
@@ -266,45 +269,94 @@
 		</div>
 
 		<div class="biaryCode">
-			<img src="images/biaryCode.jpg"> <span style="color: red;">微信客服：在线时间9:00-17:00</span>
+			<img src="images/biaryCode.jpg"> <span style="color: red;">客服:在线时间9:00-17:00</span>
 		</div>
 	</div>
 	<div class="hotbook">
 		<div class="combookDiv">
 			<h3 style="text-align: center; color: red; font-size: 24px;">书籍推荐</h3>
 			<div class="imageAppear"></div>
-			<!-- <div class="oneBookDiv">
-				<ul id="hotDiv">
-					<li><a href="/1076435.htm" target="_blank"><img
-							src="images/hot1.jpg"></a></li>
-					<li><a href="/1076435.htm"
-						title="历史的调控" target="_blank">历史的调控</a></li>
-					<li><span class="sellPrice">¥34</span>&nbsp;&nbsp;&nbsp;
-						<span class="price">¥20</span></br></li>
-				</ul>
-			</div>
-			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div>
-			<div class="oneBookDiv"></div> -->
 			<div id="pageDiv" style="text-align: center;">
 			</div>
 		</div>
-		<div class="onlineDiv">
-			<h3 style="text-align: center;">网上热卖即将有货</h3>
-			<ul>
-				<li>英语实际试卷</li>
-				<li>历史事件</li>
-				<li>中国近代史</li>
-				<li>政治</li>
-				<li>生活与智慧</li>
-				<li>城市的审核</li>
-				<li>行书的诞生</li>
-				<li>生物的借宿</li>
-				<li>城市的变迁</li>
-			</ul>
+<div class="hot_sale">
+		<div class="hot_saleInner">
+			<div class="hotTitle">
+				<h2 style="margin-bottom:10px;margin-top:10px;margin-left:60px;color:blue;">图书畅销榜</h2>
+			</div>
+			<div class="hotNav">
+				
+				<span class="arrow leftArrow"></span> <span class="arrow rightArrow"></span>
+			</div>
+			<div class="hotCon">
+				<ul class="on">
+					<!-- <li class="red"><i>01</i><em>&gt;</em>
+					<p>我们悲惨的宇宙</p>
+						<div class="bookCur">
+							<div class="bpic">
+								<a href="http://www.bookschina.com/5774948.htm" target="_blank"
+									title="我们悲惨的宇宙"><img
+									src="./中国图书网（中图网）：网上书店，尾货特色书店，5万种特价书低至2折！_files/s5774948.jpg"
+									alt="我们悲惨的宇宙"></a>
+							</div>
+							<div class="bDetai">
+								<div class="bName">
+									<a href="http://www.bookschina.com/5774948.htm" target="_blank"
+										title="我们悲惨的宇宙">我们悲惨的宇宙</a>
+								</div>
+								<div class="bPrice">
+									<span class="sellPrice">￥9.9 </span><span class="price">￥36.0
+									</span>
+								</div>
+							</div>
+						</div></li>
+					<li class="red"><i>02</i><em>&gt;</em>
+					<p>枪与玫瑰的使用方法</p>
+						<div class="bookCur">
+							<div class="bpic">
+								<a href="http://www.bookschina.com/6444156.htm" target="_blank"
+									title="枪与玫瑰的使用方法"><img
+									src="./中国图书网（中图网）：网上书店，尾货特色书店，5万种特价书低至2折！_files/s6444156.jpg"
+									alt="枪与玫瑰的使用方法"></a>
+							</div>
+							<div class="bDetai">
+								<div class="bName">
+									<a href="http://www.bookschina.com/6444156.htm" target="_blank"
+										title="枪与玫瑰的使用方法">枪与玫瑰的使用方法</a>
+								</div>
+								<div class="bPrice">
+									<span class="sellPrice">￥9.9 </span><span class="price">￥32.8
+									</span>
+								</div>
+							</div>
+						</div></li>
+					<li class="red"><i>03</i><em>&gt;</em>
+					<p>尘世是唯一的天堂(名家笔下的生老病死)</p>
+						<div class="bookCur">
+							<div class="bpic">
+								<a href="http://www.bookschina.com/2466676.htm" target="_blank"
+									title="尘世是唯一的天堂(名家笔下的生老病死)"><img
+									src="./中国图书网（中图网）：网上书店，尾货特色书店，5万种特价书低至2折！_files/s2466676.jpg"
+									alt="尘世是唯一的天堂(名家笔下的生老病死)"></a>
+							</div>
+							<div class="bDetai">
+								<div class="bName">
+									<a href="http://www.bookschina.com/2466676.htm" target="_blank"
+										title="尘世是唯一的天堂(名家笔下的生老病死)">尘世是唯一的天堂(名家笔下的生老病死)</a>
+								</div>
+								<div class="bPrice">
+									<span class="sellPrice">￥5.9 </span><span class="price">￥28.0
+									</span>
+								</div>
+							</div>
+						</div></li>
+				</ul>
+			</div> -->
+			<div class="moreHotSale">
+				<a href="http://www.bookschina.com/24hour/" target="_blank">查看完整榜单&gt;&gt;</a>
+			</div>
 		</div>
+	</div>
 	</div>
 	<div class="foot">
 		<p>&copy; 2017-2018 www.baidu.com&nbsp;&nbsp;&nbsp;等待继续更新</p>
@@ -313,7 +365,6 @@
 		<p>营业执照注册号 ：2210100224343
 			&nbsp;&nbsp;&nbsp;&nbsp;许可证：SP242423665968</p>
 	</div>
-	<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+
 </body>
 </html>

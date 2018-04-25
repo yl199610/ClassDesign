@@ -77,12 +77,6 @@ function loadHotBook(){
 //总分页界面
 function pageFunction(){
 	$.post("cproduct/getproductbyman",function(data) {
-		var currPage=data.currPage;
-		var nextPage=currPage+1;
-		var perPage=currPage-1;
-		var totalPage=data.totalPage;
-		var total=data.total;
-		var len = data.rows.length;
 		loadData(data);
 		//分页栏
 		pageNextAndPer(data);
@@ -107,19 +101,13 @@ function pageNextAndPer(data){
 	var totalPage=data.totalPage;
 	var total=data.total;
 	var len = data.rows.length;
-	if(data.currPage>1){
+	if(data.currPage>=1&&currPage<=totalPage){
 		$('#pageDiv').empty();
 		$('#pageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a><form id="get$("#pagenum").val()"><h4 align="center">共'+totalPage+'页 <input id="pagenum" type="text" value="'+currPage+'"name="pageNos" size="1">页 <input type="button" value="到达" onclick="decPerPage('+currPage+','+totalPage+')"></h4></form>');
 	}else if(currPage<=0){
 		getPerPage(1);
-	}
-	if(currPage <totalPage){
-		$('#pageDiv').empty();
-		$('#pageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a><form id="get$("#pagenum").val()"><h4 align="center">共'+totalPage+'页 <input id="pagenum") type="text" value="'+currPage+'"name="pageNos" size="1">页 <input type="button" value="到达" onclick="decPerPage('+currPage+','+totalPage+')"></h4></form>');
 	}else{
-		$("#nexta").click(function(){
-			getPerPage(totalPage);
-		});
+		getPerPage(totalPage);
 	}
 }
 
@@ -140,27 +128,104 @@ function decPerPage(currPage,total){
 //获得数据
 function getData(pageCurr){
 	$.post("cproduct/getproductbyman?pageNos="+pageCurr,function(data) {
-		var currPage=data.currPage;
-		var nextPage=currPage+1;
-		var perPage=currPage-1;
-		var totalPage=data.totalPage;
-		var total=data.total;
-		var len = data.rows.length;
 		$('.imageAppear').empty();
 		loadData(data);
 		pageNextAndPer(data);
 	}, "json");
 }
 
+function getJsoupData(){
+	$.post("cproduct/getjsoupdata",function(data) {
+		$(".on").empty();
+		for(var i=0;i<data.length;i++){
+			var redCurList =data[i].cdescription;
+			var bookNameList = data[i].cproductname;
+			var imgList = data[i].cimage;
+			var sellPriceList = data[i].cwsscprice;
+			var priceList = data[i].cnormalprice ;
+			$(".on").append('<li class="red"><i>'+redCurList+'</i><em>&gt;</em><p>'+bookNameList+'</p><div class="bookCur">'+
+					'<div class="bpic"><a href="/6444156.htm" target="_blank" title="'+bookNameList+'">'+
+					'<img src="'+imgList+'" alt="'+bookNameList+'"></a></div>'+
+					'<div class="bDetai"><div class="bName"><a href="/6444156.htm" target="_blank" title="'+bookNameList+'">'+
+					''+bookNameList+'</a></div><div class="bPrice"><span class="sellPrice">'+sellPriceList+'</span><span class="price">'+
+					''+priceList+'</span></div></div></div></li>');
+			getDymicData();
+		}
+	}, "json");
+}
+function getDymicData(){
+	$(".hotBook .tabTit a").hover(
+			function() {
+				var $this = $(this);
+				var thisIndex = $this.index();
+				$this.addClass("cur").siblings().removeClass("cur");
+				$(".tabCon .tabConList").eq(thisIndex).addClass("cur")
+						.siblings().removeClass("cur")
+			})
+
+	$(".tabConList .leftArrow").click(function() {
+		var $this = $(this);
+		var obj = $this.parents(".tabConList");
+		var tabPanel = obj.find(".tabPanel");
+		tabPanel.find(".tabItem").removeClass("cur");
+		var lastLi = tabPanel.find(".tabItem:last");
+		lastLi.addClass("cur");
+		lastLi.prependTo(tabPanel);
+	})
+
+	$(".tabConList .rightArrow").click(function() {
+		var $this = $(this);
+		var obj = $this.parents(".tabConList");
+		var tabPanel = obj.find(".tabPanel");
+		tabPanel.find(".tabItem").removeClass("cur");
+		var firstLi = tabPanel.find(".tabItem:first");
+		firstLi.appendTo(tabPanel);
+		tabPanel.find(".tabItem:first").addClass("cur");
+	})
+
+	var len = $(".navDot ul li").length;
+
+	$(".navDot ul li").hover(
+			function() {
+				var $this = $(this);
+				var thisIndex = $this.index();
+				$this.addClass("cur").siblings().removeClass("cur");
+				$(".hotCon ul").eq(thisIndex).addClass("on").siblings()
+						.removeClass("on");
+
+			})
+
+	/*畅销榜*/
+	$(".hotNav .rightArrow").click(function() {
+		$(".hotNav .leftArrow").show();
+		$(".hotNav .rightArrow").hide();
+		$(".navDot ul").css("left", -55 * (len - 4) + 10 + "px");
+	})
+	$(".hotNav .leftArrow").click(function() {
+
+		$(".navDot ul").css("left", 0);
+		$(".hotNav .leftArrow").hide();
+		$(".hotNav .rightArrow").show();
+	})
+
+	$(".hotCon ul li").hover(function() {
+		var $this = $(this);
+		$this.addClass("cur").siblings().removeClass("cur");
+
+	})
+}
+
 
 //页面加载出现
 $(function() {
 	tabChange();//选项卡
+	getDymicData();//动态排行
 	imgChange();//图片轮转
 	consume();//客服
 	loadCategory();//从数据库加载分类的数据
 	loadHotBook();//加载热门图书  评论 收藏	//加载书籍推荐
-	pageFunction();
+	pageFunction();//总分页界面
+	getJsoupData();
 });
 function diffType(){//分类
 	$("#type-menu > ul > li").hover(function() {
