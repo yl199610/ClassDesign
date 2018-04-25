@@ -1,4 +1,4 @@
-body { font-family:"楷体"; font-size:18px; background:#fff;  }
+body { font-family:"宋体"; font-size:18px; background:#fff;  }
 .w1200 { width:1200px; margin:auto;  }
 
 .tabConList .arrow { position:absolute; width:27px; height:38px; top:50%; margin-top:-57px; cursor:pointer; z-index:9; display:none;  }

@@ -16,21 +16,17 @@
 body {
 	margin: 0px auto;
 	padding: 0px;
-	width: 1365px;
 	overflow-x: hidden;
 }
 
 #bigproductDiv {
 	width: 80%;
-	height: 1000px;
 	margin-left: 100px;
-	border: 1px solid red;
 }
 
 #topproductDiv {
 	width: 100%;
-	height: 50%;
-	border: 1px solid green;
+	height: 400px;
 }
 
 #topproductOne {
@@ -43,21 +39,18 @@ body {
 #topproductTwo {
 	width: 50%;
 	height: 100%;
-	border: 1px solid blue;
 	float: left;
 }
 
 #topproductThree {
 	width: 24%;
 	height: 100%;
-	border: 1px solid orange;
 	float: left;
 }
 
 .padLeft10 {
 	width: 90%;
 	height: 46%;
-	border: 1px solid orange;
 }
 
 .padLeft10 h1 {
@@ -93,7 +86,12 @@ body {
 	height: 30%;
 	border: 1px solid orange;
 }
-#addCarfirst{
+#addCarBig{
+	width: 100%;
+	height: 40%;
+}
+
+#addCarpriduct{
     width: 160px;
     line-height: 32px;
     text-indent: 45px;
@@ -102,7 +100,67 @@ body {
     font-family: 'Microsoft YaHei';
     background: url(images/childredSprit.png) no-repeat;
     text-decoration: none;
+    margin-left: 0px;
+    margin-top: 6px;
+    float: left;
+    border-radius: 10px;
 }
+#addfavpriduct{
+	width: 120px;
+    line-height: 32px;
+    text-indent: 45px;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+    background-color: #63b7ff;     
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 6px;
+    float: left;
+    border-radius: 10px;
+}
+#bottomproductDiv{
+	width: 80%;
+	margin-left: 90px;
+	border: 1px solid red;
+}
+#productleftDiv{
+	width: 25%;
+	height:1100px;
+	float: left;
+}
+#recommendDiv{
+	width: 100%;
+	height: 50%;
+	border: 1px solid blue;
+}
+#historyDiv{
+	width: 100%;
+	height: 50%;
+	border: 1px solid red;
+}
+#productRightDiv{
+	width: 73%;
+	float: left;
+	border: 1px solid red;
+}
+#productbookmsg{
+	width: 100%;
+	height: 150px;
+	border: 1px solid red;
+
+}
+#intrducebookmsg{
+	width: 100%;
+	height: 150px;
+	border: 1px solid blue;
+}
+#commentsMsg{
+	width: 100%;
+	height: 600px;
+	border: 1px solid blue;
+}
+
 </style>
 
 </head>
@@ -192,16 +250,53 @@ body {
 					</div>
 				</div>
 				<div id="addCar">
-					<div id="addCarfirst">
-						<a style="">加入购物车</a>
+					<div id="addCarBig">
+						<a id="addCarpriduct" href="#">
+							<span>加入购物车</span>
+						</a>
+						<a id="addfavpriduct" href="#">
+						<span>收藏</span>
+						</a>
 					</div>
-					<div id="addCarTwo"></div>
-					<div id="addCarThree"></div>
+
+					<div id="addCarThree">
+						<span style="color:#E60000;">温馨提示</span>：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8-9成新、切口 
+有划线标记、光盘等附件不全
+					</div>
 				</div>
 			</div>
-			<div id="topproductThree"></div>
+			<div id="topproductThree">
+				<h3>本类五星好评</h3>
+				<ul>
+					<li>231321</li>
+					<li>231321</li>
+					<li>231321</li>
+					<li>231321</li>
+					<li>231321</li>
+				</ul>
+			</div>
 		</div>
-		<div id="bottomproductDiv"></div>
+		<div id="bottomproductDiv">
+			<div id="productleftDiv">
+				<h3>图书推荐</h3><hr>
+				<div id="recommendDiv"></div>
+				<h3>浏览历史</h3><hr>
+				<div id="historyDiv"></div>
+			</div>
+			<div id="productRightDiv">
+				<h3>图书详情&nbsp;&nbsp;&nbsp;&nbsp;商品评价</h3>
+				<div id="productbookmsg">
+					<h3>版权信息</h3>
+				</div>
+				<div id="intrducebookmsg">
+					<h3>图书简介</h3>
+				</div>
+				<div id="commentsMsg">
+					<h3>图书评价</h3>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 
 
@@ -213,7 +308,7 @@ body {
 
 
 
-	<div class="foot">
+	<div class="foot" style="margin-top: 100px;">
 		<p>&copy; 2017-2018 www.baidu.com&nbsp;&nbsp;&nbsp;等待继续更新</p>
 		<p>名称：XX技术有限公司&nbsp;&nbsp;&nbsp;&nbsp;地址
 			：湖南省衡阳市珠晖区&nbsp;&nbsp;&nbsp;&nbsp;电话 ：xxx-xxxx-xx</p>

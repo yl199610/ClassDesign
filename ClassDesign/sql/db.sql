@@ -132,12 +132,12 @@ insert into CPRODUCT values(seqcpro.nextval,26,29,'幻想的哲学','名家著�
 insert into CPRODUCT values(seqcpro.nextval,27,41,'幻想的哲学','历史著作','1998-02-15','82.5','60','作者','images/sh.jpg',1,default);
 
 
-update CPRODUCT set cimage='images/xq.jpg' where cpid=42;
-update CPRODUCT set cimage='images/ms.jpg' where cpid=43;
-update CPRODUCT set cimage='images/sj.jpg' where cpid=44;
-update CPRODUCT set cimage='images/bs.jpg' where cpid=45;
-update CPRODUCT set cimage='images/ts.jpg' where cpid=46;
-update CPRODUCT set cimage='images/om.jpg' where cpid=47;
+update CPRODUCT set cimage='images/xq.jpg' where cpid=3;
+update CPRODUCT set cimage='images/ms.jpg' where cpid=4;
+update CPRODUCT set cimage='images/sj.jpg' where cpid=5;
+update CPRODUCT set cimage='images/bs.jpg' where cpid=6;
+update CPRODUCT set cimage='images/ts.jpg' where cpid=7;
+update CPRODUCT set cimage='images/om.jpg' where cpid=8;
 
 --书籍表
 create table cbook(
