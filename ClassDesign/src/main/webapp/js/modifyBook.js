@@ -1,27 +1,27 @@
 //获取对应信息
 $.get("cbook/detail?cbid="+cnid,function(data){
 	$("#mcbid").val(cnid);
-	$("#mcauthor").val(data.levels);
-	$("#mcisbn").val(data.ccname);
-	$('#mbookname').combobox('setValue',data.parentid);
-	$('#mcpublishtime').combobox('setText',data.cafree);
-	$("#mcpublishing").val(data.description);
-	$("#mcwordnumber").val(data.description);
-	$("#pic").attr("src", data.cphoto);
-	$("#mctotalpage").val(data.description);
-	$("#mcintroduce").val(data.description);
-	$("#mcatalogue").val(data.description);
-	$("#medition").val(data.description);
+	$("#mcauthor").val(data.cauthor);
+	$("#mcisbn").val(data.cisbn);
+	$("#mbookname").val(data.bookname);
+	$("#mcpublishtime").val(data.cpublishtime);
+	$("#mcpublishing").val(data.cpublishing);
+	$("#mcwordnumber").val(data.cwordnumber);
+	$("#pic").attr("src", data.cimage);
+	$("#mctotalpage").val(data.ctotalpage);
+	$("#mcintroduce").val(data.cintroduce);
+	$("#mcatalogue").val(data.catalogue);
+	$("#medition").val(data.edition);
 },"json");
 
-//修改用户
-function modifyCate(){
-	$("#modifyCateForm").form({
-		  url: 'ccategory/modify',
+//修改书籍
+function modifyBook(){
+	$("#modifyBookForm").form({
+		  url: 'cbook/modify',
 		  success : function(data) {
 			if (data.trim() == "true") {
-				$("#modifyCategory").dialog("close"); //关闭修改框
-				$("#categoryInfo").datagrid("reload"); // 刷新修改数据
+				$("#modifyBook").dialog("close"); //关闭修改框
+				$("#bookInfo").datagrid("reload"); // 刷新修改数据
 			}  else {
 				$.messager.show({
 					title : '修改信息',

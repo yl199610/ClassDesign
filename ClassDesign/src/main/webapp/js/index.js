@@ -42,9 +42,9 @@ function loadHotBook(){
 	$("#hotBookDivFirst").empty();
 	$.post("cproduct/gethotproduct",function(data) {
 		for(var i=0;i<data.length;i++){
-			$('#hotBookDivFirst').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+			$('#hotBookDivFirst').append('<ul id="hotDiv"><li><a href="page/productList.jsp?ccid='+data[i].cpid+'" target="_blank">'+
 					'<img src="'+data[i].cimage+'"></a></li><li>'+
-					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
+					'<a href="page/productList.jsp?ccid='+data[i].cpid+'" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li>'+
 					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
 		}
 	}, "json");
@@ -52,9 +52,9 @@ function loadHotBook(){
 	$("#hotBookDivScoend").empty();
 	$.post("cproduct/getcomproduct",function(data) {
 		for(var i=0;i<data.length;i++){
-			$('#hotBookDivScoend').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+			$('#hotBookDivScoend').append('<ul id="hotDiv"><li><a href="page/productList.jsp?ccid='+data[i].cpid+'" target="_blank">'+
 					'<img src="'+data[i].cimage+'"></a></li><li>'+
-					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条评论</li><li>'+
+					'<a href="page/productList.jsp?ccid='+data[i].cpid+'" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条评论</li><li>'+
 					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
 		}
 	}, "json");
@@ -62,9 +62,9 @@ function loadHotBook(){
 	$("#hotBookDivThird").empty();
 	$.post("cproduct/getfavproduct",function(data) {
 		for(var i=0;i<data.length;i++){
-			$('#hotBookDivThird').append('<ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+			$('#hotBookDivThird').append('<ul id="hotDiv"><li><a href="page/productList.jsp?ccid='+data[i].cpid+'" target="_blank">'+
 					'<img src="'+data[i].cimage+'"></a></li><li>'+
-					'<a href="/1076435.htm" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条收藏</li><li>'+
+					'<a href="page/productList.jsp?ccid='+data[i].cpid+'" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li><li style="color:orange;">'+data[i].ckeywords+'条收藏</li><li>'+
 					'<span class="sellPrice">¥'+data[i].cwsscprice+'</span>&nbsp;&nbsp;&nbsp; <span class="price"><del>¥'+data[i].cnormalprice+'</del></span></br></li></ul>');
 		}
 	}, "json");

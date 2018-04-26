@@ -134,4 +134,13 @@ public class CcategoryHandler{
 		LogManager.getLogger().debug("请求CcategoryHandler处理getAllParentTypeByCcid......"+ccid);
 		return ccategoryService.getAllParentTypeByCcid(ccid);
 	}
+	
+	//加载所有三级目录
+	@RequestMapping("/getallthridtype")
+	@ResponseBody
+	public List<Ccategory> getAllThridType(){
+		LogManager.getLogger().debug("请求CcategoryHandler处理getAllThridType......");
+		return ccategoryService.getAllThridType();
+	}
+	
 }

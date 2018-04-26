@@ -103,4 +103,9 @@ public class CcategoryServiceImpl implements CcategoryService{
 		return CcategoryMapper.getAllParentTypeByCcid(levels);
 	}
 
+	@Override
+	public List<Ccategory> getAllThridType() {
+		return CcategoryMapper.getAllThridType();
+	}
+
 }

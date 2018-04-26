@@ -45,18 +45,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
-	
-	
-	
+
+
+
 	<update id="archiveBook" parameterType="Integer">
-		update cbook set cbfree=0 where cbid=#{cbid}
+		update cbook set cbfree=0
+		where cbid=#{cbid}
 	</update>
-	
-		
-	<select id="detailBook" resultType="Ccategory">
-		select * from cbook where cbid=#{cbid}
+
+
+	<select id="detailBook" resultType="Cbook">
+		select * from cbook where
+		cbid=#{cbid}
 	</select>
-	
-	
-	
+
+
+	<select id="getAllBookNoPage" resultType="Cbook">
+		select * from cbook
+	</select>
+
+	<update id="modifyBook" parameterType="Cbook">
+		update cbook
+		<set>
+			<if test='cauthor!=null and cauthor!=""'>
+				cauthor = #{cauthor},
+			</if>
+			<if test='cimage!=null and cimage!=""'>
+				cimage = #{cimage},
+			</if>
+			<if test='cisbn!=null and cisbn!=""'>
+				cisbn = #{cisbn},
+			</if>
+			<if test='bookname!=null and bookname!=""'>
+				bookname = #{bookname},
+			</if>
+			<if test='cpublishing!=null and cpublishing!=""'>
+				cpublishing = #{cpublishing},
+			</if>
+			<if test='cpublishtime!=null and cpublishtime!=""'>
+				cpublishtime = #{cpublishtime},
+			</if>
+			<if test='cwordnumber!=null and cwordnumber!=""'>
+				cwordnumber = #{cwordnumber},
+			</if>
+			<if test='ctotalpage!=null and ctotalpage!=""'>
+				ctotalpage = #{ctotalpage},
+			</if>
+			<if test='cintroduce!=null and cintroduce!=""'>
+				cintroduce = #{cintroduce},
+			</if>
+			<if test='catalogue!=null and catalogue!=""'>
+				catalogue = #{catalogue},
+			</if>
+			<if test='edition!=null and edition!=""'>
+				edition = #{edition},
+			</if>
+		</set>
+		where cbid=#{cbid}
+	</update>
+
+
 </mapper>

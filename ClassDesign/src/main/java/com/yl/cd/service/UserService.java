@@ -13,4 +13,6 @@ public interface UserService {
 
 	boolean archiveUser(Integer cuid);
 
+	Cuser userLogin(Cuser cuser);
+
 }

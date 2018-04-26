@@ -16,4 +16,6 @@ public interface UserMapper {
 	boolean modifyUser(Cuser cuser);
 
 	boolean archiveUser(Integer cuid);
+
+	Cuser userLogin(Cuser cuser);
 }

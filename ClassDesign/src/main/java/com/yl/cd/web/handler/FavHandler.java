@@ -23,7 +23,6 @@ public class FavHandler{
 	public PaginationBean<Cfavorites> getAllFavorites(String page, String rows, Cfavorites cfavorites) {
 		LogManager.getLogger().debug("请求FavHandler处理getAllFavorites......");
 		PaginationBean<Cfavorites> favoritesPage = favService.getAllFavorites(page, rows, cfavorites);
-		System.out.println(favoritesPage.getRows());
 		return favoritesPage;
 	}
 

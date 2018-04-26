@@ -18,14 +18,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yl.cd.entity.Cadmin;
+import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
+import com.yl.cd.mapper.BookMapper;
 import com.yl.cd.mapper.CadminMapper;
 import com.yl.cd.mapper.CcategoryMapper;
 import com.yl.cd.mapper.ProductMapper;
 import com.yl.cd.mapper.UserMapper;
+import com.yl.cd.service.impl.BookServiceImpl;
 import com.yl.cd.service.impl.CcategoryServiceImpl;
 import com.yl.cd.service.impl.ProductServiceImpl;
 
@@ -51,6 +54,10 @@ public class ConnTest {
 	private ProductServiceImpl productServiceImpl;
 	@Autowired
 	private ProductMapper productMapper;
+	@Autowired
+	private BookServiceImpl bookServiceImpl;
+	@Autowired
+	private BookMapper bookMapper;
 	
 	@Test
 	public void testCateAll(){
@@ -106,6 +113,19 @@ public class ConnTest {
 		PaginationBean<Cproduct>  p = productServiceImpl.getProductByMan("2","3");
 		System.out.println(p+"=-=--===-="+p.getTotal()+"========"+p.getTotalPage());
 	}
-	
+	@Test
+	public void getProduct() {
+		Cproduct  p = productServiceImpl.detailProduct(48);
+		System.out.println(p);
+	}
+	@Test
+	public void getAllBook() {
+		List<Cbook>  p = bookServiceImpl.getAllBookNoPage();
+		System.out.println(p);
+	}
+	@Test
+	public void getAllOneBook() {
+		System.out.println(bookMapper.detailBook(11));
+	}
 	
 }

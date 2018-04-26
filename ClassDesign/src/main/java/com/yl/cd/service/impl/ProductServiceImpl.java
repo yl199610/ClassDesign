@@ -8,11 +8,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Ccomments;
 import com.yl.cd.entity.Cfavorites;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
+import com.yl.cd.mapper.BookMapper;
 import com.yl.cd.mapper.ProductMapper;
 import com.yl.cd.service.ProductService;
 
@@ -20,6 +22,9 @@ import com.yl.cd.service.ProductService;
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Autowired
+	private BookMapper bookMapper;
 
 	@Override
 	public PaginationBean<Cproduct> getAllProduct(String currpage, String pageSize, Cproduct cproduct) {
@@ -108,6 +113,25 @@ public class ProductServiceImpl implements ProductService{
 		productBean.setTotalPage(totalPage);
 		productBean.setRows(c);
 		return productBean;
+	}
+
+	@Override
+	public boolean archiveProduct(Integer cuid) {
+		return productMapper.archiveProduct(cuid);
+	}
+
+	@Override
+	public Cproduct detailProduct(Integer ccid) {
+		return productMapper.detailProduct(ccid);
+	}
+
+	@Override
+	public boolean modifyProduct(Cproduct cproduct) {
+		Integer cbcpid = cproduct.getCbcpid();
+		Cbook cbook = bookMapper.detailBook(cbcpid);
+		System.out.println(cbcpid+"=-------------"+cbook.getBookname());
+		cproduct.setCproductname(cbook.getBookname());
+		return productMapper.modifyProduct(cproduct);
 	}
 	
 

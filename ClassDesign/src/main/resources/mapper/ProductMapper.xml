@@ -83,5 +83,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(1)-5
 		total from CPRODUCT
 	</select>
+	
+		<!-- 删除产品 -->
+	<update id="archiveProduct" parameterType="Integer">
+		update cproduct set cpstatus='nonormal' where cpid=#{cuid}
+	</update>
+	
+	<resultMap id="CproductAll" type="Cproduct">
+		<id property="cpid" column="cpid" />
+		<result property="cuserid" column="cuserid" />
+		<result property="spcaid" column="spcaid" />
+		<result property="cproductname" column="cproductname" />
+		<result property="cdescription" column="cdescription" />
+		<result property="caddtime" column="caddtime" />
+		<result property="cnormalprice" column="cnormalprice" />
+		<result property="cwsscprice" column="cwsscprice" />
+		<result property="ckeywords" column="ckeywords" />
+		<result property="cimage" column="cimage" />
+		<result property="cpfree" column="cpfree" />
+		<association property="ccategory" javaType="Ccategory">
+			<id property="ccid" column="ccid" />
+			<result property="levels" column="levels" />
+			<result property="ccname" column="ccname" />
+			<result property="description" column="description" />
+			<result property="parentid" column="parentid" />
+			<result property="cafree" column="cafree" />
+		</association>
+		<association property="cbook" javaType="Cbook">
+			<id property="cbid" column="cbid" />
+			<result property="cbcpid" column="cbcpid" />
+			<result property="cauthor" column="cauthor" />
+			<result property="cimage" column="cimage" />
+			<result property="cisbn" column="cisbn" />
+			<result property="cpublishing" column="cpublishing" />
+			<result property="cpublishtime" column="cpublishtime" />
+			<result property="cwordnumber" column="cwordnumber" />
+			<result property="ctotalpage" column="ctotalpage" />
+			<result property="cintroduce" column="cintroduce" />
+			<result property="edition" column="edition" />
+			<result property="cbfree" column="cbfree" />
+			<result property="bookname" column="bookname" />
+		</association>
+	</resultMap>
+	
+	
+	<select id="detailProduct" parameterType="Integer" resultMap="CproductAll">
+		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid where cpid=#{cuid}
+	</select>
+	
+	
+	
+	<update id="modifyProduct" parameterType="Cproduct">
+		update cproduct
+		<set>
+			<if test='spcaid!=null and spcaid!=""'>
+				spcaid = #{spcaid},
+			</if>
+			<if test='cbcpid!=null and cbcpid!=""'>
+				cbcpid = #{cbcpid},
+			</if>
+			<if test='cproductname!=null and cproductname!=""'>
+				cproductname = #{cproductname},
+			</if>
+			<if test='caddtime!=null and caddtime!=""'>
+				caddtime = #{caddtime},
+			</if>
+			<if test='cnormalprice!=null and cnormalprice!=""'>
+				cnormalprice = #{cnormalprice},
+			</if>
+			<if test='cwsscprice!=null and cwsscprice!=""'>
+				cwsscprice = #{cwsscprice},
+			</if>
+			<if test='ckeywords!=null and ckeywords!=""'>
+				ckeywords = #{ckeywords},
+			</if>
+			<if test='cimage!=null and cimage!=""'>
+				cimage = #{cimage},
+			</if>
+			<if test='cpfree!=null and cpfree!=""'>
+				cpfree = #{cpfree},
+			</if>
+			
+		</set>
+		where cpid=#{cpid}
+	</update>
+	
 
 </mapper>

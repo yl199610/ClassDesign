@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService{
 		return userMapper.archiveUser(cuid);
 	}
 
+	@Override
+	public Cuser userLogin(Cuser cuser) {
+		return userMapper.userLogin(cuser);
+	}
+
 }

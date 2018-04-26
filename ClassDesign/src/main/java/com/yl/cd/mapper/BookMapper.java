@@ -16,4 +16,8 @@ public interface BookMapper {
 
 	Cbook detailBook(Integer cbid);
 
+	List<Cbook> getAllBookNoPage();
+
+	boolean modifyBook(Cbook cbook);
+
 }

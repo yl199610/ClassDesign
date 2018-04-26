@@ -3,6 +3,7 @@ package com.yl.cd.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Ccomments;
 import com.yl.cd.entity.Cfavorites;
 import com.yl.cd.entity.Cproduct;
@@ -31,6 +32,14 @@ public interface ProductMapper {
 	List<Cproduct> getProductByMan(PaginationBean<Cproduct> productBean);
 
 	PaginationBean<Cproduct> getProductPageByMan(PaginationBean<Cproduct> productBean);
+
+	boolean archiveProduct(Integer cuid);
+
+	Cproduct detailProduct(Integer ccid);
+
+	boolean modifyProduct(Cproduct cproduct);
+
+	Cbook findBookName(Integer cbcpid);
 
 
 }

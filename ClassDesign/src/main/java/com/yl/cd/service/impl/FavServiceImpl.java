@@ -30,7 +30,6 @@ public class FavServiceImpl implements FavService{
 		Integer cuserid = cfavorites.getCuserid();
 		Integer cfp = cfavorites.getCfp();
 		String cfstatus = cfavorites.getCfstatus();
-		System.out.println(cfp+"========"+cuserid+"==========="+cfstatus);
 		map.put("cfstatus", cfstatus);
 		map.put("cuserid", cuserid);
 		map.put("cfp", cfp);

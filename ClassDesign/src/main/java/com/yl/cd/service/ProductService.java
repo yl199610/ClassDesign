@@ -21,4 +21,10 @@ public interface ProductService {
 
 	PaginationBean<Cproduct> getProductByMan(String page, String rows);
 
+	boolean archiveProduct(Integer cuid);
+
+	Cproduct detailProduct(Integer ccid);
+
+	boolean modifyProduct(Cproduct cproduct);
+
 }

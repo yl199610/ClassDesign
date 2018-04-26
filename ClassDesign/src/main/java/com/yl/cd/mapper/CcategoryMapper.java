@@ -32,5 +32,7 @@ public interface CcategoryMapper {
 
 	List<Ccategory> getAllParentTypeByCcid(String levels);
 
+	List<Ccategory> getAllThridType();
+
 
 }

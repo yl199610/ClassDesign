@@ -125,6 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllParentTypeByCcid" resultType="Ccategory">
 		select * from ccategory where levels=#{levels}
 	</select>
-	
+	<select id="getAllThridType" resultType="Ccategory">
+		select * from ccategory where levels='三级目录'
+	</select>
 	
 </mapper>

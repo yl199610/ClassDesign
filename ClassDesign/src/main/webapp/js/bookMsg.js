@@ -2,17 +2,19 @@ $('#bookInfo').datagrid({
 	fitColumns : true,
 	url:'cbook/list',
 	fit:true,
+	pageList:[4,6],
+	pageSize:4,
 	singleSelect : true,
 	pagination:true,
 	columns : [ [ {
 		field : 'cbid',
 		title : '编号',
-		width : 18,
+		width : 14,
 		align:'center'
 	}, {
 		field : 'bookname',
 		title : '书名',
-		width : 30,
+		width : 40,
 		align:'center'
 	} , {
 		field : 'cauthor',
@@ -22,27 +24,27 @@ $('#bookInfo').datagrid({
 	} ,{
 		field : 'cisbn',
 		title : '发布编号',
-		width : 18,
+		width : 32,
 		align:'center'
 	}, {
 		field : 'cpublishtime',
 		title : '印刷时间',
-		width : 26,
+		width : 28,
 		align:'center'
 	} , {
 		field : 'cpublishing',
 		title : '出版社',
-		width : 26,
+		width : 36,
 		align:'center'
 	} , {
 		field : 'cwordnumber',
 		title : '总字数',
-		width : 26,
+		width : 20,
 		align:'center'
 	} , {
 		field : 'ctotalpage',
 		title : '总页数',
-		width : 26,
+		width : 18,
 		align:'center'
 	}, {
 		field : 'cimage',
@@ -64,9 +66,7 @@ $('#bookInfo').datagrid({
 		width : 40,
 		align:'center',
 		formatter: function(value,row,index){
-			var str = '<a class="operatorBtn" href="javascript:void(0)" onClick="bookOperatorFun(1, ' 
-				+ row.cbid + ')">删除</a>&nbsp;'
-				+ '<a class="operatorBtn" href="javascript:void(0)" onClick="bookOperatorFun(2, ' 
+			var str = '<a class="operatorBtn" href="javascript:void(0)" onClick="bookOperatorFun(2, ' 
 				+ row.cbid + ')">修改</a>&nbsp;'
 				+ '<script>$(".operatorBtn").linkbutton();</script>';
 			return str;

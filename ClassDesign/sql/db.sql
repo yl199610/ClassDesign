@@ -26,6 +26,8 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
+alter table cuser modify cphoto varchar2(42);
+
 select * from cuser c where 1=1 and cufree=1 and c.cuid like '%%' and c.cusername like '%%'
 update cuser set cufree=1 where cusername='a'
 select * from (select m.*,rownum rn from (select * from cuser where cuid=2) m where 1*5>=rownum) where rn>(1-1)*5 
@@ -112,6 +114,10 @@ create table cproduct(
 	cpstatus varchar2(20) default 'normal',
 	cpfree varchar2(25) default null
 );
+		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid
+		where cpid=48
+alter table cproduct modify cimage varchar2(42) 
+
 select * from (select t.*,rownum rownu from cproduct t where rownum<=1*10 and 1=1 and cpstatus='normal' and cproductname='左脑思维魔法训练' )tt where tt.rownu>(1-1)*10
 select * from cproduct;
 drop table cproduct;
@@ -155,6 +161,8 @@ create table cbook(
 	edition varchar2(10),				--印刷次数
 	cbfree varchar2(25) default null
 );
+alter table cbook modify cimage varchar2(42) 
+
 select * from (select t.*,rownum rownu from cbook t where rownum<=1*5 and 1=1 and cbfree=1)tt where tt.rownu>(1-1)*5
 select * from cbook;
 drop table cbook;

@@ -11,7 +11,8 @@
 		输入名称:<input name="cproductname" id="mcproductname"><br>
 		 <input type="button" value="查询产品信息" onClick="getProductBy()">
 	</form> 
-	<table id="productInfo"></table>
+	<div style="height:90%;">
+	<table id="productInfo"></table></div>
 	<script type="text/javascript" src="js/productMsg.js"></script>
 </body>
 </html>

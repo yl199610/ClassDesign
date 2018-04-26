@@ -5,21 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yl.cd.mapper.UserMapper">
 	<cache eviction="LRU" flushInterval="100000" size="1024"
 		readOnly="true" />
-	<!-- 常规分页 <resultMap type="paginationBean" id="paginationBeanMap"> <collection 
-		property="rows" column="{userBean.pageSize=pageSize ,userBean.currPage=currPage,cuser=cuser}" 
-		select="getUsers" /> </resultMap> <select id="getUsersByPagination" resultMap="paginationBeanMap"> 
-		select count(1) total,ceil(count(1)/${userBean.pageSize}) totalPage,${userBean.pageSize} 
-		pageSize,${userBean.currPage} currPage from cuser </select> <select id="getUsers" 
-		resultType="Cuser"> select * from (select m.*,rownum rn from (select * from 
-		cuser <if test="cuser==null"> where 1=1 </if> ) m where ${userBean.currPage}*${userBean.pageSize}>=rownum) 
-		where rn>(${userBean.currPage}-1)*${userBean.pageSize} </select> -->
-	<!-- 无分页结果的分页 <select id="getUsersId" resultType="Cuser"> select * from 
-		(select t.*,rownum rownu from cuser t where rownum&lt;=#{userBean.currPage}*#{userBean.pageSize})tt 
-		where tt.rownu>(#{userBean.currPage}-1)*#{userBean.pageSize} </select> -->
-
-
-
-
 	<!-- 按照条件查询分页 -->
 	<resultMap id="detailMap" type="Cuser">
 		<id property="cuid" column="cuid" />
@@ -55,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and c.cuid like '%${cuid}%'
 			</when>
 			<otherwise>
-				and c.cuid like '%${cuid}%' and c.cusername=#{cusername}%'
+				and c.cuid like '%${cuid}%' and c.cusername like '%${cusername}%'
 			</otherwise>
 		</choose>
 	</select>
@@ -144,5 +129,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="archiveUser" parameterType="Integer">
 		update cuser set cufree=0 where cuid=#{cuid}
 	</update>
+	
+	<select id="userLogin" parameterType="Cuser"  resultType="Cuser">
+		select * from cuser where cusername=#{cusername} and cpassword=#{cpassword}
+	</select>
+	
 	
 </mapper>

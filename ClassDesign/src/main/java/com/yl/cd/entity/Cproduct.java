@@ -3,6 +3,7 @@ package com.yl.cd.entity;
 public class Cproduct {
 	private Integer cpid;
 	private Integer spcaid;
+	private Integer cbcpid;
 	private String cproductname;
 	private String cdescription;
 	private String caddtime;
@@ -16,12 +17,15 @@ public class Cproduct {
 	public Cproduct() {
 	}
 
-	public Cproduct(Integer cpid, Integer spcaid, String cproductname, String cdescription, String caddtime,
-			String cnormalprice, String cwsscprice, String ckeywords, String cimage, String cpfree, Ccategory ccategory,
-			Cbook cbook) {
+	
+
+	public Cproduct(Integer cpid, Integer spcaid, Integer cbcpid, String cproductname, String cdescription,
+			String caddtime, String cnormalprice, String cwsscprice, String ckeywords, String cimage, String cpfree,
+			Ccategory ccategory, Cbook cbook) {
 		super();
 		this.cpid = cpid;
 		this.spcaid = spcaid;
+		this.cbcpid = cbcpid;
 		this.cproductname = cproductname;
 		this.cdescription = cdescription;
 		this.caddtime = caddtime;
@@ -33,6 +37,8 @@ public class Cproduct {
 		this.ccategory = ccategory;
 		this.cbook = cbook;
 	}
+
+
 
 	public Integer getCpid() {
 		return cpid;
@@ -111,12 +117,26 @@ public class Cproduct {
 		this.cbook = cbook;
 	}
 
+
+
+	public Integer getCbcpid() {
+		return cbcpid;
+	}
+
+
+
+	public void setCbcpid(Integer cbcpid) {
+		this.cbcpid = cbcpid;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Cproduct [cpid=" + cpid + ", spcaid=" + spcaid + ", cproductname=" + cproductname + ", cdescription="
-				+ cdescription + ", caddtime=" + caddtime + ", cnormalprice=" + cnormalprice + ", cwsscprice="
-				+ cwsscprice + ", ckeywords=" + ckeywords + ", cimage=" + cimage + ", cpfree=" + cpfree + ", ccategory="
-				+ ccategory + ", cbook=" + cbook + "]";
+		return "Cproduct [cpid=" + cpid + ", spcaid=" + spcaid + ", cbcpid=" + cbcpid + ", cproductname=" + cproductname
+				+ ", cdescription=" + cdescription + ", caddtime=" + caddtime + ", cnormalprice=" + cnormalprice
+				+ ", cwsscprice=" + cwsscprice + ", ckeywords=" + ckeywords + ", cimage=" + cimage + ", cpfree="
+				+ cpfree + ", ccategory=" + ccategory + ", cbook=" + cbook + "]";
 	}
 
 	

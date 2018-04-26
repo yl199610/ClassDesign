@@ -56,4 +56,16 @@ public class BookServiceImpl implements BookService{
 		return bookMapper.detailBook(cbid);
 	}
 
+
+	@Override
+	public List<Cbook> getAllBookNoPage() {
+		return bookMapper.getAllBookNoPage();
+	}
+
+
+	@Override
+	public boolean modifyBook(Cbook cbook) {
+		return bookMapper.modifyBook(cbook);
+	}
+
 }

@@ -75,10 +75,23 @@ function openBook(id) {
 	cnid = id;
 	$("#modifyBook").dialog({
 		title : 'modifyBook',
-		width : 700,
+		width : 650,
 		height : 600,
 		left : 300,
 		modal : true,
 		href : 'back/modifyBook.jsp'
+	});
+}
+
+
+function openProduct(id){
+	cnid = id;
+	$("#modifyProduct").dialog({
+		title : 'modifyProduct',
+		width : 500,
+		height : 600,
+		left : 300,
+		modal : true,
+		href : 'back/modifyProduct.jsp'
 	});
 }

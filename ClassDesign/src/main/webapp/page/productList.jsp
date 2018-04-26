@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="js/productList.js"></script>
 <title>图书商城：Such is life</title>
 <style type="text/css">
 * {
@@ -60,13 +61,13 @@ body {
 	font-size: 18px;
 	color: #333333;
 }
-
+/* 
 .padLeft10 .recomand {
 	line-height: 24px;
 	color: #e60000;
 	margin-top: 7px;
 	overflow: hidden;
-}
+} */
 
 .padLeft10 div {
 	font-size: 14px;
@@ -122,7 +123,6 @@ body {
 #bottomproductDiv{
 	width: 80%;
 	margin-left: 90px;
-	border: 1px solid red;
 }
 #productleftDiv{
 	width: 25%;
@@ -132,28 +132,23 @@ body {
 #recommendDiv{
 	width: 100%;
 	height: 50%;
-	border: 1px solid blue;
 }
 #historyDiv{
 	width: 100%;
 	height: 50%;
-	border: 1px solid red;
 }
 #productRightDiv{
 	width: 73%;
 	float: left;
-	border: 1px solid red;
 }
 #productbookmsg{
 	width: 100%;
 	height: 150px;
-	border: 1px solid red;
 
 }
 #intrducebookmsg{
 	width: 100%;
 	height: 150px;
-	border: 1px solid blue;
 }
 #commentsMsg{
 	width: 100%;
@@ -206,30 +201,30 @@ body {
 	<div id="bigproductDiv">
 		<div id="topproductDiv">
 			<div id="topproductOne">
-				<img src="images/ts.jpg" width="80%" height="80%"
+				<img id="bigImageShow" src="images/ts.jpg" width="80%" height="80%"
 					style="margin-top: 50px;">
 			</div>
 			<div id="topproductTwo">
 				<div class="padLeft10">
-					<h1>谈美书简——语文新课标必读丛书</h1>
-					<p class="recomand">语文新课标必读丛书</p>
-					<div class="author">
-						<span>作者：</span><a
-							href="/Books/allbook/allauthor.asp?stype=author&amp;sbook=朱光潜"
-							target="_blank">朱光潜</a>
+					<h1>谈美书简——语文新课标必读丛书</h1></br>
+<!-- 					<p class="recomand">语文新课标必读丛书</p>
+ -->					<div class="author">
+						<span>作者：</span><span id="authBymy">朱光潜</span>
 					</div>
 					<div class="publisher">
-						<span>出版社：</span><a href="/publish/80115/" target="_blank">当代世界出版社</a><span>出版时间：</span><i>2003-09-01</i>
+						<span>出版社：</span><a>当代世界出版社</a>
 					</div>
-					<div class="series">
-						<span>所属丛书：</span> <a href="/congshu/56570/" target="_blank"
-							style="padding-right: 5px;">语文新课标必读丛书（译林出版）</a>
+					<div class="publishertime">
+						<span>出版时间：</span><i>2003-09-01</i>
 					</div>
 					<div class="otherInfor">
-						<span>开本：</span> <em>大32开</em> <span>页数：</span> <i>118</i>
+						<span>开本：</span> <em>大32开</em>
 					</div>
-					<div class="startWrap">
-						<span>读者评分：</span><em>4.6分</em><i class="one"></i><i class="one"></i><i
+					<div class="otherInfor2">
+						<span>页数：</span> <i>118</i>
+					</div>
+					<!-- <div class="startWrap">
+						<i class="one"></i><i class="one"></i><i
 							class="one"></i><i class="one"></i><i class="half"></i><a
 							href="#tabookReco">98条评论</a>
 					</div>
@@ -237,15 +232,15 @@ body {
 						<span>排名：</span><a href="/24hour/63000000/" target="_blank">中小学教辅销量榜</a>
 						<b>第<i>2</i>位
 						</b>
-					</div>
+					</div> -->
 				</div>
 
 				<div id="showPrice">
 					<div class="priceWrap">
-						<span class="sellPriceTit">中 图 价:</span><span class="sellPrice"><i>¥</i>1.7</span><span
-							class="discount">(2.1折)</span> <span class="priceTit">定价:</span>
-						<del class="price">¥8.0 </del>
-						<a href="/RegUser/login.aspx?url=/522126.htm" target="_blank">登录后可看到会员价</a>
+						<span class="sellPriceTit">中 图 价:</span><i>¥</i><span class="sellPrice">1.7</span><span
+							class="discount"></span> <span class="priceTit">定价:</span>
+						<i>¥</i><del class="price">8.0 </del>
+						<a href="/RegUser/login.aspx?url=/522126.htm" target="_blank"></a>
 						<div>促销活动</div>
 					</div>
 				</div>
@@ -278,21 +273,21 @@ body {
 		</div>
 		<div id="bottomproductDiv">
 			<div id="productleftDiv">
-				<h3>图书推荐</h3><hr>
+				<h3 style="background-color: #f3f3f3;">图书推荐</h3><hr>
 				<div id="recommendDiv"></div>
 				<h3>浏览历史</h3><hr>
 				<div id="historyDiv"></div>
 			</div>
 			<div id="productRightDiv">
-				<h3>图书详情&nbsp;&nbsp;&nbsp;&nbsp;商品评价</h3>
-				<div id="productbookmsg">
-					<h3>版权信息</h3>
+				<h3 style="color:white; line-height:40px; height:40px; background-color: #3b3b3b">图书详情&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:red;">商品评价</a></h3>
+				<div id="productbookmsg" style="margin-top: 10px;">
+					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">版权信息</h3>
 				</div>
 				<div id="intrducebookmsg">
-					<h3>图书简介</h3>
+					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">图书简介</h3>
 				</div>
 				<div id="commentsMsg">
-					<h3>图书评价</h3>
+					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">图书评价</h3>
 				</div>
 				
 			</div>
