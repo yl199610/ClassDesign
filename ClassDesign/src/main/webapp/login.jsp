@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<base href="/ClassDesign/">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -9,10 +10,13 @@
 <link rel="stylesheet" type="text/css" href="js/login_files/denglu.css">
 <link rel="stylesheet" type="text/css" href="js/login_files/zhuce.css">
 <link rel="stylesheet" type="text/css" href="js/login_files/public.css">
-<script type="text/javascript"
+<link rel="stylesheet" type="text/css" href="js/login_files/my.css">
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<!-- <script type="text/javascript"
 	src="js/login_files/jquery-1.4.2.min.js.下载"></script>
 <script type="text/javascript"
 	src="js/login_files/jquery.SuperSlide.2.1.js.下载"></script>
+ -->
 </head>
 <body>
 	<!--整体内容开始-->
@@ -36,68 +40,7 @@
 		</div>
 		<!--第一部分内容结束-->
 		<style>
-.carousel {
-	width: 750px;
-	height: 430px;
-	float: left;
-}
-/* 本例子css */
-.focusBox {
-	margin: 0 auto;
-	position: relative;
-	width: 750px;
-	height: 430px;
-	margin-top: 50px;
-	padding: 5px;
-	background: #f5f5f5;
-	overflow: hidden;
-}
 
-.focusBox .hd {
-	height: 22px;
-	position: absolute;
-	z-index: 1;
-	bottom: 10px;
-	right: 10px;
-	overflow: hidden;
-}
-
-.focusBox .hd ul {
-	float: right;
-	overflow: hidden;
-}
-
-.focusBox .hd li {
-	width: 22px;
-	height: 22px;
-	line-height: 22px;
-	text-align: center;
-	background: #999;
-	color: #fff;
-	font-family: Arial;
-	float: left;
-	margin: 0 1px;
-	display: inline;
-	-webkit-border-radius: 22px;
-	-moz-border-radius: 22px;
-	border-radius: 22px;
-	cursor: pointer;
-}
-
-.focusBox .hd li.on {
-	background: #c00;
-}
-
-.focusBox .bd li {
-	vertical-align: middle;
-}
-
-.focusBox .bd li img {
-	width: 750px;
-	height: 430px;
-	display: block;
-	background: url(img/loading.gif) center center no-repeat;
-}
 </style>
 		<!--第二部分内容开始-->
 		<div class="denglu-frist2">
@@ -164,130 +107,132 @@
 										</div>
 										<div class="bd">
 											<form id="loginForm" action="cuser/login" method="post">
-											<p style="color: red;"><label>${errorMsgu}&nbsp;</label></p><c:remove var="errorMsgu" scope="session"/>
-											<div class="conWrap"
-												style="position: relative; width: 384px; height: 420px;">
-												<div class="con"
-													style="position: absolute; width: 384px; left: 0px; top: 50px; display: block;">
-													<div class="yonghuming">
-														<input type="text" id="clcusername" name="cusername" value=""
-															placeholder="请输入用户名" class="shurukuang">
-													</div>
-													<div class="yonghuming-mima">
-														<input type="password" id="clcpassword" name="cpassword" value=""
-															placeholder="请输入密码" class="shurukuang">
-													</div>
-														<div class="denglu1">
-															<p><input type="submit" value="登录" style="background-color: #e31830"/></p>
+												<span style="color: red;margin-left: 40%;"><label>${errorMsg}&nbsp;</label></span>&nbsp;</label></p><c:remove var="errorMsg" scope="session"/>
+												<c:remove var="errorMsg" scope="session" />
+												<div class="conWrap"
+													style="position: relative; width: 384px; height: 400px;">
+													<div class="con"
+														style="position: absolute; width: 384px; left: 0px; top: 0px; display: block;">
+														<div class="yonghuming">
+															<input type="text" id="clcusername" name="cusernamelogin" placeholder="请输入用户名" class="shurukuang">
 														</div>
-													<div class="zhuce">
-														<p>还没有登录账号？</p>
+														<div class="yonghuming-mima">
+															<input type="password" id="clcpassword" name="cpasswordlogin" placeholder="请输入密码" class="shurukuang">
+														</div>
+														<div class="denglu1">
+															<p>
+																<input type="submit" value="登录"
+																	style="background-color: #e31830" />
+															</p>
+														</div>
+														<div class="zhuce">
+															<p>还没有登录账号？</p>
+														</div>
+														<div class="xieyi">
+															<p>
+																同意<span>《用户使用协议》</span>
+															</p>
+															<input type="checkbox" class="danxuan" checked="checked">
+														</div>
+														<div class="qqdenglu">
+															<div class="qqdenglu-left"></div>
+															<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+																<div class="qqdenglu-middle">使用第三方账号登录</div>
+															</a>
+															<div class="qqdenglu-right"></div>
+														</div>
 													</div>
-													<div class="xieyi">
-														<p>
-															同意<span>《用户使用协议》</span>
-														</p>
-														<input type="checkbox" class="danxuan">
-													</div>
-													<div class="qqdenglu">
-														<div class="qqdenglu-left"></div>
-														<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
-															<div class="qqdenglu-middle">使用第三方账号登录</div>
-														</a>
-														<div class="qqdenglu-right"></div>
-													</div>
+											</form>
+											<div class="con"
+												style="position: absolute; width: 384px; left: 0px; top: 0px; display: none;">
+												<div class="nicheng">
+													<input type="text" id="uucusername" name="cusername"
+														value="" placeholder="昵称" class="shurukuang">
 												</div>
-												</form>
-												<div class="con"
-													style="position: absolute; width: 384px; left: 0px; top: 0px; display: none;">
-													<div class="nicheng">
-														<input type="text" id="name" name="name" value=""
-															placeholder="昵称" class="shurukuang">
-													</div>
-													<div class="mima">
-														<input type="password" id="name" name="name" value=""
-															placeholder="密码" class="shurukuang">
-													</div>
-													<div class="yonghuming">
-														<input type="text" id="name" name="name" value=""
-															placeholder="邮箱" class="shurukuang">
-													</div>
+												<div class="mima">
+													<input type="password" id="uucpassword" name="cpassword"
+														value="" placeholder="密码" class="shurukuang">
+												</div>
+												<div class="yonghuming">
+													<input type="text" id="uucemail" name="cemail" value=""
+														placeholder="邮箱" class="shurukuang">
+												</div>
 
-													<div class="yonghuming_mima1">
-														<div class="yonghuming_mima">
-															<input type="text" id="name" name="name" value=""
-																placeholder="验证码" class="shurukuang">
-														</div>
-														<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
-															<div class="yzmdx">发送验证码</div>
-														</a>
+												<div class="yonghuming_mima1">
+													<div class="yonghuming_mima">
+														<input type="text" id="vcode" name="vcode" value=""
+															placeholder="验证码" class="shurukuang">
 													</div>
-
 													<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
-														<div class="denglu1">
-															<p>登录</p>
-														</div>
+														<div class="yzmdx">发送验证码</div>
 													</a>
-													<div class="xieyi">
-														<p>
-															同意<span>《用户使用协议》</span>
-														</p>
-														<input type="checkbox" class="danxuan">
+												</div>
+
+												<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+													<div class="denglu1">
+														<p>登录</p>
 													</div>
-													<div class="qqdenglu">
-														<div class="qqdenglu-left"></div>
-														<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
-															<div class="qqdenglu-middle">使用第三方账号登录</div>
-														</a>
-														<div class="qqdenglu-right"></div>
-													</div>
+												</a>
+												<div class="xieyi">
+													<p>
+														同意<span>《用户使用协议》</span>
+													</p>
+													<input type="checkbox" class="danxuan">
+												</div>
+												<div class="qqdenglu">
+													<div class="qqdenglu-left"></div>
+													<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+														<div class="qqdenglu-middle">使用第三方账号登录</div>
+													</a>
+													<div class="qqdenglu-right"></div>
 												</div>
 											</div>
-
 										</div>
+
 									</div>
-									<script type="text/javascript">
-										jQuery(".hasMoreTab").slide({
-											mainCell : ".conWrap",
-											targetCell : ".more a",
-											effect : "fold"
-										});
-									</script>
 								</div>
+								<script type="text/javascript">
+									jQuery(".hasMoreTab").slide({
+										mainCell : ".conWrap",
+										targetCell : ".more a",
+										effect : "fold"
+									});
+								</script>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="denglu-first2-content-bottom">
-					<div class="bottom-left">
-						<div class="bottom-left-top">
-							<p>安全保障</p>
-						</div>
-						<div class="bottom-left-footer">
-							<p>****网站保障消费者账号密码等重要信息的安全</p>
-						</div>
+			</div>
+			<div class="denglu-first2-content-bottom">
+				<div class="bottom-left">
+					<div class="bottom-left-top">
+						<p>安全保障</p>
 					</div>
-					<div class="bottom-middle">
-						<div class="bottom-left-top">
-							<p>一键找回</p>
-						</div>
-						<div class="bottom-left-footer">
-							<p>支持邮箱、手机号、昵称等多种其他账号找回，方便快捷</p>
-						</div>
+					<div class="bottom-left-footer">
+						<p>****网站保障消费者账号密码等重要信息的安全</p>
 					</div>
-					<div class="bottom-right">
-						<div class="bottom-left-top">
-							<p>贴心客服</p>
-						</div>
-						<div class="bottom-left-footer">
-							<p>客服热线：400-4357-570</p>
-							<p>客服邮箱：********@qq.com</p>
-						</div>
+				</div>
+				<div class="bottom-middle">
+					<div class="bottom-left-top">
+						<p>一键找回</p>
+					</div>
+					<div class="bottom-left-footer">
+						<p>支持邮箱、手机号、昵称等多种其他账号找回，方便快捷</p>
+					</div>
+				</div>
+				<div class="bottom-right">
+					<div class="bottom-left-top">
+						<p>贴心客服</p>
+					</div>
+					<div class="bottom-left-footer">
+						<p>客服热线：400-4357-570</p>
+						<p>客服邮箱：********@qq.com</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--第二部分内容结束-->
+	</div>
+	<!--第二部分内容结束-->
 	</div>
 	<!--整体内容结束-->
 	<!--登录尾部内容开始-->

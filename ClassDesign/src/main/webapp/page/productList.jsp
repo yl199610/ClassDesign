@@ -208,20 +208,20 @@ body {
 				<div class="padLeft10">
 					<h1>谈美书简——语文新课标必读丛书</h1></br>
 <!-- 					<p class="recomand">语文新课标必读丛书</p>
- -->					<div class="author">
-						<span>作者：</span><span id="authBymy">朱光潜</span>
+ -->					<div class="author" >
+						<span>作者：</span><span id="authBymy" style="color:red;">朱光潜</span>
 					</div>
 					<div class="publisher">
-						<span>出版社：</span><a>当代世界出版社</a>
+						<span>出版社：</span><a style="color:red;">当代世界出版社</a>
 					</div>
 					<div class="publishertime">
-						<span>出版时间：</span><i>2003-09-01</i>
+						<span>出版时间：</span><i style="color:red;">2003-09-01</i>
 					</div>
 					<div class="otherInfor">
-						<span>开本：</span> <em>大32开</em>
+						<span>开本：</span> <em style="color:red;">大32开</em>
 					</div>
 					<div class="otherInfor2">
-						<span>页数：</span> <i>118</i>
+						<span>页数：</span> <i style="color:red;">118</i>
 					</div>
 					<!-- <div class="startWrap">
 						<i class="one"></i><i class="one"></i><i
@@ -237,9 +237,9 @@ body {
 
 				<div id="showPrice">
 					<div class="priceWrap">
-						<span class="sellPriceTit">中 图 价:</span><i>¥</i><span class="sellPrice">1.7</span><span
-							class="discount"></span> <span class="priceTit">定价:</span>
-						<i>¥</i><del class="price">8.0 </del>
+						<span class="sellPriceTit">中 图 价:&nbsp;&nbsp;</span><i>¥&nbsp;</i><span class="sellPrice">1.7</span><span
+							class="discount"></span> <span class="priceTit">定价:&nbsp;</span>
+						<i>¥&nbsp;</i><del class="price">8.0 </del>
 						<a href="/RegUser/login.aspx?url=/522126.htm" target="_blank"></a>
 						<div>促销活动</div>
 					</div>

@@ -1,0 +1,62 @@
+.carousel {
+	width: 750px;
+	height: 430px;
+	float: left;
+}
+/* 本例子css */
+.focusBox {
+	margin: 0 auto;
+	position: relative;
+	width: 750px;
+	height: 430px;
+	margin-top: 50px;
+	padding: 5px;
+	background: #f5f5f5;
+	overflow: hidden;
+}
+
+.focusBox .hd {
+	height: 22px;
+	position: absolute;
+	z-index: 1;
+	bottom: 10px;
+	right: 10px;
+	overflow: hidden;
+}
+
+.focusBox .hd ul {
+	float: right;
+	overflow: hidden;
+}
+
+.focusBox .hd li {
+	width: 22px;
+	height: 22px;
+	line-height: 22px;
+	text-align: center;
+	background: #999;
+	color: #fff;
+	font-family: Arial;
+	float: left;
+	margin: 0 1px;
+	display: inline;
+	-webkit-border-radius: 22px;
+	-moz-border-radius: 22px;
+	border-radius: 22px;
+	cursor: pointer;
+}
+
+.focusBox .hd li.on {
+	background: #c00;
+}
+
+.focusBox .bd li {
+	vertical-align: middle;
+}
+
+.focusBox .bd li img {
+	width: 750px;
+	height: 430px;
+	display: block;
+	background: url(img/loading.gif) center center no-repeat;
+}

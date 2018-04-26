@@ -14,7 +14,7 @@
 	<div data-options="region:'north'" style="height: 65px;">
 		<div id="header">
 			<div id="top_login">
-				<label> 欢迎【<span>${loginUser.kgAdminName}</span>】使用网上书城管理系统
+				<label> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
 				</label>
 			</div>
 			<div id="nav"></div>
@@ -91,7 +91,7 @@
 		<div id="main" style="width: 500px; height: 250px;">
 			<div title="欢迎">
 				<h1 style="width: 100%; text-align: center; margin-top: 80px">
-				<label> 欢迎【<span>${loginUser.kgAdminName}</span>】使用网上书城管理系统
+				<label> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
 					</label>
 				</h1>
 			</div>

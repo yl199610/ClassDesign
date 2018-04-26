@@ -1,7 +1,8 @@
 var index = 0;//当前显示的图片索引
 var total = 0;//总图片数
 var time;
-
+alert("----"+$("#name").val());
+alert(cuid);
 //从数据库加载分类的数据
 function loadCategory(){
 	$.post("ccategory/firsttype", function(data) {

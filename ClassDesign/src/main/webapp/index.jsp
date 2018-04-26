@@ -11,6 +11,10 @@
 <link type="text/css" rel="stylesheet" href="css/hotbookAppear.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+	var cusername="${sessionScope.loginUser.cusername}";
+	var cuid="${sessionScope.loginUser.cuid}";
+</script>
 <title>图书商城：Such is life</title>
 </head>
 <body>
@@ -25,6 +29,7 @@
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
+			<input type="hidden" id="name" value="${sessionScope.loginUser.cusername}"/>
 				<li><a target="_blank" class="f-green"
 					href="http://www.99read.com/Help/Index.aspx"> 帮助中心</a></li>
 			</ul>
@@ -54,6 +59,7 @@
 				<li><a>首页</a></li>
 				<li><a>我的收藏</a></li>
 				<li><a>购物车</a></li>
+
 			</ul>
 		</div>
 

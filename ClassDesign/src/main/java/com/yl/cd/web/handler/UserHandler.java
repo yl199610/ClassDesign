@@ -3,13 +3,17 @@ package com.yl.cd.web.handler;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +25,7 @@ import com.yl.cd.util.ServletUtil;
 
 @Controller
 @RequestMapping("/cuser")
+@SessionAttributes("loginUser")
 public class UserHandler{
 	@Autowired
 	private UserService userService;
@@ -75,15 +80,20 @@ public class UserHandler{
 	 * 用户登录
 	 */
 	@RequestMapping("/login")
-	public String userLogin(Cuser cuser,RedirectAttributes redirectAttributes,ModelMap m){
+	public String userLogin(HttpServletRequest request,ModelMap map){
+		Cuser cuser=new Cuser();
+		String username = request.getParameter("cusernamelogin");
+		String password = request.getParameter("cpasswordlogin");
+		cuser.setCusername(username);
+		cuser.setCpassword(password);
 		LogManager.getLogger().debug("请求CadminHandler处理adminLogin......"+cuser);
 		cuser=userService.userLogin(cuser);
 		if(cuser!=null){
-			m.put("loginUser",cuser);//放到sessoin
+			map.put("loginUser",cuser);//放到sessoin
 			return "redirect:/index.jsp";
 		}
-		redirectAttributes.addFlashAttribute("errorMsgu", "用户名或密码错误");
-		return "redirect:/login.jsp";
+		map.addAttribute("errorMsg","用户名或密码错误");
+		return "forward:/login.jsp";
 	}	
 	
 	
