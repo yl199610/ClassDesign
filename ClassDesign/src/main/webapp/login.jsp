@@ -13,10 +13,9 @@
 <link rel="stylesheet" type="text/css" href="js/login_files/my.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <!-- <script type="text/javascript"
-	src="js/login_files/jquery-1.4.2.min.js.下载"></script>
-<script type="text/javascript"
-	src="js/login_files/jquery.SuperSlide.2.1.js.下载"></script>
- -->
+	src="js/login_files/jquery-1.4.2.min.js.下载"></script> -->
+<script type="text/javascript" src="js/login_files/jquery.SuperSlide.2.1.js.下载"></script>
+
 </head>
 <body>
 	<!--整体内容开始-->
@@ -53,18 +52,15 @@
 									style="overflow: hidden; position: relative; height: 430px">
 									<ul
 										style="top: -860px; position: relative; padding: 0px; margin: 0px;">
-										<li style="height: 430px;"><a target="_blank"
-											href="http://yanshi.sucaihuo.com/modals/7/701/demo/#"><img
-												src="js/login_files/bg.png"></a></li>
-										<li style="height: 430px;"><a target="_blank"
-											href="http://yanshi.sucaihuo.com/modals/7/701/demo/#"><img
-												src="js/login_files/bg.png"></a></li>
-										<li style="height: 430px;"><a target="_blank"
-											href="http://yanshi.sucaihuo.com/modals/7/701/demo/#"><img
-												src="js/login_files/bg.png"></a></li>
-										<li style="height: 430px;"><a target="_blank"
-											href="http://yanshi.sucaihuo.com/modals/7/701/demo/#"><img
-												src="js/login_files/bg.png"></a></li>
+										<li style="height: 430px;"><a>
+											<img
+												src="js/login_files/bglogin.png"></a></li>
+										<li style="height: 430px;"><a><img
+												src="js/login_files/bglogin.png"></a></li>
+										<li style="height: 430px;"><a><img
+												src="js/login_files/bglogin.png"></a></li>
+										<li style="height: 430px;"><a><img
+												src="js/login_files/bglogin.png"></a></li>
 									</ul>
 								</div>
 							</div>
@@ -136,7 +132,7 @@
 														</div>
 														<div class="qqdenglu">
 															<div class="qqdenglu-left"></div>
-															<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+															<a>
 																<div class="qqdenglu-middle">使用第三方账号登录</div>
 															</a>
 															<div class="qqdenglu-right"></div>
@@ -163,15 +159,16 @@
 														<input type="text" id="vcode" name="vcode" value=""
 															placeholder="验证码" class="shurukuang">
 													</div>
-													<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+													<a>
 														<div class="yzmdx">发送验证码</div>
 													</a>
 												</div>
 
-												<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
-													<div class="denglu1">
-														<p>登录</p>
-													</div>
+												<a>
+															<p>
+																<input type="submit" value="注册" id="regUser"
+																	style="background-color: #e31830" />
+															</p>
 												</a>
 												<div class="xieyi">
 													<p>
@@ -181,7 +178,7 @@
 												</div>
 												<div class="qqdenglu">
 													<div class="qqdenglu-left"></div>
-													<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">
+													<a>
 														<div class="qqdenglu-middle">使用第三方账号登录</div>
 													</a>
 													<div class="qqdenglu-right"></div>
@@ -239,13 +236,13 @@
 	<div class="denglu-footer">
 		<div class="denglu-footer-content">
 			*****有限公司 版权所有 2015-2016 备10216464645号&nbsp;&nbsp; <a
-				href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">关于我们</a>&nbsp;
-			|&nbsp; <a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">帮助中心</a>
+				href="login.jsp">关于我们</a>&nbsp;
+			|&nbsp; <a href="login.jsp">帮助中心</a>
 			&nbsp;|&nbsp; <a
-				href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">网站合作</a>&nbsp;|&nbsp;
-			<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">版权说明</a>&nbsp;|&nbsp;
-			<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">诚聘英才</a>&nbsp;|&nbsp;
-			<a href="http://yanshi.sucaihuo.com/modals/7/701/demo/#">联系我们</a>
+				href="login.jsp">网站合作</a>&nbsp;|&nbsp;
+			<a href="login.jsp">版权说明</a>&nbsp;|&nbsp;
+			<a href="login.jsp">诚聘英才</a>&nbsp;|&nbsp;
+			<a href="login.jsp">联系我们</a>
 		</div>
 	</div>
 	<!--登录尾部内容结束-->

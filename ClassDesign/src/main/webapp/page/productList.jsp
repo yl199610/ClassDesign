@@ -68,7 +68,6 @@ body {
 	margin-top: 7px;
 	overflow: hidden;
 } */
-
 .padLeft10 div {
 	font-size: 14px;
 	line-height: 20px;
@@ -87,75 +86,170 @@ body {
 	height: 30%;
 	border: 1px solid orange;
 }
-#addCarBig{
+
+#addCarBig {
 	width: 100%;
 	height: 40%;
 }
 
-#addCarpriduct{
-    width: 160px;
-    line-height: 32px;
-    text-indent: 45px;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Microsoft YaHei';
-    background: url(images/childredSprit.png) no-repeat;
-    text-decoration: none;
-    margin-left: 0px;
-    margin-top: 6px;
-    float: left;
-    border-radius: 10px;
+#addCarpriduct {
+	width: 160px;
+	line-height: 32px;
+	text-indent: 45px;
+	color: #fff;
+	font-size: 16px;
+	font-family: 'Microsoft YaHei';
+	background: url(images/childredSprit.png) no-repeat;
+	text-decoration: none;
+	margin-left: 0px;
+	margin-top: 6px;
+	float: left;
+	border-radius: 10px;
 }
-#addfavpriduct{
+
+#addfavpriduct {
 	width: 120px;
-    line-height: 32px;
-    text-indent: 45px;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Microsoft YaHei';
-    background-color: #63b7ff;     
-    text-decoration: none;
-    margin-left: 10px;
-    margin-top: 6px;
-    float: left;
-    border-radius: 10px;
+	line-height: 32px;
+	text-indent: 45px;
+	color: #fff;
+	font-size: 16px;
+	font-family: 'Microsoft YaHei';
+	background-color: #63b7ff;
+	text-decoration: none;
+	margin-left: 10px;
+	margin-top: 6px;
+	float: left;
+	border-radius: 10px;
 }
-#bottomproductDiv{
-	width: 80%;
+
+#bottomproductDiv {
+	width: 90%;
 	margin-left: 90px;
 }
-#productleftDiv{
-	width: 25%;
-	height:1100px;
-	float: left;
-}
-#recommendDiv{
-	width: 100%;
-	height: 50%;
-}
-#historyDiv{
-	width: 100%;
-	height: 50%;
-}
-#productRightDiv{
-	width: 73%;
-	float: left;
-}
-#productbookmsg{
-	width: 100%;
-	height: 150px;
 
+#productleftDiv {
+	width: 23%;
+	height: 1100px;
+	float: left;
 }
-#intrducebookmsg{
+
+#recommendDiv {
+	width: 100%;
+	height: 50%;
+}
+
+#historyDiv {
+	width: 100%;
+	height: 50%;
+}
+
+#productRightDiv {
+	width: 76%;
+	float: left;
+}
+
+#productbookmsg {
 	width: 100%;
 	height: 150px;
 }
-#commentsMsg{
+
+#intrducebookmsg {
+	width: 100%;
+	height: 150px;
+}
+
+#commentsMsg {
 	width: 100%;
 	height: 600px;
-	border: 1px solid blue;
 }
 
+#bookowner li {
+	float: left;
+	width: 276px;
+	color: #666666;
+	color: black;
+	font-size: 14px;
+}
+
+#commentsMsg {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+}
+
+#listLeft #listRight {
+	display: block;
+}
+
+#commentsMsg li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+}
+
+.listLeft {
+	padding-top: 16px;
+	float: left;
+	width: 80%;
+}
+
+.theme {
+	float: left;
+	width: 600px;
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	color: #666666;
+	font-weight: bold;
+}
+
+.con p {
+	color: #666666;
+	font-size: 14px;
+}
+
+.listRight {
+	float: right;
+	width: 18%;
+	margin-top: 20px;
+}
+
+.userIcon1 {
+	width: 100px;
+	height: 130px;
+	text-align: center;
+}
+
+.userIcon1 a {
+	color: red;
+	margin-bottom: -1220px;
+}
+.pro_r_b {
+    float: right;
+    margin-right: 10px;
+    background: #f3f3f3;
+    border: solid 1px #e6e6e6;
+    padding: 15px;
+    text-align: center;
+    margin-top: 30px;
+}
+.pro_r_c {
+    display: block;
+    background: url(images/problem.gif) no-repeat;
+    width: 110px;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+.pro_r_x {
+    display: block;
+    background: url(images/add.gif) no-repeat;
+    width: 128px;
+    height: 33px;
+    margin: 5px auto;
+}
 </style>
 
 </head>
@@ -164,16 +258,19 @@ body {
 	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎光临网上书城</li>
+			<li class="headspan">您好,欢迎<label style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
+			</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="http://login.99read.com/Sign-in.aspx"> 登录</a> <span
-				class="f-hui-line">| </span>&nbsp; <a id="regSpan"
-				class="f-cheng f-bold" href="http://login.99read.com/register.aspx">注册</a></li>
+				href="index.jsp">==</a> <span class="f-hui-line">| </span>&nbsp; <a
+				id="regSpan" class="f-cheng f-bold" href="index.jsp">==</a></li>
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<li><a target="_blank" class="f-green"
-					href="http://www.99read.com/Help/Index.aspx"> 帮助中心</a></li>
+				<input hidden="hidden" id="namesession"
+					value="${sessionScope.loginUser.cusername}" />
+				<input hidden="hidden" id="cuidsession"
+					value="${sessionScope.loginUser.cuid}" />
+				<li><a target="_blank" class="f-green">帮助中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -206,22 +303,24 @@ body {
 			</div>
 			<div id="topproductTwo">
 				<div class="padLeft10">
-					<h1>谈美书简——语文新课标必读丛书</h1></br>
-<!-- 					<p class="recomand">语文新课标必读丛书</p>
- -->					<div class="author" >
-						<span>作者：</span><span id="authBymy" style="color:red;">朱光潜</span>
+					<h1>谈美书简——语文新课标必读丛书</h1>
+					</br>
+					<!-- 					<p class="recomand">语文新课标必读丛书</p>
+ -->
+					<div class="author">
+						<span>作者：</span><span id="authBymy" style="color: red;"></span>
 					</div>
 					<div class="publisher">
-						<span>出版社：</span><a style="color:red;">当代世界出版社</a>
+						<span>出版社：</span><a style="color: red;"></a>
 					</div>
 					<div class="publishertime">
-						<span>出版时间：</span><i style="color:red;">2003-09-01</i>
+						<span>出版时间：</span><i style="color: red;"></i>
 					</div>
 					<div class="otherInfor">
-						<span>开本：</span> <em style="color:red;">大32开</em>
+						<span>开本：</span> <em style="color: red;"></em>
 					</div>
 					<div class="otherInfor2">
-						<span>页数：</span> <i style="color:red;">118</i>
+						<span>页数：</span> <i style="color: red;"></i>
 					</div>
 					<!-- <div class="startWrap">
 						<i class="one"></i><i class="one"></i><i
@@ -237,26 +336,24 @@ body {
 
 				<div id="showPrice">
 					<div class="priceWrap">
-						<span class="sellPriceTit">中 图 价:&nbsp;&nbsp;</span><i>¥&nbsp;</i><span class="sellPrice">1.7</span><span
-							class="discount"></span> <span class="priceTit">定价:&nbsp;</span>
-						<i>¥&nbsp;</i><del class="price">8.0 </del>
+						<span class="sellPriceTit">中 图 价:&nbsp;&nbsp;</span><i>¥&nbsp;</i><span
+							class="sellPrice">1.7</span><span class="discount"></span> <span
+							class="priceTit">定价:&nbsp;</span> <i>¥&nbsp;</i>
+						<del class="price">8.0 </del>
 						<a href="/RegUser/login.aspx?url=/522126.htm" target="_blank"></a>
 						<div>促销活动</div>
 					</div>
 				</div>
 				<div id="addCar">
 					<div id="addCarBig">
-						<a id="addCarpriduct" href="#">
-							<span>加入购物车</span>
-						</a>
-						<a id="addfavpriduct" href="#">
-						<span>收藏</span>
+						<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>
+						</a> <a id="addfavpriduct" href="#"> <span>收藏</span>
 						</a>
 					</div>
 
 					<div id="addCarThree">
-						<span style="color:#E60000;">温馨提示</span>：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8-9成新、切口 
-有划线标记、光盘等附件不全
+						<span style="color: #E60000;">温馨提示</span>：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8-9成新、切口
+						有划线标记、光盘等附件不全
 					</div>
 				</div>
 			</div>
@@ -273,35 +370,62 @@ body {
 		</div>
 		<div id="bottomproductDiv">
 			<div id="productleftDiv">
-				<h3 style="background-color: #f3f3f3;">图书推荐</h3><hr>
+				<h3 style="background-color: #f3f3f3;">图书推荐</h3>
+				<hr>
 				<div id="recommendDiv"></div>
-				<h3>浏览历史</h3><hr>
+				<h3>浏览历史</h3>
+				<hr>
 				<div id="historyDiv"></div>
 			</div>
 			<div id="productRightDiv">
-				<h3 style="color:white; line-height:40px; height:40px; background-color: #3b3b3b">图书详情&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:red;">商品评价</a></h3>
+				<h3
+					style="color: white; line-height: 40px; height: 40px; background-color: #3b3b3b">
+					图书详情&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: red;">商品评价</a>
+				</h3>
 				<div id="productbookmsg" style="margin-top: 10px;">
-					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">版权信息</h3>
+					<h3
+						style="line-height: 40px; height: 40px; background-color: #f5f5f5">版权信息</h3>
+					<ul id="bookowner"
+						style="list-style: none; line-height: 22px; margin-top: 17px; overflow: hidden; padding-left: 22px;">
+						<li id="first1"></li>
+						<li id="first2"></li>
+						<li id="first3"></li>
+						<li id="first4"></li>
+						<li id="first5"></li>
+						<li id="first6"></li>
+						<li id="first7"></li>
+					</ul>
 				</div>
 				<div id="intrducebookmsg">
-					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">图书简介</h3>
+					<h3
+						style="line-height: 40px; height: 40px; background-color: #f5f5f5">图书简介</h3>
+					<p></p>
 				</div>
 				<div id="commentsMsg">
-					<h3 style=" line-height:40px; height:40px; background-color: #f5f5f5">图书评价</h3>
+					<h3
+						style="margin-left: -40px; line-height: 40px; height: 40px; background-color: #f5f5f5">图书评价</h3>
+					<div class="tabookRecoCon">
+						<div class="recoList">
+							<ul style="list-style: none; line-height: 40px;"
+								id="commentsDivcar">
+							</ul>
+
+							<div class="pro_r_b">
+								<h3>写评论，赢评论积分，快快行动吧！</h3>
+								<a class="pro_r_c"
+									href="productList.jsp"
+									target="_blank">如何参与评论和打分</a> <a class="pro_r_x"
+									href="page/Comment.jsp"></a>
+							</div>
+						</div>
+					</div>
+
 				</div>
-				
+				<div id="productpageDiv"
+					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
 
 	<div class="foot" style="margin-top: 100px;">
 		<p>&copy; 2017-2018 www.baidu.com&nbsp;&nbsp;&nbsp;等待继续更新</p>

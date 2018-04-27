@@ -73,7 +73,7 @@ public class ProductHandler {
 		return count;
 	}
 
-	// 首页页面加载获取图书推荐
+	// 首页页面加载获取图书推荐分页
 	@RequestMapping("/getproductbyman")
 	@ResponseBody
 	public PaginationBean<Cproduct> getProductByMan(HttpServletRequest request) {

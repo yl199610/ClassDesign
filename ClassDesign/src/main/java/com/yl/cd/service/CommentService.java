@@ -7,4 +7,6 @@ public interface CommentService {
 
 	PaginationBean<Ccomments> getAllComments(String page, String rows, Ccomments comments);
 
+	PaginationBean<Ccomments> getCommentsById(Integer cfp, String page, String rows);
+
 }

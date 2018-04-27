@@ -1,8 +1,6 @@
 var index = 0;//当前显示的图片索引
 var total = 0;//总图片数
 var time;
-alert("----"+$("#name").val());
-alert(cuid);
 //从数据库加载分类的数据
 function loadCategory(){
 	$.post("ccategory/firsttype", function(data) {
@@ -227,6 +225,8 @@ $(function() {
 	loadHotBook();//加载热门图书  评论 收藏	//加载书籍推荐
 	pageFunction();//总分页界面
 	getJsoupData();
+	var username = $("#namesession").val();
+	var cuid = $("#cuidsession").val();
 });
 function diffType(){//分类
 	$("#type-menu > ul > li").hover(function() {

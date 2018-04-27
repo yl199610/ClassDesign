@@ -12,4 +12,8 @@ public interface CommentMapper {
 
 	PaginationBean<Ccomments> getCommentTotalAndTotalPage(Map<String, Object> map);
 
+	List<Ccomments> getAllDataComment(Map<String, Object> map);
+
+	PaginationBean<Ccomments> getCommentPageAndPage(Map<String, Object> map);
+
 }

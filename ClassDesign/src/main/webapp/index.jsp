@@ -11,27 +11,27 @@
 <link type="text/css" rel="stylesheet" href="css/hotbookAppear.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	var cusername="${sessionScope.loginUser.cusername}";
 	var cuid="${sessionScope.loginUser.cuid}";
-</script>
+</script> -->
 <title>图书商城：Such is life</title>
 </head>
 <body>
 	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎光临网上书城</li>
+			<li class="headspan">您好,欢迎<label style="color:red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="http://login.99read.com/Sign-in.aspx"> 登录</a> <span
+				href="index.jsp">==</a> <span
 				class="f-hui-line">| </span>&nbsp; <a id="regSpan"
-				class="f-cheng f-bold" href="http://login.99read.com/register.aspx">注册</a></li>
+				class="f-cheng f-bold" href="index.jsp">==</a></li>
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-			<input type="hidden" id="name" value="${sessionScope.loginUser.cusername}"/>
-				<li><a target="_blank" class="f-green"
-					href="http://www.99read.com/Help/Index.aspx"> 帮助中心</a></li>
+			<input hidden="hidden" id="namesession" value="${sessionScope.loginUser.cusername}"/>
+			<input hidden="hidden" id="cuidsession" value="${sessionScope.loginUser.cuid}"/>
+				<li><a target="_blank" class="f-green">帮助中心</a></li>
 			</ul>
 		</div>
 	</div>

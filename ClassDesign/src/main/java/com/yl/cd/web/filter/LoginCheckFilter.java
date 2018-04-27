@@ -30,8 +30,8 @@ public class LoginCheckFilter extends AbstractFilter {
 		String reqUri = request.getRequestURI();
 		LogManager.getLogger().debug("请求路径uri ==> " + reqUri);
 		//取到session中的登录信息
-		if(request.getSession().getAttribute("loginUser") == null){
-			if(reqUri.endsWith("manage1.jsp") ||reqUri.endsWith("add.jsp")||reqUri.endsWith("admin.jsp")){
+		if(request.getSession().getAttribute("loginAdmin") == null){
+			if(reqUri.endsWith("manage.jsp") ||reqUri.endsWith("add.jsp")||reqUri.endsWith("admin.jsp")){
 				//2.满足过滤过滤条件终止继续请求， 返回登录页面
 				if(request.getSession().getAttribute("errorMsg") == null){
 					request.setAttribute("errorMsg", "请求登录后，再来操作...");

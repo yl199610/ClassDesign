@@ -25,6 +25,11 @@ $('#commentInfo').datagrid({
 			return row['cuser']['cusername'];
 		}
 	}, {
+		field : 'theam',
+		title : '主题',
+		width : 30,
+		align:'center'
+	}, {
 		field : 'ccontent',
 		title : '内容',
 		width : 40,

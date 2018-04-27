@@ -40,4 +40,30 @@ public class CommentServiceImpl implements CommentService{
 		return commentList;
 	}
 
+	@Override
+	public PaginationBean<Ccomments> getCommentsById(Integer cfp, String currpage, String pageSize) {
+		PaginationBean<Ccomments> productBean = new PaginationBean<Ccomments>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(currpage!=null){
+			productBean.setCurrPage(Integer.parseInt(currpage));
+		}
+		if(pageSize!=null){
+			productBean.setPageSize(Integer.parseInt(pageSize));
+		}
+		map.put("cfp", cfp);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		List<Ccomments> c = commentMapper.getAllDataComment(map);
+		//获得total 和 totalPage
+		productBean = commentMapper.getCommentPageAndPage(map);
+		int total = productBean.getTotal();
+		Integer totalPage = (int) Math.ceil((double)total/Double.parseDouble(pageSize));
+		productBean.setCurrPage(Integer.parseInt(currpage));
+		productBean.setTotal(total);
+		productBean.setPageSize(Integer.parseInt(pageSize));
+		productBean.setTotalPage(totalPage);
+		productBean.setRows(c);
+		return productBean;
+	}
+
 }

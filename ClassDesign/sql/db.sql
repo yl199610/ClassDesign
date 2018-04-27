@@ -29,7 +29,7 @@ create table cuser(
 alter table cuser modify cphoto varchar2(42);
 select * from cuser where cusername='a' and cpassword='a'
 select * from cuser c where 1=1 and cufree=1 and c.cuid like '%%' and c.cusername like '%%'
-update cuser set cufree=1 where cusername='a'
+update cuser set cufree=1 where cuid>2
 select * from (select m.*,rownum rn from (select * from cuser where cuid=2) m where 1*5>=rownum) where rn>(1-1)*5 
 drop table cuser;
 create sequence sequserid start with 1;
@@ -272,8 +272,15 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	cfp references cproduct(cpid),
 	cuserid references cuser(cuid),
 	ccontent varchar2(1000),
-	ccdate varchar2(20)
+	ccdate varchar2(20),
+	theam varchar2(30) default '主题'
 );
+alter table ccomments add (theam varchar2(30) default '主题');
+select t.*,c.*,cp.*,rownum rownu from ccomments t join
+		cuser c
+		on c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp where cfp=26
+select * from CCOMMENTS where cfp=26
 insert into ccomments values(seqccomments.nextval,26,2,'这本书好看','2018-4-16');
 insert into ccomments values(seqccomments.nextval,26,2,'这本书好看','2018-5-11');
 
@@ -348,4 +355,16 @@ where rn>(1-1)*8 and rn<(select count(1)-4 from CPRODUCT)
 		cp.rownu>(1-1)*8
 		and cp.rownu<(select count(1)-4 from CPRODUCT)
 
-		select * from CPRODUCT
+select * from (select t.*,c.*,cp.*,rownum rownu from ccomments t join
+		cuser c
+		on c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp where
+		rownum<=8 and 1=1 and  cfp=26
+		)tt where tt.rownu>(1-1)*8
+		
+select count(1) total,ceil(count(1)/8)
+		totalPage,8
+		pageSize,1 currPage from ccomments t
+		join cuser c on
+		c.cuid=t.cuserid
+		join cproduct cp on cp.cpid=t.cfp where 1=1 and cfp=26
