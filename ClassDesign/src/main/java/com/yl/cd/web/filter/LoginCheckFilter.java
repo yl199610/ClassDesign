@@ -36,7 +36,7 @@ public class LoginCheckFilter extends AbstractFilter {
 				if(request.getSession().getAttribute("errorMsg") == null){
 					request.setAttribute("errorMsg", "请求登录后，再来操作...");
 				}
-				req.getRequestDispatcher("/login.jsp").forward(req, resp);
+				req.getRequestDispatcher("/manageLogin.jsp").forward(req, resp);
 				return;
 			}
 		}

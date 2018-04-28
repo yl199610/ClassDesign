@@ -29,4 +29,8 @@ public interface CcategoryService {
 	List<Ccategory> getAllParentTypeByCcid(int ccid);
 
 	List<Ccategory> getAllThridType();
+
+	boolean addCcategory(Ccategory c);
+
+	List<Ccategory> getAllParentTypeByLevels(String levels);
 }

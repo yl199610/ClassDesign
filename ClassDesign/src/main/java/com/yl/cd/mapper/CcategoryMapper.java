@@ -34,5 +34,11 @@ public interface CcategoryMapper {
 
 	List<Ccategory> getAllThridType();
 
+	Ccategory isExistName(Ccategory c);
+
+	List<Ccategory> getAllParentTypeByLevels(String levels);
+
+	boolean addCcategory(Ccategory c);
+
 
 }

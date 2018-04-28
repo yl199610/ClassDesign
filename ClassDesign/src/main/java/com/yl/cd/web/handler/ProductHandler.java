@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.Cuser;
@@ -129,6 +130,15 @@ public class ProductHandler {
 			}
 		}
 		return productService.modifyProduct(cproduct);
+	}
+	
+	// 书籍的添加
+	@RequestMapping("/add")
+	@ResponseBody
+	public boolean addProduct(Cproduct cproduct) {
+		LogManager.getLogger().debug("请求ProductHandler处理add...." + cproduct);
+		return  false;
+//		return productService.addProduct(cproduct);
 	}
 	
 }

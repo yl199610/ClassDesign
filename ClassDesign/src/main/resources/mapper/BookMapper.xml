@@ -105,4 +105,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
+	<select id="isExistBookName"  parameterType="Cbook" resultType="Cbook">
+		select * from cbook where  bookname=#{bookname} and cpublishing=#{cpublishing}
+	</select>
+
+	<insert id="addBook" parameterType="Cbook">
+			insert into cbook values(seqcbook.nextval,#{cauthor},#{cimage},#{cisbn},#{bookname},#{cpublishing},#{cpublishtime},#{cwordnumber},#{ctotalpage},#{cintroduce},#{catalogue},#{edition},1)
+	</insert>	
 </mapper>
