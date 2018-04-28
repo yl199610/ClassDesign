@@ -9,7 +9,11 @@ var urlJson = {
 	"书籍信息" : "bookMsg.jsp",
 	"订单信息" : "orderMsg.jsp",
 	"收藏信息" : "favMsg.jsp",
-	"评论信息" : "commentMsg.jsp"
+	"评论信息" : "commentMsg.jsp",
+	"添加图书类别" : "addCategory.jsp",
+	"添加产品类别" : "addproduct.jsp",
+	"添加书籍" : "addBook.jsp"
+
 }
 
 $(".menutree").tree({
@@ -56,7 +60,7 @@ function openPerson(id) {
 		href : 'back/modifyUser.jsp'
 	});
 }
-//修改目录信息
+// 修改目录信息
 function openCate(id) {
 	cnid = id;
 	$("#modifyCategory").dialog({
@@ -69,8 +73,7 @@ function openCate(id) {
 	});
 }
 
-
-//修改书籍信息
+// 修改书籍信息
 function openBook(id) {
 	cnid = id;
 	$("#modifyBook").dialog({
@@ -83,8 +86,7 @@ function openBook(id) {
 	});
 }
 
-
-function openProduct(id){
+function openProduct(id) {
 	cnid = id;
 	$("#modifyProduct").dialog({
 		title : 'modifyProduct',

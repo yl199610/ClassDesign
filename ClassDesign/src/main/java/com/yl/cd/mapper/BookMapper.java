@@ -20,4 +20,8 @@ public interface BookMapper {
 
 	boolean modifyBook(Cbook cbook);
 
+	boolean addBook(Cbook cbook);
+
+	Cbook isExistBookName(Cbook cbook);
+
 }

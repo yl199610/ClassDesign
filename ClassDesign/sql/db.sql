@@ -48,12 +48,16 @@ create  table ccategory(
 select * from ccategory where ccid=3 and cafree=1
 update ccategory set cafree=1 where ccid>=1
 select count(1) total,ceil(count(1)/5) totalPage from ccategory
+
 select * from (select m.*,rownum rn from (select * from ccategory where levels='二级目录') m where 1*10>=rownum) where rn>0
 select * from ccategory where ccid=9
 select * from ccategory where ccid=(select parentid from ccategory where ccid=3)
 drop table ccategory;
 create sequence seqcatid start with 1;
 drop sequence seqcatid
+select * from ccategory where ccid in(
+select parentid from ccategory where levels='二级目录')
+
 insert into ccategory values(seqcatid.nextval,'总父类','图书','所有图书的父类',0,default);
 update CCATEGORY set cafree=1 where levels='总父类'
 select * from CCATEGORY where levels='总父类'

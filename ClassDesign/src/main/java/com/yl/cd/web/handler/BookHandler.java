@@ -74,5 +74,21 @@ public class BookHandler {
 		}
 		return bookService.modifyBook(cbook);
 	}
+	
+	// 书籍的添加
+	@RequestMapping("/add")
+	@ResponseBody
+	public boolean addBook(@RequestParam(name = "picData", required = false) MultipartFile picData,Cbook cbook) {
+		LogManager.getLogger().debug("请求BookHandler处理addBook...." + cbook);
+		if (picData != null) {
+			try {
+				picData.transferTo(new File(ServletUtil.UPLOAD_DIR, picData.getOriginalFilename()));
+				cbook.setCimage("/" + ServletUtil.UPLOAD_DIR_NAME + "/" + picData.getOriginalFilename());// 图片上传
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return bookService.addBook(cbook);
+	}
 
 }

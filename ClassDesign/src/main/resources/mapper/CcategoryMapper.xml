@@ -129,4 +129,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ccategory where levels='三级目录'
 	</select>
 	
+	<select id="isExistName"  parameterType="Ccategory" resultType="Ccategory">
+		select * from ccategory where  ccname=#{ccname} and levels=#{levels}
+	</select>
+	
+	
+	<select id="getAllParentTypeByLevels"  parameterType="String" resultType="Ccategory">
+		select * from ccategory where ccid in(select parentid from ccategory where levels=#{levels})
+	</select>
+
+	<insert id="addCcategory" parameterType="Ccategory">
+			insert into ccategory values(seqcatid.nextval,#{levels},#{ccname},#{description},#{parentid},1)
+	</insert>	
+	
+	
 </mapper>

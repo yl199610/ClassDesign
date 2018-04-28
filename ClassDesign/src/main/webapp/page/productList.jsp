@@ -5,253 +5,82 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/right.css" />
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/productList.js"></script>
+
 <title>图书商城：Such is life</title>
 <style type="text/css">
-* {
-	margin: 0 auto;
-	padding: 0 auto;
-}
 
-body {
-	margin: 0px auto;
-	padding: 0px;
-	overflow-x: hidden;
-}
 
-#bigproductDiv {
-	width: 80%;
-	margin-left: 100px;
-}
-
-#topproductDiv {
-	width: 100%;
-	height: 400px;
-}
-
-#topproductOne {
-	width: 25%;
-	height: 80%;
-	float: left;
-	text-align: center;
-}
-
-#topproductTwo {
-	width: 50%;
-	height: 100%;
-	float: left;
-}
-
-#topproductThree {
-	width: 24%;
-	height: 100%;
-	float: left;
-}
-
-.padLeft10 {
-	width: 90%;
-	height: 46%;
-}
-
-.padLeft10 h1 {
-	line-height: 24px;
-	margin-top: 7px;
-	font-family: 'Microsoft YaHei';
-	font-size: 18px;
-	color: #333333;
-}
-/* 
-.padLeft10 .recomand {
-	line-height: 24px;
-	color: #e60000;
-	margin-top: 7px;
-	overflow: hidden;
-} */
-.padLeft10 div {
-	font-size: 14px;
-	line-height: 20px;
-}
-
-#showPrice {
-	width: 90%;
-	height: 20%;
-	background-color: #fff4f8;
-	text-align: center;
-	line-height: 30px;
-}
-
-#addCar {
-	width: 90%;
-	height: 30%;
-	border: 1px solid orange;
-}
-
-#addCarBig {
-	width: 100%;
-	height: 40%;
-}
-
-#addCarpriduct {
-	width: 160px;
-	line-height: 32px;
-	text-indent: 45px;
-	color: #fff;
-	font-size: 16px;
-	font-family: 'Microsoft YaHei';
-	background: url(images/childredSprit.png) no-repeat;
-	text-decoration: none;
-	margin-left: 0px;
-	margin-top: 6px;
-	float: left;
-	border-radius: 10px;
-}
-
-#addfavpriduct {
-	width: 120px;
-	line-height: 32px;
-	text-indent: 45px;
-	color: #fff;
-	font-size: 16px;
-	font-family: 'Microsoft YaHei';
-	background-color: #63b7ff;
-	text-decoration: none;
-	margin-left: 10px;
-	margin-top: 6px;
-	float: left;
-	border-radius: 10px;
-}
-
-#bottomproductDiv {
-	width: 90%;
-	margin-left: 90px;
-}
-
-#productleftDiv {
-	width: 23%;
-	height: 1100px;
-	float: left;
-}
-
-#recommendDiv {
-	width: 100%;
-	height: 50%;
-}
-
-#historyDiv {
-	width: 100%;
-	height: 50%;
-}
-
-#productRightDiv {
-	width: 76%;
-	float: left;
-}
-
-#productbookmsg {
-	width: 100%;
-	height: 150px;
-}
-
-#intrducebookmsg {
-	width: 100%;
-	height: 150px;
-}
-
-#commentsMsg {
-	width: 100%;
-	height: 600px;
-}
-
-#bookowner li {
-	float: left;
-	width: 276px;
-	color: #666666;
-	color: black;
-	font-size: 14px;
-}
-
-#commentsMsg {
-	display: block;
-	list-style-type: disc;
-	-webkit-margin-before: 1em;
-	-webkit-margin-after: 1em;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
-	-webkit-padding-start: 40px;
-}
-
-#listLeft #listRight {
-	display: block;
-}
-
-#commentsMsg li {
-	display: list-item;
-	text-align: -webkit-match-parent;
-}
-
-.listLeft {
-	padding-top: 16px;
-	float: left;
-	width: 80%;
-}
-
-.theme {
-	float: left;
-	width: 600px;
-	height: 22px;
-	line-height: 22px;
-	overflow: hidden;
-	color: #666666;
-	font-weight: bold;
-}
-
-.con p {
-	color: #666666;
-	font-size: 14px;
-}
-
-.listRight {
-	float: right;
-	width: 18%;
-	margin-top: 20px;
-}
-
-.userIcon1 {
-	width: 100px;
-	height: 130px;
-	text-align: center;
-}
-
-.userIcon1 a {
-	color: red;
-	margin-bottom: -1220px;
-}
-.pro_r_b {
-    float: right;
-    margin-right: 10px;
-    background: #f3f3f3;
-    border: solid 1px #e6e6e6;
-    padding: 15px;
-    text-align: center;
-    margin-top: 30px;
-}
-.pro_r_c {
-    display: block;
-    background: url(images/problem.gif) no-repeat;
-    width: 110px;
-    margin: 0 auto;
-    padding-left: 20px;
-}
-.pro_r_x {
-    display: block;
-    background: url(images/add.gif) no-repeat;
-    width: 128px;
-    height: 33px;
-    margin: 5px auto;
-}
 </style>
+<script type="text/javascript">
 
+	var money = 0;
+	var name = "";
+	var data = [];
+	function allowDrop(e){
+		e.preventDefault();
+	}
+	function getValue() {
+		var name = $(".padLeft10 h1").html();
+		var money = $(".sellPrice").html();
+		var productid = $(".otherInfor3 i").html();
+		/* money=$("#inp_money1").val();
+		name = $("#inp_name").val(); */
+		$("#div1").attr("style", "display:block;");
+		addJson(name, money);
+		addHtml();
+	}
+
+	function addJson(name, money) {
+		for (var j = 0; j < data.length; j++) {
+			if (data[j].name == name) {
+				data[j].num++;
+				return;
+			}
+		}
+		data.push({
+			money : money,
+			name : name,
+			num : 1
+		});
+	}
+	function addHtml(){
+		var text_html='';
+		var totalMoney=0;
+		$("#ul_panel").html("");
+		for(var i=0;i<data.length;i++){
+			text_html+='<tr><td>'+data[i].name+'</td><td>'+data[i].money+'</td><td><a onclick="reduce(\'\'+'+i+',this)">-</a> '+data[i].num+' ';
+			text_html+='<a onclick="addNum(\'\'+'+i+',this)">+</a></td><td>￥'+(data[i].money*data[i].num)+'</td></tr>';
+			totalMoney+=data[i].money*data[i].num;
+			$("#totalMoney").text('￥'+totalMoney);
+		}
+		$("#ul_panel").append(text_html);
+	}
+	function drop(){
+		addJson(name,money);
+		addHtml();
+	}
+	function reduce(a,t){
+		data[a].num--;
+		if(data[a].num==0){
+			data.splice(a,1);
+		}
+		if(data.length==0){
+			$("#totalMoney").text(0);
+		}
+		addHtml();
+	}
+	function addNum(a,t){
+		data[a].num++;
+		addHtml();
+	}
+	
+	
+	
+	
+</script>
 </head>
 <body>
 	<img src="images/topList.png" />
@@ -278,16 +107,6 @@ body {
 		<h1 class="loge">
 			<a href="./index.jsp"> <img alt="欢迎来到网上书城" src="images/log.jpg" /></a>
 		</h1>
-		<div class="searchinput d2">
-			<form>
-				<input type="text" placeholder="搜索从这里开始...">
-				<button type="submit">搜索</button>
-				<div class="searhot">
-					<h7>热门搜索:</h7>
-					<span>刘德华</span><span>李宗盛</span>
-				</div>
-			</form>
-		</div>
 	</div>
 	<hr color="red" size="4" />
 	<div class="getdest">
@@ -303,7 +122,7 @@ body {
 			</div>
 			<div id="topproductTwo">
 				<div class="padLeft10">
-					<h1>谈美书简——语文新课标必读丛书</h1>
+					<h1></h1>
 					</br>
 					<!-- 					<p class="recomand">语文新课标必读丛书</p>
  -->
@@ -322,7 +141,9 @@ body {
 					<div class="otherInfor2">
 						<span>页数：</span> <i style="color: red;"></i>
 					</div>
-					<!-- <div class="startWrap">
+					<div class="otherInfor3">
+						<span>产品Id：</span> <i style="color: red;"></i>
+					</div>					<!-- <div class="startWrap">
 						<i class="one"></i><i class="one"></i><i
 							class="one"></i><i class="one"></i><i class="half"></i><a
 							href="#tabookReco">98条评论</a>
@@ -346,7 +167,10 @@ body {
 				</div>
 				<div id="addCar">
 					<div id="addCarBig">
-						<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>
+						<input id="addCarpriduct" type="button" value="加入购物车"
+							onClick="getValue()" />
+						<!-- 						<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>
+ -->
 						</a> <a id="addfavpriduct" href="#"> <span>收藏</span>
 						</a>
 					</div>
@@ -412,20 +236,110 @@ body {
 
 							<div class="pro_r_b">
 								<h3>写评论，赢评论积分，快快行动吧！</h3>
-								<a class="pro_r_c"
-									href="productList.jsp"
-									target="_blank">如何参与评论和打分</a> <a class="pro_r_x"
-									href="page/Comment.jsp"></a>
+								<a class="pro_r_c" href="productList.jsp" target="_blank">如何参与评论和打分</a>
+								<a class="pro_r_x" href="page/Comment.jsp"></a>
 							</div>
 						</div>
 					</div>
 
 				</div>
-				<div id="productpageDiv"
-					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
+				<div id="productpageDiv" style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
 			</div>
+		<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"style="VISIBILITY: hidden;">
+			<div class="div_panel">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>单价</th>
+							<th>数量</th>
+							<th>价格</th>
+						</tr>
+					</thead>
+					<tbody id="ul_panel"></tbody>
+				</table>
+			</div>
+			<p class="allMoney">总价：<span id="totalMoney" style="margin-right:8px;color:orange;">￥69</span></p>
+		</div>
 		</div>
 	</div>
+
+
+<div class="cndns-right">
+    <div class="cndns-right-meau meau-car" >
+        <a href="#" class="cndns-right-btn">
+            <span class="demo-icon"><img src="images/02index-banner-8.gif"></span>
+            <sup>0</sup>
+        </a>
+    </div>
+    <div class="cndns-right-meau meau-sev">
+        <a href="javascript:" class="cndns-right-btn"><img src="images/customer.jpg">
+            <span class="demo-icon"></span>
+            <p>
+                在线<br />
+                客服
+            </p>
+        </a>
+        <div class="cndns-right-box">
+            <div class="box-border">
+                <div class="sev-b">
+                    <h4>选择下列产品马上在线沟通：</h4>
+                    <ul id="zixunUl">
+                        <li><a href="javascript:void(0);">域名/主机</a></li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+    </div>
+    <div class="cndns-right-meau meau-contact">
+        <a href="javascript:" class="cndns-right-btn">
+            <span class="demo-icon"><img src="images/phone.jpg"></span>
+            <p>
+                客服<br />
+                热线
+            </p>
+        </a>
+        <div class="cndns-right-box">
+            <div class="box-border">
+                <div class="sev-t">
+                    <span class="demo-icon">&#xe902;</span>
+                    <p>400-123-4567<br /><i>7*24小时客服服务热线</i></p>
+                    <div class="clear"></div>
+                </div>
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+    </div>
+    <div class="cndns-right-meau meau-code">
+        <a href="javascript:" class="cndns-right-btn">
+            <span class="demo-icon"><img src="images/code.jpg"></span>
+            <p>
+                关注<br />
+                微信
+            </p>
+        </a>
+        <div class="cndns-right-box">
+            <div class="box-border">
+                <div class="sev-t">
+                    <img src="images/02index-2.jpg" />
+                    <i>关注官方微信</i>
+                </div>
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+    </div>
+    <div class="cndns-right-meau meau-top" id="top-back">
+        <a href="javascript:" class="cndns-right-btn" onclick="topBack()">
+            <span class="demo-icon">&#xe904;</span>
+            <i>顶部</i>
+        </a>
+    </div>
+
+</div>
+
+
 
 	<div class="foot" style="margin-top: 100px;">
 		<p>&copy; 2017-2018 www.baidu.com&nbsp;&nbsp;&nbsp;等待继续更新</p>
@@ -434,6 +348,21 @@ body {
 		<p>营业执照注册号 ：2210100224343
 			&nbsp;&nbsp;&nbsp;&nbsp;许可证：SP242423665968</p>
 	</div>
-
+<script type="text/javascript">
+//置顶图标显示
+$('#top-back').hide()
+$(window).scroll(function(){
+	 if($(this).scrollTop() > 350){
+		$("#top-back").fadeIn();
+	 }
+	 else{
+		$("#top-back").fadeOut();
+	 }
+  })	
+//置顶事件
+function topBack(){
+  $('body,html').animate({scrollTop:0},300);
+}
+</script>
 </body>
 </html>

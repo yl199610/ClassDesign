@@ -17,4 +17,6 @@ public interface BookService {
 
 	boolean modifyBook(Cbook cbook);
 
+	boolean addBook(Cbook cbook);
+
 }

@@ -108,4 +108,20 @@ public class CcategoryServiceImpl implements CcategoryService{
 		return CcategoryMapper.getAllThridType();
 	}
 
+	@Override
+	public boolean addCcategory(Ccategory c) {
+		//判断目录是否存在
+		Ccategory notExit = CcategoryMapper.isExistName(c);
+		if(notExit!=null){
+			return false;
+		}
+		//根据levels查询到父目录
+		return CcategoryMapper.addCcategory(c);
+	}
+
+	@Override
+	public List<Ccategory> getAllParentTypeByLevels(String levels) {
+		return CcategoryMapper.getAllParentTypeByLevels(levels);
+	}
+
 }

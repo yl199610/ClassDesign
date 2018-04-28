@@ -49,20 +49,22 @@
 			<div title="图书类别管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
 					<li><span>图书类别信息</span></li>
-					<li><span>歌手添加</span></li>
-				</ul>
-			</div>
-			<div title="图书产品管理" data-options="iconCls:'icon-mini-add'">
-				<ul class="menutree">
-					<li><span>图书产品信息</span></li>
-					<li><span>风格添加</span></li>
+					<li><span>添加图书类别</span></li>
 				</ul>
 			</div>
 			<div title="书籍管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
 					<li><span>书籍信息</span></li>
+					<li><span>添加书籍</span></li>
 				</ul>
 			</div>
+			<div title="图书产品管理" data-options="iconCls:'icon-mini-add'">
+				<ul class="menutree">
+					<li><span>图书产品信息</span></li>
+					<li><span>添加产品类别</span></li>
+				</ul>
+			</div>
+
 			<div title="订单管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
 					<li><span>订单信息</span></li>

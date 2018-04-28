@@ -2,6 +2,8 @@ var cpid = location.href.substring(location.href.indexOf("?"));
 
 //detail
 $(function() {
+	var ca = cpid.split("=");
+	var productid = ca[1];
 	var cusername="${sessionScope.loginUser.cusername}";
 	var cuid="${sessionScope.loginUser.cuid}";
 	var ccid=cpid;
@@ -13,6 +15,7 @@ $(function() {
 		$(".publishertime i").html(data.cbook.cpublishtime);
 		$(".otherInfor em").html(data.cbook.cwordnumber);
 		$(".otherInfor2 i").html(data.cbook.ctotalpage);
+		$(".otherInfor3 i").html(productid);
 		$(".sellPrice").html(data.cwsscprice);
 		$(".price").html(data.cnormalprice);
 		$("#first1").html("ISBN："+data.cbook.cisbn);
