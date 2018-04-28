@@ -18,7 +18,7 @@
 	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎<label style="color:red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城</li>
+			<li class="headspan">您好,欢迎<label id="username" style="color:red">${sessionScope.loginUser.cusername}</label>光临网上书城</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
 				href="index.jsp">==</a> <span
 				class="f-hui-line">| </span>&nbsp; <a id="regSpan"
@@ -27,7 +27,7 @@
 		<div class="helpLink">
 			<ul class="helpul">
 				<li><a target="_blank" class="f-green"
-					href="http://www.99read.com/Help/Index.aspx"> 帮助中心</a></li>
+					href=""> 帮助中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		<div class="order_content">
-			<ul class="order_lists">
+			<!-- <ul class="order_lists">
 				<li class="list_chk">
 					<input type="checkbox" id="checkbox_2" class="son_check">
 					<label for="checkbox_2"></label>
@@ -121,7 +121,7 @@
 				<li class="list_op">
 					<p class="del"><a href="javascript:;" class="delBtn">移除商品</a></p>
 				</li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 

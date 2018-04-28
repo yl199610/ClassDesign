@@ -232,11 +232,26 @@ $(function () {
                 calBtn.removeClass('btn_sty');
             }
         }
-    }
+    }	
+    var cpid = location.href.substring(location.href.indexOf("?"));
 
-    loadDataCar();
+    loadDataCar(cpid);
     //加载数据
-    function loadDataCar(){
+    function loadDataCar(cpid){
+    	var cusername=$("#username").html();
+    	$.post("cproduct/detail"+cpid, function(data) {
+    		var price = data.cwsscprice;
+    		$(".order_content").append('<ul class="order_lists"><li class="list_chk"><input type="checkbox" id="checkbox_2" class="son_check">'+
+    	    		'<label for="checkbox_2"></label></li><li class="list_con"><div class="list_img"><a href="javascript:;"><img style="margin-top:-20px;height:100%;over-flow:hidden;" src="'+data.cimage+'" alt=""></a></div>'+
+    	    		'<div class="list_text"><a href="javascript:;"style="font-size:24px;">'+data.cproductname+'</a></div>'+
+    	    		'</li><li class="list_info"><p>印刷次数：'+data.cbook.edition+'</p><p>出版社：'+data.cbook.cpublishing+'</p></li><li class="list_price"><p class="price">￥'+price+'</p><del>￥'+data.cnormalprice+'</del></li><li class="list_amount">'+
+    	    		'<div class="amount_box"><a href="javascript:;" class="reduce reSty">-</a><input type="text" value="1" class="sum"><a href="javascript:;" class="plus">+</a>'+
+    	    		'</div></li><li class="list_sum"><p class="sum_price"></p></li><li class="list_op"><p class="del"><a href="javascript:;" class="delBtn">移除商品</a></p></li></ul>');
+    		
+    	}, "json");	
+    	
+    	
+    	
     	
     }
     

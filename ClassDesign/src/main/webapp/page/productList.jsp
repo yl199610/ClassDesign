@@ -7,7 +7,7 @@
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/productList.js"></script>
-<title>图书商城：Such is life</title>
+<title>图书信息</title>
 <style type="text/css">
 * {
 	margin: 0 auto;
@@ -227,29 +227,37 @@ body {
 	color: red;
 	margin-bottom: -1220px;
 }
+
 .pro_r_b {
-    float: right;
-    margin-right: 10px;
-    background: #f3f3f3;
-    border: solid 1px #e6e6e6;
-    padding: 15px;
-    text-align: center;
-    margin-top: 30px;
+	float: right;
+	margin-right: 10px;
+	background: #f3f3f3;
+	border: solid 1px #e6e6e6;
+	padding: 15px;
+	text-align: center;
+	margin-top: 30px;
 }
+
 .pro_r_c {
-    display: block;
-    background: url(images/problem.gif) no-repeat;
-    width: 110px;
-    margin: 0 auto;
-    padding-left: 20px;
+	display: block;
+	background: url(images/problem.gif) no-repeat;
+	width: 110px;
+	margin: 0 auto;
+	padding-left: 20px;
 }
+
 .pro_r_x {
-    display: block;
-    background: url(images/add.gif) no-repeat;
-    width: 128px;
-    height: 33px;
-    margin: 5px auto;
+	display: block;
+	background: url(images/add.gif) no-repeat;
+	width: 128px;
+	height: 33px;
+	margin: 5px auto;
 }
+
+
+
+
+
 </style>
 
 </head>
@@ -346,9 +354,9 @@ body {
 				</div>
 				<div id="addCar">
 					<div id="addCarBig">
-						<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>
-						</a> <a id="addfavpriduct" href="#"> <span>收藏</span>
-						</a>
+					<!-- 	<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>'+
+			'</a> <a id="addfavpriduct" href="#"> <span>收藏</span></a> -->
+					<a id="addCarpriduct" href="javascript:void(0)" onClick="success()"> <span>加入购物车</span></a> <a id="addfavpriduct" href="#"> <span>收藏</span></a>
 					</div>
 
 					<div id="addCarThree">
@@ -412,18 +420,17 @@ body {
 
 							<div class="pro_r_b">
 								<h3>写评论，赢评论积分，快快行动吧！</h3>
-								<a class="pro_r_c"
-									href="productList.jsp"
-									target="_blank">如何参与评论和打分</a> <a class="pro_r_x"
-									href="page/Comment.jsp"></a>
+								<a class="pro_r_c" href="productList.jsp" target="_blank">如何参与评论和打分</a>
+								<a class="pro_r_x" href="page/Comment.jsp" target="_blank"></a>
 							</div>
 						</div>
 					</div>
 
 				</div>
 				<div id="productpageDiv"
-					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
+					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;"></div>
 			</div>
+
 		</div>
 	</div>
 

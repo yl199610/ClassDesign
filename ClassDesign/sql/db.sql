@@ -29,7 +29,7 @@ create table cuser(
 alter table cuser modify cphoto varchar2(42);
 select * from cuser where cusername='a' and cpassword='a'
 select * from cuser c where 1=1 and cufree=1 and c.cuid like '%%' and c.cusername like '%%'
-update cuser set cufree=1 where cuid>2
+update cuser set cufree=1 where cuid>=1
 select * from (select m.*,rownum rn from (select * from cuser where cuid=2) m where 1*5>=rownum) where rn>(1-1)*5 
 drop table cuser;
 create sequence sequserid start with 1;
