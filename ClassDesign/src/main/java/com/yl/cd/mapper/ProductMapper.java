@@ -41,5 +41,9 @@ public interface ProductMapper {
 
 	Cbook findBookName(Integer cbcpid);
 
+	Cbook getBookMsgByBid(Integer cbid);
+
+	boolean addProduct(Cproduct cproduct);
+
 
 }

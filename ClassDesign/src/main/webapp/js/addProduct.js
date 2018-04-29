@@ -1,23 +1,34 @@
+$(function() {
 	$("#apspcaid").combobox({
-		editable: false,
+		editable : false,
 		url : 'ccategory/getallthridtype',
 		valueField : 'ccid',
 		textField : 'ccname'
 	});
+
 	$("#apcbcpid").combobox({
-		editable: false,
+		editable : false,
 		url : 'cbook/listallbook',
 		valueField : 'cbid',
-		textField : 'bookname',
-		onSelect : function(record) {
-			var newPtion = $("#apcbcpid").combobox('getText');
-			alert(newPtion);
-			var levels =record.text;
-			alert(levels);
-		}
-	});	
+		textField : 'bookname'
+	});
+	// $("#apcbcpid").combobox({
+	// editable : false,
+	// url : 'cbook/listallbook',
+	// valueField : 'cbid',
+	// textField : 'bookname',
+	// onSelect : function(record) {
+	// var a = $("#apcbcpid").combobox('getText');
+	// var b=record.text;
+	// alert(a+"=="+b)
+	// var newPtion1 = $('#apcbcpid').combobox('getText');
+	// alert(newPtion1 + "===");
+	// var newPtion = $("#apcbcpid").combobox('getValue');
+	// alert(newPtion);
+	// }
+	// });
 
-
+})
 
 function myformatter(date) {
 	var y = date.getFullYear();
@@ -39,7 +50,8 @@ function myparser(s) {
 	}
 }
 function addProduct() {
-	$("#addProductForm").form({
+	$("#addProductForm").form(
+			{
 				url : "cproduct/add",
 				success : function(data) {
 					alert(data);

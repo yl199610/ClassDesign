@@ -15,7 +15,7 @@
 		<select id="apspcaid" class="easyui-combobox" name="spcaid" style="width: 178px;">
 		</select><br/><br/>
 		<label>关联书籍</label>
-		<select id="apcbcpid" class="easyui-combobox" name="cbcpid" style="width: 178px;">
+		<select id="apcbcpid" name="cbcpid" style="width: 178px;">
 		</select><br/><br/>
 		<label>添加时间：</label><input name="caddtime" id="amacaddtime"  class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"  placeholder="请输入时间" /><br /><br />
 		<label>店下价格：</label><input name="cnormalprice" id="amcnormalprice" required="required" placeholder="请输入店下价格" /><br /><br />

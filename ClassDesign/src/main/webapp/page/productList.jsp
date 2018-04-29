@@ -10,74 +10,186 @@
 <script type="text/javascript" src="js/productList.js"></script>
 
 <title>图书商城：Such is life</title>
-<style type="text/css">
-
-
-</style>
 <script type="text/javascript">
-
-	var money = 0;
-	var name = "";
-	var data = [];
-	function allowDrop(e){
-		e.preventDefault();
-	}
-	function getValue() {
-		var name = $(".padLeft10 h1").html();
-		var money = $(".sellPrice").html();
-		var productid = $(".otherInfor3 i").html();
-		/* money=$("#inp_money1").val();
-		name = $("#inp_name").val(); */
-		$("#div1").attr("style", "display:block;");
-		addJson(name, money);
-		addHtml();
-	}
-
-	function addJson(name, money) {
-		for (var j = 0; j < data.length; j++) {
-			if (data[j].name == name) {
-				data[j].num++;
-				return;
+$(function() {
+	$.post("cproduct/saveProductModel",{ "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
+		//获取数据后拼接起来
+			loadCarData(data);
+ 			function reduce(a,t){
+				data[a].cpfree--;
+				if(data[a].cpfree==0){
+					data.splice(a,1);
+				}
+				if(data.length==0){
+					$("#totalMoney").text(0);
+				}
+				loadCarData(data);
 			}
-		}
-		data.push({
-			money : money,
-			name : name,
-			num : 1
-		});
+			function addNum(a,t){
+				data[a].cpfree++;
+				loadCarData(data);
+			}
+			function loadCarData(data){
+				var text_html='';
+				var totalMoney=0;
+				$("#ul_panel").html("");
+				for(var i=0;i<data.length;i++){
+					text_html+='<tr><td>'+data[i].cproductname+'</td><td>'+data[i].cwsscprice+'</td><td><a onclick="reduce(\'\'+'+i+',this)">-</a> <span>'+data[i].cpfree+' </span> ';
+					text_html+='<a onclick="addNum(\'\'+'+i+',this)">+</a></td><td>￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
+					totalMoney+=data[i].cwsscprice*data[i].cpfree;
+					$("#totalMoney").text('￥'+totalMoney);
+				}
+				$("#ul_panel").append(text_html); 
+			}
+
+	}, "json");	
+});
+
+//点击加入购物车 youbi
+var money = 0;
+var name = "";
+var data = [];
+var num=0;
+function loadCarData(data){
+	var text_html='';
+	var totalMoney=0;
+	$("#ul_panel").html("");
+	for(var i=0;i<data.length;i++){
+		text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
+		text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
+		totalMoney+=data[i].cwsscprice*data[i].cpfree;
+		$("#totalMoney").text(totalMoney);
 	}
-	function addHtml(){
-		var text_html='';
-		var totalMoney=0;
-		$("#ul_panel").html("");
-		for(var i=0;i<data.length;i++){
-			text_html+='<tr><td>'+data[i].name+'</td><td>'+data[i].money+'</td><td><a onclick="reduce(\'\'+'+i+',this)">-</a> '+data[i].num+' ';
-			text_html+='<a onclick="addNum(\'\'+'+i+',this)">+</a></td><td>￥'+(data[i].money*data[i].num)+'</td></tr>';
-			totalMoney+=data[i].money*data[i].num;
-			$("#totalMoney").text('￥'+totalMoney);
-		}
-		$("#ul_panel").append(text_html);
-	}
-	function drop(){
-		addJson(name,money);
-		addHtml();
-	}
-	function reduce(a,t){
-		data[a].num--;
-		if(data[a].num==0){
-			data.splice(a,1);
-		}
-		if(data.length==0){
-			$("#totalMoney").text(0);
-		}
-		addHtml();
-	}
-	function addNum(a,t){
-		data[a].num++;
-		addHtml();
-	}
+	$("#ul_panel").append(text_html); 
+}
+
+function saveCar(cproductname,cwsscprice,spcaid,cpfree){
+	$.post("cproduct/saveProductModel",{ "cproductname": cproductname, "cwsscprice": cwsscprice, "spcaid": spcaid, "cpfree": cpfree },function(data) {
+		loadCarData(data);
+	}, "json");	
+}
+
+function changeCar(cpfree){
+	$.post("cproduct/changeProductModel",{ "cproductname": cproductname, "cwsscprice": cwsscprice, "spcaid": spcaid, "cpfree": cpfree },function(data) {
+		loadCarData(data);
+	}, "json");	
+}
+
+function addNum(spcaid,a,i,t){
+	var textval = $(".spand"+(i)).html();
+	var num2 = parseInt(textval)+1;
+	$(".spand"+(i)).html(num2); 
+	var onetotal2 = $(".price"+(i)).html();
+	var onetotal = parseInt(onetotal2)*num2;
+	$(".ontTotal"+(i)).html('￥'+onetotal)
+	var one = $("#totalMoney").html();
+	$("#totalMoney").text(parseInt(one)+parseInt(onetotal2));
+
+	var cproductname= $(".product"+(i)).html();
+	var cwsscprice= $(".price"+(i)).html();
+	var cpfree =$(".spand"+(i)).html(); 
+	var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
+	var cpfree2 = cpfree1.substr(1);
+	saveCar(cproductname,cwsscprice,spcaid,cpfree);
 	
+}
+
+function reduce(spcaid,a,i,t){
+	var textval = $(".spand"+(i)).html();
+	var num2 = parseInt(textval)-1;
+	var onetotal2 = $(".price"+(i)).html();
+	var one = $("#totalMoney").html();
+	if(num2==0){
+		num2=1;
+		$(".alltd"+(i)).empty();
+		$("#totalMoney").text(parseInt(one)-parseInt(onetotal2));
+		saveCar(cproductname,cwsscprice,spcaid,cpfree);
+		return;
+	}
+	var red1 = $(".ontTotal"+(i)).html();
+	var red = red1.substr(1);
+	var onetotal = parseInt(red)-parseInt(onetotal2);
+	$(".ontTotal"+(i)).html('￥'+onetotal);
 	
+	$("#totalMoney").text(parseInt(one)-parseInt(onetotal2));
+	$(".spand"+(i)).html(num2);
+
+	var cproductname= $(".product"+(i)).html();
+	var cwsscprice= $(".price"+(i)).html();
+	var cpfree =$(".spand"+(i)).html(); 
+	var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
+	var cpfree2 = cpfree1.substr(1);
+	saveCar(cproductname,cwsscprice,spcaid,cpfree);
+	
+}
+
+
+function getValue() {
+	num++;
+	$(".cndns-right-btn sup").html(num);
+	var name = $(".padLeft10 h1").html();
+	var money = $(".sellPrice").html();
+	var productid = $(".otherInfor3 i").html();
+	//点击一下就插入到后台实体类  换页面后点击或点击购物车图标加载后台实体类数据
+	saveCar(name,money,productid,num);
+	
+	$("#div1").attr("style", "display:block;");
+/* 	addJson(name, money);
+	addHtml(); */
+}
+
+function openCar() {
+	if($("#div1")[0].style.display=="none"){
+		$("#div1").attr("style", "display:block;");
+	}else{
+		$("#div1").attr("style", "display:none;");
+	}
+}
+
+ 
+
+
+/*
+function reduce(a,t){
+				data[a].num--;
+				if(data[a].num==0){
+					data.splice(a,1);
+				}
+				if(data.length==0){
+					$("#totalMoney").text(0);
+				}
+				loadCarData(data);
+			}
+			function addNum(a,t){
+				data[a].num++;
+				loadCarData(data);
+			}
+
+function addJson(name, money) {
+	for (var j = 0; j < data.length; j++) {
+		if (data[j].name == name) {
+			data[j].num++;
+			return;
+		}
+	}
+	data.push({
+		money : money,
+		name : name,
+		num : 1
+	});
+}
+function addHtml(){
+	var text_html='';
+	var totalMoney=0;
+	$("#ul_panel").html("");
+	for(var i=0;i<data.length;i++){
+		text_html+='<tr><td>'+data[i].name+'</td><td>'+data[i].money+'</td><td><a onclick="reduce(\'\'+'+i+',this)">-</a> '+data[i].num+' ';
+		text_html+='<a onclick="addNum(\'\'+'+i+',this)">+</a></td><td>￥'+(data[i].money*data[i].num)+'</td></tr>';
+		totalMoney+=data[i].money*data[i].num;
+		$("#totalMoney").text('￥'+totalMoney);
+	}
+	$("#ul_panel").append(text_html);
+}   */
 	
 	
 </script>
@@ -143,7 +255,8 @@
 					</div>
 					<div class="otherInfor3">
 						<span>产品Id：</span> <i style="color: red;"></i>
-					</div>					<!-- <div class="startWrap">
+					</div>
+					<!-- <div class="startWrap">
 						<i class="one"></i><i class="one"></i><i
 							class="one"></i><i class="one"></i><i class="half"></i><a
 							href="#tabookReco">98条评论</a>
@@ -243,101 +356,101 @@
 					</div>
 
 				</div>
-				<div id="productpageDiv" style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
+				<div id="productpageDiv"
+					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
 			</div>
-		<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"style="VISIBILITY: hidden;">
-			<div class="div_panel">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<thead>
-						<tr>
-							<th>名称</th>
-							<th>单价</th>
-							<th>数量</th>
-							<th>价格</th>
-						</tr>
-					</thead>
-					<tbody id="ul_panel"></tbody>
-				</table>
+			<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"
+				style="VISIBILITY: hidden;">
+				<div class="div_panel">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>名称</th>
+								<th>单价</th>
+								<th>数量</th>
+								<th>价格</th>
+							</tr>
+						</thead>
+						<tbody id="ul_panel"></tbody>
+					</table>
+				</div>
+				<p class="allMoney">
+					总价：<span id="totalMoney" style="margin-right: 8px; color: orange;">￥</span>
+				</p>
 			</div>
-			<p class="allMoney">总价：<span id="totalMoney" style="margin-right:8px;color:orange;">￥69</span></p>
-		</div>
 		</div>
 	</div>
 
 
-<div class="cndns-right">
-    <div class="cndns-right-meau meau-car" >
-        <a href="#" class="cndns-right-btn">
-            <span class="demo-icon"><img src="images/02index-banner-8.gif"></span>
-            <sup>0</sup>
-        </a>
-    </div>
-    <div class="cndns-right-meau meau-sev">
-        <a href="javascript:" class="cndns-right-btn"><img src="images/customer.jpg">
-            <span class="demo-icon"></span>
-            <p>
-                在线<br />
-                客服
-            </p>
-        </a>
-        <div class="cndns-right-box">
-            <div class="box-border">
-                <div class="sev-b">
-                    <h4>选择下列产品马上在线沟通：</h4>
-                    <ul id="zixunUl">
-                        <li><a href="javascript:void(0);">域名/主机</a></li>
-                        <div class="clear"></div>
-                    </ul>
-                </div>
-                <span class="arrow-right"></span>
-            </div>
-        </div>
-    </div>
-    <div class="cndns-right-meau meau-contact">
-        <a href="javascript:" class="cndns-right-btn">
-            <span class="demo-icon"><img src="images/phone.jpg"></span>
-            <p>
-                客服<br />
-                热线
-            </p>
-        </a>
-        <div class="cndns-right-box">
-            <div class="box-border">
-                <div class="sev-t">
-                    <span class="demo-icon">&#xe902;</span>
-                    <p>400-123-4567<br /><i>7*24小时客服服务热线</i></p>
-                    <div class="clear"></div>
-                </div>
-                <span class="arrow-right"></span>
-            </div>
-        </div>
-    </div>
-    <div class="cndns-right-meau meau-code">
-        <a href="javascript:" class="cndns-right-btn">
-            <span class="demo-icon"><img src="images/code.jpg"></span>
-            <p>
-                关注<br />
-                微信
-            </p>
-        </a>
-        <div class="cndns-right-box">
-            <div class="box-border">
-                <div class="sev-t">
-                    <img src="images/02index-2.jpg" />
-                    <i>关注官方微信</i>
-                </div>
-                <span class="arrow-right"></span>
-            </div>
-        </div>
-    </div>
-    <div class="cndns-right-meau meau-top" id="top-back">
-        <a href="javascript:" class="cndns-right-btn" onclick="topBack()">
-            <span class="demo-icon">&#xe904;</span>
-            <i>顶部</i>
-        </a>
-    </div>
+	<div class="cndns-right">
+		<div class="cndns-right-meau meau-car">
+			<a href="javascript:void(0)" onClick="openCar()"
+				class="cndns-right-btn"> <span class="demo-icon"><img
+					src="images/02index-banner-8.gif"></span> <sup>0</sup>
+			</a>
+		</div>
+		<div class="cndns-right-meau meau-sev">
+			<a href="javascript:" class="cndns-right-btn"><img
+				src="images/customer.jpg"> <span class="demo-icon"></span>
+				<p>
+					在线<br /> 客服
+				</p> </a>
+			<div class="cndns-right-box">
+				<div class="box-border">
+					<div class="sev-b">
+						<h4>选择下列产品马上在线沟通：</h4>
+						<ul id="zixunUl">
+							<li><a href="javascript:void(0);">域名/主机</a></li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<span class="arrow-right"></span>
+				</div>
+			</div>
+		</div>
+		<div class="cndns-right-meau meau-contact">
+			<a href="javascript:" class="cndns-right-btn"> <span
+				class="demo-icon"><img src="images/phone.jpg"></span>
+				<p>
+					客服<br /> 热线
+				</p>
+			</a>
+			<div class="cndns-right-box">
+				<div class="box-border">
+					<div class="sev-t">
+						<span class="demo-icon">&#xe902;</span>
+						<p>
+							400-123-4567<br /> <i>7*24小时客服服务热线</i>
+						</p>
+						<div class="clear"></div>
+					</div>
+					<span class="arrow-right"></span>
+				</div>
+			</div>
+		</div>
+		<div class="cndns-right-meau meau-code">
+			<a href="javascript:" class="cndns-right-btn"> <span
+				class="demo-icon"><img src="images/code.jpg"></span>
+				<p>
+					关注<br /> 微信
+				</p>
+			</a>
+			<div class="cndns-right-box">
+				<div class="box-border">
+					<div class="sev-t">
+						<img src="images/02index-2.jpg" /> <i>关注官方微信</i>
+					</div>
+					<span class="arrow-right"></span>
+				</div>
+			</div>
+		</div>
+		<div class="cndns-right-meau meau-top" id="top-back">
+			<a href="javascript:" class="cndns-right-btn" onclick="topBack()">
+				<span class="demo-icon">&#xe904;</span> <i>顶部</i>
+			</a>
+		</div>
 
-</div>
+	</div>
 
 
 
@@ -348,7 +461,7 @@
 		<p>营业执照注册号 ：2210100224343
 			&nbsp;&nbsp;&nbsp;&nbsp;许可证：SP242423665968</p>
 	</div>
-<script type="text/javascript">
+	<script type="text/javascript">
 //置顶图标显示
 $('#top-back').hide()
 $(window).scroll(function(){

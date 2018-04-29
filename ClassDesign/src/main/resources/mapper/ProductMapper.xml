@@ -168,5 +168,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cpid=#{cpid}
 	</update>
 	
-
+	<select id="getBookMsgByBid" parameterType="Integer" resultType="Cbook">
+		select * from cbook where cbid=#{cbid}
+	</select>
+	
+	
+	<insert id="addProduct" parameterType="Cproduct">
+			insert into cproduct values(seqcpro.nextval,#{spcaid},#{cbcpid},#{cproductname},#{cdescription},#{caddtime},#{cnormalprice},#{cwsscprice},#{ckeywords},#{cimage},default,1)
+	</insert>	
 </mapper>

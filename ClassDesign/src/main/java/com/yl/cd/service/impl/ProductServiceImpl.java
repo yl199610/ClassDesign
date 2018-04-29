@@ -129,9 +129,18 @@ public class ProductServiceImpl implements ProductService{
 	public boolean modifyProduct(Cproduct cproduct) {
 		Integer cbcpid = cproduct.getCbcpid();
 		Cbook cbook = bookMapper.detailBook(cbcpid);
-		System.out.println(cbcpid+"=-------------"+cbook.getBookname());
 		cproduct.setCproductname(cbook.getBookname());
 		return productMapper.modifyProduct(cproduct);
+	}
+
+	@Override
+	public Cbook getBookMsgByBid(Integer cbid) {
+		return productMapper.getBookMsgByBid(cbid);
+	}
+
+	@Override
+	public boolean addProduct(Cproduct cproduct) {
+		return productMapper.addProduct(cproduct);
 	}
 	
 

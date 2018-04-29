@@ -68,6 +68,7 @@ function pageNextAndPerProduct(data){
 	var total=data.total;
 	var len = data.rows.length;
 	if(len<=0){
+		alert("此书暂无评论");
 		return;
 	}
 	if(data.currPage>1&&currPage<=totalPage){
@@ -101,4 +102,5 @@ function success(){
 		alert("加入购物车成功");
 	},1000)
 }
+
 
