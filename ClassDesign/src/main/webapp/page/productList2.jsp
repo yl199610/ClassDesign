@@ -11,11 +11,8 @@
 
 <title>图书商城：Such is life</title>
 <script type="text/javascript">
-var cusername="${sessionScope.loginUser.cusername}";
-
- $(function() {
-	 alert('========================='+cusername);
-	$.post("cproduct/saveProductModel",{"ckeywords": cusername, "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
+$(function() {
+	$.post("cproduct/saveProductModel",{ "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
 		//获取数据后拼接起来
 			loadCarData(data);
 			function addNum(spcaid,a,i,t){
@@ -33,7 +30,7 @@ var cusername="${sessionScope.loginUser.cusername}";
 				var cpfree =$(".spand"+(i)).html(); 
 				var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
 				var cpfree2 = cpfree1.substr(1);
-				saveCar(cproductname,cwsscprice,spcaid,cpfree,cusername);
+				saveCar(cproductname,cwsscprice,spcaid,cpfree);
 				
 			}
 
@@ -62,7 +59,7 @@ var cusername="${sessionScope.loginUser.cusername}";
 				var cpfree =$(".spand"+(i)).html(); 
 				var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
 				var cpfree2 = cpfree1.substr(1);
-				saveCar(cproductname,cwsscprice,spcaid,cpfree,cusername);
+				saveCar(cproductname,cwsscprice,spcaid,cpfree);
 				
 			}
 
@@ -71,52 +68,46 @@ var cusername="${sessionScope.loginUser.cusername}";
 				var totalMoney=0;
 				$("#ul_panel").html("");
 				for(var i=0;i<data.length;i++){
-					if(data[i].ckeywords===cusername){
-						text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
-						text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
-						totalMoney+=data[i].cwsscprice*data[i].cpfree;
-						$("#totalMoney").text(totalMoney);
-					}
+					text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
+					text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
+					totalMoney+=data[i].cwsscprice*data[i].cpfree;
+					$("#totalMoney").text(totalMoney);
 				}
 				$("#ul_panel").append(text_html); 
 			}
 
 	}, "json");	
-}); 
+});
 
 //点击加入购物车 youbi
 var money = 0;
 var name = "";
 var data = [];
 var num=0;
-
 function loadCarData(data){
 	var text_html='';
 	var totalMoney=0;
 	$("#ul_panel").html("");
 	for(var i=0;i<data.length;i++){
-		if(data[i].ckeywords===cusername){
-			alert("====");
-			text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
-			text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
-			totalMoney+=data[i].cwsscprice*data[i].cpfree;
-			$("#totalMoney").text(totalMoney);
-		}
+		text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
+		text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
+		totalMoney+=data[i].cwsscprice*data[i].cpfree;
+		$("#totalMoney").text(totalMoney);
 	}
 	$("#ul_panel").append(text_html); 
 }
 
-function saveCar(cproductname,cwsscprice,spcaid,cpfree,ckeywords){
-	$.post("cproduct/saveProductModel",{"ckeywords": ckeywords, "cproductname": cproductname, "cwsscprice": cwsscprice, "spcaid": spcaid, "cpfree": cpfree },function(data) {
+function saveCar(cproductname,cwsscprice,spcaid,cpfree){
+	$.post("cproduct/saveProductModel",{ "cproductname": cproductname, "cwsscprice": cwsscprice, "spcaid": spcaid, "cpfree": cpfree },function(data) {
 		loadCarData(data);
 	}, "json");	
 }
 
-/* function changeCar(cpfree){
+function changeCar(cpfree){
 	$.post("cproduct/changeProductModel",{ "cproductname": cproductname, "cwsscprice": cwsscprice, "spcaid": spcaid, "cpfree": cpfree },function(data) {
 		loadCarData(data);
 	}, "json");	
-} */
+}
 
 function addNum(spcaid,a,i,t){
 	var textval = $(".spand"+(i)).html();
@@ -133,7 +124,7 @@ function addNum(spcaid,a,i,t){
 	var cpfree =$(".spand"+(i)).html(); 
 	var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
 	var cpfree2 = cpfree1.substr(1);
-	saveCar(cproductname,cwsscprice,spcaid,cpfree,cusername);
+	saveCar(cproductname,cwsscprice,spcaid,cpfree);
 	
 }
 
@@ -171,22 +162,23 @@ function reduce(spcaid,a,i,t){
 	var cpfree =$(".spand"+(i)).html(); 
 	var cpfree1 = ontTotal=$(".ontTotal"+(i)).html(); 
 	var cpfree2 = cpfree1.substr(1);
-	saveCar(cproductname,cwsscprice,spcaid,cpfree,cusername);
+	saveCar(cproductname,cwsscprice,spcaid,cpfree);
 	
 }
 
 
 function getValue() {
- 	/*	if(cusername==null||cusername==""){
+	var cusername="${sessionScope.loginUser.cusername}";
+	if(cusername==null||cusername==""){
 		alert("请先登录再加入商品到购物车");
 		return;
-	} */
+	}
 	num++;
 	var name = $(".padLeft10 h1").html();
 	var money = $(".sellPrice").html();
 	var productid = $(".otherInfor3 i").html();
 	//点击一下就插入到后台实体类  换页面后点击或点击购物车图标加载后台实体类数据(session更加合理)
-	saveCar(name,money,productid,num,cusername);
+	saveCar(name,money,productid,num);
 	var totalAmount=1;
 	$("#ul_panel").find("tr").each(function () {
 		$(this).find('td:eq(2) span').each(function() { 

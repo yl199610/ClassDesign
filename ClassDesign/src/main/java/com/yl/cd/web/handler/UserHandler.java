@@ -90,6 +90,7 @@ public class UserHandler{
 		cuser=userService.userLogin(cuser);
 		if(cuser!=null){
 			map.put("loginUser",cuser);//放到sessoin
+			System.out.println(map.get("loginUser"));
 			return "redirect:/index.jsp";
 		}
 		map.addAttribute("errorMsg","用户名或密码错误");

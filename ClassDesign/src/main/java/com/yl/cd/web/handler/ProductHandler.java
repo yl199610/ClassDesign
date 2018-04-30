@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,15 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yl.cd.entity.Cbook;
-import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
-import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.ProductService;
 import com.yl.cd.util.JsoupGetBook;
@@ -30,11 +29,12 @@ import com.yl.cd.util.ServletUtil;
 
 @Controller
 @RequestMapping("/cproduct")
+@SessionAttributes("productList")
 public class ProductHandler {
 	@Autowired
 	private ProductService productService;
+	public final static String PRODUCTLIST="productList";
 	public static List<Cproduct> productList = new ArrayList<Cproduct>();
-
 	// 模糊分页查询
 	@RequestMapping("/list")
 	@ResponseBody
@@ -154,62 +154,73 @@ public class ProductHandler {
 		return productService.addProduct(cproduct);
 	}
 
-/*	// 右侧购物车添加
-	@RequestMapping("/saveProductModel")
-	@ResponseBody
-	public List<Cproduct> saveProductModel(Cproduct cproduct) throws Exception {
-		LogManager.getLogger().debug("请求ProductHandler处理saveProductModel...." + cproduct);
-		if("".equals(cproduct.getCpfree())||"".equals(cproduct.getCproductname())||"".equals(cproduct.getCwsscprice())){
-			cproduct.setCpfree(null);
-			cproduct.setCproductname(null);
-			cproduct.setCwsscprice(null);
-		}
-		System.out.println("====1231312321========"+cproduct);
-		//判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
-		if(isAllFieldNull(cproduct)){
-			return productList;
-		}
-		if (productList != null && cproduct!=null) {
-			for (int i = 0; i < productList.size(); i++) {
-				if(cproduct==null||"".equals(cproduct)){
-					return productList;
-				}
-				if (productList.get(i).getCproductname().equals(cproduct.getCproductname()) || cproduct.getCproductname() == productList.get(i).getCproductname()) {
-					productList.get(i).setCpfree(String.valueOf(cproduct.getCpfree()));
-					productList.remove(productList.get(i));
-				}
-			}
-		}
-		if(cproduct!=null){
-			productList.add(cproduct);
-		}
-		Collection nuCon = new Vector(); 
-		nuCon.add(null); 
-		productList.removeAll(nuCon);
-		System.out.println(productList.size() + "=========" + productList);
-		return productList;
-	}*/
 	// 右侧购物车添加
+//	@RequestMapping("/saveProductModel")
+//	@ResponseBody
+//	public List<Cproduct> saveProductModel(Cproduct cproduct,ModelMap map) throws Exception {
+//	public static List<Cproduct> productList = new ArrayList<Cproduct>();
+//		List<Cproduct> productList = new ArrayList<Cproduct>();
+//		LogManager.getLogger().debug("请求ProductHandler处理saveProductModel...." + cproduct);
+//		if("".equals(cproduct.getCpfree())||"".equals(cproduct.getCproductname())||"".equals(cproduct.getCwsscprice())){
+//			cproduct.setCpfree(null);
+//			cproduct.setCproductname(null);
+//			cproduct.setCwsscprice(null);
+//		}
+//		if(cproduct.getSpcaid()!=null&&null==cproduct.getCpfree()&&null==cproduct.getCproductname()&&null==cproduct.getCwsscprice()){
+//			for (Cproduct cproduct1 : productList) {
+//				if(cproduct.getSpcaid().equals(cproduct1.getSpcaid())){
+//					productList.remove(cproduct1);
+//					return productList;
+//				}
+//			}
+//		}
+//		System.out.println("====1231312321========"+cproduct);
+//		//判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
+//		if(isAllFieldNull(cproduct)){
+//			return productList;
+//		}
+//		if (productList != null && cproduct!=null) {
+//			for (int i = 0; i < productList.size(); i++) {
+//				if(cproduct==null||"".equals(cproduct)){
+//					return productList;
+//				}
+//				if(cproduct.getCproductname()==null||"".equals(cproduct.getCproductname())){
+//					Collection nuCon = new Vector(); 
+//					nuCon.add(null); 
+//					productList.removeAll(nuCon);
+//				}
+//				if (productList.get(i).getCproductname().equals(cproduct.getCproductname()) || cproduct.getCproductname() == productList.get(i).getCproductname()) {
+//					productList.get(i).setCpfree(String.valueOf(cproduct.getCpfree()));
+//					productList.remove(productList.get(i));
+//				}
+//			}
+//		}
+//		if(cproduct!=null){
+//			productList.add(cproduct);
+//		}
+//		map.put("productList",productList);//放到sessoin
+//		return productList;
+//	}
+//	// 右侧购物车添加
 	@RequestMapping("/saveProductModel")
 	@ResponseBody
-	public List<Cproduct> saveProductModel(Cproduct cproduct) throws Exception {
+	public List<Cproduct> saveProductModel(Cproduct cproduct,ModelMap map) throws Exception {
 		LogManager.getLogger().debug("请求ProductHandler处理saveProductModel...." + cproduct);
-		if("".equals(cproduct.getCpfree())||"".equals(cproduct.getCproductname())||"".equals(cproduct.getCwsscprice())){
+//		List<Cproduct> productList = new ArrayList<Cproduct>();
+		if(cproduct.getCkeywords()!=null&&"".equals(cproduct.getCpfree())&&"".equals(cproduct.getCproductname())&&"".equals(cproduct.getCwsscprice())){
 			cproduct.setCpfree(null);
 			cproduct.setCproductname(null);
 			cproduct.setCwsscprice(null);
+			return productList;
 		}
 		if(cproduct.getSpcaid()!=null&&null==cproduct.getCpfree()&&null==cproduct.getCproductname()&&null==cproduct.getCwsscprice()){
 			for (Cproduct cproduct1 : productList) {
 				if(cproduct.getSpcaid().equals(cproduct1.getSpcaid())){
-					System.out.println("===="+productList);
 					productList.remove(cproduct1);
-					System.out.println("999999999999"+productList);
 					return productList;
 				}
 			}
 		}
-		System.out.println("====1231312321========"+cproduct);
 		//判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
 		if(isAllFieldNull(cproduct)){
 			return productList;
@@ -233,11 +244,11 @@ public class ProductHandler {
 		if(cproduct!=null){
 			productList.add(cproduct);
 		}
-		
-		System.out.println(productList.size() + "=========" + productList);
+		map.put(PRODUCTLIST,productList);
+		System.out.println(map.get(PRODUCTLIST));
 		return productList;
 	}
-	// 购物车点击加减改变static的值
+//	 购物车点击加减改变static的值
 //	@RequestMapping("/changeProductModel")
 //	@ResponseBody
 //	public List<Cproduct> changeProductModel(Cproduct cproduct) throws Exception {
@@ -245,7 +256,7 @@ public class ProductHandler {
 //		productList
 //		return productList;
 //	}
-	
+//	
 	
     public static boolean isAllFieldNull(Object obj) throws Exception{
         Class stuCla = (Class) obj.getClass();// 得到类对象
