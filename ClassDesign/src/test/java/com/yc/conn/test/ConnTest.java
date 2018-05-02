@@ -1,8 +1,5 @@
 package com.yc.conn.test;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,6 @@ import com.yl.cd.entity.Cadmin;
 import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
-import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.mapper.BookMapper;
 import com.yl.cd.mapper.CadminMapper;
@@ -68,8 +64,18 @@ public class ConnTest {
 	@Test
 	public void testConn() throws SQLException {
 		System.out.println("------------");
-		Connection con = dataSource.getConnection();
-		assertNotNull(con);
+//		Date nowTime=new Date(); 
+//		System.out.println(nowTime); 
+//		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+//		System.out.println(time.format(nowTime)); 
+/*		Connection con = dataSource.getConnection();
+		assertNotNull(con);*/
+		String spid = "7-3,3-4,";
+		String []one =  spid.split(",");
+		for (int i = 0; i < one.length; i++) {
+			String []two =  one[i].split("-");//编号   数量
+			System.out.println(two[0]+"===="+two[1]);
+		}
 	}
 
 
@@ -127,5 +133,34 @@ public class ConnTest {
 	public void getAllOneBook() {
 		System.out.println(bookMapper.detailBook(11));
 	}
+//	
+//	@Test
+//	public void sendMobileCode() {
+//	    String rusult = null;
+//	    // 官网的URL
+//	    String url = "http://gw.api.taobao.com/router/rest";
+//	    // 成为开发者，创建应用后系统自动生成
+//	    String appkey = "23566780";
+//	    String secret = "自己的App Secret";
+//	    String code = "520";
+//	    String product = "cool_moon";
+//	    TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+//	    AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+//	    req.setExtend("1234");
+//	    req.setSmsType("normal");
+//	    req.setSmsFreeSignName("验证提醒");
+//	    req.setSmsParamString("{\"code\":\""+code+"\",\"product\":\""+product+"\"}");
+//	    req.setRecNum("自己的手机号码");
+//	    req.setSmsTemplateCode("SMS_34530098");
+//	    try {
+//	        AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
+//	        System.out.println(rsp.getBody());  
+//	        rusult = rsp.getSubMsg();
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	    }
+//	    System.out.println(rusult);
+//	}
+//	
 	
 }

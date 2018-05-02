@@ -118,6 +118,8 @@ create table cproduct(
 	cpstatus varchar2(20) default 'normal',
 	cpfree varchar2(25) default null
 );
+select * from CPRODUCT where cpid=7
+
 		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid
 		where cpid=48
 alter table cproduct modify cimage varchar2(42) 
@@ -221,19 +223,21 @@ create table corder(
   cphone varchar2(20) default null,
   cofree varchar2(25) default null
 );
+SELECT seqcorder.nextval from DUAL
 create sequence seqcorder start with 1;
-select * from corder where cstatus='normal' and coid like '%23%'
+select * from corder
+where cstatus='normal' and coid like '%23%'
 insert into corder values(2323,2,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
 insert into corder values(seqcorder.nextval,2,'normal','2018-4-18','请寄顺丰快递','18','tom','湖南衡阳','42200','15486597435',default);
 --订单详细表
 create  table corderitem(
   coiid Integer primary key,
-  coiname varchar2(20),
   coinumber varchar2(10),
   ciprice varchar2(10),
   cobid references cproduct(cpid),--产品表
   corid references corder(coid)--订单表
 );
+select * from corderitem
 create sequence seqcorderitem start with 1;
 drop table corderitem
 --收藏表

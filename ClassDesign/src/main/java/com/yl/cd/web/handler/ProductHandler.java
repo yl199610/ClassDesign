@@ -154,6 +154,7 @@ public class ProductHandler {
 		return productService.addProduct(cproduct);
 	}
 
+	
 	// 右侧购物车添加
 //	@RequestMapping("/saveProductModel")
 //	@ResponseBody
@@ -248,6 +249,30 @@ public class ProductHandler {
 		System.out.println(map.get(PRODUCTLIST));
 		return productList;
 	}
+	
+	//多个id查产品
+	@RequestMapping("/showproductMsg")
+	@ResponseBody
+	public List<Cproduct> showProductMsg(Cproduct cproduct) {
+		LogManager.getLogger().debug("请求ProductHandler处理showproductMsg...."+cproduct);
+		String username = cproduct.getCkeywords();//获取用户名
+		Cproduct oneProduct = new Cproduct();
+		if(username!=null&&productList.size()>0){
+			for (int i = 0; i < productList.size(); i++) {
+				Integer spcaid = productList.get(i).getSpcaid();
+				oneProduct= productService.detailProduct(spcaid);
+				productList.get(i).setCimage(oneProduct.getCimage());
+				productList.get(i).setCaddtime(oneProduct.getCaddtime());
+				Integer total  = Integer.parseInt(oneProduct.getCwsscprice())*Integer.parseInt(productList.get(i).getCpfree());
+				productList.get(i).setCnormalprice(String.valueOf(total));
+			}
+		}
+		System.out.println(productList.size()+"==========="+productList);
+		return productList;
+	}
+	
+	
+	
 //	 购物车点击加减改变static的值
 //	@RequestMapping("/changeProductModel")
 //	@ResponseBody

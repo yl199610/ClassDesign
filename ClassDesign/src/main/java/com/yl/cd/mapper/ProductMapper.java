@@ -45,5 +45,4 @@ public interface ProductMapper {
 
 	boolean addProduct(Cproduct cproduct);
 
-
 }

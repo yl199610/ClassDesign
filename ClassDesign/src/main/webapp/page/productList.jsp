@@ -14,7 +14,6 @@
 var cusername="${sessionScope.loginUser.cusername}";
 
  $(function() {
-	 alert('========================='+cusername);
 	$.post("cproduct/saveProductModel",{"ckeywords": cusername, "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
 		//获取数据后拼接起来
 			loadCarData(data);
@@ -96,7 +95,6 @@ function loadCarData(data){
 	$("#ul_panel").html("");
 	for(var i=0;i<data.length;i++){
 		if(data[i].ckeywords===cusername){
-			alert("====");
 			text_html+='<tr class="'+"alltd"+(i)+'"><td  class="'+"product"+(i)+'">'+data[i].cproductname+'</td><td  class="'+"price"+(i)+'">'+data[i].cwsscprice+'</td><td class="thrid"><a class="red" onclick="reduce(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">-</a><span class="'+"spand"+(i)+'">'+data[i].cpfree+' </span> ';
 			text_html+='<a class="add" onclick="addNum(\'\'+'+data[i].spcaid+','+data[i].cpfree+','+i+',this)">+</a></td><td class="ontTotal'+(i)+'">￥'+(data[i].cwsscprice*data[i].cpfree)+'</td></tr>';
 			totalMoney+=data[i].cwsscprice*data[i].cpfree;
@@ -177,10 +175,10 @@ function reduce(spcaid,a,i,t){
 
 
 function getValue() {
- 	/*	if(cusername==null||cusername==""){
+ 	if(cusername==null||cusername==""){
 		alert("请先登录再加入商品到购物车");
 		return;
-	} */
+	} 
 	num++;
 	var name = $(".padLeft10 h1").html();
 	var money = $(".sellPrice").html();
@@ -216,7 +214,18 @@ function openCar() {
 	}
 }
 
+/* function goBy(){
+	var t = $("#ul_panel tr").length;
+	for(var i=0;i<t;i++){
+		var cproductname= $(".product"+(i)).html();
+		var cwsscprice= $(".price"+(i)).html();
+		var cpfree =$(".spand"+(i)).html(); 
+		var ontotal = $(".ontTotal"+(i)).html();
+		$("#goBy").attr("href","page/car.jsp");
+		$("#goBy").attr("target","_blank");
+	}
  
+} */
 
 	
 	
@@ -403,7 +412,7 @@ function openCar() {
 					</table>
 				</div>
 				<p class="allMoney">
-					<a style="color:red; margin-left: -200px;">去结算</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a id="goBy" href="page/carts.jsp" style="color:red; margin-left: -200px;">去结算</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					总价：<span id="totalMoney" style="margin-right: 8px; color: orange;">￥</span>
 				</p>
 			</div>

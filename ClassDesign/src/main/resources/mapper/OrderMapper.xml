@@ -31,4 +31,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
+	
+	
+	
+	<insert id="insertCorder" parameterType="Corder">
+		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="coid">  
+			SELECT seqcorder.nextval from DUAL
+		</selectKey> 
+			insert into corder values(#{coid},#{cordid},'normal',#{cordertime},#{corderdesc},#{ctotalprice},#{cordername},#{cfulladdress},#{cpostalcode},#{cphone},1)
+	</insert>	
+	
+	<insert id="insertCorderDetail" parameterType="Corderitem">
+			insert into corderitem values(seqcorderitem.nextval,#{coinumber},#{ciprice},#{cobid},#{corid})
+	</insert>	
+	
+	
+	
+	
 </mapper>

@@ -18,4 +18,8 @@ public interface UserMapper {
 	boolean archiveUser(Integer cuid);
 
 	Cuser userLogin(Cuser cuser);
+
+	Cuser findCuser(String name);
+
+	boolean register(Cuser cuser);
 }

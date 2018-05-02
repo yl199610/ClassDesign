@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.yl.cd.entity.Cadmin;
 import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.UserService;
@@ -47,6 +44,25 @@ public class UserHandler{
 		LogManager.getLogger().debug("请求UserHandler处理userDetail...."+cuid);
 		return userService.getUserMsgById(cuid);
 	}
+	
+	//注册时候查询用户是否存在
+	
+	@RequestMapping("/check")
+	@ResponseBody
+	public boolean check(@RequestParam(name="uname",required=false)String name) {
+		LogManager.getLogger().debug("请求userHandler查询用户名是否重复..."+name);
+		if(name==""||"".equals(name)){//不通过
+			return true;
+		}else{
+			Cuser user=userService.findCuser(name);
+			if(user!=null){//查询出有这个用户名
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	
 	
 	
 	
@@ -97,6 +113,19 @@ public class UserHandler{
 		return "forward:/login.jsp";
 	}	
 	
+	//注册
+	@RequestMapping("/register")
+	@ResponseBody
+	public boolean register(Cuser user) {//ModelMap   逻辑操作和实体类    request.setAttribute
+		LogManager.getLogger().debug("请求userHandler注册用户..."+user);
+		return false;
+		
+//		if(userService.register(user)){
+//			return true;
+//		}else {
+//			return false;
+//		}
+	}
 	
 	
 }

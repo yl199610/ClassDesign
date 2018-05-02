@@ -23,7 +23,6 @@ public class VcodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 4348904329267330103L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("---------");
 		// 设置页面不缓存
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");

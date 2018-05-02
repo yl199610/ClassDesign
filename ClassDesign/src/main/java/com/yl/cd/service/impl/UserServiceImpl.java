@@ -10,6 +10,7 @@ import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.mapper.UserMapper;
 import com.yl.cd.service.UserService;
+import com.yl.cd.util.Encrypt;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{
@@ -52,6 +53,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Cuser userLogin(Cuser cuser) {
 		return userMapper.userLogin(cuser);
+	}
+
+	@Override
+	public Cuser findCuser(String name) {
+		return userMapper.findCuser(name);
+	}
+
+	@Override
+	public boolean register(Cuser cuser) {
+		Encrypt encrypt = new Encrypt();
+		cuser.setCpassword(encrypt.md5(cuser.getCpassword()));
+		return userMapper.register(cuser);
 	}
 
 }

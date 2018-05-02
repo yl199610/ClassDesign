@@ -14,7 +14,44 @@
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <!-- <script type="text/javascript"
 	src="js/login_files/jquery-1.4.2.min.js.下载"></script> -->
-<script type="text/javascript" src="js/login_files/jquery.SuperSlide.2.1.js.下载"></script>
+<script type="text/javascript"
+	src="js/login_files/jquery.SuperSlide.2.1.js"></script>
+<script type="text/javascript">
+
+	$("#loginForm p img").click(function() {
+		$(this).attr("src", "vcode.jpg?" + new Date().getTime());
+	});
+
+	function validate() {
+		var name = $("#uucusername").val();
+		$.post("cuser/check?uname=" + name, function(data) {
+			var jsonarray = JSON.stringify(data);
+			if (jsonarray == "true") {
+				$("#showResult").html("");
+				$("#regUser").attr("disabled", false);
+			} else {
+				$("#showResult").html("*用户名已经存在");
+				$("#showResult").css("color", "red");
+				$("#regUser").attr("disabled", true);
+			}
+		}, "json");
+	}
+
+	function regUserMsg() {
+		alert("====");
+		var params = $("#regForm").serialize();//取到添加评论数据 
+		$.post("cuser/register", params, function(data) {
+			var jsonarray = JSON.stringify(data);
+			if (jsonarray == "true") {
+				alert("注册成功")
+			} else {
+				alert("注册失败")
+			}
+		}, "json");
+	}
+	
+	
+</script>
 
 </head>
 <body>
@@ -39,7 +76,6 @@
 		</div>
 		<!--第一部分内容结束-->
 		<style>
-
 </style>
 		<!--第二部分内容开始-->
 		<div class="denglu-frist2">
@@ -52,8 +88,7 @@
 									style="overflow: hidden; position: relative; height: 430px">
 									<ul
 										style="top: -860px; position: relative; padding: 0px; margin: 0px;">
-										<li style="height: 430px;"><a>
-											<img
+										<li style="height: 430px;"><a> <img
 												src="js/login_files/bglogin.png"></a></li>
 										<li style="height: 430px;"><a><img
 												src="js/login_files/bglogin.png"></a></li>
@@ -103,18 +138,29 @@
 										</div>
 										<div class="bd">
 											<form id="loginForm" action="cuser/login" method="post">
-												<span style="color: red;margin-left: 40%;"><label>${errorMsg}&nbsp;</label></span>&nbsp;</label></p><c:remove var="errorMsg" scope="session"/>
+												<span style="color: red; margin-left: 40%;"><label>${errorMsg}&nbsp;</label></span>&nbsp;</label>
+												</p>
+												<c:remove var="errorMsg" scope="session" />
 												<c:remove var="errorMsg" scope="session" />
 												<div class="conWrap"
 													style="position: relative; width: 384px; height: 400px;">
 													<div class="con"
 														style="position: absolute; width: 384px; left: 0px; top: 0px; display: block;">
 														<div class="yonghuming">
-															<input type="text" id="clcusername" name="cusernamelogin" placeholder="请输入用户名" class="shurukuang">
+															<input type="text" id="clcusername" name="cusernamelogin"
+																placeholder="请输入用户名" class="shurukuang">
 														</div>
 														<div class="yonghuming-mima">
-															<input type="password" id="clcpassword" name="cpasswordlogin" placeholder="请输入密码" class="shurukuang">
+															<input type="password" id="clcpassword"
+																name="cpasswordlogin" placeholder="请输入密码"
+																class="shurukuang">
 														</div>
+														<p style="margin-left: 50px; margin-top: 10px;">
+															验证码：<img src="vcode.jpg" title="看不清，换一张" />&nbsp;&nbsp;&nbsp;&nbsp;<input
+																name="vcode" placeholder="输入验证码" id="vcode"
+																required="required" style="height: 26px; width: 100px;" />
+														</p>
+
 														<div class="denglu1">
 															<p>
 																<input type="submit" value="登录"
@@ -122,7 +168,9 @@
 															</p>
 														</div>
 														<div class="zhuce">
-															<p>还没有登录账号？</p>
+															<p>
+																<a href="page/forgetPassword.jsp">忘记密码?</a>
+															</p>
 														</div>
 														<div class="xieyi">
 															<p>
@@ -141,20 +189,23 @@
 											</form>
 											<div class="con"
 												style="position: absolute; width: 384px; left: 0px; top: 0px; display: none;">
-												<div class="nicheng">
-													<input type="text" id="uucusername" name="cusername"
-														value="" placeholder="昵称" class="shurukuang">
-												</div>
-												<div class="mima">
-													<input type="password" id="uucpassword" name="cpassword"
-														value="" placeholder="密码" class="shurukuang">
-												</div>
-												<div class="yonghuming">
-													<input type="text" id="uucemail" name="cemail" value=""
-														placeholder="邮箱" class="shurukuang">
-												</div>
+												<form id="regForm" method="post">
+													<div class="nicheng">
+														<input type="text" id="uucusername" name="cusername"
+															value="" placeholder="昵称" required="required"
+															class="shurukuang" onblur="validate()">
+													</div>
+													<div style="margin-left: 100px;" id="showResult"></div>
+													<div class="mima">
+														<input type="password" id="uucpassword" name="cpassword"
+															value="" placeholder="密码" class="shurukuang">
+													</div>
+													<div class="yonghuming">
+														<input type="email" id="uucemail" name="cemail" value=""
+															placeholder="邮箱可以找回密码" class="shurukuang">
+													</div>
 
-												<div class="yonghuming_mima1">
+													<!-- <div class="yonghuming_mima1">
 													<div class="yonghuming_mima">
 														<input type="text" id="vcode" name="vcode" value=""
 															placeholder="验证码" class="shurukuang">
@@ -162,19 +213,21 @@
 													<a>
 														<div class="yzmdx">发送验证码</div>
 													</a>
-												</div>
+												</div> -->
+											
+													<a >
+														<p>
+															<input type="submit" value="注册" id="regUser"
+																style="background-color: #e31830" onClick="regUserMsg()" />
+														</p>
+													</a>
+												</form>
 
-												<a>
-															<p>
-																<input type="submit" value="注册" id="regUser"
-																	style="background-color: #e31830" />
-															</p>
-												</a>
 												<div class="xieyi">
 													<p>
 														同意<span>《用户使用协议》</span>
 													</p>
-													<input type="checkbox" class="danxuan">
+													<input type="checkbox" checked="checked" class="danxuan">
 												</div>
 												<div class="qqdenglu">
 													<div class="qqdenglu-left"></div>
@@ -236,17 +289,13 @@
 	<div class="denglu-footer">
 		<div class="denglu-footer-content">
 			*****有限公司 版权所有 2015-2016 备10216464645号&nbsp;&nbsp; <a
-				href="login.jsp">关于我们</a>&nbsp;
-			|&nbsp; <a href="login.jsp">帮助中心</a>
-			&nbsp;|&nbsp; <a
-				href="login.jsp">网站合作</a>&nbsp;|&nbsp;
-			<a href="login.jsp">版权说明</a>&nbsp;|&nbsp;
-			<a href="login.jsp">诚聘英才</a>&nbsp;|&nbsp;
+				href="login.jsp">关于我们</a>&nbsp; |&nbsp; <a href="login.jsp">帮助中心</a>
+			&nbsp;|&nbsp; <a href="login.jsp">网站合作</a>&nbsp;|&nbsp; <a
+				href="login.jsp">版权说明</a>&nbsp;|&nbsp; <a href="login.jsp">诚聘英才</a>&nbsp;|&nbsp;
 			<a href="login.jsp">联系我们</a>
 		</div>
 	</div>
 	<!--登录尾部内容结束-->
-
 
 </body>
 </html>

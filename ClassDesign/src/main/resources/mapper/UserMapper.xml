@@ -132,5 +132,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cuser where cusername=#{cusername} and cpassword=#{cpassword}
 	</select>
 	
+	<select id="findCuser" resultType="Cuser">
+		select * from cuser where cusername=#{name}
+	</select>
+	
+	<insert id="register" parameterType="Cuser">
+			insert into cuser values(sequserid.nextval,#{cusername},#{cpassword},#{cemail},#{csex},#{cphone},#{clastloginip},#{cphoto},#{applynum},#{clikebook},cbirthday,1)
+	</insert>	
 	
 </mapper>

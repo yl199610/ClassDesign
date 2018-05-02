@@ -7,4 +7,6 @@ public interface OrderService {
 
 	PaginationBean<Corder> getAllCorder(String page, String rows, Corder corder);
 
+	boolean insertCorder(Corder corder, String num, String pricetotal, String spid);
+
 }
