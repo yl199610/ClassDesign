@@ -15,8 +15,16 @@ public interface UserService {
 
 	Cuser userLogin(Cuser cuser);
 
-	Cuser findCuser(String name);
+	Cuser findCuser(int i);
 
 	boolean register(Cuser user);
+
+	boolean modifyUserByUser(Cuser cuser);
+
+	boolean updatePassword(Cuser user);
+
+	Cuser findCuserByName(String name);
+
+	Cuser findCuserAndAccount(Integer cuaid);
 
 }

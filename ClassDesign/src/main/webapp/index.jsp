@@ -33,7 +33,7 @@ $(document).ready(function() {
 			<ul class="helpul">
 			<input hidden="hidden" id="namesession" value="${sessionScope.loginUser.cusername}"/>
 			<input hidden="hidden" id="cuidsession" value="${sessionScope.loginUser.cuid}"/>
-				<li><a target="_blank" class="f-green">帮助中心</a></li>
+				<li><a target="_blank" class="f-green" href="page/personCenter.jsp">个人中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -361,7 +361,7 @@ $(document).ready(function() {
 				</ul>
 			</div> -->
 			<div class="moreHotSale">
-				<a href="http://www.bookschina.com/24hour/" target="_blank">查看完整榜单&gt;&gt;</a>
+				<a href="javascript:void(0);" target="_blank">查看完整榜单&gt;&gt;</a>
 			</div>
 		</div>
 	</div>

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-<title>图书商城：Such is life</title>
+<title>我的购物车</title>
 
 <style>
 table {
@@ -90,6 +90,22 @@ a {
 	text-align: center;
 	border-radius: 2px;
 	cursor: pointer;
+	border: 1px solid red;
+}
+
+#btma{
+display: block;
+	width: 120px;
+	height: 50px;
+	color: #fff;
+	background: #FF2832;
+	font-size: 22px;
+	letter-spacing: 5px;
+	text-decoration: none;
+	line-height: 50px;
+	text-align: center;
+	border-radius: 2px;
+	cursor: pointer;
 }
 
 
@@ -112,7 +128,7 @@ a {
     float:left;
     color:#666666;
 }
-input, button {
+input, button{
     text-rendering: auto;
     color: initial;
     letter-spacing: normal;
@@ -136,6 +152,13 @@ input, button {
 
 $(function() {
  	$(".mycar").attr('style', 'background-color:#FF2832');
+ 	$(document).ready(function() {
+ 		var cusername="${sessionScope.loginUser.cusername}";
+ 		if(cusername.length == 0||cusername==null || cusername==''|| cusername == undefined){
+ 			$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span>&nbsp;<a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
+ 	 	}
+ 		var cuid="${sessionScope.loginUser.cuid}";
+ 	})
 });
 var cusername="${sessionScope.loginUser.cusername}";
 
@@ -275,8 +298,22 @@ function goBy(){
 }
 
 
-
-
+function byProduct(){
+ 	var params = $("#formAddress").serialize();//取到添加评论数据 
+	$.post("corder/add", params, function(data) {
+		var jsonarray = JSON.stringify(data);
+		if (jsonarray == "true") {
+			$(".orderInfo").attr("style", "display:none;");
+			$(".bar-wrapper").attr("style", "display:none;");
+			$(".orderSuccess").attr("style", "display:block;");
+			$(".mycar").attr('style', 'background-color:#F2F2F2');
+			$(".current").attr('style', 'background-color:#F2F2F2');
+			$(".success").attr('style', 'background-color:#FF2832');
+		} else {
+			alert("付款失败");
+		}
+	}, "json"); 
+}
 
 
 
@@ -292,12 +329,12 @@ function goBy(){
 			<li class="headspan">您好,欢迎<label style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
 			</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="index.jsp">==</a> <span class="f-hui-line">| </span>&nbsp; <a
-				id="regSpan" class="f-cheng f-bold" href="index.jsp">==</a></li>
+				href="index.jsp"></a> <span class="f-hui-line"> </span>&nbsp; <a
+				id="regSpan" class="f-cheng f-bold" href="index.jsp"></a></li>
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<li><a target="_blank" class="f-green">帮助中心</a></li>
+				<li><a target="_blank" class="f-green">个人中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -354,7 +391,7 @@ function goBy(){
 
 <div class="orderInfo" style="visibility:hidden;width: 1000px;height: 360px;border: 1px solid #DBDBDB;margin-left: 100px;">
 	<div class="stepTit clearfix"style="width: 960px;height: 30px;background:#E9E9E9;margin-left: 100px; "><strong>收货人信息</strong></div>
-		<form name="form1" action="corder/add" method="post">
+		<form name="formAddress" id="formAddress" method="post">
 	      <input type="text" id="namesession" name="proname"
 					value="${sessionScope.loginUser.cusername}" />
 	      <input type="text" id="cuidsession" name="cordid"
@@ -391,22 +428,19 @@ function goBy(){
 	        </tr>
 	        <tr>
 	         <td colspan="2" align="center">
-	         <input type="submit" value="确认收货地址" style="text-align:center;background: red;border-radius: 10px;" />
-	         </td>
+	         <div class="calBtn">
+					<a id="btma" href="javascript:void(0)" onClick="byProduct()">结算</a>
+				</div>
+<!-- 	         <input type="submit" value="确认收货地址" onclick="byProduct()" style="text-align:center;background: red;border-radius: 10px;" />
+ -->	         </td>
 	        </tr>
       </table>
     </form>
 </div>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+<div class="orderSuccess" style="visibility: hidden;width: 100px;height: 30px;border: 1px solid #DBDBDB;margin-left: 100px;">
+	购买书籍成功!!!<a href="./index.jsp">返回首页继续购买</a>
+</div>	
 		
 		
 	<div>

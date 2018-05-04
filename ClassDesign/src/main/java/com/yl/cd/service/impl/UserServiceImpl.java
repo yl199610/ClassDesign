@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Cuser findCuser(String name) {
-		return userMapper.findCuser(name);
+	public Cuser findCuser(int cuid) {
+		return userMapper.findCuser(cuid);
 	}
 
 	@Override
@@ -65,6 +65,26 @@ public class UserServiceImpl implements UserService{
 		Encrypt encrypt = new Encrypt();
 		cuser.setCpassword(encrypt.md5(cuser.getCpassword()));
 		return userMapper.register(cuser);
+	}
+
+	@Override
+	public boolean modifyUserByUser(Cuser cuser) {
+		return userMapper.modifyUserByUser(cuser);
+	}
+
+	@Override
+	public boolean updatePassword(Cuser user) {
+		return userMapper.updatePassword(user);
+	}
+
+	@Override
+	public Cuser findCuserByName(String name) {
+		return userMapper.findCuserByName(name);
+	}
+
+	@Override
+	public Cuser findCuserAndAccount(Integer cuaid) {
+		return userMapper.findCuserAndAccount(cuaid);
 	}
 
 }

@@ -15,10 +15,10 @@ select * from cadmin;
 create table cuser(
 	cuid Integer primary key,
 	cusername varchar2(20) unique,
-	cpassword varchar2(20) not null,
+	cpassword varchar2(50) not null,
 	cemail varchar2(20) not null,
 	csex varchar2(10),
-	cphone varchar2(15) not null,
+	cphone varchar2(15),
 	clastloginip varchar2(30),
 	cphoto varchar2(30) default '../images/notpic.jpg',
 	applynum varchar2(20),
@@ -26,7 +26,10 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
-alter table cuser modify cphoto varchar2(42);
+select * from account where cuaid=1 
+select * from cuser where cusername='a'
+ALTER TABLE cuser MODIFY cphone NULL;
+alter table cuser modify cpassword varchar2(50);
 select * from cuser where cusername='a' and cpassword='a'
 select * from cuser c where 1=1 and cufree=1 and c.cuid like '%%' and c.cusername like '%%'
 update cuser set cufree=1 where cuid>=1
@@ -315,6 +318,27 @@ select * from cfavorites;
 drop table ccomments
 create sequence seqccomments start with 1;
 
+select * from cuser c join account a on a.cuaid=c.cuid where cuid=1
+--用户金额表
+create table account(
+  aid Integer  primary key,
+  cuaid references cuser(cuid),
+  applyno varchar2(20) not null,
+  money varchar2(18),
+  datetime varchar2(30),
+  income varchar2(22),
+  outcome varchar2(22)
+)
+drop table account;
+	select * from account
+drop sequence seqaccount
+create sequence seqaccount start with 1;
+insert into account values(seqaccount.nextval,1,'678678678@qq.com',100,'2017-12-12',0,0);
+delete account where cuaid=1
+
+
+
+
 --按照热门排序
 select * from (select * from cproduct where cpstatus='normal' order by to_number(cpfree) desc) where rownum<4
 
@@ -376,3 +400,8 @@ select count(1) total,ceil(count(1)/8)
 		join cuser c on
 		c.cuid=t.cuserid
 		join cproduct cp on cp.cpid=t.cfp where 1=1 and cfp=26
+		
+		
+		
+select * from (select t.*,c.*,cp.*,rownum rownu from ccomments t join cuser c on c.cuid=t.cuserid join
+cproduct cp on cp.cpid=t.cfp where rownum<=10 and 1=1 and cfp=2 )tt where tt.rownu>(5-1)*2 

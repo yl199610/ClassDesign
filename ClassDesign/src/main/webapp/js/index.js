@@ -86,9 +86,9 @@ function pageFunction(){
 function loadData(data){
 	var len = data.rows.length;
 	for(var i=0;i<len;i++){
-		$('.imageAppear').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="/1076435.htm" target="_blank">'+
+		$('.imageAppear').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="" target="_blank">'+
 				'<img src="'+data.rows[i].cimage+'"></a></li><li>'+
-				'<a href="/1076435.htm" title="'+data.rows[i].cproductname+'" target="_blank">'+data.rows[i].cproductname+'</a></li><li>'+
+				'<a href="" title="'+data.rows[i].cproductname+'" target="_blank">'+data.rows[i].cproductname+'</a></li><li>'+
 				'<span class="sellPrice">¥'+data.rows[i].cwsscprice+'</span></br><span class="price"><del>¥'+data.rows[i].cnormalprice+'</del></span></br></li></ul></div>');
 	}
 }
@@ -143,9 +143,9 @@ function getJsoupData(){
 			var sellPriceList = data[i].cwsscprice;
 			var priceList = data[i].cnormalprice ;
 			$(".on").append('<li class="red"><i>'+redCurList+'</i><em>&gt;</em><p>'+bookNameList+'</p><div class="bookCur">'+
-					'<div class="bpic"><a href="/6444156.htm" target="_blank" title="'+bookNameList+'">'+
+					'<div class="bpic"><a href="" target="_blank" title="'+bookNameList+'">'+
 					'<img src="'+imgList+'" alt="'+bookNameList+'"></a></div>'+
-					'<div class="bDetai"><div class="bName"><a href="/6444156.htm" target="_blank" title="'+bookNameList+'">'+
+					'<div class="bDetai"><div class="bName"><a href="" target="_blank" title="'+bookNameList+'">'+
 					''+bookNameList+'</a></div><div class="bPrice"><span class="sellPrice">'+sellPriceList+'</span><span class="price">'+
 					''+priceList+'</span></div></div></div></li>');
 			getDymicData();

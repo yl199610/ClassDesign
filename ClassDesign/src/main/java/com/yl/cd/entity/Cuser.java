@@ -13,10 +13,13 @@ public class Cuser {
 	private String clikebook;
 	private String cbirthday;
 	private String cufree;
+	private Account account;
 	public Cuser() {
 	}
+	
 	public Cuser(Integer cuid, String cusername, String cpassword, String cemail, String csex, String cphone,
-			String clastloginip, String cphoto, String applynum, String clikebook, String cbirthday, String cufree) {
+			String clastloginip, String cphoto, String applynum, String clikebook, String cbirthday, String cufree,
+			Account account) {
 		super();
 		this.cuid = cuid;
 		this.cusername = cusername;
@@ -30,7 +33,9 @@ public class Cuser {
 		this.clikebook = clikebook;
 		this.cbirthday = cbirthday;
 		this.cufree = cufree;
+		this.account = account;
 	}
+
 	public Integer getCuid() {
 		return cuid;
 	}
@@ -103,13 +108,23 @@ public class Cuser {
 	public void setCufree(String cufree) {
 		this.cufree = cufree;
 	}
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	@Override
 	public String toString() {
 		return "Cuser [cuid=" + cuid + ", cusername=" + cusername + ", cpassword=" + cpassword + ", cemail=" + cemail
 				+ ", csex=" + csex + ", cphone=" + cphone + ", clastloginip=" + clastloginip + ", cphoto=" + cphoto
 				+ ", applynum=" + applynum + ", clikebook=" + clikebook + ", cbirthday=" + cbirthday + ", cufree="
-				+ cufree + "]";
+				+ cufree + ", account=" + account + "]";
 	}
+
 	
 	
 }

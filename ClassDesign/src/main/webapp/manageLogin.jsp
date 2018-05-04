@@ -1,35 +1,48 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html>	
 <base href="/ClassDesign/">
-<head lang="en">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" rel="stylesheet" href="css/manageLogin.css">
-<title>管理员登录界面</title>
+<head>
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+
 </head>
 <body>
-	<div class="wrap">
-		<div class="container">
-			<h1>Welcome&nbsp;Admin</h1>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+});
+</script>
+ <!--SIGN UP-->
+ <h1>Admin Login</h1>
+<div class="login-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="images/avtar.png" />
+	</div>
 			<form id="aloginForm" action="cadmin/alogin" method="post">
 				<p style="color: red;margin-left: 46%;"><label>${errorMsg }&nbsp;</label></p><c:remove var="errorMsg" scope="session"/>
-				<input name="caname" type="text" placeholder="user login"  required="required"/>
-				<input name="capwd" type="password" placeholder="password"  required="required"/>
-				<input type="submit" value="Login" />
+					<input type="text" name="caname" required="required" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+						<div class="key">
+					<input type="password" name="capwd"  required="required" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+						</div>
 			</form>
-		</div>
-		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
+	<div class="signin">
+		<input type="submit" value="Login" >
 	</div>
+</div>
 </body>
 </html>

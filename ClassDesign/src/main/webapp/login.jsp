@@ -21,7 +21,13 @@
 	$("#loginForm p img").click(function() {
 		$(this).attr("src", "vcode.jpg?" + new Date().getTime());
 	});
-
+	function operate() {
+		document.getElementById('div_test').style.display = "";
+		setTimeout("disappeare()", 2000);
+	}
+	function disappeare() {
+		document.getElementById('div_test').style.display = "none";
+	}
 	function validate() {
 		var name = $("#uucusername").val();
 		$.post("cuser/check?uname=" + name, function(data) {
@@ -38,14 +44,15 @@
 	}
 
 	function regUserMsg() {
-		alert("====");
 		var params = $("#regForm").serialize();//取到添加评论数据 
 		$.post("cuser/register", params, function(data) {
 			var jsonarray = JSON.stringify(data);
 			if (jsonarray == "true") {
-				alert("注册成功")
+				$("#div_test").html("恭喜你，注册成功");
+				operate();
 			} else {
-				alert("注册失败")
+				$("#div_test").html("不好意思，注册失败");
+				operate();
 			}
 		}, "json");
 	}
@@ -217,7 +224,7 @@
 											
 													<a >
 														<p>
-															<input type="submit" value="注册" id="regUser"
+															<input type="button" value="注册" id="regUser"
 																style="background-color: #e31830" onClick="regUserMsg()" />
 														</p>
 													</a>
@@ -253,6 +260,7 @@
 					</div>
 				</div>
 			</div>
+<div id="div_test" style="display: none; color: white; line-height: 35px; position: absolute; z-index: 100; left: 50%; top: 30%; margin-left: -75px; text-align: center; width: 150px; height: 35px; background-color: green; font-size: 12px;"></div>
 			<div class="denglu-first2-content-bottom">
 				<div class="bottom-left">
 					<div class="bottom-left-top">

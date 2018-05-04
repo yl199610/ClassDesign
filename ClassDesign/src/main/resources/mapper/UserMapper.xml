@@ -74,18 +74,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</select>
 	<!-- 按照条件查询分页结束 -->
-	<update id="dynaUpdate" parameterType="map">
-		update students
-		<set>
-			<if test="pname!=null">
-				students_name = #{pname},
-			</if>
-			<if test="psal!=null">
-				students_sal = #{psal},
-			</if>
-		</set>
-		where students_id = #{pid}
-	</update>
 	<update id="modifyUser" parameterType="Cuser">
 		update cuser
 		<set>
@@ -117,6 +105,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cuid=#{cuid}
 	</update>
 
+	<update id="modifyUserByUser" parameterType="Cuser">
+		update cuser
+		<set>
+			<if test='cemail!=null and cemail!=""'>
+				cemail = #{cemail},
+			</if>
+			<if test='csex!=null and csex!=""'>
+				csex = #{csex},
+			</if>
+			<if test='cphone!=null and cphone!=""'>
+				cphone = #{cphone},
+			</if>
+			<if test='clastloginip!=null and clastloginip!=""'>
+				clastloginip = #{clastloginip},
+			</if>
+			<if test='cphoto!=null and cphoto!=""'>
+				cphoto = #{cphoto},
+			</if>
+			<if test='applynum!=null and applynum!=""'>
+				applynum = #{applynum},
+			</if>
+			<if test='clikebook!=null and clikebook!=""'>
+				clikebook = #{clikebook},
+			</if>
+			<if test='cbirthday!=null and cbirthday!=""'>
+				cbirthday = #{cbirthday},
+			</if>
+		</set>
+		where cusername=#{cusername}
+	</update>
+
+
+
+
+
+
+
+
 	<!-- 根据id获取用户信息 -->
 
 	<select id="getUserMsgById" parameterType="Integer" resultType="Cuser">
@@ -132,12 +158,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cuser where cusername=#{cusername} and cpassword=#{cpassword}
 	</select>
 	
+	
+	<resultMap type="Cuser" id="CuserDetail">
+		<id property="cuid" column="cuid" />
+		<result property="cusername" column="cusername" />
+		<result property="cpassword" column="cpassword" />
+		<result property="cemail" column="cemail" />
+		<result property="csex" column="csex" />
+		<result property="cphone" column="cphone" />
+		<result property="clastloginip" column="clastloginip" />
+		<result property="cphoto" column="cphoto" />
+		<result property="applynum" column="applynum" />
+		<result property="clikebook" column="clikebook" />
+		<result property="cbirthday" column="cbirthday" />
+		<association property="account" javaType="Account">
+			<id property="aid" column="aid" />
+			<result property="cuaid" column="cuaid" />
+			<result property="applyno" column="applyno" />
+			<result property="money" column="money" />
+			<result property="datetime" column="datetime" />
+			<result property="income" column="income" />
+			<result property="outcome" column="outcome" />
+		</association>
+	</resultMap>
+	
+	<select id="findCuserAndAccount" resultMap="CuserDetail">
+		select * from cuser c join account a on a.cuaid=c.cuid where cuid=#{cuid}
+	</select>
+	
+	
 	<select id="findCuser" resultType="Cuser">
-		select * from cuser where cusername=#{name}
+		select * from cuser c where cuid=#{cuid}
+	</select>
+	
+	
+	<select id="findCuserByName" resultType="Cuser">
+		select * from cuser where cusername=#{cusername}
 	</select>
 	
 	<insert id="register" parameterType="Cuser">
-			insert into cuser values(sequserid.nextval,#{cusername},#{cpassword},#{cemail},#{csex},#{cphone},#{clastloginip},#{cphoto},#{applynum},#{clikebook},cbirthday,1)
+			insert into cuser values(sequserid.nextval,#{cusername},#{cpassword},#{cemail},#{csex,jdbcType=VARCHAR},#{cphone,jdbcType=VARCHAR},#{clastloginip,jdbcType=VARCHAR},#{cphoto,jdbcType=VARCHAR},#{applynum,jdbcType=VARCHAR},#{clikebook,jdbcType=VARCHAR},#{cbirthday,jdbcType=VARCHAR},1)
 	</insert>	
 	
+	<update id="updatePassword">
+		update cuser set cpassword=#{cpassword} where cusername=#{cusername}
+	</update>
+	
+	
+<!-- 	<update id="updateApplyNum" parameterType="Account">
+		update cuser set applynum=#{applyno} where cuid=#{cuaid}
+	</update> -->
 </mapper>

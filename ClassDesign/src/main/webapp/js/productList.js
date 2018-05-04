@@ -36,6 +36,11 @@ $(function() {
 
 function pageProductFunction(){
 	$.post("ccomments/getcommentsbyId"+cpid, function(data) {
+		var len = data.rows.length;
+		if(len<=0){
+			$("#commentsDivcar").append('<span style="color:red;">此书籍暂无评论！！！</span>');
+			return;
+		}
 		loadDataProduct(data);
 		pageNextAndPerProduct(data);
 	}, "json");	
@@ -43,10 +48,10 @@ function pageProductFunction(){
 
 function loadDataProduct(data){
 	var len = data.rows.length;
-	if(len<=0){
-		$("#commentsDivcar").append('<span style="color:red;">此书籍暂无评论！！！</span>');
-		return;
-	}
+//	if(len<=0){
+//		$("#commentsDivcar").append('<span style="color:red;">此书籍暂无评论！！！</span>');
+//		return;
+//	}
 	for(var i=0;i<len;i++){
 		$("#commentsDivcar").append('<li><div class="listLeft" style="width:80%; border-bottom: 1px solid red;">'+
 				'<div class="tit"><div class="startWrap"><i class="one"></i><i class="one"></i><i></i><i></i><i></i></div>'+
@@ -67,18 +72,19 @@ function pageNextAndPerProduct(data){
 	var totalPage=data.totalPage;
 	var total=data.total;
 	var len = data.rows.length;
-	if(len<=0){
-		alert("此书暂无评论");
-		return;
-	}
-	if(data.currPage>1&&currPage<=totalPage){
+//	if(len<=0){
+//		alert("此书暂无评论");
+//		return;
+//	}
+	if(data.currPage>=1&&currPage<totalPage){
 		$('#productpageDiv').empty();
 		$('#productpageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a>');
 	}else if(currPage<1){
 		getPerPage(1);
-	}else{
-		getPerPage(totalPage);
 	}
+//	else{
+//		getPerPage(totalPage);
+//	}
 }
 
 
@@ -97,10 +103,10 @@ function getData(pageCurr){
 	}, "json");
 }
 
-function success(){
-	setTimeout(function(){
-		alert("加入购物车成功");
-	},1000)
-}
+//function success(){
+//	setTimeout(function(){
+//		alert("加入购物车成功");
+//	},1000)
+//}
 
 

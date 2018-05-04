@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.yl.cd.entity.Account;
 import com.yl.cd.entity.Cuser;
 import com.yl.cd.entity.PaginationBean;
 
@@ -19,7 +20,16 @@ public interface UserMapper {
 
 	Cuser userLogin(Cuser cuser);
 
-	Cuser findCuser(String name);
+	Cuser findCuser(int cuid);
 
 	boolean register(Cuser cuser);
+
+	boolean modifyUserByUser(Cuser cuser);
+
+	boolean updatePassword(Cuser cuser);
+
+
+	Cuser findCuserByName(String name);
+
+	Cuser findCuserAndAccount(Integer cuaid);
 }

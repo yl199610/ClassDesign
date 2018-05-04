@@ -9,11 +9,18 @@
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/productList.js"></script>
 
-<title>图书商城：Such is life</title>
+<title>商品详细信息</title>
 <script type="text/javascript">
 var cusername="${sessionScope.loginUser.cusername}";
-
  $(function() {
+	 $(document).ready(function() {
+			var cusername="${sessionScope.loginUser.cusername}";
+			if(cusername.length == 0||cusername==null || cusername==''|| cusername == undefined){
+				$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span>&nbsp;<a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
+		 	}
+			var cuid="${sessionScope.loginUser.cuid}";
+		})
+
 	$.post("cproduct/saveProductModel",{"ckeywords": cusername, "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
 		//获取数据后拼接起来
 			loadCarData(data);
@@ -239,8 +246,8 @@ function openCar() {
 			<li class="headspan">您好,欢迎<label style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
 			</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="index.jsp">==</a> <span class="f-hui-line">| </span>&nbsp; <a
-				id="regSpan" class="f-cheng f-bold" href="index.jsp">==</a></li>
+				href="index.jsp"></a> <span class="f-hui-line"> </span>&nbsp; <a
+				id="regSpan" class="f-cheng f-bold" href="index.jsp"></a></li>
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
@@ -248,7 +255,7 @@ function openCar() {
 					value="${sessionScope.loginUser.cusername}" />
 				<input hidden="hidden" id="cuidsession"
 					value="${sessionScope.loginUser.cuid}" />
-				<li><a target="_blank" class="f-green">帮助中心</a></li>
+				<li><a target="_blank" class="f-green">个人中心</a></li>
 			</ul>
 		</div>
 	</div>

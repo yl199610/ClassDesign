@@ -46,7 +46,6 @@ public class UserHandler{
 	}
 	
 	//注册时候查询用户是否存在
-	
 	@RequestMapping("/check")
 	@ResponseBody
 	public boolean check(@RequestParam(name="uname",required=false)String name) {
@@ -54,7 +53,7 @@ public class UserHandler{
 		if(name==""||"".equals(name)){//不通过
 			return true;
 		}else{
-			Cuser user=userService.findCuser(name);
+			Cuser user=userService.findCuserByName(name);
 			if(user!=null){//查询出有这个用户名
 				return false;
 			}else{
@@ -63,8 +62,14 @@ public class UserHandler{
 		}
 	}
 	
-	
-	
+	//获取用户信息
+	@RequestMapping("/showuser")
+	@ResponseBody
+	public Cuser getUserMsgByName(String cuid) {
+		LogManager.getLogger().debug("请求userHandler请求getUserMsgByName查询用户信息..-"+cuid+"--");
+		Cuser user=userService.findCuser(Integer.parseInt(cuid));
+		return user;
+	}
 	
 	@RequestMapping("/modify")	
 	@ResponseBody
@@ -81,6 +86,22 @@ public class UserHandler{
 		}
 		return userService.modifyUser(cuser);
 	}
+	
+	@RequestMapping("/usermodify")
+	@ResponseBody
+	public boolean usermodify(@RequestParam(name="picData",required=false)MultipartFile picData,Cuser cuser){
+		LogManager.getLogger().debug(picData+"用户发送请求userHandler处理usermodify...."+cuser);
+		if(picData!=null){
+			try {
+				picData.transferTo(new File(ServletUtil.UPLOAD_DIR,picData.getOriginalFilename()));
+				cuser.setCphoto("/"+ServletUtil.UPLOAD_DIR_NAME+"/"+picData.getOriginalFilename());//图片上传
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return userService.modifyUserByUser(cuser);
+	}
+	
 	
 	/**
 	 * 删除用户
@@ -118,13 +139,19 @@ public class UserHandler{
 	@ResponseBody
 	public boolean register(Cuser user) {//ModelMap   逻辑操作和实体类    request.setAttribute
 		LogManager.getLogger().debug("请求userHandler注册用户..."+user);
-		return false;
-		
-//		if(userService.register(user)){
-//			return true;
-//		}else {
-//			return false;
-//		}
+		if(userService.register(user)){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	//修改密码
+	@RequestMapping("/updatepassword")
+	@ResponseBody
+	public boolean updatePassword(Cuser user,ModelMap map) {//ModelMap   逻辑操作和实体类    request.setAttribute
+		LogManager.getLogger().debug("请求userHandler修改密码..."+user);
+		boolean flag = userService.updatePassword(user);
+		return flag;
 	}
 	
 	
