@@ -240,6 +240,7 @@ create  table corderitem(
   cobid references cproduct(cpid),--产品表
   corid references corder(coid)--订单表
 );
+select * from corderitem ci join cproduct c on c.cpid=ci.cobid join corder cd on cd.coid=ci.corid where corid=44
 select * from corderitem
 create sequence seqcorderitem start with 1;
 drop table corderitem

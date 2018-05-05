@@ -45,7 +45,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			insert into corderitem values(seqcorderitem.nextval,#{coinumber},#{ciprice},#{cobid},#{corid})
 	</insert>	
 	
+	<update id="cancelOrder">
+		update corder set cstatus='nonormal' where coid=#{coid}
+	</update>
 	
 	
+	<resultMap id="CorderitemDetail" type="Corderitem">
+		<id property="coiid" column="coiid" />
+		<result property="coinumber" column="coinumber" />
+		<result property="ciprice" column="ciprice" />
+		<result property="cobid" column="cobid" />
+		<result property="corid" column="corid" />
+		<association property="corder" javaType="Corder">
+			<id property="coid" column="coid" />
+			<result property="cordid" column="cordid" />
+			<result property="cstatus" column="cstatus" />
+			<result property="cordertime" column="cordertime" />
+			<result property="corderdesc" column="corderdesc" />
+			<result property="ctotalprice" column="ctotalprice" />
+			<result property="cordername" column="cordername" />
+			<result property="cfulladdress" column="cfulladdress" />
+			<result property="cpostalcode" column="cpostalcode" />
+			<result property="cphone" column="cphone" />
+		</association>
+		<association property="cproduct" javaType="Cproduct">
+			<id property="cpid" column="cpid" />
+			<result property="spcaid" column="spcaid" />
+			<result property="cproductname" column="cproductname" />
+			<result property="cdescription" column="cdescription" />
+			<result property="caddtime" column="caddtime" />
+			<result property="cnormalprice" column="cnormalprice" />
+			<result property="ckeywords" column="ckeywords" />
+			<result property="cwsscprice" column="cwsscprice" />
+		</association>
+	</resultMap>
+	
+	<select id="findorderDetail" resultMap="CorderitemDetail">
+		select * from corderitem ci join cproduct c on c.cpid=ci.cobid join corder cd on cd.coid=ci.corid where corid=#{corid}
+	</select>	
 	
 </mapper>

@@ -16,4 +16,8 @@ public interface OrderMapper {
 
 	boolean insertCorderDetail(Corderitem ci);
 
+	boolean cancelOrder(String coid);
+
+	List<Corderitem> findorderDetail(String corid);
+
 }

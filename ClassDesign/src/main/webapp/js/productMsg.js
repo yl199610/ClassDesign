@@ -97,7 +97,7 @@ function stopProduct(id){
 }
 
 function getProductBy(){
-	var formData = new FormData($("#getProInfoForm")[0]); // FormData
+	var formData = new FormData($("#getProInfoForm")[0]);
 	$.ajax({
 		url : 'cproduct/list',
 		type : 'POST',

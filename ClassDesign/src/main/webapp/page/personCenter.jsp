@@ -12,114 +12,218 @@
 <script type="text/javascript" src="js/pc.js"></script>
 </head>
 <script>
-function operate() {
-	document.getElementById('div_test').style.display = "";
-	setTimeout("disappeare()", 2000);
-}
-function disappeare() {
-	document.getElementById('div_test').style.display = "none";
-}
-$(function() {
-	var ecusername="${sessionScope.loginUser.cusername}";
-	var cuid="${sessionScope.loginUser.cuid}";
-	$("#ecusername").val(ecusername);
-	$("#emcusername").val(ecusername);
-	$.post("cuser/showuser?cuid="+cuid,function(data) {
-		$("#eemail").val(data.cemail);
-		$("#ecphone").val(data.cphone);
-		$(":radio[name='csex'][value='" + data.csex + "']").prop("checked", "checked");
-		$("#pic").attr("src", data.cphoto);
-		$("#ecbirthday").val(data.cbirthday);
-	}, "json");	
-	$.post("account/findapplyno?cuaid="+cuid,function(data) {
-		$("#meapplyno").val(data.account.applyno);
-		$(".showapply").html(data.account.applyno);
-		$(".money").html(data.account.money);
-	}, "json");	
-});
-function modifyUserMsg(){
-	var params = $("#updateUserMsg").serialize();
-	$.post("cuser/usermodify", params, function(data) {
-		var jsonarray = JSON.stringify(data);
-		if (jsonarray == "true") {
-			$("#div_test").html("修改信息成功！！！");
-			operate();
-		} else {
-			$("#div_test").html("修改信息失败。。。");
-			operate();
+	function operate() {
+		document.getElementById('div_test').style.display = "";
+		setTimeout("disappeare()", 2000);
+	}
+	function disappeare() {
+		document.getElementById('div_test').style.display = "none";
+	}
+	$(function() {
+		var ecusername = "${sessionScope.loginUser.cusername}";
+		var cuid = "${sessionScope.loginUser.cuid}";
+		$("#ecusername").val(ecusername);
+		$("#emcusername").val(ecusername);
+		$.post("cuser/showuser?cuid=" + cuid, function(data) {
+			$("#eemail").val(data.cemail);
+			$("#ecphone").val(data.cphone);
+			$(":radio[name='csex'][value='" + data.csex + "']").prop("checked",
+					"checked");
+			$("#pic").attr("src", data.cphoto);
+			$("#ecbirthday").val(data.cbirthday);
+		}, "json");
+		$.post("account/findapplyno?cuaid=" + cuid, function(data) {
+			$("#meapplyno").val(data.account.applyno);
+			$(".showapply").html(data.account.applyno);
+			$(".money").html(data.account.money);
+		}, "json");
+		
+		pageOrderFunction();//总分页界面
+	});
+	function pageOrderFunction(){
+		var cuid = "${sessionScope.loginUser.cuid}";
+		$.post("corder/findorderbyid?cordid=" + cuid, function(data) {
+			var len = data.rows.length;
+			if(len<=0){
+				$("#productpageDiv").append('<span style="color:red;">暂时没有订单</span>');
+				return;
+			}
+			loadDataOrder(data);
+			pageNextAndPerOrder(data);
+		}, "json");
+		
+	}
+  
+	function loadDataOrder(data){
+		var len = data.rows.length;
+		for(var i=0;i<len;i++){
+			$("#bodyOrder").append('<tr><td>'+data.rows[i].coid+'</td><td>'+data.rows[i].corderdesc+'</td><td>'+data.rows[i].ctotalprice+'</td><td>'+data.rows[i].cordertime+'</td>'+
+			'<td>'+data.rows[i].cfulladdress+'</td><td>'+data.rows[i].cpostalcode+'</td><td>'+data.rows[i].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[i].coid+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[i].coid+')">订单详情</td></tr>');
 		}
-	}, "json");  
-} 
+	}
+
+	//分页栏
+	function pageNextAndPerOrder(data){
+		var currPage=data.currPage;
+		var nextPage=currPage+1;
+		var perPage=currPage-1;
+		var totalPage=data.totalPage;
+		var total=data.total;
+		var len = data.rows.length;
+//		if(len<=0){
+//			alert("此书暂无评论");
+//			return;
+//		}
+		if(data.currPage>=1&&currPage<totalPage){
+			$('#productpageDiv').empty();
+			$('#productpageDiv').html('<a href="javascript:void(0)" onClick="getPerPage(1);">首页&nbsp;&nbsp;</a><a id="pera" href="javascript:void(0)" onClick="getPerPage('+perPage+');">上一页&nbsp;&nbsp;</a><a href="javascript:void(0)" id="nexta" onClick="getPerPage('+nextPage+');">下一页&nbsp;&nbsp;</a><a href="javascript:void(0)" onClick="getPerPage('+totalPage+');">末页</a>');
+		}else if(currPage<1){
+			getPerPage(1);
+		}
+	}
+
+
+	//上下页的点击事件
+	function getPerPage(perpage){
+		getData(perpage);
+	}
+
+
+	//获得数据
+	function getData(pageCurr){
+		var cuid = "${sessionScope.loginUser.cuid}";
+		$.post("corder/findorderbyid?cordid="+cuid+"&pageNos="+pageCurr,function(data) {
+			$("#bodyOrder").html("");  
+			loadDataOrder(data);
+			pageNextAndPerOrder(data);
+		}, "json");
+	}
+	function getOrderUser(){
+		var cuid = "${sessionScope.loginUser.cuid}";
+		var coid = $("#mmcoid").val();  
+		if(coid==null||coid==""){
+			$("#bodyOrder").empty();
+			pageOrderFunction();//总分页界面
+		}
+		$.post("corder/findorderone?cordid="+cuid+"&coid="+coid,function(data) {
+			$("#bodyOrder").empty();
+			if(data.total=1){
+				$("#bodyOrder").append('<tr><td>'+data.rows[0].coid+'</td><td>'+data.rows[0].corderdesc+'</td><td>'+data.rows[0].ctotalprice+'</td><td>'+data.rows[0].cordertime+'</td>'+
+						'<td>'+data.rows[0].cfulladdress+'</td><td>'+data.rows[0].cpostalcode+'</td><td>'+data.rows[0].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[0].coid+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[0].coid+')">订单详情</td></tr>');
+			}else{
+				$("#bodyOrder").append("暂无此订单");
+			}
+		}, "json");
+	}
 	
-function addPicPath(obj){
-	var picStr=window.URL.createObjectURL(obj.files[0]);
-	$("#pic").attr("src",picStr);
-	$("#pic").attr("height","100px");
-	$("#pic").attr("weight","100px");
-}
-
-
-function checkSeam(){
-	var onePwd = $("#mcpassword").val();
-	var twoPwd = $("#mncpassword").val();
-	if(twoPwd==""||onePwd==""){
-		return false;
-	}
-	if(onePwd!=twoPwd){	
-		$(".new").html("*输入的密码不一致");
-		return false;
-	}else{
-		$(".new").html("");
-		return true;
-	}
-	return true;
-} 
-
-
-function updatePassword(){
-	var params = $("#updatePassword").serialize();
-	if(checkSeam()){
-		$.post("cuser/updatepassword", params, function(data) {
+	function cancelOrder(coid){
+		$.post("corder/cancelorder?coid="+coid, function(data) {
 			var jsonarray = JSON.stringify(data);
 			if (jsonarray == "true") {
-				$("#div_test").html("修改密码成功！！！");
+				$("#div_test").html("取消订单成功！！！");
 				operate();
 			} else {
-				$("#div_test").html("修改密码失败。。。");
+				$("#div_test").html("取消订单失败！！！");
 				operate();
 			}
 		}, "json");
 	}
-}
-function noNull(){
-	if($("#applyno").val()!=""){
-		return true;
-	}else{
-		return false;
+	
+	
+	function detailOrder(coid){
+		$.post("corder/findorderdetail?corid="+coid,function(data) {
+			$("#bodyOrderDetail").empty();
+			for(var i=0;i<data.length;i++){
+				$("#bodyOrderDetail").append('<tr><td>'+data[i].corid+'</td><td>'+data[i].cproduct.cproductname+'</td><td>'+data[i].coinumber+'</td>'+
+						'<td>'+data[i].ciprice+'</td></tr>');
+			}
+		}, "json");
 	}
-}
-function addAcount(){
-	if(noNull()){
-		var params = $("#addCount").serialize();
-		$.post("account/addacount", params, function(data) {
+	
+	
+	
+	
+	function modifyUserMsg() {
+		var params = $("#updateUserMsg").serialize();
+		$.post("cuser/usermodify", params, function(data) {
 			var jsonarray = JSON.stringify(data);
 			if (jsonarray == "true") {
-				$(".showapply").html($("#applyno").val());
-				$("#meapplyno").val($("#applyno").val());
-				$("#div_test").html("用户添加账户成功！！！");
+				$("#div_test").html("修改信息成功！！！");
 				operate();
 			} else {
-				$("#div_test").html("用户添加账户失败。。。");
+				$("#div_test").html("修改信息失败。。。");
 				operate();
 			}
 		}, "json");
-	}else{
-		alert("请勿输入空账户");
 	}
-	
-}
 
-function editAcount(){
+	function addPicPath(obj) {
+		var picStr = window.URL.createObjectURL(obj.files[0]);
+		$("#pic").attr("src", picStr);
+		$("#pic").attr("height", "100px");
+		$("#pic").attr("weight", "100px");
+	}
+
+	function checkSeam() {
+		var onePwd = $("#mcpassword").val();
+		var twoPwd = $("#mncpassword").val();
+		if (twoPwd == "" || onePwd == "") {
+			return false;
+		}
+		if (onePwd != twoPwd) {
+			$(".new").html("*输入的密码不一致");
+			return false;
+		} else {
+			$(".new").html("");
+			return true;
+		}
+		return true;
+	}
+
+	function updatePassword() {
+		var params = $("#updatePassword").serialize();
+		if (checkSeam()) {
+			$.post("cuser/updatepassword", params, function(data) {
+				var jsonarray = JSON.stringify(data);
+				if (jsonarray == "true") {
+					$("#div_test").html("修改密码成功！！！");
+					operate();
+				} else {
+					$("#div_test").html("修改密码失败。。。");
+					operate();
+				}
+			}, "json");
+		}
+	}
+	function noNull() {
+		if ($("#applyno").val() != "") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function addAcount() {
+		if (noNull()) {
+			var params = $("#addCount").serialize();
+			$.post("account/addacount", params, function(data) {
+				var jsonarray = JSON.stringify(data);
+				if (jsonarray == "true") {
+					$(".showapply").html($("#applyno").val());
+					$("#meapplyno").val($("#applyno").val());
+					$("#div_test").html("用户添加账户成功！！！");
+					operate();
+				} else {
+					$("#div_test").html("用户添加账户失败。。。");
+					operate();
+				}
+			}, "json");
+		} else {
+			alert("请勿输入空账户");
+		}
+
+	}
+
+	function editAcount() {
 		var params = $("#editCount").serialize();
 		$.post("account/editacount", params, function(data) {
 			var jsonarray = JSON.stringify(data);
@@ -130,25 +234,26 @@ function editAcount(){
 				$("#div_test").html("用户编辑账户失败。。。");
 				operate();
 			}
-		}, "json");	
-	
-}
+		}, "json");
 
-function addMoney(){
-	var params = $("#addMoney").serialize();
-	$.post("account/addmoney", params, function(data) {
-		var jsonarray = JSON.stringify(data);
-		if (jsonarray == "true") {
-			$(".money").html(parseInt($(".money").html())+parseInt($("#amoney").val()));
-			$("#div_test").html("账户充值成功！！！");
-			operate();
-		} else {
-			$("#div_test").html("账户充值失败。。。");
-			operate();
-		}
-	}, "json");	
-}
+	}
 
+	function addMoney() {
+		var params = $("#addMoney").serialize();
+		$.post("account/addmoney", params, function(data) {
+			var jsonarray = JSON.stringify(data);
+			if (jsonarray == "true") {
+				$(".money").html(
+						parseInt($(".money").html())
+								+ parseInt($("#amoney").val()));
+				$("#div_test").html("账户充值成功！！！");
+				operate();
+			} else {
+				$("#div_test").html("账户充值失败。。。");
+				operate();
+			}
+		}, "json");
+	}
 </script>
 <style>
 #btma {
@@ -165,11 +270,38 @@ function addMoney(){
 	border-radius: 2px;
 	cursor: pointer;
 }
+
+#tableOrder #tableOrderDetail{
+	border-collapse: collapse;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#tableOrder td, #tableOrder th,#tableOrderDetail td, #tableOrderDetail th {
+	border: 1px solid #cad9ea;
+	color: #666;
+	height: 30px;
+}
+
+#tableOrder thead th,#tableOrderDetail thead th {
+	background-color: #CCE8EB;
+	width: 100px;
+}
+
+#tableOrder tr:nth-child(odd) #tableOrderDetail tr:nth-child(odd){
+	background: #fff;
+}
+
+#tableOrder tr:nth-child(even) ,#tableOrderDetail tr:nth-child(even) {
+	background: #F5FAFA;
+}
 </style>
 
 <body>
-	<input type="text" id="namesession" name="proname" value="${sessionScope.loginUser.cusername}" />
-	<input type="text" id="cuidsession" name="cordid" value="${sessionScope.loginUser.cuid}" />
+	<input type="text" id="namesession" name="proname"
+		value="${sessionScope.loginUser.cusername}" />
+	<input type="text" id="cuidsession" name="cordid"
+		value="${sessionScope.loginUser.cuid}" />
 	<div class="container">
 		<div class="menu">
 			<h3>
@@ -203,10 +335,13 @@ function addMoney(){
 
 			<div class="menu1 menu_tab">
 				<div id="tab1" class="tab active">
-					<form id="updateUserMsg" onsubmit="return modifyUserMsg();" action="cuser/usermodify" enctype="multipart/form-data" method="post"  target="nm_iframe">
+					<form id="updateUserMsg" onsubmit="return modifyUserMsg();"
+						action="cuser/usermodify" enctype="multipart/form-data"
+						method="post" target="nm_iframe">
 						<table width="100%">
 							<tr>
-								<th colspan="2" ALIGN=CENTER><font size="5" style="color: red;">编辑个人档案</font></th>
+								<th colspan="2" ALIGN=CENTER><font size="5"
+									style="color: red;">编辑个人档案</font></th>
 							</tr>
 							<tr>
 								<td colspan="3"><hr></td>
@@ -218,7 +353,8 @@ function addMoney(){
 									<table width="400" cellpadding="4">
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户名:</font></td>
-											<td><input id="ecusername" name="cusername" readonly="readonly"/></td>
+											<td><input id="ecusername" name="cusername"
+												readonly="readonly" /></td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">邮箱</font></td>
@@ -232,26 +368,28 @@ function addMoney(){
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><label> 上传图片 </label></td>
-											<td><input type="file" name="picData" id="mpic" onchange="addPicPath(this)"/><br/>
-										<img src="images/1.jpg" id="pic"><br/></td>
+											<td><input type="file" name="picData" id="mpic"
+												onchange="addPicPath(this)" /><br /> <img
+												src="images/1.jpg" id="pic"><br /></td>
 										</tr>
-										 
-										
-										
+
+
+
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">性别</font></td>
 											<td><input type="radio" name="csex" value="男">男
 												<input type="radio" name="csex" value="女">女</td>
 										</tr>
-										
+
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户生日</font></td>
 											<td><input type="date" name="cbirthday" id="ecbirthday"
 												placeholder="请输入用户生日" /></td>
 										</tr>
 										<tr>
-											<td ALIGN="center" colspan="3">
-											<input type="submit" value="修改" style="width:143px; height:40px; background:url('images/bg11.jpg') no-repeat left top; color:#FFF;">
+											<td ALIGN="center" colspan="3"><input type="submit"
+												value="修改"
+												style="width: 143px; height: 40px; background: url('images/bg11.jpg') no-repeat left top; color: #FFF;">
 										</tr>
 									</table>
 								</td>
@@ -259,11 +397,11 @@ function addMoney(){
 							</tr>
 						</table>
 					</form>
-<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+					<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
 				</div>
 
 
-					
+
 
 
 
@@ -273,7 +411,8 @@ function addMoney(){
 					<form id="updatePassword" method="post">
 						<table width="100%">
 							<tr>
-								<th colspan="2" ALIGN=CENTER><font size="5" style="color: red;">用户密码修改</font></th>
+								<th colspan="2" ALIGN=CENTER><font size="5"
+									style="color: red;">用户密码修改</font></th>
 							</tr>
 							<tr>
 								<td colspan="3"><hr></td>
@@ -285,21 +424,27 @@ function addMoney(){
 									<table width="500" cellpadding="4">
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户名:</font></td>
-											<td><input id="emcusername" name="cusername" readonly="readonly"/></td>
+											<td><input id="emcusername" name="cusername"
+												readonly="readonly" /></td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">新密码:</font></td>
-											<td><input type="text" name="ncpassword" id="mcpassword" required="required" placeholder="请输入新密码" maxlength="16"/>*长度不能超过16位</td>
+											<td><input type="text" name="ncpassword" id="mcpassword"
+												required="required" placeholder="请输入新密码" maxlength="16" />*长度不能超过16位</td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">确认新密码</font></td>
-											<td><input type="text" name="cpassword" id="mncpassword"  required="required" placeholder="请输入新密码" maxlength="16" onchange="checkSeam()"/><span style="color:red" class="new"></span></td>
+											<td><input type="text" name="cpassword" id="mncpassword"
+												required="required" placeholder="请输入新密码" maxlength="16"
+												onchange="checkSeam()" /><span style="color: red"
+												class="new"></span></td>
 										</tr>
 										<tr>
 											<td ALIGN="center" colspan="3">
-											<div class="calBtn" >
-												<a id="btma" href="javascript:void(0)" onClick="updatePassword()">修改密码</a>
-											</div>
+												<div class="calBtn">
+													<a id="btma" href="javascript:void(0)"
+														onClick="updatePassword()">修改密码</a>
+												</div>
 										</tr>
 									</table>
 								</td>
@@ -310,7 +455,7 @@ function addMoney(){
 
 				</div>
 
-			<!-- 	<div id="tab3" class="tab">
+				<!-- 	<div id="tab3" class="tab">
 					<p class="tt">6.新增银行账号处”是否现金账户”什么意思？</p>
 					<p>This is Answer！6.新增银行账号处”是否现金账户”什么意思？6.新增银行账号处”是否现金账户”什么意思？</p>
 
@@ -349,9 +494,50 @@ function addMoney(){
 
 			<div class="menu2 menu_tab">
 				<div id="tab-1" class="tab">
-					<p class="tt">1. Question</p>
-					<p>This is Answer！</p>
+					<h4 style="color: red">订单信息</h4>
+					<form id="getOrderInfo" method="post">
+						<input name="coid" id="mmcoid" placeholder="输入订单信息"> <input
+							id="aacuid" name="cordid" readonly="readonly"
+							value="${sessionScope.loginUser.cuid}" /> <input type="button"
+							value="查询订单信息" onClick="getOrderUser()">
+					</form>
+					<table id="tableOrder" align="center" border="1px"
+						cellspacing="0px" cellpadding="0px" width="80%"
+						style="margin-left: 100px;">
+						<thead>
+							<tr style="background-color: #dedede;">
+								<th>订单编号</th>
+								<th>订单描述</th>
+								<th>订单总价</th>
+								<th>订单时间</th>
+								<th>收货地址</th>
+								<th>邮政编码</th>
+								<th>联系电话</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody align="center" id="bodyOrder">
 
+						</tbody>
+					</table>
+					<div id="productpageDiv"
+						style="color: red; float: right; display: block;"></div>
+
+					<table id="tableOrderDetail" align="center" border="1px"
+						cellspacing="0px" cellpadding="0px" width="80%"
+						style="margin-left: 100px;">
+						<thead>
+							<tr style="background-color: #dedede;">
+								<th>订单编号</th>
+								<th>产品名称</th>
+								<th>数量</th>
+								<th>价格</th>
+							</tr>
+						</thead>
+						<tbody align="center" id="bodyOrderDetail">
+
+						</tbody>
+					</table>
 
 				</div>
 
@@ -385,11 +571,13 @@ function addMoney(){
 
 			<div class="menu3 menu_tab">
 				<div id="tab-3-1" class="tab">
-					<label>账户总金额:<span class="money" style="color:red;"></span>元</label>
+					<label>账户总金额:<span class="money" style="color: red;"></span>元
+					</label>
 					<form id="addMoney" method="post">
 						<table width="100%">
 							<tr>
-								<th colspan="2" ALIGN=CENTER><font size="5" style="color: red;">账户充值</font></th>
+								<th colspan="2" ALIGN=CENTER><font size="5"
+									style="color: red;">账户充值</font></th>
 							</tr>
 							<tr>
 								<td colspan="3"><hr></td>
@@ -399,10 +587,11 @@ function addMoney(){
 								<td width="400"></td>
 								<td ALIGN=CENTER BGCOLOR="#ffffff">
 									<table width="500" cellpadding="4">
-									<tr>
-									
+										<tr>
+
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户ID:</font></td>
-											<td><input id="aacuid" name="cuaid" readonly="readonly"  value="${sessionScope.loginUser.cuid}" /></td>
+											<td><input id="aacuid" name="cuaid" readonly="readonly"
+												value="${sessionScope.loginUser.cuid}" /></td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">充值金额:</font></td>
@@ -410,9 +599,9 @@ function addMoney(){
 										</tr>
 										<tr>
 											<td ALIGN="center" colspan="3">
-											<div class="calBtn" >
-												<a id="btma" href="javascript:void(0)" onClick="addMoney()">充值</a>
-											</div>
+												<div class="calBtn">
+													<a id="btma" href="javascript:void(0)" onClick="addMoney()">充值</a>
+												</div>
 										</tr>
 									</table>
 								</td>
@@ -425,7 +614,8 @@ function addMoney(){
 					<form id="addCount" method="post">
 						<table width="100%">
 							<tr>
-								<th colspan="2" ALIGN=CENTER><font size="5" style="color: red;">添加个人账户</font></th>
+								<th colspan="2" ALIGN=CENTER><font size="5"
+									style="color: red;">添加个人账户</font></th>
 							</tr>
 							<tr>
 								<td colspan="3"><hr></td>
@@ -435,10 +625,11 @@ function addMoney(){
 								<td width="400"></td>
 								<td ALIGN=CENTER BGCOLOR="#ffffff">
 									<table width="500" cellpadding="4">
-									<tr>
-									
+										<tr>
+
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户ID:</font></td>
-											<td><input id="aacuid" name="cuaid" readonly="readonly"  value="${sessionScope.loginUser.cuid}" /></td>
+											<td><input id="aacuid" name="cuaid" readonly="readonly"
+												value="${sessionScope.loginUser.cuid}" /></td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">账户名:</font></td>
@@ -446,9 +637,10 @@ function addMoney(){
 										</tr>
 										<tr>
 											<td ALIGN="center" colspan="3">
-											<div class="calBtn" >
-												<a id="btma" href="javascript:void(0)" onClick="addAcount()">添加账户</a>
-											</div>
+												<div class="calBtn">
+													<a id="btma" href="javascript:void(0)"
+														onClick="addAcount()">添加账户</a>
+												</div>
 										</tr>
 									</table>
 								</td>
@@ -459,7 +651,8 @@ function addMoney(){
 					<form id="editCount" method="post">
 						<table width="100%">
 							<tr>
-								<th colspan="2" ALIGN=CENTER><font size="5" style="color: red;">编辑个人账户</font></th>
+								<th colspan="2" ALIGN=CENTER><font size="5"
+									style="color: red;">编辑个人账户</font></th>
 							</tr>
 							<tr>
 								<td colspan="3"><hr></td>
@@ -470,9 +663,10 @@ function addMoney(){
 								<td ALIGN=CENTER BGCOLOR="#ffffff">
 									<table width="500" cellpadding="4">
 										<label>当前账户：<span class="showapply"></span></label>
-									<tr>
+										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">用户ID:</font></td>
-											<td><input id="aacuid" name="cuaid" readonly="readonly"  value="${sessionScope.loginUser.cuid}" /></td>
+											<td><input id="aacuid" name="cuaid" readonly="readonly"
+												value="${sessionScope.loginUser.cuid}" /></td>
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">账户名:</font></td>
@@ -480,9 +674,10 @@ function addMoney(){
 										</tr>
 										<tr>
 											<td ALIGN="center" colspan="3">
-											<div class="calBtn" >
-												<a id="btma" href="javascript:void(0)" onClick="editAcount()">删除账户</a>
-											</div>
+												<div class="calBtn">
+													<a id="btma" href="javascript:void(0)"
+														onClick="editAcount()">删除账户</a>
+												</div>
 										</tr>
 									</table>
 								</td>
@@ -511,7 +706,7 @@ function addMoney(){
 			style="text-align: center; margin: 50px 0; font: normal 14px/24px 'MicroSoft YaHei';">
 
 		</div>
-		<div id="div_test" style="display: none; color: white; line-height: 35px; position: absolute; z-index: 100; left: 50%; top: 30%; margin-left: -75px; text-align: center; width: 150px; height: 35px; background-color: green; font-size: 12px;"></div>
-		
+		<div id="div_test"
+			style="display: none; color: white; line-height: 35px; position: absolute; z-index: 100; left: 50%; top: 30%; margin-left: -75px; text-align: center; width: 150px; height: 35px; background-color: green; font-size: 12px;"></div>
 </body>
 </html>

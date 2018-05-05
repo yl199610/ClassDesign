@@ -3,6 +3,7 @@ package com.yl.cd.web.handler;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yl.cd.entity.Cbook;
 import com.yl.cd.entity.Corder;
+import com.yl.cd.entity.Corderitem;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.OrderService;
@@ -75,4 +77,48 @@ public class OrderHandler{
 		return flag;
 	}
 	
+	
+	// 模糊分页查询
+	@RequestMapping("/findorderbyid")
+	@ResponseBody
+	public PaginationBean<Corder> getAllCorderByUser(HttpServletRequest request) {
+		LogManager.getLogger().debug("请求OrderHandler处理getAllCorderByUser根据用户查出订单......");
+		String page = request.getParameter("pageNos");
+		PaginationBean<Cproduct> cproductList = new PaginationBean<Cproduct>();
+		if ("".equals(page) || page == null) {
+			page = String.valueOf(cproductList.getCurrPage());
+		}
+		String rows = "2";
+		String cordid = request.getParameter("cordid");
+		Corder corder = new Corder();
+		corder.setCordid(Integer.parseInt(cordid));
+		PaginationBean<Corder> productPage = orderService.getAllCorder(page, rows, corder);
+		return productPage;
+	}
+	
+	@RequestMapping("/findorderone")
+	@ResponseBody
+	public PaginationBean<Corder> findOrderOne(HttpServletRequest request) {
+		LogManager.getLogger().debug("请求OrderHandler处理getAllCorderByUser根据用户查出一个订单......");
+		String cordid = request.getParameter("cordid");
+		String coid = request.getParameter("coid");
+		Corder corder = new Corder();
+		corder.setCordid(Integer.parseInt(cordid));
+		corder.setCoid(Integer.parseInt(coid));
+		PaginationBean<Corder> productPage = orderService.getAllCorder("1","10", corder);
+		return productPage;
+	}
+	@RequestMapping("/cancelorder")
+	@ResponseBody
+	public boolean cancelOrder(String coid) {
+		LogManager.getLogger().debug("请求OrderHandler处理cancelOrder取消订单......"+coid);
+		return orderService.cancelOrder(coid);
+	}
+	
+	@RequestMapping("/findorderdetail")
+	@ResponseBody
+	public List<Corderitem> findorderDetail(String corid) {
+		LogManager.getLogger().debug("请求OrderHandler处理findorderDetail订单详情......"+corid);
+		return orderService.findorderDetail(corid);
+	}
 }

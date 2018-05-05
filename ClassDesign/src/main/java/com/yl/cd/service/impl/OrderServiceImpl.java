@@ -67,4 +67,16 @@ public class OrderServiceImpl implements OrderService{
 		return result;
 	}
 
+
+	@Override
+	public boolean cancelOrder(String coid) {
+		return orderMapper.cancelOrder(coid);
+	}
+
+
+	@Override
+	public List<Corderitem> findorderDetail(String coid) {
+		return orderMapper.findorderDetail(coid);
+	}
+
 }
