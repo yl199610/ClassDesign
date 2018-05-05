@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yl.cd.entity.Cbook;
+import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Ccomments;
 import com.yl.cd.entity.Cfavorites;
 import com.yl.cd.entity.Cproduct;
@@ -44,5 +45,10 @@ public interface ProductMapper {
 	Cbook getBookMsgByBid(Integer cbid);
 
 	boolean addProduct(Cproduct cproduct);
+
+	List<Cproduct> getProductByCcid(Map<String, Object> map);
+
+	PaginationBean<Cproduct> getTotalAndTotalProduct(Map<String, Object> map);
+
 
 }

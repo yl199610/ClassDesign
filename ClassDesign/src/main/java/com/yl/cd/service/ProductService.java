@@ -3,6 +3,7 @@ package com.yl.cd.service;
 import java.util.List;
 
 import com.yl.cd.entity.Cbook;
+import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 
@@ -31,5 +32,7 @@ public interface ProductService {
 	Cbook getBookMsgByBid(Integer cbid);
 
 	boolean addProduct(Cproduct cproduct);
+
+	PaginationBean<Cproduct> getProductByCcid(String page, String rows, String ccid);
 
 }

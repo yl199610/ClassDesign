@@ -12,4 +12,8 @@ public interface FavMapper {
 
 	PaginationBean<Cfavorites> getFavoriteTotalAndTotalPage(Map<String, Object> map);
 
+	boolean saveFavorites(Cfavorites fav);
+
+	Cfavorites findFavBypidAndCuid(Cfavorites fav);
+
 }

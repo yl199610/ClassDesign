@@ -133,6 +133,14 @@ public class ConnTest {
 	public void getAllOneBook() {
 		System.out.println(bookMapper.detailBook(11));
 	}
+	
+	@Test
+	public void getProductById() {
+		System.out.println(productServiceImpl.getProductByCcid("1","2","21"));
+	}
+	
+	
+	
 //	
 //	@Test
 //	public void sendMobileCode() {

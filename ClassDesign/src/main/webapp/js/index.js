@@ -31,7 +31,7 @@ function findanotherdata(ccid){
 			$(".hiddenul").append('<li><h2>'+data[i].ccname+'</h2><div class="'+"menu-list"+(i)+'"></div><div class="clear"></div></li>');
 			for(var j=0; j <ccateLen; j++){
 				if(data[i].ccid==data[i].ccategory[j].parentid){
-					$(".menu-list"+(i)).append('<div class="menu-list-div"><span>|</span><a class="thrida" href="#">'+data[i].ccategory[j].ccname+'</a></div>');
+					$(".menu-list"+(i)).append('<div class="menu-list-div"><span>|</span><a target="_blank" class="thrida" href="page/showMsg.jsp?ccid='+data[i].ccategory[j].ccid+'">'+data[i].ccategory[j].ccname+'</a></div>');
 				}
 			}
 		}
@@ -86,9 +86,9 @@ function pageFunction(){
 function loadData(data){
 	var len = data.rows.length;
 	for(var i=0;i<len;i++){
-		$('.imageAppear').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="" target="_blank">'+
+		$('.imageAppear').append('<div class="oneBookDiv"><ul id="hotDiv"><li><a href="page/productList.jsp?ccid='+data.rows[i].cpid+'" target="_blank">'+
 				'<img src="'+data.rows[i].cimage+'"></a></li><li>'+
-				'<a href="" title="'+data.rows[i].cproductname+'" target="_blank">'+data.rows[i].cproductname+'</a></li><li>'+
+				'<a href="page/productList.jsp?ccid='+data.rows[i].cpid+'" title="'+data.rows[i].cproductname+'" target="_blank">'+data.rows[i].cproductname+'</a></li><li>'+
 				'<span class="sellPrice">¥'+data.rows[i].cwsscprice+'</span></br><span class="price"><del>¥'+data.rows[i].cnormalprice+'</del></span></br></li></ul></div>');
 	}
 }

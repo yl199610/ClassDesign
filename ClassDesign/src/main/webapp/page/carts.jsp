@@ -161,6 +161,10 @@ $(function() {
  	})
 });
 var cusername="${sessionScope.loginUser.cusername}";
+var cuid="${sessionScope.loginUser.cuid}";
+$.post("account/findaccountbyId?cuid="+cuid,function(data) {
+	$(".MtotalM").html(data.money);
+}, "json");	
 
 $.post("cproduct/showproductMsg",{"ckeywords": cusername, "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
 	for(var i=0;i<data.length;i++){
@@ -200,7 +204,6 @@ function selectAll(val,obj){
 	    	 spid+=s;
 		};
 	}
-	alert(spid)
 		/* 	alert("===");
 			 $("#tableDiv tr td:nth-child(4)").each(function(){
 			     alert($("#tableDiv tr:!eq(1) td:nth-child(1)").html());
@@ -280,6 +283,11 @@ function selects(obj){
 function goBy(){
 	var num = $(".piece_num").html();
 	var price=  $(".total_text").html();
+	var priceuser=  $(".MtotalM").html();
+	if(parseInt(price)>parseInt(priceuser)){
+		alert("用户余额不足请充值");
+		return ;
+	}
 	if(price!=0&&num!=0){
 		$("#tableDiv").attr("style", "display:none;");
 		$(".bar-wrapper").attr("style", "display:none;");
@@ -372,9 +380,9 @@ function byProduct(){
 	
 			</tbody>
 		</table>
-	
 		<div class="bar-wrapper">
 			<div class="bar-right">
+		<label>总余额：</label><label style="color:red;" class="MtotalM"></label>
 				<div class="piece">
 					已选商品<strong class="piece_num">0</strong>件
 				</div>
@@ -429,7 +437,7 @@ function byProduct(){
 	        <tr>
 	         <td colspan="2" align="center">
 	         <div class="calBtn">
-					<a id="btma" href="javascript:void(0)" onClick="byProduct()">结算</a>
+					<a id="btma" href="javascript:void(0)" onClick="byProduct()">确认信息</a>
 				</div>
 <!-- 	         <input type="submit" value="确认收货地址" onclick="byProduct()" style="text-align:center;background: red;border-radius: 10px;" />
  -->	         </td>

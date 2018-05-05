@@ -25,5 +25,29 @@ public class FavHandler{
 		PaginationBean<Cfavorites> favoritesPage = favService.getAllFavorites(page, rows, cfavorites);
 		return favoritesPage;
 	}
+	
+	
+	// 图书收藏
+	@RequestMapping("/favbook")
+	@ResponseBody
+	public boolean saveFavorites(String cfp, String cuserid) {
+		LogManager.getLogger().debug(cfp+"请求FavHandler处理saveFavorites......"+cuserid);
+		Cfavorites fav = new Cfavorites();
+		fav.setCfp(Integer.parseInt(cfp));
+		fav.setCuserid(Integer.parseInt(cuserid));
+		return favService.saveFavorites(fav);
+	}
+	
+	//显示用户的收藏
+	@RequestMapping("/listuserfav")
+	@ResponseBody
+	public PaginationBean<Cfavorites> listuserFav(String page, String rows,String cuid) {
+		LogManager.getLogger().debug("请求FavHandler处理getAllFavorites......"+cuid);
+		Cfavorites cfavorites = new Cfavorites();
+		cfavorites.setCuserid(Integer.parseInt(cuid));
+		PaginationBean<Cfavorites> favoritesPage = favService.getAllFavorites(page, rows, cfavorites);
+		return favoritesPage;
+	}
+	
 
 }

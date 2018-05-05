@@ -7,4 +7,6 @@ public interface FavService {
 
 	PaginationBean<Cfavorites> getAllFavorites(String page, String rows, Cfavorites cfavorites);
 
+	boolean saveFavorites(Cfavorites fav);
+
 }

@@ -76,4 +76,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose> -->
 	</select>
+	
+	<insert id="saveFavorites" parameterType="Cfavorites">
+		insert into cfavorites values(seqcfavorites.nextval,#{cuserid},#{cfp},'收藏')
+	</insert>
+	
+	
+	<select id="findFavBypidAndCuid" parameterType="Cfavorites" resultType="Cfavorites">
+		select * from cfavorites where cuserid=#{cuserid} and cfp=#{cfp} and cfstatus='收藏'
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

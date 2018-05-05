@@ -33,4 +33,5 @@ public interface CcategoryService {
 	boolean addCcategory(Ccategory c);
 
 	List<Ccategory> getAllParentTypeByLevels(String levels);
+
 }

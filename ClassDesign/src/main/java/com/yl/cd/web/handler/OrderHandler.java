@@ -18,6 +18,7 @@ import com.yl.cd.entity.Corder;
 import com.yl.cd.entity.Corderitem;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
+import com.yl.cd.service.AccountService;
 import com.yl.cd.service.OrderService;
 
 @Controller
@@ -25,7 +26,8 @@ import com.yl.cd.service.OrderService;
 public class OrderHandler{
 	@Autowired
 	private OrderService orderService;
-	
+	@Autowired
+	private AccountService accountService;	
 	// 模糊分页查询
 	@RequestMapping("/list")
 	@ResponseBody
@@ -54,6 +56,8 @@ public class OrderHandler{
 		String []one =  spid.split(",");
 		boolean flag = orderService.insertCorder(corder,num,pricetotal,spid);
 		if(flag){
+			boolean f = accountService.reduceMoney(pricetotal,proname);
+			System.out.println(pricetotal+"扣除账户金额"+f);
 			for (int j = 0;  j< one.length; j++) {
 				String []two =  one[j].split("-");
 				String pod = two[0];

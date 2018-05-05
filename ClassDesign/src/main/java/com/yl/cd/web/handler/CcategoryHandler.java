@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yl.cd.entity.Ccategory;
+import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.CcategoryService;
 

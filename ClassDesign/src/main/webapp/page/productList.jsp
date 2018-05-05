@@ -11,7 +11,15 @@
 
 <title>商品详细信息</title>
 <script type="text/javascript">
+function operate() {
+	document.getElementById('div_test').style.display = "";
+	setTimeout("disappeare()", 2000);
+}
+function disappeare() {
+	document.getElementById('div_test').style.display = "none";
+}
 var cusername="${sessionScope.loginUser.cusername}";
+var cuid="${sessionScope.loginUser.cuid}";
  $(function() {
 	 $(document).ready(function() {
 			var cusername="${sessionScope.loginUser.cusername}";
@@ -234,6 +242,23 @@ function openCar() {
  
 } */
 
+//收藏
+function fav(){
+	var productid = $(".otherInfor3 i").html();
+	$.post("cfav/favbook",{"cuserid": cuid, "cfp": productid},function(data) {
+		var jsonarray = JSON.stringify(data);
+		if (jsonarray == "true") {
+			$("#div_test").html("收藏图书成功！！！");
+			operate();
+		} else {
+			$("#div_test").html("请勿重复收藏图书！！！");
+			operate();
+		}
+	}, "json");	
+	
+}
+
+
 	
 	
 </script>
@@ -328,7 +353,7 @@ function openCar() {
 							onClick="getValue()" />
 						<!-- 						<a id="addCarpriduct" href="page/car.jsp" target="_blank"> <span>加入购物车</span>
  -->
-						</a> <a id="addfavpriduct" href="#"> <span>收藏</span>
+						</a> <a id="addfavpriduct" href="javascript:void(0);" onClick="fav()"> <span>收藏</span>
 						</a>
 					</div>
 
@@ -425,6 +450,7 @@ function openCar() {
 			</div>
 		</div>
 	</div>
+<div id="div_test" style="display: none; color: white; line-height: 35px; position: absolute; z-index: 100; left: 50%; top: 60%; margin-left: -75px; text-align: center; width: 150px; height: 35px; background-color: green; font-size: 12px;"></div>
 
 
 	<div class="cndns-right">

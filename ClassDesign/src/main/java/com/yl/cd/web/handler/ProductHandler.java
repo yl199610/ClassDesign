@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yl.cd.entity.Cbook;
+import com.yl.cd.entity.Ccategory;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.ProductService;
@@ -90,9 +91,25 @@ public class ProductHandler {
 		if ("".equals(page) || page == null) {
 			page = String.valueOf(cproductList.getCurrPage());
 		}
-		String rows = "2";
+		String rows = "4";
 		cproductList = productService.getProductByMan(page, rows);
 		return cproductList;
+	}
+	
+	
+	//根据目录id获取product
+	@RequestMapping("/getproductbyccid")
+	@ResponseBody
+	public PaginationBean<Cproduct> getProductByCcid(HttpServletRequest request,String ccid) {
+		LogManager.getLogger().debug("请求CcategoryHandler处理getProductByCcid......"+request.getParameter("pageNos"));
+		String page = request.getParameter("pageNos");
+		PaginationBean<Cproduct> ccategoryPageProduct = new PaginationBean<Cproduct>();
+		if ("".equals(page) || page == null) {
+			page = String.valueOf(ccategoryPageProduct.getCurrPage());
+		}
+		String rows = "1";
+		ccategoryPageProduct = productService.getProductByCcid(page, rows,ccid);
+		return ccategoryPageProduct;
 	}
 
 	// 首页加载爬虫数据
@@ -297,5 +314,9 @@ public class ProductHandler {
         }
         return flag;
     }
+    
+    
+    
+
 
 }

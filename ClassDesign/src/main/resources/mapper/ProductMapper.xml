@@ -176,4 +176,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addProduct" parameterType="Cproduct">
 			insert into cproduct values(seqcpro.nextval,#{spcaid},#{cbcpid},#{cproductname},#{cdescription},#{caddtime},#{cnormalprice},#{cwsscprice},#{ckeywords},#{cimage},default,1)
 	</insert>	
+	
+	
+	<!-- 条件查询 -->
+	
+	<resultMap id="CproductAndBook" type="Cproduct">
+		<id property="cpid" column="cpid" />
+		<result property="cuserid" column="cuserid" />
+		<result property="spcaid" column="spcaid" />
+		<result property="cproductname" column="cproductname" />
+		<result property="cdescription" column="cdescription" />
+		<result property="caddtime" column="caddtime" />
+		<result property="cnormalprice" column="cnormalprice" />
+		<result property="cwsscprice" column="cwsscprice" />
+		<result property="ckeywords" column="ckeywords" />
+		<result property="cimage" column="cimage" />
+		<result property="cpfree" column="cpfree" />
+		<association property="cbook" javaType="Cbook">
+			<id property="cbid" column="cbid" />
+			<result property="cbcpid" column="cbcpid" />
+			<result property="cauthor" column="cauthor" />
+			<result property="cimage" column="cimage" />
+			<result property="cisbn" column="cisbn" />
+			<result property="cpublishing" column="cpublishing" />
+			<result property="cpublishtime" column="cpublishtime" />
+			<result property="cwordnumber" column="cwordnumber" />
+			<result property="ctotalpage" column="ctotalpage" />
+			<result property="cintroduce" column="cintroduce" />
+			<result property="edition" column="edition" />
+			<result property="cbfree" column="cbfree" />
+			<result property="bookname" column="bookname" />
+		</association>
+	</resultMap>
+		
+	
+	
+	
+	<select id="getProductByCcid" parameterType="map" resultMap="CproductAndBook">
+		select * from (select p.*,cbid,cauthor,cisbn,bookname,cpublishing,cpublishtime,ctotalpage,cwordnumber,cintroduce,catalogue,edition,rownum rownu from cproduct p join cbook cb on cb.cbid=p.cbcpid where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and p.cpstatus='normal' and p.spcaid=#{ccid}
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
+	</select>
+	<!-- 条件查询获得total and totalpage -->
+	<select id="getTotalAndTotalProduct" parameterType="map" resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize}
+		pageSize,${currPage} currPage from cproduct p join cbook cb on cb.cbid=p.cbcpid where 1=1 and cpstatus='normal' and p.spcaid=#{ccid}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

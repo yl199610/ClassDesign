@@ -10,4 +10,8 @@ public interface AccountService {
 
 	boolean addMoney(Account account);
 
+	Account findUserMoney(String cuid);
+
+	boolean reduceMoney(String pricetotal, String proname);
+
 }

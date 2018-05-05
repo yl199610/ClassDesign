@@ -42,4 +42,14 @@ public class FavServiceImpl implements FavService{
 		return productList;
 	}
 
+	@Override
+	public boolean saveFavorites(Cfavorites fav) {
+		Cfavorites c = favMapper.findFavBypidAndCuid(fav);
+		if(c==null){
+			return favMapper.saveFavorites(fav);
+		}else{
+			return false;
+		}
+	}
+
 }

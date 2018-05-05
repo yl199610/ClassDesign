@@ -58,9 +58,9 @@ $(document).ready(function() {
 	<div class="firstHead">
 		<div class="menu">
 			<ul>
-				<li><a>首页</a></li>
-				<li><a>我的收藏</a></li>
-				<li><a>购物车</a></li>
+				<li><a href="#">首页</a></li>
+				<li><a href="page/fav.jsp" target="_blank">我的收藏</a></li>
+				<li><a href="page/carts.jsp" target="_blank">购物车</a></li>
 
 			</ul>
 		</div>

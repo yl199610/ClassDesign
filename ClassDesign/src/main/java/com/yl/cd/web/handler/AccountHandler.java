@@ -67,5 +67,13 @@ public class AccountHandler {
 
 	}
 	
+	@RequestMapping("/findaccountbyId")
+	@ResponseBody
+	public Account findAccountById(String cuid) {
+		LogManager.getLogger().debug("请求AccountHandler查询用户余额..." + cuid);
+		return accountService.findUserMoney(cuid);
+
+	}
+	
 
 }

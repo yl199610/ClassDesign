@@ -142,6 +142,26 @@ public class ProductServiceImpl implements ProductService{
 	public boolean addProduct(Cproduct cproduct) {
 		return productMapper.addProduct(cproduct);
 	}
+
+	@Override
+	public PaginationBean<Cproduct> getProductByCcid(String currpage, String pageSize, String ccid) {
+		PaginationBean<Cproduct> ccategoryListProduct = new PaginationBean<Cproduct>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
+		}
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
+		}
+		map.put("ccid", ccid);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		List<Cproduct> cc = productMapper.getProductByCcid(map);
+		//获得total 和 totalPage
+		ccategoryListProduct = productMapper.getTotalAndTotalProduct(map);
+		ccategoryListProduct.setRows(cc);
+		return ccategoryListProduct;
+	}
 	
 
 }

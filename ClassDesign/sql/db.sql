@@ -121,9 +121,19 @@ create table cproduct(
 	cpstatus varchar2(20) default 'normal',
 	cpfree varchar2(25) default null
 );
-select * from CPRODUCT where cpid=7
+select * from cproduct p join ccategory cc on cc.ccid=p.spcaid join cbook cb on cb.cbid=p.cbcpid where cc.ccid=21
+select tt.* from (select p.*,cbid,cauthor,cisbn,bookname,cpublishing,cpublishtime,ctotalpage,cwordnumber,cintroduce,catalogue,edition,rownum rownu from cproduct p join cbook cb on cb.cbid=p.cbcpid where
+		rownum<=2 and 1=1 and p.cpstatus='normal' and p.spcaid=21
+		)tt where tt.rownu>0
+select * from cproduct p join cbook cb on cb.cbid=p.cbcpid where p.spcaid=21 and 1=1 and cpstatus='normal'
 
-		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid
+select * from (
+select t.*,rownum rownu from cproduct t 
+join cbook cb on cb.cbid=t.cbcpid 
+where rownum<=1 and 1=1 and cpstatus='normal'and spcaid=21 )tt where tt.rownu>0
+
+select * from CPRODUCT where spcaid=22
+select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid
 		where cpid=48
 alter table cproduct modify cimage varchar2(42) 
 
@@ -251,7 +261,8 @@ create table cfavorites(--用户的外键 书籍产品的外键
    cfp references cproduct(cpid),
    cfstatus varchar2(10) default '不收藏'
 );
-select * from cfavorites;
+select * from cfavorites c join cproduct cp on cp.cpid=c.cfp where cuserid=1;
+select * from cfavorites where cuserid=2 and cfp=1 and cfstatus='收藏'
 drop table cfavorites
 create sequence seqcfavorites start with 1;
 insert into cfavorites values(seqcfavorites.nextval,2,26,default);
