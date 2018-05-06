@@ -25,7 +25,7 @@ public class FavServiceImpl implements FavService{
 			currpage=currpage.valueOf(1);
 		}
 		if("".equals(pageSize)||null==pageSize){
-			pageSize=pageSize.valueOf(5);
+			pageSize=pageSize.valueOf(4);
 		}
 		Integer cuserid = cfavorites.getCuserid();
 		Integer cfp = cfavorites.getCfp();
@@ -50,6 +50,11 @@ public class FavServiceImpl implements FavService{
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public boolean cancelFav(String cfid) {
+		return favMapper.cancelFav(cfid);
 	}
 
 }

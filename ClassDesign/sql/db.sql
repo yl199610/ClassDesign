@@ -298,7 +298,7 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	ccdate varchar2(20),
 	theam varchar2(30) default '主题'
 );
-alter table ccomments add (theam varchar2(30) default '主题');
+alter table ccomments add (star varchar2(30));
 select t.*,c.*,cp.*,rownum rownu from ccomments t join
 		cuser c
 		on c.cuid=t.cuserid

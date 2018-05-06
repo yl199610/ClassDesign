@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
-<link type="text/css" rel="stylesheet" href="css/comment.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <title>图书商城：Such is life</title>
 <style type="text/css">
@@ -63,23 +62,8 @@ h2 {
 				<form id="commentForm">
 					<h2>
 						<span class="infor_emp">*</span>评分<span class="infor_note">（5星代表很喜欢）</span>
-						<div id="startone" class="block clearfix">
-							<div class="star_score"></div>
-							<p style="float: left;">
-								您的评分：<span class="fenshu"></span> 分
-							</p>
-							<div class="attitude"></div>
-						</div>
-						<script type="text/javascript" src="js/startScore.js"></script>
-						<script>
-							scoreFun($("#startone"))
-							scoreFun($("#starttwo"), {
-								fen_d : 22,//每一个a的宽度
-								ScoreGrade : 5
-							//a的个数 10或者
-							})
-						</script>
 					</h2>
+					<div id="five_star" class="five_star"></div>
 
 					<h2>
 						评论标题<span class="infor_note">（长度在4-20个字之间）</span>
@@ -96,7 +80,8 @@ h2 {
 					<span id="contentError" style="color: rgb(255, 0, 0);">*
 						内容长度须在5-1500个字之间</span>
 					<div style="clear: both;"></div>
-					<input style="position: absolute; display: block; width: 100px; height: 40px; background-color: #00b3ee; color: #fff; text-decoration: none; text-align: center; font: normal normal normal 16px/40px 'Microsoft YaHei'; cursor: pointer; border-radius: 4px;"
+					<input
+						style="position: absolute; display: block; width: 100px; height: 40px; background-color: #00b3ee; color: #fff; text-decoration: none; text-align: center; font: normal normal normal 16px/40px 'Microsoft YaHei'; cursor: pointer; border-radius: 4px;"
 						id="comment" type="submit" value="评论" onclick="comment()">
 				</form>
 				<div class="clear"></div>

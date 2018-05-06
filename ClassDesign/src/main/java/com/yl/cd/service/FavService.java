@@ -9,4 +9,6 @@ public interface FavService {
 
 	boolean saveFavorites(Cfavorites fav);
 
+	boolean cancelFav(String cfid);
+
 }

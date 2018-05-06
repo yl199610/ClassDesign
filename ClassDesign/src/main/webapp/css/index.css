@@ -71,7 +71,7 @@ body {
 	margin-left: -250px;
 }
 
-/*ËÑË÷¿ò*/
+/*æœç´¢æ¡†*/
 form {
 	position: relative;
 	top: 10px;
@@ -81,7 +81,7 @@ form {
 }
 
 input .searhot {
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 
 .d2 input, .d2 button {
@@ -133,17 +133,17 @@ input .searhot {
 	width: 100%;
 	height: 340px;
 }
-/*·ÖÀàÄ¿Â¼µÄcss*/
+/*åˆ†ç±»ç›®å½•çš„css*/
 #type-menu {
 	position: absolute;
-	/*Ä¿Ç°ÒªÇó¿í¶ÈÊÇ238px,¸ß¶ÈÊÇ332px£¬×ó±ß¿ò+widthÕıºÃ238£¬ÒÔºóĞèÒª¿ÉÒÔĞŞ¸Ä*/
+	/*ç›®å‰è¦æ±‚å®½åº¦æ˜¯238px,é«˜åº¦æ˜¯332pxï¼Œå·¦è¾¹æ¡†+widthæ­£å¥½238ï¼Œä»¥åéœ€è¦å¯ä»¥ä¿®æ”¹*/
 	border-left: 1px solid #FF8A00;
 	width: 237px;
 	/* height : 332px; */
 	margin: 0;
 	padding: 0;
 	background: #FFF7F0;
-	margin-left: 200px;
+	margin-left: 180px;
 }
 
 #type-menu>ul {
@@ -177,7 +177,7 @@ input .searhot {
 
 #type-menu .menu-attr {
 	background: #FFF7F0 no-repeat left center;
-	height: 32px; /**¿ØÖÆ²Ëµ¥ÖĞÃ¿ĞĞµÄ¿í¶È£¬ÏÂÃæ»¹ÓĞÁ½´¦ĞèÒªĞŞ¸Ä**/
+	height: 32px; /**æ§åˆ¶èœå•ä¸­æ¯è¡Œçš„å®½åº¦ï¼Œä¸‹é¢è¿˜æœ‰ä¸¤å¤„éœ€è¦ä¿®æ”¹**/
 	border-right: 1px solid #F93;
 	z-index: 10000;
 	position: relative;
@@ -221,7 +221,7 @@ input .searhot {
 	display: block;
 }
 
-/*Panel ÀïÃæµÄÁ´½ÓÁĞ±í*/
+/*Panel é‡Œé¢çš„é“¾æ¥åˆ—è¡¨*/
 #type-menu div.menu-panel ul {
 	list-style: none;
 	padding: 0;
@@ -277,13 +277,13 @@ input .searhot {
 	line-height: 0;
 }
 
-/*²Ëµ¥*/
+/*èœå•*/
 .menu {
 	width: 67.5%;
 	height: 34px;
 	float: right;
 	background-color: #FF8A00;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "å¾®è½¯é›…é»‘";
 	border: 1px solid #CCC;
 }
 
@@ -316,17 +316,17 @@ input .searhot {
 	background: #FE8B20;
 	color: #000;
 }
-/*ÓÒ±ßÍ¼Æ¬ÂÖ×ªºÍ¹«¸æ*/
+/*å³è¾¹å›¾ç‰‡è½®è½¬å’Œå…¬å‘Š*/
 #picMsgConter {
 	width: 59%;
 	position: relative;
 	border: 1px solid #333;
 	float: left;
-	margin-left: 450px;
+	margin-left: 420px;
 	margin-top: 10px;
 }
 
-/*Í¼Æ¬ÇĞ»»*/
+/*å›¾ç‰‡åˆ‡æ¢*/
 #containerDiv {
 	position: relative;
 	width: 565px;
@@ -338,7 +338,7 @@ input .searhot {
 
 #listDiv {
 	position: absolute;
-	z-index: 1;
+	z-index: -2;
 	width: 4200px;
 	height: 400px;
 }
@@ -397,14 +397,14 @@ input .searhot {
 	display: block;
 }
 
-/*¹«¸æ*/
+/*å…¬å‘Š*/
 .message {
 	width: 28%;
 	height: 100%;
 	float: right;
 }
 
-/*µÚ¶ş²¿·Ö*/
+/*ç¬¬äºŒéƒ¨åˆ†*/
 .secondDiv {
 	width: 58%;
 	height: 300px;
@@ -412,7 +412,7 @@ input .searhot {
 	margin-left: 200px;
 }
 
-/*ÍÆ¼ö*/
+/*æ¨è*/
 #command_top {
 	width: 600px;
 }
@@ -499,7 +499,7 @@ input .searhot {
 	height: 100%;
 }
 
-/*ÈÈÃÅÊé¼®*/
+/*çƒ­é—¨ä¹¦ç±*/
 .hotbook {
 	width: 78%;
 	height: 612px;
@@ -538,7 +538,7 @@ a{
 	text-decoration: none;
 }
 
-/*µ×²¿*/
+/*åº•éƒ¨*/
 .foot {
 	width: 100%;
 	height: 200px;
@@ -548,7 +548,7 @@ a{
 	line-height: 45px;
 }
 
-/*¿Í·ş*/
+/*å®¢æœ*/
 .izl-rmenu {
 	position: fixed;
 	left: 95.8%;
@@ -580,7 +580,7 @@ a{
 	background-color: #fe9700;
 	display: none;
 }
-
+	
 .izl-rmenu .returnTop:hover {
 	background-color: #f06f52;
 	background: url(../images/return_two.png) 0px 0px no-repeat;

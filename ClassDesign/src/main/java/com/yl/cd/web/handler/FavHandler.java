@@ -1,5 +1,7 @@
 package com.yl.cd.web.handler;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,12 +43,27 @@ public class FavHandler{
 	//显示用户的收藏
 	@RequestMapping("/listuserfav")
 	@ResponseBody
-	public PaginationBean<Cfavorites> listuserFav(String page, String rows,String cuid) {
+	public PaginationBean<Cfavorites> listuserFav(HttpServletRequest request,String cuid) {
 		LogManager.getLogger().debug("请求FavHandler处理getAllFavorites......"+cuid);
+		String page = request.getParameter("pageNos");
+		PaginationBean<Cproduct> ccategoryPageProduct = new PaginationBean<Cproduct>();
+		if ("".equals(page) || page == null) {
+			page = String.valueOf(ccategoryPageProduct.getCurrPage());
+		}
+		String rows = "4";
 		Cfavorites cfavorites = new Cfavorites();
 		cfavorites.setCuserid(Integer.parseInt(cuid));
 		PaginationBean<Cfavorites> favoritesPage = favService.getAllFavorites(page, rows, cfavorites);
 		return favoritesPage;
+	}
+	
+	
+	//取消收藏
+	@RequestMapping("/calcelfav")
+	@ResponseBody
+	public boolean cancelFav(String cfid) {
+		LogManager.getLogger().debug("请求OrderHandler处理cancelOrder取消收藏......"+cfid);
+		return favService.cancelFav(cfid);
 	}
 	
 

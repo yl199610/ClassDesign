@@ -10,11 +10,13 @@ public class Ccomments {
 	private Cuser cuser;
 	private String comcount;
 	private String theam;
+	private String star;
 	public Ccomments() {
 	}
 
+
 	public Ccomments(Integer cid, Integer cfp, Integer cuserid, String ccontent, String ccdate, Cproduct cproduct,
-			Cuser cuser, String comcount, String theam) {
+			Cuser cuser, String comcount, String theam, String star) {
 		super();
 		this.cid = cid;
 		this.cfp = cfp;
@@ -25,7 +27,9 @@ public class Ccomments {
 		this.cuser = cuser;
 		this.comcount = comcount;
 		this.theam = theam;
+		this.star = star;
 	}
+
 
 	public Integer getCid() {
 		return cid;
@@ -85,6 +89,16 @@ public class Ccomments {
 	
 	
 
+	public String getStar() {
+		return star;
+	}
+
+
+	public void setStar(String star) {
+		this.star = star;
+	}
+
+
 	public String getTheam() {
 		return theam;
 	}
@@ -93,11 +107,13 @@ public class Ccomments {
 		this.theam = theam;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Ccomments [cid=" + cid + ", cfp=" + cfp + ", cuserid=" + cuserid + ", ccontent=" + ccontent
 				+ ", ccdate=" + ccdate + ", cproduct=" + cproduct + ", cuser=" + cuser + ", comcount=" + comcount
-				+ ", theam=" + theam + "]";
+				+ ", theam=" + theam + ", star=" + star + "]";
 	}
+
 
 }

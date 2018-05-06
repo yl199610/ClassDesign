@@ -418,9 +418,9 @@ function fav(){
 
 							<div class="pro_r_b">
 								<h3>写评论，赢评论积分，快快行动吧！</h3>
-								<a class="pro_r_c" href="productList.jsp" target="_blank">如何参与评论和打分</a>
-								<a class="pro_r_x" href="page/Comment.jsp"></a>
-							</div>
+								<a class="pro_r_c" href="#" target="_blank">如何参与评论和打分</a>
+<!-- 								<a class="pro_r_x" href="page/Comment.jsp"></a>
+ -->							</div>
 						</div>
 					</div>
 

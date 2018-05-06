@@ -28,6 +28,7 @@ $(function() {
 		$("#first6").html("重量：暂无");
 		$("#first7").html("印刷次数："+data.cbook.edition);
 		$("#intrducebookmsg p").html(data.cbook.cintroduce);
+		$(".pro_r_b").append('<a class="pro_r_x" href="page/Comment.jsp'+ccid+'"></a>');
 	}, "json");	
 	
 	pageProductFunction();//总分页界面

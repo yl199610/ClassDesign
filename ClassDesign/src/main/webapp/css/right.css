@@ -229,7 +229,7 @@ body {
 
 .pro_r_c {
 	display: block;
-	background: url(images/problem.gif) no-repeat;
+	background: url(../images/problem.gif) no-repeat;
 	width: 110px;
 	margin: 0 auto;
 	padding-left: 20px;
@@ -237,7 +237,7 @@ body {
 
 .pro_r_x {
 	display: block;
-	background: url(images/add.gif) no-repeat;
+	background: url(../images/add.gif) no-repeat;
 	width: 128px;
 	height: 33px;
 	margin: 5px auto;

@@ -16,4 +16,6 @@ public interface FavMapper {
 
 	Cfavorites findFavBypidAndCuid(Cfavorites fav);
 
+	boolean cancelFav(String cfid);
+
 }

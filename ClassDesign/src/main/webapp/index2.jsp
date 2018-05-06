@@ -8,17 +8,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
-<link type="text/css" rel="stylesheet" href="css/indexb.css">
 <link type="text/css" rel="stylesheet" href="css/hotbookAppear.css">
+<link rel="stylesheet" type="text/css" href="css/right.css" />
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
 	var cusername="${sessionScope.loginUser.cusername}";
 	if(cusername.length == 0||cusername==null || cusername==''|| cusername == undefined){
 		$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span>&nbsp;<a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
  	}
 	var cuid="${sessionScope.loginUser.cuid}";
+	
+
 	$.post("cproduct/saveProductModel",{"ckeywords": cusername, "cproductname": null, "cwsscprice": null, "spcaid": null, "cpfree": null },function(data) {
 		loadCarData(data);
 		var totalAmount1=0;
@@ -30,7 +33,9 @@ $(document).ready(function() {
 		});
 		$(".cndns-right-btn sup").html(totalAmount1);	
 	}, "json");	
+	
 })
+
 function loadCarData(data){
 	var cusername="${sessionScope.loginUser.cusername}";
 	var text_html='';
@@ -115,29 +120,19 @@ function openCar() {
 	}
 }
 </script>
-<style>
-
-</style>
 <title>图书商城：Such is life</title>
 </head>
 <body>
 	<div id="header-bg"></div>
-	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎<label style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
-			</li>
-			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="index.jsp"></a> <span class="f-hui-line"> </span>&nbsp; <a
-				id="regSpan" class="f-cheng f-bold" href="index.jsp"></a></li>
+			<li class="headspan">您好,欢迎<label style="color:red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城</li>
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<input hidden="hidden" id="namesession"
-					value="${sessionScope.loginUser.cusername}" />
-				<input hidden="hidden" id="cuidsession"
-					value="${sessionScope.loginUser.cuid}" />
-				<li><a target="_blank" class="f-green">个人中心</a></li>
+			<input hidden="hidden" id="namesession" value="${sessionScope.loginUser.cusername}"/>
+			<input hidden="hidden" id="cuidsession" value="${sessionScope.loginUser.cuid}"/>
+				<li><a target="_blank" class="f-green" href="page/personCenter.jsp">个人中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -147,8 +142,8 @@ function openCar() {
 		</h1>
 		<div class="searchinput d2">
 			<form>
-				<input type="text" placeholder="搜索从这里开始...">
-				<button type="submit">搜索</button>
+				<input type="text" name="" placeholder="请输入书名">
+				<button type="submit" onClick="search()">搜索</button>
 				<div class="searhot">
 					<h7>热门搜索:</h7>
 					<span>刘德华</span><span>李宗盛</span>
@@ -162,10 +157,9 @@ function openCar() {
 	<div class="firstHead">
 		<div class="menu">
 			<ul>
-				<li><a>首页</a></li>
-				<li><a>我的收藏</a></li>
-				<li><a>购物车</a></li>
-
+				<li><a href="#">首页</a></li>
+				<li><a href="page/fav.jsp" target="_blank">我的收藏</a></li>
+				<li><a href="page/carts.jsp" target="_blank">购物车结算</a></li>
 			</ul>
 		</div>
 
@@ -465,14 +459,13 @@ function openCar() {
 				</ul>
 			</div> -->
 			<div class="moreHotSale">
-				<a href="http://www.bookschina.com/24hour/" target="_blank">查看完整榜单&gt;&gt;</a>
+				<a href="javascript:void(0);" target="_blank">查看完整榜单&gt;&gt;</a>
 			</div>
 		</div>
 	</div>
 	</div>
 	
-	
-			<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"
+		<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"
 				style="VISIBILITY: hidden;">
 				<div class="div_panel">
 					<table border="0" cellspacing="0" cellpadding="0">
@@ -503,6 +496,8 @@ function openCar() {
 
 	</div>
 
+	
+	
 	
 	
 	
