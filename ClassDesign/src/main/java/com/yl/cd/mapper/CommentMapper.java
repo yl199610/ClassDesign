@@ -16,4 +16,10 @@ public interface CommentMapper {
 
 	PaginationBean<Ccomments> getCommentPageAndPage(Map<String, Object> map);
 
+	boolean addComment(Ccomments comments);
+
+	Ccomments getProductStar(String cfp);
+
+	boolean cancelComment(int cid);
+
 }

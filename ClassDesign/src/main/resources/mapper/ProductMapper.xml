@@ -68,9 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and cp.rownu&lt;(select count(1)-4 from CPRODUCT) -->
 		select * from
 		(select m.*,rownum rn from
-		(select * from cproduct where cpstatus='normal' order by to_number(cpfree)
-		asc) m where #{currPage}*#{pageSize}>=rownum)
-		where rn>(#{currPage}-1)*#{pageSize} and rn&lt;(select count(1)-4 from
+		(select * from cproduct where
+		cpstatus='normal' order by to_number(cpfree)
+		asc) m where
+		#{currPage}*#{pageSize}>=rownum)
+		where rn>(#{currPage}-1)*#{pageSize}
+		and rn&lt;(select count(1)-4 from
 		CPRODUCT)
 	</select>
 
@@ -83,12 +86,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(1)-5
 		total from CPRODUCT
 	</select>
-	
-		<!-- 删除产品 -->
+
+	<!-- 删除产品 -->
 	<update id="archiveProduct" parameterType="Integer">
-		update cproduct set cpstatus='nonormal' where cpid=#{cuid}
+		update cproduct set
+		cpstatus='nonormal' where cpid=#{cuid}
 	</update>
-	
+
 	<resultMap id="CproductAll" type="Cproduct">
 		<id property="cpid" column="cpid" />
 		<result property="cuserid" column="cuserid" />
@@ -125,14 +129,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="bookname" column="bookname" />
 		</association>
 	</resultMap>
-	
-	
+
+
 	<select id="detailProduct" parameterType="Integer" resultMap="CproductAll">
-		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join cbook cb on cb.cbid=cp.cbcpid where cpid=#{cuid}
+		select * from cproduct cp join ccategory cc on cc.ccid=cp.spcaid join
+		cbook cb on cb.cbid=cp.cbcpid where cpid=#{cuid}
 	</select>
-	
-	
-	
+
+
+
 	<update id="modifyProduct" parameterType="Cproduct">
 		update cproduct
 		<set>
@@ -163,23 +168,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test='cpfree!=null and cpfree!=""'>
 				cpfree = #{cpfree},
 			</if>
-			
+
 		</set>
 		where cpid=#{cpid}
 	</update>
-	
+
 	<select id="getBookMsgByBid" parameterType="Integer" resultType="Cbook">
 		select * from cbook where cbid=#{cbid}
 	</select>
-	
-	
+
+
 	<insert id="addProduct" parameterType="Cproduct">
-			insert into cproduct values(seqcpro.nextval,#{spcaid},#{cbcpid},#{cproductname},#{cdescription},#{caddtime},#{cnormalprice},#{cwsscprice},#{ckeywords},#{cimage},default,1)
-	</insert>	
-	
-	
+		insert into cproduct
+		values(seqcpro.nextval,#{spcaid},#{cbcpid},#{cproductname},#{cdescription},#{caddtime},#{cnormalprice},#{cwsscprice},#{ckeywords},#{cimage},default,1)
+	</insert>
+
+
 	<!-- 条件查询 -->
-	
+
 	<resultMap id="CproductAndBook" type="Cproduct">
 		<id property="cpid" column="cpid" />
 		<result property="cuserid" column="cuserid" />
@@ -208,29 +214,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="bookname" column="bookname" />
 		</association>
 	</resultMap>
-		
-	
-	
-	
+
+
+
+
 	<select id="getProductByCcid" parameterType="map" resultMap="CproductAndBook">
-		select * from (select p.*,cbid,cauthor,cisbn,bookname,cpublishing,cpublishtime,ctotalpage,cwordnumber,cintroduce,catalogue,edition,rownum rownu from cproduct p join cbook cb on cb.cbid=p.cbcpid where
-		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and p.cpstatus='normal' and p.spcaid=#{ccid}
+		select * from (select
+		p.*,cbid,cauthor,cisbn,bookname,cpublishing,cpublishtime,ctotalpage,cwordnumber,cintroduce,catalogue,edition,rownum
+		rownu from cproduct p join cbook cb on cb.cbid=p.cbcpid where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and p.cpstatus='normal'
+		<choose>
+			<when test="cproductname!=null and cproductname!=''">
+				and p.cproductname like '%${cproductname}%'
+			</when>
+		</choose>
+		<choose>
+			<when test="spcaid!=null and spcaid!=''">
+				and p.spcaid like '%${ccid}%'
+			</when>
+		</choose>
 		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
 	</select>
 	<!-- 条件查询获得total and totalpage -->
-	<select id="getTotalAndTotalProduct" parameterType="map" resultType="PaginationBean">
-		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize}
-		pageSize,${currPage} currPage from cproduct p join cbook cb on cb.cbid=p.cbcpid where 1=1 and cpstatus='normal' and p.spcaid=#{ccid}
+	<select id="getTotalAndTotalProduct" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize})
+		totalPage,${pageSize}
+		pageSize,${currPage} currPage from cproduct p
+		join cbook cb on cb.cbid=p.cbcpid where 1=1 and cpstatus='normal'
+		<choose>
+			<when test="cproductname!=null and cproductname!=''">
+				and p.cproductname like '%${cproductname}%'
+			</when>
+		</choose>
+		<choose>
+			<when test="spcaid!=null and spcaid!=''">
+				and p.spcaid like '%${ccid}%'
+			</when>
+		</choose> 
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+<!-- 	<select id="getProductByNameProduct" parameterType="map"
+		resultMap="CproductAndBook">
+		select * from (select
+		p.*,cbid,cauthor,cisbn,bookname,cpublishing,cpublishtime,ctotalpage,cwordnumber,cintroduce,catalogue,edition,rownum
+		rownu from cproduct p join cbook cb on cb.cbid=p.cbcpid where
+		rownum&lt;=#{currPage}*#{pageSize} and 1=1 and p.cpstatus='normal'
+		<choose>
+			<when test="cproductname!=null and cproductname!=''">
+				and p.cproductname like '%${cproductname}%'
+			</when>
+		</choose>
+		)tt where tt.rownu>(#{currPage}-1)*#{pageSize}
+	</select>
+	条件查询获得total and totalpage
+	<select id="getTotalAndTotalProductByname" parameterType="map"
+		resultType="PaginationBean">
+		select count(1) total,ceil(count(1)/${pageSize}) totalPage,${pageSize}
+		pageSize,${currPage} currPage from cproduct p join cbook cb on
+		cb.cbid=p.cbcpid where 1=1 and cpstatus='normal'
+		<choose>
+			<when test="cproductname!=null and cproductname!=''">
+				and p.cproductname like '%${cproductname}%'
+			</when>
+		</choose>
+	</select> -->
+	<select id="getTwoProduct" resultType="Cproduct">
+		select * from (select * from cproduct order by dbms_random.value)where rownum&lt;3
+	</select>
+
+
 </mapper>

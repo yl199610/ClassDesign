@@ -13,6 +13,14 @@
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
+function logout(){
+	$.post("cuser/logout",function(data) {
+		$("#username1").html("");
+		$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span>&nbsp;<a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
+	}, "json");	
+
+}
+
 $(document).ready(function() {
 	var cusername="${sessionScope.loginUser.cusername}";
 	if(cusername.length == 0||cusername==null || cusername==''|| cusername == undefined){
@@ -31,6 +39,11 @@ $(document).ready(function() {
 		$(".cndns-right-btn sup").html(totalAmount1);	
 	}, "json");	
 })
+function get(){
+	var cproductname = "?cproductname="+$("#bbcproductname").val();
+	 window.open('page/showMsg.jsp'+cproductname);
+}
+
 function loadCarData(data){
 	var cusername="${sessionScope.loginUser.cusername}";
 	var text_html='';
@@ -125,7 +138,7 @@ function openCar() {
 	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎<label style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
+			<li class="headspan">您好,欢迎<label id="username1" style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
 			</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
 				href="index.jsp"></a> <span class="f-hui-line"> </span>&nbsp; <a
@@ -137,7 +150,8 @@ function openCar() {
 					value="${sessionScope.loginUser.cusername}" />
 				<input hidden="hidden" id="cuidsession"
 					value="${sessionScope.loginUser.cuid}" />
-				<li><a target="_blank" class="f-green">个人中心</a></li>
+				<li><a style="float:left" href="javascript:void(0)" onClick="logout()">退出登录&nbsp;&nbsp;</a></li>
+				<li><a style="float:right" href="page/personCenter.jsp" target="_blank"  class="f-green">个人中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -146,12 +160,10 @@ function openCar() {
 			<a href="./index.jsp"> <img alt="欢迎来到网上书城" src="images/log.jpg" /></a>
 		</h1>
 		<div class="searchinput d2">
-			<form>
-				<input type="text" placeholder="搜索从这里开始...">
-				<button type="submit">搜索</button>
+			<form method="post" id="searchaForm" onSubmit="return false">
+				<input type="text" name="cproductname" id="bbcproductname" placeholder="搜索从这里开始...">
+				<button id="searbottom" onclick="get()" >搜索</button>
 				<div class="searhot">
-					<h7>热门搜索:</h7>
-					<span>刘德华</span><span>李宗盛</span>
 				</div>
 				<div class="bookNum">
 					共有图书<span id="countProductTotal" style="color: blue"></span>本
@@ -162,10 +174,9 @@ function openCar() {
 	<div class="firstHead">
 		<div class="menu">
 			<ul>
-				<li><a>首页</a></li>
-				<li><a>我的收藏</a></li>
-				<li><a>购物车</a></li>
-
+				<li><a href="#">首页</a></li>
+				<li><a href="page/fav.jsp" target="_blank">我的收藏</a></li>
+				<li><a href="page/carts.jsp" target="_blank">购物车结算</a></li>
 			</ul>
 		</div>
 
@@ -344,11 +355,11 @@ function openCar() {
 			<div id="top"></div>
 
 			<div class="message">
-				<h4>公告</h4>
-				<ul>
+				<h4 style="text-align: center;">公告</h4>
+				<ul style="list-style: none;text-align: center;margin-top: 10px;">
 					<li>123123</li>
-					<li>weqweqw</li>
-					<li>cxvx</li>
+					<li>广告位招商</li>
+					<li><img src="images/gg.jpg"></li>
 				</ul>
 			</div>
 		</div>

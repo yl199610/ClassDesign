@@ -9,4 +9,12 @@ public interface CommentService {
 
 	PaginationBean<Ccomments> getCommentsById(Integer cfp, String page, String rows);
 
+	boolean addComment(Ccomments comments);
+
+	Ccomments getProductStar(String ccid);
+
+	PaginationBean<Ccomments> getCommentsByUid(String page, String rows, Ccomments comments);
+
+	boolean cancelComment(int cid);
+
 }

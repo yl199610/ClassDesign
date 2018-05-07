@@ -2,6 +2,7 @@ var cpid = location.href.substring(location.href.indexOf("?"));
 
 //detail
 $(function() {
+	
 	var ca = cpid.split("=");
 	var productid = ca[1];
 	var cusername="${sessionScope.loginUser.cusername}";
@@ -35,6 +36,13 @@ $(function() {
 
 });
 
+
+
+
+
+
+
+
 function pageProductFunction(){
 	$.post("ccomments/getcommentsbyId"+cpid, function(data) {
 		var len = data.rows.length;
@@ -56,7 +64,7 @@ function loadDataProduct(data){
 	for(var i=0;i<len;i++){
 		$("#commentsDivcar").append('<li><div class="listLeft" style="width:80%; border-bottom: 1px solid red;">'+
 				'<div class="tit"><div class="startWrap"><i class="one"></i><i class="one"></i><i></i><i></i><i></i></div>'+
-				'<div class="theme">主题：'+data.rows[i].theam+'</div></div></br><div class="con"><p>'+data.rows[i].ccontent+'</p>'+
+				'<div class="theme">主题：'+data.rows[i].theam+'</div></br></div></br><div class="con"><p>'+data.rows[i].ccontent+'</p>'+
 				'</div><div class="oparaButWrap"><span class="time">'+data.rows[i].ccdate+'</span><div class="oparaBut" data-id="685252" data-bookid="6474240">'+
 				'<a href="javascript:void(0)" class="support"><span class="icon"></span></a><a href="javascript:void(0)" class="disagree"><span class="icon"></span></a>'+
 				'</div></div></div><div class="listRight"><div class="userIcon1"><img style="text-align:vertical-align;display:block" src="'+data.rows[i].cuser.cphoto+'"></a>'+

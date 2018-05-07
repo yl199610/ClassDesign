@@ -17,6 +17,12 @@ public class Cuser {
 	public Cuser() {
 	}
 	
+	public Cuser(String cusername, String cpassword) {
+		super();
+		this.cusername = cusername;
+		this.cpassword = cpassword;
+	}
+
 	public Cuser(Integer cuid, String cusername, String cpassword, String cemail, String csex, String cphone,
 			String clastloginip, String cphoto, String applynum, String clikebook, String cbirthday, String cufree,
 			Account account) {

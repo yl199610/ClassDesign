@@ -96,11 +96,10 @@ public class ProductHandler {
 		return cproductList;
 	}
 	
-	
 	//根据目录id获取product
 	@RequestMapping("/getproductbyccid")
 	@ResponseBody
-	public PaginationBean<Cproduct> getProductByCcid(HttpServletRequest request,String ccid) {
+	public PaginationBean<Cproduct> getProductByCcid(HttpServletRequest request,Cproduct cproduct) {
 		LogManager.getLogger().debug("请求CcategoryHandler处理getProductByCcid......"+request.getParameter("pageNos"));
 		String page = request.getParameter("pageNos");
 		PaginationBean<Cproduct> ccategoryPageProduct = new PaginationBean<Cproduct>();
@@ -108,9 +107,9 @@ public class ProductHandler {
 			page = String.valueOf(ccategoryPageProduct.getCurrPage());
 		}
 		String rows = "1";
-		ccategoryPageProduct = productService.getProductByCcid(page, rows,ccid);
+		ccategoryPageProduct = productService.getProductByCcid(page, rows,cproduct);
 		return ccategoryPageProduct;
-	}
+	}	
 
 	// 首页加载爬虫数据
 	@RequestMapping("/getjsoupdata")
@@ -131,6 +130,17 @@ public class ProductHandler {
 		return productService.archiveProduct(cuid);
 	}
 
+	//浏览记录
+	@RequestMapping("/setproductredis")
+	@ResponseBody
+	public List<Cproduct> setProductRedis(@RequestParam(name = "cfp") Integer cfp,HttpServletRequest request) {
+		LogManager.getLogger().debug("请求ProductHandler处理历史记录的查看...\n" + cfp);
+		String ip = request.getRemoteAddr();
+		List<Cproduct> c = productService.getProductRedis(ip,cfp);
+		System.out.println(c.size()+"==================="+c);
+		return c;
+	}
+	
 	// 获取详情
 	@RequestMapping("/detail")
 	@ResponseBody
@@ -172,53 +182,6 @@ public class ProductHandler {
 	}
 
 	
-	// 右侧购物车添加
-//	@RequestMapping("/saveProductModel")
-//	@ResponseBody
-//	public List<Cproduct> saveProductModel(Cproduct cproduct,ModelMap map) throws Exception {
-//	public static List<Cproduct> productList = new ArrayList<Cproduct>();
-//		List<Cproduct> productList = new ArrayList<Cproduct>();
-//		LogManager.getLogger().debug("请求ProductHandler处理saveProductModel...." + cproduct);
-//		if("".equals(cproduct.getCpfree())||"".equals(cproduct.getCproductname())||"".equals(cproduct.getCwsscprice())){
-//			cproduct.setCpfree(null);
-//			cproduct.setCproductname(null);
-//			cproduct.setCwsscprice(null);
-//		}
-//		if(cproduct.getSpcaid()!=null&&null==cproduct.getCpfree()&&null==cproduct.getCproductname()&&null==cproduct.getCwsscprice()){
-//			for (Cproduct cproduct1 : productList) {
-//				if(cproduct.getSpcaid().equals(cproduct1.getSpcaid())){
-//					productList.remove(cproduct1);
-//					return productList;
-//				}
-//			}
-//		}
-//		System.out.println("====1231312321========"+cproduct);
-//		//判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
-//		if(isAllFieldNull(cproduct)){
-//			return productList;
-//		}
-//		if (productList != null && cproduct!=null) {
-//			for (int i = 0; i < productList.size(); i++) {
-//				if(cproduct==null||"".equals(cproduct)){
-//					return productList;
-//				}
-//				if(cproduct.getCproductname()==null||"".equals(cproduct.getCproductname())){
-//					Collection nuCon = new Vector(); 
-//					nuCon.add(null); 
-//					productList.removeAll(nuCon);
-//				}
-//				if (productList.get(i).getCproductname().equals(cproduct.getCproductname()) || cproduct.getCproductname() == productList.get(i).getCproductname()) {
-//					productList.get(i).setCpfree(String.valueOf(cproduct.getCpfree()));
-//					productList.remove(productList.get(i));
-//				}
-//			}
-//		}
-//		if(cproduct!=null){
-//			productList.add(cproduct);
-//		}
-//		map.put("productList",productList);//放到sessoin
-//		return productList;
-//	}
 //	// 右侧购物车添加
 	@RequestMapping("/saveProductModel")
 	@ResponseBody
@@ -288,17 +251,13 @@ public class ProductHandler {
 		return productList;
 	}
 	
-	
-	
-//	 购物车点击加减改变static的值
-//	@RequestMapping("/changeProductModel")
-//	@ResponseBody
-//	public List<Cproduct> changeProductModel(Cproduct cproduct) throws Exception {
-//		LogManager.getLogger().debug("请求ProductHandler处理changeProductModel...." + cproduct);
-//		productList
-//		return productList;
-//	}
-//	
+	//随机获得
+	@RequestMapping("/gettwoproduct")
+	@ResponseBody
+	public List<Cproduct> getTwoProduct() {
+		LogManager.getLogger().debug("请求ProductHandler处理随机显示数据....");
+		return productService.getTwoProduct();
+	}
 	
     public static boolean isAllFieldNull(Object obj) throws Exception{
         Class stuCla = (Class) obj.getClass();// 得到类对象

@@ -66,4 +66,42 @@ public class CommentServiceImpl implements CommentService{
 		return productBean;
 	}
 
+	@Override
+	public boolean addComment(Ccomments comments) {
+		return commentMapper.addComment(comments);
+	}
+
+	@Override
+	public Ccomments getProductStar(String cfp) {
+		return commentMapper.getProductStar(cfp);
+	}
+
+	@Override
+	public PaginationBean<Ccomments> getCommentsByUid(String currpage, String pageSize, Ccomments comments) {
+		PaginationBean<Ccomments> commentList = new PaginationBean<Ccomments>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if("".equals(currpage)||null==currpage){
+			currpage=currpage.valueOf(1);
+		}
+		if("".equals(pageSize)||null==pageSize){
+			pageSize=pageSize.valueOf(5);
+		}
+		Integer cuserid = comments.getCuserid();
+		Integer cfp = comments.getCfp();
+		map.put("cuserid", cuserid);
+		map.put("cfp", cfp);
+		map.put("currPage", currpage);
+		map.put("pageSize", pageSize);
+		List<Ccomments> c = commentMapper.getCommentByName(map);
+		//获得total 和 totalPage
+		commentList = commentMapper.getCommentTotalAndTotalPage(map);
+		commentList.setRows(c);
+		return commentList;
+	}
+
+	@Override
+	public boolean cancelComment(int cid) {
+		return commentMapper.cancelComment(cid);
+	}
+
 }

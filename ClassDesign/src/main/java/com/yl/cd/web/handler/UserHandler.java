@@ -2,11 +2,17 @@ package com.yl.cd.web.handler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +32,8 @@ import com.yl.cd.util.ServletUtil;
 public class UserHandler{
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private JavaMailSender mailSender;	
 
 	/**
 	 * 分页显示用户信息
@@ -134,6 +141,16 @@ public class UserHandler{
 		return "forward:/login.jsp";
 	}	
 	
+	//退出登录
+	@RequestMapping("/logout")
+	@ResponseBody
+	public boolean logout(ModelMap map) {
+		LogManager.getLogger().debug("请求userHandler退出登录...");
+		Cuser cuser =new Cuser();
+		map.put("loginUser",cuser);
+		return true;
+	}
+	
 	//注册
 	@RequestMapping("/register")
 	@ResponseBody
@@ -152,6 +169,41 @@ public class UserHandler{
 		LogManager.getLogger().debug("请求userHandler修改密码..."+user);
 		boolean flag = userService.updatePassword(user);
 		return flag;
+	}
+	
+	
+	
+	
+	/**
+	 * 忘记密码
+	 */
+	@RequestMapping("/forget")
+	public String forget(String cusername, String cemail, HttpServletRequest request) {
+		LogManager.getLogger().debug("请求UserHandler进行forget的操作....");
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom("studymail_test@163.com");
+			helper.setTo(cemail);
+			helper.setSubject("找回密码");
+			String hrefStr = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getServletContext().getContextPath() + "/cuser/getpassword?username=" + cusername;
+			System.out.println(hrefStr);
+			helper.setText("<a href='" + hrefStr + "'>找回密码</a><br>如果连接不可用拷贝" + hrefStr + "到地址栏...", true);
+			mailSender.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return "redirect:/page/forgetPassword.jsp";
+		}
+		return "redirect:/page/forgetSuccess.jsp";
+	}
+	@RequestMapping("/getpassword")
+	public String getpassword(String username, HttpSession session) {
+		Random rand = new Random();
+		String randPassword = rand.nextInt(900000) + 100000 + "";
+		//业务处理重置密码
+		userService.resetPassword(username,randPassword);
+		session.setAttribute("newPassword", randPassword);
+		return "redirect:/page/getpasswordSuccess.jsp";
 	}
 	
 	

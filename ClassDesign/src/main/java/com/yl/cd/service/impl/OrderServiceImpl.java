@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yl.cd.entity.Account;
 import com.yl.cd.entity.Corder;
 import com.yl.cd.entity.Corderitem;
 import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
+import com.yl.cd.mapper.AccountMapper;
 import com.yl.cd.mapper.OrderMapper;
 import com.yl.cd.mapper.ProductMapper;
+import com.yl.cd.mapper.UserMapper;
 import com.yl.cd.service.OrderService;
 
 @Service("orderService")
@@ -22,6 +25,11 @@ public class OrderServiceImpl implements OrderService{
 	private OrderMapper orderMapper;
 	@Autowired
 	private ProductMapper productMapper;
+	@Autowired
+	private AccountMapper acccountMapper;
+	@Autowired
+	private UserMapper userMapper;
+
 
 	@Override
 	public PaginationBean<Corder> getAllCorder(String currpage, String pageSize, Corder corder) {
@@ -68,9 +76,17 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
-	@Override
-	public boolean cancelOrder(String coid) {
-		return orderMapper.cancelOrder(coid);
+	@Override@Transactional
+	public boolean cancelOrder(Corder corder) {
+		boolean flag = orderMapper.cancelOrder(String.valueOf(corder.getCoid()));
+		if(flag){
+			Account account = acccountMapper.findAccountById(corder.getCordid());
+			System.out.println();
+			account.setMoney(String.valueOf(Double.parseDouble(account.getMoney())+Double.parseDouble(corder.getCtotalprice())));
+			return acccountMapper.addMoney(account);
+		}else{
+			return false;
+		}
 	}
 
 

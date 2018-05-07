@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/right.css" />
+<link type="text/css" rel="stylesheet" href="css/comment.css">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/productList.js"></script>
 
@@ -18,9 +19,35 @@ function operate() {
 function disappeare() {
 	document.getElementById('div_test').style.display = "none";
 }
+function setredis(cpid){
+	$.post("cproduct/setproductredis?cfp="+cpid,function(data) {
+	}, "json");
+}
 var cusername="${sessionScope.loginUser.cusername}";
 var cuid="${sessionScope.loginUser.cuid}";
  $(function() {
+	 var cpid = location.href.substring(location.href.indexOf("?"));
+		$.post("cproduct/setproductredis?cfp="+cpid.substr(6),function(data) {
+			for(var i=0;i<data.length;i++){
+				$("#historyDiv").append('<ul id="hotDiv"> <li><a onClick="setredis('+data[i].cpid+')" href="page/productList.jsp?ccid='+data[i].cpid+'" target="_blank"><img src="'+data[i].cimage+'"></a></li>'+
+						'<li><a href="page/productList.jsp?ccid=1" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li>'+
+						'<li><span class="sellPrice">¥'+data[i].cwsscprice+'</span><br><span class="price"><del>¥28</del></span><br></li></ul>');
+			}
+			
+		}, "json");
+ 
+	 
+	 
+	$.post("cproduct/gettwoproduct",function(data) {
+		for(var i=0;i<data.length;i++){
+			$("#recommendDiv").append('<ul id="hotDiv"> <li><a onClick="setredis('+data[i].cpid+')" href="page/productList.jsp?ccid='+data[i].cpid+'" target="_blank"><img src="'+data[i].cimage+'"></a></li>'+
+					'<li><a href="page/productList.jsp?ccid=1" title="'+data[i].cproductname+'" target="_blank">'+data[i].cproductname+'</a></li>'+
+					'<li><span class="sellPrice">¥'+data[i].cwsscprice+'</span><br><span class="price"><del>¥28</del></span><br></li></ul>');
+		}
+	}, "json");	
+	 
+	 
+	 
 	 $(document).ready(function() {
 			var cusername="${sessionScope.loginUser.cusername}";
 			if(cusername.length == 0||cusername==null || cusername==''|| cusername == undefined){
@@ -280,7 +307,7 @@ function fav(){
 					value="${sessionScope.loginUser.cusername}" />
 				<input hidden="hidden" id="cuidsession"
 					value="${sessionScope.loginUser.cuid}" />
-				<li><a target="_blank" class="f-green">个人中心</a></li>
+				<li><a href="page/personCenter.jsp" target="_blank" class="f-green">个人中心</a></li>
 			</ul>
 		</div>
 	</div>
@@ -291,8 +318,8 @@ function fav(){
 	</div>
 	<hr color="red" size="4" />
 	<div class="getdest">
-		<a href="./index.jsp">中国图书网</a>&gt;<a href="./index.jsp">一级标题</a>&gt;<a
-			href="./index.jsp">二级标题</a>&gt;<a href="./index.jsp">三级标题</a>&gt;<span>书名</span>
+		<a href="./index.jsp">中国图书网</a>&gt;<a href="./index.jsp"></a>&gt;<a
+			href="./index.jsp"></a>&gt;<a href="./index.jsp"></a>&gt;<span></span>
 	</div>
 
 	<div id="bigproductDiv">
@@ -364,21 +391,39 @@ function fav(){
 				</div>
 			</div>
 			<div id="topproductThree">
-				<h3>本类五星好评</h3>
-				<ul>
-					<li>231321</li>
-					<li>231321</li>
-					<li>231321</li>
-					<li>231321</li>
-					<li>231321</li>
-				</ul>
+				<h3>本书星评</h3>
+				<ul class="show_number clearfix">
+       				<li>
+       				 <div class="atar_Show">
+         				 <p tip="2.5" class="pd"></p>
+        			</div>
+      			 	 <p class="top"></p>
+    			   </li>
+    			</ul>
 			</div>
+			 <script>
+		    //显示分数
+		      $(".show_number li p").each(function(index, element) {
+		    	var ccid = location.href.substring(location.href.indexOf("?"));
+		         $(this).attr("tip", function(){
+		        	$.post("ccomments/getproductstar"+ccid,function(data) {
+		        		var num = data.star;
+		        		$(this).attr("tip",num);
+				        var www=num*2*16;//
+				        $(".pd").width(parseFloat(www));
+				        $(".top").html(num+"分");
+		        	}, "json");	
+		        }); 
+		      
+		    });
+    </script>
 		</div>
 		<div id="bottomproductDiv">
 			<div id="productleftDiv">
 				<h3 style="background-color: #f3f3f3;">图书推荐</h3>
 				<hr>
-				<div id="recommendDiv"></div>
+				<div id="recommendDiv">
+				</div>
 				<h3>浏览历史</h3>
 				<hr>
 				<div id="historyDiv"></div>
@@ -426,7 +471,7 @@ function fav(){
 
 				</div>
 				<div id="productpageDiv"
-					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">dfsd</div>
+					style="margin-top: 20px; float: left; text-align: center; width: 100%; height: 30px;">无下一页</div>
 			</div>
 			<div id="div1" ondrop="drop()" ondragover="allowDrop(event)"
 				style="VISIBILITY: hidden;">

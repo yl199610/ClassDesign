@@ -87,4 +87,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join cproduct cp on cp.cpid=t.cfp where 1=1 and cfp=#{cfp}
 	</select>
 
+
+	<insert id="addComment" parameterType="Ccomments">
+		insert into ccomments values(seqccomments.nextval,#{cfp},#{cuserid},#{ccontent},to_char(sysdate,'yyyy-mm-dd HH:mm:ss'),#{theam},#{star})
+	</insert>
+	
+	
+	<select id="getProductStar" resultType="Ccomments">
+		select avg(star) star from ccomments where cfp=#{cfp}
+	</select>
+	
+	
+	<delete id="cancelComment" parameterType="int">
+		delete ccomments where cid=#{cid}
+	</delete>
+
 </mapper>

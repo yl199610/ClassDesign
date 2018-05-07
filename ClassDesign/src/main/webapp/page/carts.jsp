@@ -342,7 +342,7 @@ function byProduct(){
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<li><a target="_blank" class="f-green">个人中心</a></li>
+				<li><a href="page/personCenter.jsp" target="_blank" class="f-green">个人中心</a></li>
 			</ul>
 		</div>
 	</div>

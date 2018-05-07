@@ -178,7 +178,7 @@ function saveCar(cproductname,cwsscprice,spcaid,cpfree,ckeywords){
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<li><a target="_blank" class="f-green">个人中心</a></li>
+				<li><a href="page/personCenter.jsp" target="_blank" class="f-green">个人中心</a></li>
 				<input hidden="hidden" id="namesession"
 					value="${sessionScope.loginUser.cusername}" />
 				<input hidden="hidden" id="cuidsession"

@@ -114,9 +114,9 @@ public class OrderHandler{
 	}
 	@RequestMapping("/cancelorder")
 	@ResponseBody
-	public boolean cancelOrder(String coid) {
-		LogManager.getLogger().debug("请求OrderHandler处理cancelOrder取消订单......"+coid);
-		return orderService.cancelOrder(coid);
+	public boolean cancelOrder(Corder corder) {
+		LogManager.getLogger().debug("请求OrderHandler处理cancelOrder取消订单......"+corder);
+		return orderService.cancelOrder(corder);
 	}
 	
 	@RequestMapping("/findorderdetail")

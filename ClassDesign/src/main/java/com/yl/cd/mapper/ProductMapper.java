@@ -50,5 +50,12 @@ public interface ProductMapper {
 
 	PaginationBean<Cproduct> getTotalAndTotalProduct(Map<String, Object> map);
 
+	PaginationBean<Cproduct> getTotalAndTotalProductByname(Map<String, Object> map);
+
+	List<Cproduct> getProductByNameProduct(Map<String, Object> map);
+
+	List<Cproduct> getTwoProduct();
+
+
 
 }

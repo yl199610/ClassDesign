@@ -11,7 +11,7 @@ create table cadmin(
 create sequence adminid start with 1;
 insert into cadmin values(adminid.nextval,'a','a',0);
 select * from cadmin;
---用户 --applynum付款账号
+--用户 --applynum付款账号  214383
 create table cuser(
 	cuid Integer primary key,
 	cusername varchar2(20) unique,
@@ -27,7 +27,7 @@ create table cuser(
 	cufree varchar2(25) default null
 );
 select * from account where cuaid=1 
-select * from cuser where cusername='a'
+select * from cuser where cusername='b'
 ALTER TABLE cuser MODIFY cphone NULL;
 alter table cuser modify cpassword varchar2(50);
 select * from cuser where cusername='a' and cpassword='a'
@@ -105,7 +105,7 @@ insert into ccategory values(seqcatid.nextval,'三级目录','杂志','特色书
 
 
 select * from ccategory c inner join ccategory ca on c.ccid=ca.parentid and ca.parentid=8
-
+select * from ccategory where ccid=(select spcaid from cproduct where cpid=1)
 --图书产品表  cpfree为已销售数量
 create table cproduct(
 	cpid Integer primary key,
@@ -296,8 +296,12 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	cuserid references cuser(cuid),
 	ccontent varchar2(1000),
 	ccdate varchar2(20),
-	theam varchar2(30) default '主题'
+	theam varchar2(30) default '主题',
+	star varchar2(30)
 );
+select avg(star) star from ccomments where cfp=2
+select * from ccomments where cfp=7
+
 alter table ccomments add (star varchar2(30));
 select t.*,c.*,cp.*,rownum rownu from ccomments t join
 		cuser c
@@ -307,29 +311,29 @@ select * from CCOMMENTS where cfp=26
 insert into ccomments values(seqccomments.nextval,26,2,'这本书好看','2018-4-16');
 insert into ccomments values(seqccomments.nextval,26,2,'这本书好看','2018-5-11');
 
-insert into ccomments values(seqcfavorites.nextval,26,2,'好书1','2018-02-12');
-insert into ccomments values(seqcfavorites.nextval,26,21,'好书11','2011-02-22');
-insert into ccomments values(seqcfavorites.nextval,26,22,'好书111','2012-02-12');
-insert into ccomments values(seqcfavorites.nextval,26,23,'好书11111','2013-02-12');
-insert into ccomments values(seqcfavorites.nextval,26,23,'好书111111','2014-02-12');
+insert into ccomments values(seqccomments.nextval,26,2,'好书1','2018-02-12');
+insert into ccomments values(seqccomments.nextval,26,21,'好书11','2011-02-22');
+insert into ccomments values(seqccomments.nextval,26,22,'好书111','2012-02-12');
+insert into ccomments values(seqccomments.nextval,26,23,'好书11111','2013-02-12');
+insert into ccomments values(seqccomments.nextval,26,23,'好书111111','2014-02-12');
 
-insert into ccomments values(seqcfavorites.nextval,27,2,'好书2','2012-07-09');
-insert into ccomments values(seqcfavorites.nextval,27,21,'好书22','2014-06-10');
-insert into ccomments values(seqcfavorites.nextval,27,22,'好书222','2002-10-04');
-insert into ccomments values(seqcfavorites.nextval,27,23,'好书2222','2012-12-04');
+insert into ccomments values(seqccomments.nextval,27,2,'好书2','2012-07-09');
+insert into ccomments values(seqccomments.nextval,27,21,'好书22','2014-06-10');
+insert into ccomments values(seqccomments.nextval,27,22,'好书222','2002-10-04');
+insert into ccomments values(seqccomments.nextval,27,23,'好书2222','2012-12-04');
 
-insert into ccomments values(seqcfavorites.nextval,42,21,'好书3','2009-04-11');
-insert into ccomments values(seqcfavorites.nextval,42,22,'好书33','2008-06-12');
-insert into ccomments values(seqcfavorites.nextval,42,23,'好书333','2009-02-14');
+insert into ccomments values(seqccomments.nextval,42,21,'好书3','2009-04-11');
+insert into ccomments values(seqccomments.nextval,42,22,'好书33','2008-06-12');
+insert into ccomments values(seqccomments.nextval,42,23,'好书333','2009-02-14');
 
-insert into ccomments values(seqcfavorites.nextval,43,22,'好书4','2016-05-11');
-insert into ccomments values(seqcfavorites.nextval,43,23,'好书44','2017-03-17');
-
-insert into ccomments values(seqcfavorites.nextval,44,22,'好书5','2013-03-13');
-select * from cfavorites;
+insert into ccomments values(seqccomments.nextval,43,22,'好书4','2016-05-11');
+insert into ccomments values(seqccomments.nextval,43,23,'好书44','2017-03-17');
+select seqccomments.nextval from dual
+insert into ccomments values(seqccomments.nextval,44,22,'好书5','2013-03-13');
+select * from ccomments;
 drop table ccomments
 create sequence seqccomments start with 1;
-
+update ccomments set star=2 where cid>0
 select * from cuser c join account a on a.cuaid=c.cuid where cuid=1
 --用户金额表
 create table account(
@@ -342,7 +346,8 @@ create table account(
   outcome varchar2(22)
 )
 drop table account;
-	select * from account
+update account set money=80 where cuaid=1
+select * from ACCOUNT
 drop sequence seqaccount
 create sequence seqaccount start with 1;
 insert into account values(seqaccount.nextval,1,'678678678@qq.com',100,'2017-12-12',0,0);

@@ -27,4 +27,6 @@ public interface UserService {
 
 	Cuser findCuserAndAccount(Integer cuaid);
 
+	void resetPassword(String username, String randPassword);
+
 }

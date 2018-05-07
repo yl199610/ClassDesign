@@ -39,7 +39,68 @@
 		}, "json");
 		
 		pageOrderFunction();//总分页界面
+		
+		pageCommentFunction();//评论界面
 	});
+	//CommentpageDiv tableOrderDetail bodyOrderDetail
+	function pageCommentFunction(){
+		var cuid = "${sessionScope.loginUser.cuid}";
+		$.post("ccomments/listbyuserid?cuserid=" + cuid, function(data) {
+			var len = data.rows.length;
+			if(len<=0){
+				$("#CommentpageDiv").append('<span style="color:red;">暂时没有评论</span>');
+				return;
+			}
+			loadDataComment(data);
+		}, "json");
+		
+	}
+  
+	function loadDataComment(data){
+		var len = data.rows.length;
+		for(var i=0;i<len;i++){
+			$("#bodyCommDetail").append('<tr><td>'+data.rows[i].cid+'</td><td>'+data.rows[i].theam+'</td><td>'+data.rows[i].ccontent+'</td><td>'+data.rows[i].ccdate+'</td><td>'+data.rows[i].cproduct.cproductname+'</td>'+
+			'<td>'+data.rows[i].star+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="delComment('+data.rows[i].cid+')">删除评论</td></td></tr>');
+		}
+	}
+	
+	function getCommUser(){
+		var cuid = "${sessionScope.loginUser.cuid}";
+		var cfp = $("#cccfp").val();  
+		if(cfp==null||cfp==""){
+			alert("请输入产品id");
+		}
+		$.post("ccomments/listbyuserid?cuserid="+cuid+"&cid="+cfp,function(data) {
+			$("#bodyCommDetail").empty();
+			if(data.total=1){
+				$("#bodyCommDetail").append('<tr><td>'+data.rows[0].cid+'</td><td>'+data.rows[0].theam+'</td><td>'+data.rows[0].ccontent+'</td><td>'+data.rows[0].ccdate+'</td><td>'+data.rows[0].cproduct.cproductname+'</td>'+
+						'<td>'+data.rows[0].star+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="delComment('+data.rows[0].cid+')">删除评论</td></td></tr>');
+				}else{
+				$("#bodyOrder").append("暂无此评论");
+			}
+		}, "json");
+	}
+	
+	function delComment(cid){
+		$.post("ccomments/delcomment?cid="+cid,function(data) {
+			var jsonarray = JSON.stringify(data);
+			if (jsonarray == "true") {
+				pageCommentFunction();
+				$("#div_test").html("删除评论成功！！！");
+				operate();
+			} else {
+				$("#div_test").html("删除评论失败！！！");
+				operate();
+			}
+		}, "json");
+	}
+	
+	
+	
+	
+	
+	
+	
 	function pageOrderFunction(){
 		var cuid = "${sessionScope.loginUser.cuid}";
 		$.post("corder/findorderbyid?cordid=" + cuid, function(data) {
@@ -58,7 +119,7 @@
 		var len = data.rows.length;
 		for(var i=0;i<len;i++){
 			$("#bodyOrder").append('<tr><td>'+data.rows[i].coid+'</td><td>'+data.rows[i].corderdesc+'</td><td>'+data.rows[i].ctotalprice+'</td><td>'+data.rows[i].cordertime+'</td>'+
-			'<td>'+data.rows[i].cfulladdress+'</td><td>'+data.rows[i].cpostalcode+'</td><td>'+data.rows[i].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[i].coid+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[i].coid+')">订单详情</td></tr>');
+			'<td>'+data.rows[i].cfulladdress+'</td><td>'+data.rows[i].cpostalcode+'</td><td>'+data.rows[i].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[i].coid+','+data.rows[0].ctotalprice+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[i].coid+')">订单详情</td></tr>');
 		}
 	}
 
@@ -109,15 +170,16 @@
 			$("#bodyOrder").empty();
 			if(data.total=1){
 				$("#bodyOrder").append('<tr><td>'+data.rows[0].coid+'</td><td>'+data.rows[0].corderdesc+'</td><td>'+data.rows[0].ctotalprice+'</td><td>'+data.rows[0].cordertime+'</td>'+
-						'<td>'+data.rows[0].cfulladdress+'</td><td>'+data.rows[0].cpostalcode+'</td><td>'+data.rows[0].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[0].coid+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[0].coid+')">订单详情</td></tr>');
+						'<td>'+data.rows[0].cfulladdress+'</td><td>'+data.rows[0].cpostalcode+'</td><td>'+data.rows[0].cphone+'</td><td><a href="javascript:void(0)" style="color:red;" onClick="cancelOrder('+data.rows[0].coid+','+data.rows[0].ctotalprice+')">取消订单<a href="javascript:void(0)" style="color:red;" onClick="detailOrder('+data.rows[0].coid+')">订单详情</td></tr>');
 			}else{
 				$("#bodyOrder").append("暂无此订单");
 			}
 		}, "json");
 	}
 	
-	function cancelOrder(coid){
-		$.post("corder/cancelorder?coid="+coid, function(data) {
+	function cancelOrder(coid,price){
+		 var cuid = "${sessionScope.loginUser.cuid}";
+		$.post("corder/cancelorder?coid="+coid+"&cordid="+cuid+"&ctotalprice="+price, function(data) {
 			var jsonarray = JSON.stringify(data);
 			if (jsonarray == "true") {
 				$("#div_test").html("取消订单成功！！！");
@@ -126,7 +188,7 @@
 				$("#div_test").html("取消订单失败！！！");
 				operate();
 			}
-		}, "json");
+		}, "json"); 
 	}
 	
 	
@@ -298,9 +360,9 @@
 </style>
 
 <body>
-	<input type="text" id="namesession" name="proname"
+	<input type="hidden" id="namesession" name="proname"
 		value="${sessionScope.loginUser.cusername}" />
-	<input type="text" id="cuidsession" name="cordid"
+	<input type="hidden" id="cuidsession" name="cordid"
 		value="${sessionScope.loginUser.cuid}" />
 	<div class="container">
 		<div class="menu">
@@ -317,7 +379,6 @@
 			</h3>
 			<ul class="ulmenu2">
 				<li><a href="page/personCenter.jsp#" class="selected">订单查询</a></li>
-				<li><a href="page/personCenter.jsp#">我的收藏</a></li>
 				<li><a href="page/personCenter.jsp#">我的评价</a></li>
 
 			</ul>
@@ -502,7 +563,7 @@
 							value="查询订单信息" onClick="getOrderUser()">
 					</form>
 					<table id="tableOrder" align="center" border="1px"
-						cellspacing="0px" cellpadding="0px" width="80%"
+						cellspacing="0px" cellpadding="0px" width="100%"
 						style="margin-left: 100px;">
 						<thead>
 							<tr style="background-color: #dedede;">
@@ -520,7 +581,7 @@
 
 						</tbody>
 					</table>
-					<div id="productpageDiv"
+					<div id="productpageDiv" 
 						style="color: red; float: right; display: block;"></div>
 
 					<table id="tableOrderDetail" align="center" border="1px"
@@ -542,13 +603,36 @@
 				</div>
 
 				<div id="ta-2" class="tab">
-					<p class="tt">3. Question</p>
-					<p>This is Answer！</p>
-					<p>This is Answer！</p>
+				<h4 style="color: red">评论信息</h4>
+					<form id="getCommInfo" method="post">
+						<input name="cfp" id="cccfp" placeholder="输入评论产品id"> <input
+							id="aacuid" name="cordid" readonly="readonly"
+							value="${sessionScope.loginUser.cuid}" /> <input type="button"
+							value="查询评论信息" onClick="getCommUser()">
+					</form>
+					<table id="tableOrderComment" align="center" border="1px"
+						cellspacing="0px" cellpadding="0px" width="80%"
+						style="margin-left: 100px;">
+						<thead>
+							<tr style="background-color: #dedede;">
+								<th>评价编号</th>
+								<th>评价主题</th>
+								<th>评价内容</th>
+								<th>评价时间</th>
+								<th>评价产品</th>
+								<th>评价星级</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody align="center" id="bodyCommDetail">
+
+						</tbody>
+					</table>
+					<div id="CommentpageDiv" style="color: red; float: right; display: block;"></div>
 				</div>
 
 				<div id="tab-3" class="tab">
-					<p class="tt">3.Question</p>
+					<p class="tt">3.Question11111111</p>
 					<p>This is Answer！</p>
 					<p>This is Answer！</p>
 				</div>

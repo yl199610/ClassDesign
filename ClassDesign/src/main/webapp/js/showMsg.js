@@ -2,8 +2,12 @@ var ccid = location.href.substring(location.href.indexOf("?"));
 var num=0;
 $(function() {
 	pageGetProductFunction();//总分页界面
-
 });
+
+
+
+
+
 function operate() {
 	document.getElementById('div_test').style.display = "";
 	setTimeout("disappeare()", 2000);

@@ -1,19 +1,14 @@
 package com.yl.cd.web.handler;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yl.cd.entity.Ccomments;
-import com.yl.cd.entity.Cfavorites;
-import com.yl.cd.entity.Cproduct;
 import com.yl.cd.entity.PaginationBean;
 import com.yl.cd.service.CommentService;
 
@@ -33,6 +28,22 @@ public class CommentHandler{
 		return commentPage;
 	}
 	
+	
+	// 模糊分页查询
+	@RequestMapping("/listbyuserid")
+	@ResponseBody
+	public PaginationBean<Ccomments> getCommentsByUid(HttpServletRequest request,Ccomments comments) {
+		LogManager.getLogger().debug("请求CommentHandler处理getCommentsByUid......"+request.getParameter("pageNos"));
+		String page = request.getParameter("pageNos");
+		PaginationBean<Ccomments> ccategoryPageProduct = new PaginationBean<Ccomments>();
+		if ("".equals(page) || page == null) {
+			page = String.valueOf(ccategoryPageProduct.getCurrPage());
+		}
+		String rows = "100";
+		ccategoryPageProduct = commentService.getCommentsByUid(page, rows,comments);
+		return ccategoryPageProduct;
+	}
+	
 	@RequestMapping("/getcommentsbyId")
 	@ResponseBody
 	public PaginationBean<Ccomments> getCommentsById(HttpServletRequest request) {
@@ -49,4 +60,28 @@ public class CommentHandler{
 		return commentsList;
 	}
 	
+	@RequestMapping("/addcomment")
+	@ResponseBody
+	public boolean addComment(Ccomments comments) {
+		LogManager.getLogger().debug("请求CommentHandler处理getCommentsById......"+comments);
+		return commentService.addComment(comments);
+	}
+	
+	
+	
+	//获得产品星级别
+	@RequestMapping("/getproductstar")
+	@ResponseBody
+	public Ccomments getProductStar(String ccid ) {
+		LogManager.getLogger().debug("请求ProductHandler处理getProductStar...."+ccid);
+		return commentService.getProductStar(ccid);
+	}
+	
+	
+	@RequestMapping("/delcomment")
+	@ResponseBody
+	public boolean cancelComment(String cid) {
+		LogManager.getLogger().debug("请求ProductHandler处理删除评论......"+cid);
+		return commentService.cancelComment(Integer.parseInt(cid));
+	}
 }

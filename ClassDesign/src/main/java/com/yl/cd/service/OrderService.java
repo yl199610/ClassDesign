@@ -12,7 +12,7 @@ public interface OrderService {
 
 	boolean insertCorder(Corder corder, String num, String pricetotal, String spid);
 
-	boolean cancelOrder(String coid);
+	boolean cancelOrder(Corder corder);
 
 	List<Corderitem> findorderDetail(String coid);
 
