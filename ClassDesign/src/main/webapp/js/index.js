@@ -328,10 +328,8 @@ function imgChange(){//图片轮转
 	play();
 }
 
-
-
 function consume(){//客服
-	var tophtml = "<div id='menuId' class='izl-rmenu'><div class='btn botton-phone'></div><div class='btn returnTop'></div></div>";
+	var tophtml = "<div id='menuId' class='izl-rmenu'><a href='page/talk.jsp'><div class='btn botton-phone'></div></a><div class='btn returnTop'></div></div>";
 	$("#top").html(tophtml);
 	$("#menuId").each(function() {
 		$(this).find(".botton-phone").mouseenter(function() {

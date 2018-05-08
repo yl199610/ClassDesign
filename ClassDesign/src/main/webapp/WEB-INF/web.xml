@@ -44,6 +44,21 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>mywebsocket</servlet-name>
+		<servlet-class>com.yl.cd.web.servlet.MyWebSocketServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mywebsocket</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>initServlet</servlet-name>
+		<servlet-class>com.yl.cd.web.servlet.InitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>

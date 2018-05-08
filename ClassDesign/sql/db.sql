@@ -8,6 +8,7 @@ create table cadmin(
 	capwd varchar2(10) not null,
 	cpower varchar2(6)
 );
+update cadmin set caname='admin',capwd='admin' where caid=1
 create sequence adminid start with 1;
 insert into cadmin values(adminid.nextval,'a','a',0);
 select * from cadmin;
@@ -26,8 +27,8 @@ create table cuser(
 	cbirthday varchar2(20),
 	cufree varchar2(25) default null
 );
-select * from account where cuaid=1 
-select * from cuser where cusername='b'
+delete from cuser where cuid>4
+select * from cuser where cusername='bb'
 ALTER TABLE cuser MODIFY cphone NULL;
 alter table cuser modify cpassword varchar2(50);
 select * from cuser where cusername='a' and cpassword='a'

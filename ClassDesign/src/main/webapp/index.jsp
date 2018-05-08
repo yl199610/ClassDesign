@@ -146,10 +146,8 @@ function openCar() {
 		</ul>
 		<div class="helpLink">
 			<ul class="helpul">
-				<input hidden="hidden" id="namesession"
-					value="${sessionScope.loginUser.cusername}" />
-				<input hidden="hidden" id="cuidsession"
-					value="${sessionScope.loginUser.cuid}" />
+				<input hidden="hidden" id="namesession" value="${sessionScope.loginUser.cusername}" />
+				<input hidden="hidden" id="cuidsession" value="${sessionScope.loginUser.cuid}" />
 				<li><a style="float:left" href="javascript:void(0)" onClick="logout()">退出登录&nbsp;&nbsp;</a></li>
 				<li><a style="float:right" href="page/personCenter.jsp" target="_blank"  class="f-green">个人中心</a></li>
 			</ul>

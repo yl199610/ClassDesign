@@ -7,7 +7,7 @@
 <title>后台管理</title>
 </head>
 <body>  
-	<form id="addBookForm" method="post" enctype="multipart/form-data" style="width: 70%;margin-left:200px;margin-top:100px;">
+	<form id="addBookForm" method="post" enctype="multipart/form-data" style="width: 70%;margin-left:200px;margin-top:10px;">
 		<label>图书作者</label><input name="cauthor" id="amcauthor" required="required" placeholder="图书作者" /><br /><br />
 		<label> 图书图片 </label> 
 		<input type="file" name="picData" id="mpic" onchange="addPicPath(this)"/><br/>

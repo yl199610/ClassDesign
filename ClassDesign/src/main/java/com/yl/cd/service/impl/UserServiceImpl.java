@@ -52,8 +52,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Cuser userLogin(Cuser cuser) {
-		Encrypt encrypt = new Encrypt();
-		cuser.setCpassword(encrypt.md5(cuser.getCpassword()));
+		cuser.setCpassword(Encrypt.md5(cuser.getCpassword()));
 		return userMapper.userLogin(cuser);
 	}
 
@@ -64,8 +63,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean register(Cuser cuser) {
-		Encrypt encrypt = new Encrypt();
-		cuser.setCpassword(encrypt.md5(cuser.getCpassword()));
+		cuser.setCpassword(Encrypt.md5(cuser.getCpassword()));
 		return userMapper.register(cuser);
 	}
 
@@ -76,6 +74,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean updatePassword(Cuser user) {
+		user.setCpassword(Encrypt.md5(user.getCpassword()));
 		return userMapper.updatePassword(user);
 	}
 

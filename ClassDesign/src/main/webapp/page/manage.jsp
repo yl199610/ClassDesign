@@ -13,8 +13,8 @@
 <body class="easyui-layout" style="width: 1180px; margin: 0px auto;">
 	<div data-options="region:'north'" style="height: 65px;">
 		<div id="header">
-			<div id="top_login">
-				<label> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
+			<div id="top_login" style="text-align: center;">
+				<label style="font-size: 26px;"> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
 				</label>
 			</div>
 			<div id="nav"></div>
