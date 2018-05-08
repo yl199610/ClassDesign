@@ -400,15 +400,15 @@ function byProduct(){
 <div class="orderInfo" style="visibility:hidden;width: 1000px;height: 360px;border: 1px solid #DBDBDB;margin-left: 100px;">
 	<div class="stepTit clearfix"style="width: 960px;height: 30px;background:#E9E9E9;margin-left: 100px; "><strong>收货人信息</strong></div>
 		<form name="formAddress" id="formAddress" method="post">
-	      <input type="text" id="namesession" name="proname"
+	      <input type="hidden" id="namesession" name="proname"
 					value="${sessionScope.loginUser.cusername}" />
-	      <input type="text" id="cuidsession" name="cordid"
+	      <input type="hidden" id="cuidsession" name="cordid"
 					value="${sessionScope.loginUser.cuid}" />
-			<input type="text" id="unum" name="unum"
+			<input type="hidden" id="unum" name="unum"
 					value="" />
-	      	<input type="text" id="pricetotal" name="pricetotal"
+	      	<input type="hidden" id="pricetotal" name="pricetotal"
 					value="" />
-			<input type="text" id="spid" name="spid"
+			<input type="hidden" id="spid" name="spid"
 					value="" />
 							
 	      <table id="orderTalbe" align="center">

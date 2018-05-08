@@ -39,6 +39,31 @@ function addPicPath(obj) {
 	$("#pic").attr("weight", "50px");
 }
 
+
+function addBookExcel(){
+	var formData = new FormData($("#importForm")[0]); // FormData
+	$.ajax({
+		url : 'report/import',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			alert("插入数据成功！！！");
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
 function myformatter(date) {
 	var y = date.getFullYear();
 	var m = date.getMonth() + 1;

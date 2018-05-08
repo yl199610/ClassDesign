@@ -121,3 +121,20 @@ function getBookBy(){
 		}
 	});
 }
+
+
+function excel(){
+	var formData = new FormData($("#getBookInfoForm")[0]); // FormData
+	$.ajax({
+		url : 'report/export',
+		type : 'POST',
+		async : false,
+		data : formData,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(returndata) {
+			alert("导出成功！！！");
+		}
+	});
+}

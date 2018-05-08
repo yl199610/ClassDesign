@@ -12,6 +12,7 @@
 		输入编号:<input name="cisbn" id="cisbn"><br>
 		输入书名:<input name="bookname" id="bookname"><br>
 		 <input type="button" value="查询书籍信息" onClick="getBookBy()">
+	<button id="js-export" type="button" class="btn btn-primary" onClick="excel()">导出Excel</button>
 	</form>    
 	<div style="height:90%;">
 	<table id="bookInfo"></table>

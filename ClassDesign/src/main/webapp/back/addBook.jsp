@@ -7,6 +7,10 @@
 <title>后台管理</title>
 </head>
 <body>  
+<form ENCTYPE="multipart/form-data" name="importForm" id="importForm"  accept-charset="utf-8" method="post">
+    <input type="file" name="file"/>
+    <input type="submit" name="导入" value="导入数据到数据库" onClick="addBookExcel()"/>
+</form>
 	<form id="addBookForm" method="post" enctype="multipart/form-data" style="width: 70%;margin-left:200px;margin-top:10px;">
 		<label>图书作者</label><input name="cauthor" id="amcauthor" required="required" placeholder="图书作者" /><br /><br />
 		<label> 图书图片 </label> 

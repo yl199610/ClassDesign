@@ -14,8 +14,9 @@
 	<div data-options="region:'north'" style="height: 65px;">
 		<div id="header">
 			<div id="top_login" style="text-align: center;">
-				<label style="font-size: 26px;"> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
-				</label>
+				<label style="font-size: 24px;"> 欢迎【<span>${sessionScope.loginAdmin.caname}</span>】使用网上书城管理系统
+				</label ></br>
+				<a style="font-size: 24px;color:red" href="page/manageTalk.jsp" target="_blank">客服回复</a>
 			</div>
 			<div id="nav"></div>
 		</div>
