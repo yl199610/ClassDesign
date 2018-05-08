@@ -513,8 +513,6 @@ function openCar() {
 		</div>
 
 	</div>
-
-	
 	
 	
 	
