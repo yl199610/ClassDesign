@@ -171,8 +171,17 @@ public class UserHandler{
 		return flag;
 	}
 	
-	
-	
+	@RequestMapping("/checkeamil")
+	@ResponseBody
+	public Cuser checkEmail(String cusername) {
+		LogManager.getLogger().debug("请求userHandler查询用户名和邮箱是否可用..."+cusername);
+		if(cusername==""||"".equals(cusername)){//不通过
+			return null;
+		}else{
+			return userService.findCuserByName(cusername);
+		}
+	}	
+
 	
 	/**
 	 * 忘记密码

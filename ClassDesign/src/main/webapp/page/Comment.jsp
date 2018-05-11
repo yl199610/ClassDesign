@@ -26,10 +26,24 @@ $(function() {
 	 editor = CKEDITOR.replace('ccontent'); //ckeditor的编辑区
 });
 
+function dotcomment(cuid){
+	$.post("corder/list?cordid="+cuid,function(data) {
+		if(data.rows.length==0){
+			alert("您未购买该书籍,不能评论哦");
+			return false;
+		}
+	}, "json");	
+}
+
 function comment(){
 	var cfp1 = location.href.substring(location.href.indexOf("?"));
 	var cfp=cfp1.substr(6);
 	var cuid="${sessionScope.loginUser.cuid}";
+
+	if(dotcomment(cuid)==false){
+		return;
+	}
+	
 	var b = editor.getData();
 	var r = b.replace(/<.*?>/ig,"");
 	if(cuid==""||cuid==null){
@@ -42,7 +56,7 @@ function comment(){
 		"cuserid":cuid,
 		"cfp":cfp
 	};
-	$.post("ccomments/addcomment",ccomment,function(data) {
+	 $.post("ccomments/addcomment",ccomment,function(data) {
 		var jsonarray = JSON.stringify(data);
 		if (jsonarray == "true") {
 			$("#div_test").html("评论成功！！！");
@@ -53,7 +67,6 @@ function comment(){
 		}
 
 	}, "json");	
-	
 }
 </script>
 <style type="text/css">

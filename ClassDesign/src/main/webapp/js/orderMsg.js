@@ -1,5 +1,4 @@
-$('#orderInfo')
-		.datagrid(
+$('#orderInfo').datagrid(
 				{
 					fitColumns : true,
 					url : 'corder/list',
@@ -59,23 +58,8 @@ $('#orderInfo')
 								title : '电话',
 								width : 26,
 								align : 'center'
-							},
-							{
-								field : 'operator',
-								title : '操作',
-								width : 40,
-								align : 'center',
-								formatter : function(value, row, index) {
-									var str = '<a class="operatorBtn" href="javascript:void(0)" onClick="songOperatorFun(1, '
-											+ row.kuSongId
-											+ ')">删除</a>&nbsp;'
-											+ '<a class="operatorBtn" href="javascript:void(0)" onClick="songOperatorFun(2, '
-											+ row.kuSongId
-											+ ')">修改</a>&nbsp;'
-											+ '<script>$(".operatorBtn").linkbutton();</script>';
-									return str;
-								}
-							} ] ]
+							}
+							] ]
 				});
 
 function getOrderBy() {

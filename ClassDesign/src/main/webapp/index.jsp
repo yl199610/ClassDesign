@@ -14,10 +14,12 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
 function logout(){
+	var cusername="${sessionScope.loginUser.cusername}";
+	$(".headspan").empty();
 	$.post("cuser/logout",function(data) {
 		$("#username1").html("");
-		$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span>&nbsp;<a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
-	}, "json");	
+			$(".header-login-reg").append('<li class="headspan"><a id="loginSpan" class="f-bold f-cheng" href="login.jsp">登录</a><span class="f-hui-line">| </span><a id="regSpan" class="f-cheng f-bold" href="login.jsp">注册</a></li>');
+	}, "json");		
 
 }
 
@@ -138,10 +140,10 @@ function openCar() {
 	<div id="header-bg"></div>
 	<div id="header-nav">
 		<ul class="header-login-reg">
-			<li class="headspan">您好,欢迎<label id="username1" style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
+			<li class="headspan1">您好,欢迎<label id="username1" style="color: red">&nbsp;${sessionScope.loginUser.cusername}&nbsp;</label>光临网上书城
 			</li>
 			<li class="headspan"><a id="loginSpan" class="f-bold f-cheng"
-				href="index.jsp"></a> <span class="f-hui-line"> </span>&nbsp; <a
+				href="index.jsp"></a> <span class="f-hui-line"> </span><a
 				id="regSpan" class="f-cheng f-bold" href="index.jsp"></a></li>
 		</ul>
 		<div class="helpLink">

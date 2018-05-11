@@ -248,10 +248,12 @@ function selects(obj){
     var y=0;
     var s="";
  	if ($('#checkinput').prop('checked')) {
+ 		alert("+");
     	var x = $(obj).parent().parent().find("td"); 
     	 y= x.eq(3).text();
     	 s= x.eq(5).text()+"-"+x.eq(3).text()+",";
     	 totalNum+=parseInt(y);
+    	 alert(totalNum);
     	 spid+=s;
     }
 
@@ -284,7 +286,7 @@ function goBy(){
 	var num = $(".piece_num").html();
 	var price=  $(".total_text").html();
 	var priceuser=  $(".MtotalM").html();
-	if(parseInt(price)>parseInt(priceuser)){
+	if(priceuser==""||parseInt(price)>parseInt(priceuser)){
 		alert("用户余额不足请充值");
 		return ;
 	}

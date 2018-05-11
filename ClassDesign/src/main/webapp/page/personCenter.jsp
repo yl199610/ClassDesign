@@ -44,6 +44,7 @@
 	});
 	//CommentpageDiv tableOrderDetail bodyOrderDetail
 	function pageCommentFunction(){
+		$("#CommentpageDiv").empty();
 		var cuid = "${sessionScope.loginUser.cuid}";
 		$.post("ccomments/listbyuserid?cuserid=" + cuid, function(data) {
 			var len = data.rows.length;
@@ -103,6 +104,7 @@
 	
 	function pageOrderFunction(){
 		var cuid = "${sessionScope.loginUser.cuid}";
+		$("#productpageDiv").empty();
 		$.post("corder/findorderbyid?cordid=" + cuid, function(data) {
 			var len = data.rows.length;
 			if(len<=0){
@@ -286,6 +288,10 @@
 	}
 
 	function editAcount() {
+		if($("#meapplyno").val()==""){
+			alert("您未添加账户,请添加一个账户");
+			return;
+		}
 		var params = $("#editCount").serialize();
 		$.post("account/editacount", params, function(data) {
 			var jsonarray = JSON.stringify(data);
@@ -301,6 +307,10 @@
 	}
 
 	function addMoney() {
+		if($("#meapplyno").val()==""){
+			alert("您未添加账户,请添加一个账户再充值");
+			return;
+		}
 		var params = $("#addMoney").serialize();
 		$.post("account/addmoney", params, function(data) {
 			var jsonarray = JSON.stringify(data);
@@ -583,7 +593,8 @@
 					</table>
 					<div id="productpageDiv" 
 						style="color: red; float: right; display: block;"></div>
-
+					</br></br>
+					<h3>订单详细信息</h3>
 					<table id="tableOrderDetail" align="center" border="1px"
 						cellspacing="0px" cellpadding="0px" width="80%"
 						style="margin-left: 100px;">
@@ -754,7 +765,7 @@
 										</tr>
 										<tr>
 											<td ALIGN=RIGHT><font size="3" face="微软雅黑">账户名:</font></td>
-											<td><input id="meapplyno" name="applyno" /></td>
+											<td><input id="meapplyno" name="applyno" readonly="readonly"/></td>
 										</tr>
 										<tr>
 											<td ALIGN="center" colspan="3">
