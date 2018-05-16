@@ -20,7 +20,7 @@
 		<label>图书名称</label><input name="bookname" id="bookname" required="required" placeholder="请输入图书名称" /><br /><br />
 		<label>出版时间</label><input name="cpublishing" id="cpublishing"  class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" placeholder="请输入出版时间" /><br /><br />
 		<label>出版社：</label><input name="cpublishtime" id="cpublishtime" required="required" placeholder="请输入出版社" /><br /><br />
-		<label>总字数：</label><input name="cwordnumber" id="cwordnumber" required="required" placeholder="请输入总字数" /><br /><br />
+		<label>开数：</label><input name="cwordnumber" id="cwordnumber" required="required" placeholder="请输入总字数" /><br /><br />
 		<label>总页数：</label><input name="ctotalpage" id="ctotalpage" required="required" placeholder="请输入总页数" /><br /><br />
 		<label>书籍简介</label><input name="cintroduce" id="cintroduce" required="required" placeholder="请输入书籍简介" /><br /><br />
 		<label>书籍目录</label><input name="catalogue" id="catalogue" required="required" placeholder="请输入书籍目录" /><br /><br />

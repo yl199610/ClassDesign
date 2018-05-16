@@ -67,7 +67,7 @@ function loadDataProduct(data){
 				'<div class="theme">主题：'+data.rows[i].theam+'</div></br></div></br><div class="con"><p>'+data.rows[i].ccontent+'</p>'+
 				'</div><div class="oparaButWrap"><span class="time">'+data.rows[i].ccdate+'</span><div class="oparaBut" data-id="685252" data-bookid="6474240">'+
 				'<a href="javascript:void(0)" class="support"><span class="icon"></span></a><a href="javascript:void(0)" class="disagree"><span class="icon"></span></a>'+
-				'</div></div></div><div class="listRight"><div class="userIcon1"><img style="text-align:vertical-align;display:block" src="'+data.rows[i].cuser.cphoto+'"></a>'+
+				'</div></div></div><div class="listRight"><div class="userIcon1"><img style="width:100px;height:100px; text-align:vertical-align;display:block" src="'+data.rows[i].cuser.cphoto+'"></a>'+
 				'<span><a target="_blank">读者：'+data.rows[i].cuser.cusername+'</a></span></div></li></hr>');
 	}
 }

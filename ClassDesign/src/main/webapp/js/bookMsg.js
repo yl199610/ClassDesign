@@ -134,7 +134,7 @@ function excel(){
 		contentType : false,
 		processData : false,
 		success : function(returndata) {
-			alert("导出成功！！！");
+			alert("导出成功！！！导出的路径为D:/");
 		}
 	});
 }

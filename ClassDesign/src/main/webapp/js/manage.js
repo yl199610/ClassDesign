@@ -11,7 +11,7 @@ var urlJson = {
 	"收藏信息" : "favMsg.jsp",
 	"评论信息" : "commentMsg.jsp",
 	"添加图书类别" : "addCategory.jsp",
-	"添加产品类别" : "addproduct.jsp",
+	"添加产品" : "addproduct.jsp",
 	"添加书籍" : "addBook.jsp"
 
 }

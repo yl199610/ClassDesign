@@ -54,8 +54,7 @@ function addProduct() {
 			{
 				url : "cproduct/add",
 				success : function(data) {
-					alert(data);
-					if (data == "true") {
+					if (data) {
 						$("#getProInfoForm").datagrid("reload"); // 刷新修改数据
 						$.messager.show({
 							title : '添加信息',

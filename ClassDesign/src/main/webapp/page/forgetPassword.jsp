@@ -11,7 +11,6 @@
 </head>
 <script>
 	function getPassword(){
-		alert("---");
 		var cusername = $("#cusername").val();
 		$.post("cuser/checkeamil?cusername="+cusername,function(data) {
 			$("#cemail").val(data.cemail);

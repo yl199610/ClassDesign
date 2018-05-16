@@ -357,7 +357,6 @@ function openCar() {
 			<div class="message">
 				<h4 style="text-align: center;">公告</h4>
 				<ul style="list-style: none;text-align: center;margin-top: 10px;">
-					<li>123123</li>
 					<li>广告位招商</li>
 					<li><img src="images/gg.jpg"></li>
 				</ul>

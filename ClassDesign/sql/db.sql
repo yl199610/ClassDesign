@@ -181,7 +181,7 @@ create table cbook(
 	edition varchar2(10),				--印刷次数
 	cbfree varchar2(25) default null
 );
-alter table cbook modify cimage varchar2(42) 
+alter table cbook modify cpublishtime varchar2(42) 
 
 select * from (select t.*,rownum rownu from cbook t where rownum<=1*5 and 1=1 and cbfree=1)tt where tt.rownu>(1-1)*5
 select * from cbook;
@@ -302,8 +302,8 @@ create table ccomments(--用户的外键 书籍产品的外键(评论排行);
 	theam varchar2(30) default '主题',
 	star varchar2(30)
 );
-select avg(star) star from ccomments where cfp=2
-select * from ccomments where cfp=7
+select avg(star) star from ccomments where cfp=43
+select * from ccomments where cfp=43
 
 alter table ccomments add (star varchar2(30));
 select t.*,c.*,cp.*,rownum rownu from ccomments t join

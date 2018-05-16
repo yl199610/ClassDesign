@@ -28,10 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserDetail" resultMap="detailMap">
 		select * from cuser c where 1=1 and cufree=1
 		<choose>
-			<when test='cuid==1 and cusername=="username"'>
+			<when test='cuid==00 and cusername=="username"'>
 				and c.cuid like '%%' and c.cusername like '%%'
 			</when>
-			<when test='cuid==1 and cusername!=null and cusername!=""'>
+			<when test='cuid==00 and cusername!=null and cusername!=""'>
 				and c.cusername like '%${cusername}%'
 			</when>
 			<when test='cuid!=null and cuid!="" and cusername=="username"'>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				,${cuid} cuid
 			</when>
 			<otherwise>
-				,1 cuid
+				,00 cuid
 			</otherwise>
 		</choose>
 		<choose>

@@ -55,7 +55,7 @@ public class CommentHandler{
 		if("".equals(page)||page==null){
 			page=String.valueOf(commentsList.getCurrPage());
 		}
-		String rows = "2";
+		String rows = "5";
 		commentsList = commentService.getCommentsById(cfp,page,rows);
 		return commentsList;
 	}
@@ -74,7 +74,12 @@ public class CommentHandler{
 	@ResponseBody
 	public Ccomments getProductStar(String ccid ) {
 		LogManager.getLogger().debug("请求ProductHandler处理getProductStar...."+ccid);
-		return commentService.getProductStar(ccid);
+		Ccomments c =commentService.getProductStar(ccid);
+		if(c==null){
+			c=new Ccomments();
+			c.setStar("0");
+		}
+		return c;
 	}
 	
 	

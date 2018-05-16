@@ -371,7 +371,7 @@ function byProduct(){
 					<td colspan="7"><input type="checkbox" name="allcar"
 						id="allcar" onClick="selectAll(this.checked,this)">全选</td>
 				</tr>
-				<tr>
+				<tr style="background: #23B7E5">
 					<td>商品信息</td>
 					<td>商品参数</td>
 					<td>单价</td>

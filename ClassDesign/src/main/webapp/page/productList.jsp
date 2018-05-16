@@ -407,7 +407,7 @@ function fav(){
 		    	var ccid = location.href.substring(location.href.indexOf("?"));
 		         $(this).attr("tip", function(){
 		        	$.post("ccomments/getproductstar"+ccid,function(data) {
-		        		var num = data.star;
+		        		var num = data.star.substr(0,3);
 		        		$(this).attr("tip",num);
 				        var www=num*2*16;//
 				        $(".pd").width(parseFloat(www));

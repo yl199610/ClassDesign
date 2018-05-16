@@ -62,7 +62,7 @@
 			<div title="图书产品管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="menutree">
 					<li><span>图书产品信息</span></li>
-					<li><span>添加产品类别</span></li>
+					<li><span>添加产品</span></li>
 				</ul>
 			</div>
 

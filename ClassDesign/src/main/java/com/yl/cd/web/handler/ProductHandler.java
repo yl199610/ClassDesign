@@ -91,7 +91,7 @@ public class ProductHandler {
 		if ("".equals(page) || page == null) {
 			page = String.valueOf(cproductList.getCurrPage());
 		}
-		String rows = "4";
+		String rows = "8";
 		cproductList = productService.getProductByMan(page, rows);
 		return cproductList;
 	}
